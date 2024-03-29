@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &632696058429514498
 Transform:
@@ -131,6 +131,10 @@ PrefabInstance:
     - target: {fileID: 6669483944224020614, guid: 2fc387eb58641ad409dd5312a18c7a37, type: 3}
       propertyPath: m_Name
       value: mini iron column connect
+      objectReference: {fileID: 0}
+    - target: {fileID: 6669483944224020614, guid: 2fc387eb58641ad409dd5312a18c7a37, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fc387eb58641ad409dd5312a18c7a37, type: 3}
