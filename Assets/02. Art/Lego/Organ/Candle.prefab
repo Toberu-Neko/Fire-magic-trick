@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6741459975387973720}
-  m_Layer: 0
+  - component: {fileID: 1054872}
+  - component: {fileID: 1054871}
+  m_Layer: 15
   m_Name: Candle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,13 +27,40 @@ Transform:
   m_GameObject: {fileID: 1561207837471719427}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8949901945783468955}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1054872
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561207837471719427}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 10, z: 20}
+  m_Center: {x: 0, y: 2.0095787, z: 0}
+--- !u!114 &1054871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561207837471719427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a1436feb55b1541a8f3ff9eef7945f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnegyReturn: {fileID: 7991532180455964518, guid: b46456e62257edd4d9c728d96ba3df49, type: 3}
+  eachTime: 0.5
 --- !u!1001 &9219529644222943405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99,6 +128,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: candle
       objectReference: {fileID: 0}
+    - target: {fileID: 616423152962472332, guid: 3eb31f8d050e4564b9f4ef2c4378661e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 1280225383822696423, guid: 3eb31f8d050e4564b9f4ef2c4378661e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -107,14 +140,38 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: fae70b4e959d8674dac765d07ad8eb8c, type: 2}
+    - target: {fileID: 2632405159471842131, guid: 3eb31f8d050e4564b9f4ef2c4378661e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 2886147551396969187, guid: 3eb31f8d050e4564b9f4ef2c4378661e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1239ad9ff4193cd4da8de483ea0ee6b4, type: 2}
+    - target: {fileID: 2961622880232488525, guid: 3eb31f8d050e4564b9f4ef2c4378661e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3017474365492921591, guid: 3eb31f8d050e4564b9f4ef2c4378661e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 4357104481265498700, guid: 3eb31f8d050e4564b9f4ef2c4378661e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 919ea81c5d930cb49ab5931a14862f78, type: 2}
+    - target: {fileID: 6223453994358994668, guid: 3eb31f8d050e4564b9f4ef2c4378661e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702332746840540183, guid: 3eb31f8d050e4564b9f4ef2c4378661e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749837360701604171, guid: 3eb31f8d050e4564b9f4ef2c4378661e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8860804230529243283, guid: 3eb31f8d050e4564b9f4ef2c4378661e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
