@@ -215,7 +215,10 @@ public class PlayerState : MonoBehaviour
     public void TurnToNewDirection(Vector3 direction)
     {
         Quaternion targetRotation = Quaternion.LookRotation(direction, transform.up);
-        transform.rotation = targetRotation;
+        Vector3 euler = targetRotation.eulerAngles;
+        euler.x = 0f;
+        euler.z = 0f;
+        transform.rotation = Quaternion.Euler(euler);
     }
     public void SetUseCameraRotate(bool active)
     {

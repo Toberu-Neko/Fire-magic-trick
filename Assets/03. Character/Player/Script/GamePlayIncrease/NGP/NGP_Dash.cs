@@ -7,7 +7,6 @@ public class NGP_Dash : NGP_Basic_Dash
     public float CrashForce;
     public float CrashForceUp;
     [SerializeField] private float dashCooling;
-    
 
     [Header("Normal Dash")]
     [SerializeField] private float forwardDashSpeed;

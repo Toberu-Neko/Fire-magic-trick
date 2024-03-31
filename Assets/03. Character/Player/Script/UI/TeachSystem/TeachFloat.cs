@@ -5,6 +5,7 @@ public class TeachFloat : MonoBehaviour
     [SerializeField] private GameObject UI_SuperJump;
     [SerializeField] private GameObject DashState;
     [SerializeField] private GameObject JumpWeakest;
+    [SerializeField] private GameObject ElementSkill;
 
     private void Start()
     {
@@ -17,8 +18,7 @@ public class TeachFloat : MonoBehaviour
         SuperJump,
         DashState,
         JumpWeakest,
-        FireSkill,
-        WindSkill
+        ElementSkill,
     }
     public void Open(types type)
     {
@@ -44,6 +44,9 @@ public class TeachFloat : MonoBehaviour
                 break;
             case types.JumpWeakest:
                 obj = JumpWeakest;
+                break;
+            case types.ElementSkill:
+                obj = ElementSkill;
                 break;
         }
 
