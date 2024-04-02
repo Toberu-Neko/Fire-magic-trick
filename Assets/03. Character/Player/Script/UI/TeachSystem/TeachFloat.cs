@@ -12,6 +12,7 @@ public class TeachFloat : MonoBehaviour
         UI_SuperJump.SetActive(false);
         DashState.SetActive(false);
         JumpWeakest.SetActive(false);
+        ElementSkill.SetActive(false);
     }
     public enum types
     {
