@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6741459975387973720}
   - component: {fileID: 1054872}
   - component: {fileID: 1054871}
+  - component: {fileID: 2032309292}
   m_Layer: 15
   m_Name: Candle
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1561207837471719427}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.5000001, y: 0.5, z: 0.50000006}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8949901945783468955}
@@ -60,6 +61,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnegyReturn: {fileID: 7991532180455964518, guid: b46456e62257edd4d9c728d96ba3df49, type: 3}
+  eachTime: 0.5
+--- !u!114 &2032309292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561207837471719427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a1436feb55b1541a8f3ff9eef7945f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnegyReturn: {fileID: 2094373413415320964, guid: e9482dfb530d4af46a4905e5c38bf031, type: 3}
   eachTime: 0.5
 --- !u!1001 &9219529644222943405
 PrefabInstance:
