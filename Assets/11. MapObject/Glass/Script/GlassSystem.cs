@@ -18,15 +18,13 @@ public class GlassSystem : MonoBehaviour
     [Header("DelayMode")]
     [SerializeField] private MMF_Player feedbacks_Delay;
     [SerializeField] private float delayTime;
-    [Header("Charge")]
-    [SerializeField] private bool canCharge;
     [Header("Crash")]
     [SerializeField] public bool canCrash;
     [Header("EnemyCrash")]
-    [SerializeField] private bool canEnemyCrash;
+    [SerializeField] public bool canEnemyCrash;
     [Header("SuperJump")]
-    [SerializeField] private bool canSuperJump;
-    [SerializeField] private bool jumpDelayMode;
+    [SerializeField] public bool canSuperJump;
+    [SerializeField] public bool jumpDelayMode;
 
 
     private ProgressSystem progressSystem;
@@ -46,23 +44,13 @@ public class GlassSystem : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        BrokenCheck_Charge(collision);
         BrokenCheck_EnemyCrash(collision);
     }
     private void OnPlayerDeathToRebirthGlass()
     {
           GlassRebirth();
     }
-    private void BrokenCheck_Charge(Collision collision)
-    {
-        if(canCharge)
-        {
-            if (collision.collider.CompareTag("ChargeBullet"))
-            {
-                BrokenSuperFast();
-            }
-        }
-    }
+    
     public void BrokenCheck_SuperJump()
     {
         if(canSuperJump)
