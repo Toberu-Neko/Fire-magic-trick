@@ -40,6 +40,18 @@ public class TestTool_Teleport : MonoBehaviour
             {
                 TeleportToPoint(point[5].transform);
             }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                TeleportToPoint(point[6].transform);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                TeleportToPoint(point[7].transform);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                TeleportToPoint(point[8].transform);
+            }
         }
     }
     private void TeleportToPoint(Transform transform)

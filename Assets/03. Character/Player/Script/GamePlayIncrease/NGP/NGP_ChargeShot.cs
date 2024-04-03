@@ -28,13 +28,13 @@ public class NGP_ChargeShot : NGP_Basic_ChargeShot
     {
         shot.SetShotType(NGP_Shot.ShotType.Wind);
         TripleShot(power + 1);
-        magazing.UseBullet(power + 1);
+        magazing.UseBullet(1);
     }
     protected override void ChargeShot_Fire(int power)
     {
         shot.SetShotType(NGP_Shot.ShotType.Boom);
         scatterShot(power + 1);
-        magazing.UseBullet(power + 1);
+        magazing.UseBullet(1);
     }
     protected override bool isCombo()
     { 
