@@ -71,6 +71,10 @@ public class FireDashCollider : MonoBehaviour
 
                     _aimSupportSystem.ToAimSupport(other.gameObject, _aimSupportSystem.aimSupportTime);
                     HitFeedbacks.PlayFeedbacks();
+                    if(other.GetComponent<AgentController>() != null)
+                    {
+                        other.GetComponent<AgentController>().DisableAgent(); 
+                    }
                     other.GetComponent<Rigidbody>().AddForce(direction * CrashForce + Enemyup * CrashForceUp, ForceMode.Impulse);
                 }
             }
