@@ -8,6 +8,7 @@ public class AgentController : MonoBehaviour
 {
     [Header("NavMesh")]
     [SerializeField, Tooltip("請放入此物件")] private NavMeshAgent navMeshAgent;
+    [SerializeField, Tooltip("地面偵測距離")] private float distance = 0.1f;
 
     private bool isAgentDisabled = false;
 
@@ -24,23 +25,36 @@ public class AgentController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         // 碰到的是障礙物、Agnet關閉中、冷卻完成
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle") && isAgentDisabled)
+        if (isAgentDisabled)
         {
-            EnableAgent();
+            if(IsOnNavMesh())
+            {
+                EnableAgent();
+            }  
         }
     }
 
-    // 禁用 NavMeshAgent
+    // 禁用NavMeshAgent
     public void DisableAgent()
     {
         navMeshAgent.enabled = false;
         isAgentDisabled = true;
     }
 
-    // 啟用 NavMeshAgent
+    // 啟用NavMeshAgent
     void EnableAgent()
     {
         navMeshAgent.enabled = true;
         isAgentDisabled = false;
+    }
+
+    bool IsOnNavMesh() // 偵測是否落在NavMesh上
+    {
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(transform.position, out hit, distance, NavMesh.AllAreas))
+        {
+            return true;
+        }
+        return false;
     }
 }
