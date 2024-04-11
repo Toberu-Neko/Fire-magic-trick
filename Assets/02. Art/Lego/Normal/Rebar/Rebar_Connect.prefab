@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 632696058429514498}
-  - component: {fileID: 420988531627261628}
-  - component: {fileID: -7436881154985022880}
+  - component: {fileID: -2889599594214576156}
   m_Layer: 9
-  m_Name: Rebar_Connect_2
+  m_Name: Rebar_Connect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,27 +26,14 @@ Transform:
   m_GameObject: {fileID: 5409872951060897687}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3841755275639318602}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &420988531627261628
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5409872951060897687}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.48, z: 0}
---- !u!205 &-7436881154985022880
+--- !u!205 &-2889599594214576156
 LODGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,10 +66,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 632696058429514498}
     m_Modifications:
-    - target: {fileID: 2185756815050179903, guid: 2fc387eb58641ad409dd5312a18c7a37, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 5156120469372107091, guid: 2fc387eb58641ad409dd5312a18c7a37, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: baa15ab212d42e144bd41f6632cffabf, type: 2}
     - target: {fileID: 6324484217037423164, guid: 2fc387eb58641ad409dd5312a18c7a37, type: 3}
       propertyPath: m_RootOrder
       value: 0
