@@ -45,6 +45,8 @@ public class MenuSystem : MonoBehaviour
         }
         else
         {
+            starterAssets.cursorLocked = true;
+            starterAssets.cursorInputForLook = true;
             OpeningObj.SetActive(false);
             Player.transform.parent = null;
         }
