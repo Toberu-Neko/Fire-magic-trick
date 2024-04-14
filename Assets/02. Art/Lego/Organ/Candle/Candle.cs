@@ -22,6 +22,13 @@ public class Candle : MonoBehaviour
             timer = 0;
         }
     }
+    private void OnTriggerStay(Collider other)
+    {
+        if(!isActive && other.CompareTag("Player"))
+        {
+            SetIsActive(true);
+        }
+    }
     private void Update()
     {
         timerSystem();
