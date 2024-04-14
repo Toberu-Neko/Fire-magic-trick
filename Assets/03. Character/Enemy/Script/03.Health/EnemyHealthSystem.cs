@@ -1,12 +1,14 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using BehaviorDesigner.Runtime;
+using System.Runtime.CompilerServices;
 
 public class EnemyHealthSystem : MonoBehaviour, IHealth
 {
     
 
     [SerializeField] private bool isTeachEnemy;
+    [SerializeField] private bool isOnceEnemy;
     [SerializeField] private bool isRebirthHide;
     [Header("State")]
     public bool isIgnite;
@@ -283,6 +285,11 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     }
     private void Initialization()
     {
+        if(isOnceEnemy)
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
         EnemyAggroSystem aggroSystem = GetComponent<EnemyAggroSystem>();
         if (aggroSystem != null)
         {
