@@ -6,7 +6,7 @@ using UnityEngine.Playables;
 public class TriggerArea_Timeline : MonoBehaviour
 {
     //Script
-    private PlayableDirector timelinePlayable;
+    public PlayableDirector timelinePlayable;
     private PlayerState playerState;
 
     //varable
@@ -15,7 +15,10 @@ public class TriggerArea_Timeline : MonoBehaviour
 
     private void Start()
     {
-        timelinePlayable = GetComponent<PlayableDirector>();
+        if (timelinePlayable == null)
+        {
+            timelinePlayable = GetComponent<PlayableDirector>();
+        }
         playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
     }
     private void Update()
