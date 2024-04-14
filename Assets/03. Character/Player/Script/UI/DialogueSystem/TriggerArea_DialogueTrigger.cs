@@ -30,12 +30,16 @@ public class TriggerArea_DialogueTrigger : MonoBehaviour
         dialogueManager = GameManager.singleton.UISystem.GetComponent<DialogueManager>();
         playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
         progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
-        progressSystem.OnPlayerDeath += ResetCanTrigger;
+
+        if(!triggerOnce)
+        {
+            progressSystem.OnPlayerDeath += ResetCanTrigger;
+        }
         canTrigger = true;
     }
     private void Update()
     {
-        if(isReadyDialogue)
+        if(isReadyDialogue && canTrigger)
         {
             if (playerState.isGround)
             {
@@ -72,7 +76,7 @@ public class TriggerArea_DialogueTrigger : MonoBehaviour
 
             if (triggerOnce)
             {
-                triggerOnce = false;
+                triggerOnce = true;
                 canTrigger = false;
             }
         }
