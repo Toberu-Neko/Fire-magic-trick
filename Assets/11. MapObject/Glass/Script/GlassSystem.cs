@@ -154,7 +154,10 @@ public class GlassSystem : MonoBehaviour
     }
     private void SetCollider(bool active)
     {
-        glassCollider.enabled = active;
+        if(glassCollider != null)
+        {
+            glassCollider.enabled = active;
+        }
     }
     private void SetColliderRender(bool active)
     {
