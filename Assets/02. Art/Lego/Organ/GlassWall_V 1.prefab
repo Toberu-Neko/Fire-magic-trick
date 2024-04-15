@@ -5667,6 +5667,7 @@ GameObject:
   - component: {fileID: 7872413336182889757}
   - component: {fileID: 7677523435993503098}
   - component: {fileID: 1868808380824982533}
+  - component: {fileID: 197346729778124889}
   m_Layer: 0
   m_Name: Glass
   m_TagString: Untagged
@@ -5763,6 +5764,20 @@ MonoBehaviour:
   canEnemyCrash: 1
   canSuperJump: 1
   jumpDelayMode: 0
+--- !u!64 &197346729778124889
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775805116453590154}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -9146618070568788744, guid: 38e881515953e114e8bd06152abad698, type: 3}
 --- !u!1 &5522632596044845466
 GameObject:
   m_ObjectHideFlags: 0
