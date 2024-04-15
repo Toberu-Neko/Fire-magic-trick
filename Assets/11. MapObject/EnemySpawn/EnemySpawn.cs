@@ -5,6 +5,7 @@ public class EnemySpawn : MonoBehaviour
 {
     public GameObject[] Enemys;
 
+    [SerializeField] private bool Test_BrokenRightNow;
     //Script
     private ProgressSystem progressSystem;
 
@@ -26,6 +27,11 @@ public class EnemySpawn : MonoBehaviour
         //event
         progressSystem.OnPlayerDeath += ToDeath;
 
+
+        if(Test_BrokenRightNow)
+        {
+            ToClear();
+        }
     }
     private void Update()
     {
