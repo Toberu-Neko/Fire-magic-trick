@@ -10,6 +10,7 @@ public class CooldownStart : Action
 	public override TaskStatus OnUpdate()
 	{
 		skillCooldown.timer = Time.time;
+		skillCooldown.OffsetCooldown();
 
 		return TaskStatus.Success;
 	}
