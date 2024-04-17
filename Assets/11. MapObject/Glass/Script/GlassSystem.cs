@@ -62,7 +62,6 @@ public class GlassSystem : MonoBehaviour
             else
             {
                 BrokenSuperFast();
-
             }
         }
     }
