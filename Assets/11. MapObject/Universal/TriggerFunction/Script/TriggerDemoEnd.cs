@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using UnityEngine.Playables;
 
 public class TriggerDemoEnd : MonoBehaviour
 {
     //Script
-    [SerializeField] private Animator BlackImage;
-    [SerializeField] private GameObject Text;
-    [SerializeField] private Transform StartPosition;
+    [SerializeField] private PlayableDirector EndingPlayer;
+    [SerializeField] private int creditTime = 10;
     private SenceManagerment senceManagerment;
 
     //variable
@@ -20,8 +20,8 @@ public class TriggerDemoEnd : MonoBehaviour
         if(!trigger)
         {
             trigger = true;
-            BlackImage.SetTrigger("Enter");
-            await Task.Delay(3000);
+            EndingPlayer.Play();
+            await Task.Delay(creditTime * 1000);
             senceManagerment.ReStartGame();
         }
     }
