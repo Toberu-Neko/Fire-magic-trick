@@ -8,7 +8,7 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] private MMF_Player Feedbacks;
     [Header("Invicible")]
     [SerializeField] private float HitInvicibleTime = 0.5f;
-
+    
     //Script
     private EnergySystem energySystem;
     private ImpactReceiver impactReceiver;
@@ -49,8 +49,13 @@ public class HealthSystem : MonoBehaviour
     }
     private void DamagePlayer(int Damage)
     {
+        /* old system
         energySystem.DecreaseEnergy(Damage);
         ToInvincible();
+        PlayFeedbacks();
+        */
+
+        energySystem.GetEnergy(Damage);
         PlayFeedbacks();
     }
     private void DamagePlayer(int Damage, Vector3 ImpactDirection)

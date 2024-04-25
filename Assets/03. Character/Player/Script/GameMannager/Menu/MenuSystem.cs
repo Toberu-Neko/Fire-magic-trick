@@ -40,15 +40,16 @@ public class MenuSystem : MonoBehaviour
         if(useMenu)
         {
             Initialization();
-            OpeningObj.SetActive(true);
+            if(OpeningObj!=null) OpeningObj.SetActive(true);
             Player.transform.parent = OpeningObj.gameObject.transform;
         }
         else
         {
+            NullFather();
             starterAssets.cursorLocked = true;
             starterAssets.cursorInputForLook = true;
             starterAssets.SetCursorState(starterAssets.cursorLocked);
-            OpeningObj.SetActive(false);
+            if (OpeningObj != null) OpeningObj.SetActive(false);
             Player.transform.parent = null;
         }
     }
@@ -69,7 +70,7 @@ public class MenuSystem : MonoBehaviour
         }
     }
     #endregion
-    private void Initialization()
+    private void NullFather()
     {
         NullFatherObj(gameManager.gameObject);
         NullFatherObj(MainCamera.gameObject);
@@ -77,7 +78,10 @@ public class MenuSystem : MonoBehaviour
         //NullFatherObj(PauseUI);
         NullFatherObj(UI);
         NullFatherObj(CameraPakage);
-
+    }
+    private void Initialization()
+    {
+        NullFather();
         SetPlayMode(false);
         SetMenuInterface(true);
 

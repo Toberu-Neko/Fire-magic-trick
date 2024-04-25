@@ -135,10 +135,7 @@ public class EnergySystem : MonoBehaviour
         Feedback_GetEnergy.PlayFeedbacks();
         Increase(value);
     }
-    public void DecreaseEnergy(int Energy)
-    {
-        Decrease(Energy);
-    }
+    
     #region Recover
     private void RecoverSystem()
     {
