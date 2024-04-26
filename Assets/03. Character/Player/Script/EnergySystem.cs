@@ -1,4 +1,5 @@
 using MoreMountains.Feedbacks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnergySystem : MonoBehaviour
@@ -16,12 +17,16 @@ public class EnergySystem : MonoBehaviour
 
     //Variable
     [Header("Energy")]
+    public bool isOverBurning;
     public float Energy;
+    public float Energy_overBurning;
     [SerializeField] private float StartEnergy;
+
     [Header("Recover")]
     [SerializeField] private float recoverRange;
     [SerializeField] private float recoverTime;
     [SerializeField] private float recover;
+
     [Header("GetEnergy")]
     private float timer;
     private bool isRecover;
@@ -33,6 +38,7 @@ public class EnergySystem : MonoBehaviour
     [SerializeField] private float FloatCost = 10;
     [SerializeField] private float DashCost = 10;
     [SerializeField] private float KickCost = 10;
+
     [Header("Feedbacks")]
     [SerializeField] private MMF_Player Feedbacks_NoEnegy;
     [SerializeField] private MMF_Player Feedback_GetEnergy;
@@ -41,12 +47,18 @@ public class EnergySystem : MonoBehaviour
     private void Start()
     {
         _energySystemUI = GameManager.singleton.UISystem.GetComponent<EnergySystemUI>();
-
-        //SetEnegy(StartEnergy);
     }
     private void Update()
     {
         RecoverSystem();
+        UseEnergyTest();
+    }
+    private void UseEnergyTest()
+    {
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            Decrease(10);
+        }
     }
     public bool canUseEnegy(SkillType type)
     {
@@ -68,32 +80,82 @@ public class EnergySystem : MonoBehaviour
             case SkillType.Float:
                 need = FloatCost;
                 break;
-        }
+        } //Check type
 
-        if(Energy > need)
+        if(Energy > need) //cost
         {
-            Energy -= need;
+            UseEnergy(need);
             return true;
         }else
         {
             return false;
         }
     }
-    #region Set-UI
-    public void SetEnegy(float value)
+    public void UseEnergy(float value)
     {
-        Energy = value;
-        UpdateUI();
-    }
-    public void UpdateUI()
-    {
-        float value = Energy / 100;
-        if (_energySystemUI != null)
+        if(isOverBurning)
         {
-            _energySystemUI.UpdateBar(value);
+            if(leaveOverBurning(value))
+            {
+                float allEnergy = Energy + Energy_overBurning;
+                float leaveEnergy = allEnergy - value;
+
+                Decrease(leaveEnergy);
+            }
+            Decrease_overburning(value);
+        }else
+        {
+            Decrease(value);
         }
     }
-    #endregion
+    private bool leaveOverBurning(float value)
+    {
+        float newEnergy = allEnergy - value;
+
+        if(newEnergy <100)
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
+    }
+    public void GetEnergyByDamage(float value)
+    {
+        if(!isOverBurning)
+        {
+            if(willOverburning(value))
+            {
+                float overEnergy = Energy + value - 100;
+                Increase_overburning(overEnergy);
+            }
+            Increase(value);
+        }else
+        {
+            Increase_overburning(value);
+        }
+    }
+    private bool willOverburning(float value)
+    {
+        float newEnergy = Energy + value;
+
+        if(newEnergy > 100)
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
+    }
+    private void ToOverBurning()
+    {
+        setIsOverBurning(true);
+    }
+    public void GetEnergy(float value)
+    {
+        Feedback_GetEnergy.PlayFeedbacks();
+        Increase(value);
+    }
     #region Increase Decrease
     private void Increase(float energy)
     {
@@ -123,19 +185,36 @@ public class EnergySystem : MonoBehaviour
             _energySystemUI.UpdateBar(value);
         }
     }
-    #endregion
-    #region use Skill
-    public void UseEnegy(int value)
+    private void Increase_overburning(float energy)
     {
-        Decrease(value);
+        Energy_overBurning += energy;
+
+        if (Energy_overBurning > 100)
+        {
+            Energy_overBurning = 100;
+        }
+        UpdateUI_overBurning(Energy_overBurning);
+    }
+    private void Decrease_overburning(float energy)
+    {
+        Energy_overBurning -= energy;
+
+        if (Energy_overBurning < 0)
+        {
+            Energy_overBurning = 0;
+        }
+        UpdateUI_overBurning(Energy_overBurning);
+    }
+    public void UpdateUI_overBurning(float Value)
+    {
+        float value = Value / 100;
+
+        if (_energySystemUI != null)
+        {
+            _energySystemUI.UpdateBarOverBurning(value);
+        }
     }
     #endregion
-    public void GetEnergy(float value)
-    {
-        Feedback_GetEnergy.PlayFeedbacks();
-        Increase(value);
-    }
-    
     #region Recover
     private void RecoverSystem()
     {
@@ -161,4 +240,8 @@ public class EnergySystem : MonoBehaviour
         }
     }
     #endregion
+    private void setIsOverBurning(bool active)
+    {
+        isOverBurning = active;
+    }
 }

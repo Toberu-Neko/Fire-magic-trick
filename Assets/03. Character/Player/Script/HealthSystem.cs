@@ -55,7 +55,7 @@ public class HealthSystem : MonoBehaviour
         PlayFeedbacks();
         */
 
-        energySystem.GetEnergy(Damage);
+        energySystem.GetEnergyByDamage(Damage);
         PlayFeedbacks();
     }
     private void DamagePlayer(int Damage, Vector3 ImpactDirection)
