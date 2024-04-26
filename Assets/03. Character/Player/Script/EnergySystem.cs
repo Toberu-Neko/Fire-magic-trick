@@ -98,9 +98,10 @@ public class EnergySystem : MonoBehaviour
             if(leaveOverBurning(value))
             {
                 float allEnergy = Energy + Energy_overBurning;
-                float leaveEnergy = allEnergy - value;
+                float leaveEnergy =100 - allEnergy - value;
 
                 Decrease(leaveEnergy);
+                leaveOverBurning();
             }
             Decrease_overburning(value);
         }else
@@ -110,6 +111,7 @@ public class EnergySystem : MonoBehaviour
     }
     private bool leaveOverBurning(float value)
     {
+        float allEnergy = Energy + Energy_overBurning;
         float newEnergy = allEnergy - value;
 
         if(newEnergy <100)
@@ -128,6 +130,7 @@ public class EnergySystem : MonoBehaviour
             {
                 float overEnergy = Energy + value - 100;
                 Increase_overburning(overEnergy);
+                ToOverBurning();
             }
             Increase(value);
         }else
@@ -150,6 +153,10 @@ public class EnergySystem : MonoBehaviour
     private void ToOverBurning()
     {
         setIsOverBurning(true);
+    }
+    private void leaveOverBurning()
+    {
+        setIsOverBurning(false);
     }
     public void GetEnergy(float value)
     {
