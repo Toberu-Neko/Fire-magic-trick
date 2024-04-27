@@ -57,6 +57,7 @@ public class HealthSystem : MonoBehaviour
 
         energySystem.GetEnergyByDamage(Damage);
         PlayFeedbacks();
+        ToInvincible();
     }
     private void DamagePlayer(int Damage, Vector3 ImpactDirection)
     {

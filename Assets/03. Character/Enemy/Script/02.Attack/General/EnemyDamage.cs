@@ -43,7 +43,7 @@ public class EnemyDamage : MonoBehaviour
             ForceDirection = new Vector3(0, Direction.y, 0);
         }
 
-        healthSystem.ToDamagePlayer(0, ForceDirection * force);
+        healthSystem.ToDamagePlayer(damage, ForceDirection * force);
     }
     public void DestroyObject()
     {

@@ -164,6 +164,7 @@ public class EnergySystem : MonoBehaviour
         Feedback_PlayerDeath.PlayFeedbacks();
         Decrease_overburning(100);
         Decrease(100);
+        setIsOverBurning(false);
         playerState.SetUseCameraRotate(false);
         playerState.OutControl();
         await Task.Delay(1500);
@@ -212,6 +213,10 @@ public class EnergySystem : MonoBehaviour
         if(isOverBurning)
         {
             Decrease_overburning(value / 4);
+            if(Energy_overBurning==0)
+            {
+                setIsOverBurning(false);
+            }
         }
     }
     #region Increase Decrease
@@ -301,8 +306,14 @@ public class EnergySystem : MonoBehaviour
     }
     private void RecoverCheck_overburning()
     {
-        bool condition = Energy_overBurning > recoverRange_overBurning;
-        isRecover_overBurning = condition ? true : false;
+        bool condition = Energy_overBurning < recoverRange_overBurning;
+        if(isOverBurning)
+        {
+            isRecover_overBurning = condition ? true : false;
+        }else
+        {
+            isRecover_overBurning = false;
+        }
     }
     private void recoverTimer_overburning()
     {
@@ -312,7 +323,7 @@ public class EnergySystem : MonoBehaviour
 
             if (timer_overBurning > recoverTime_overBurning)
             {
-                Decrease_overburning(recover_overBurning);
+                Increase_overburning(recover_overBurning);
                 timer_overBurning = 0;
             }
         }
