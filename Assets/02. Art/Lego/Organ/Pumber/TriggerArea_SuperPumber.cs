@@ -29,7 +29,7 @@ public class TriggerArea_SuperPumber : MonoBehaviour
         {
             if(isDeathPumber)
             {
-                deathSystem.EnterDeathImage_Fast();
+                deathSystem.Death_Fast();
                 return;
             }
 

@@ -34,6 +34,6 @@ public class ProgressSystem : MonoBehaviour
     }
     public void PlayerRebirth()
     {
-        _deathSystem.ExitDeathImage();
+        _deathSystem.Rebirth();
     }
 }

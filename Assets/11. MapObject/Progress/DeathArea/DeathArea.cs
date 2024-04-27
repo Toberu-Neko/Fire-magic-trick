@@ -12,7 +12,7 @@ public class DeathArea : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            _deathSystem.EnterDeathImage();
+            _deathSystem.Death();
         }
         if(other.CompareTag("Enemy"))
         {
