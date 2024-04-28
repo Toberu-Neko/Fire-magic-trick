@@ -34,9 +34,12 @@ public class Shooting_Magazing : MonoBehaviour
     {
         if (input.ButtonX && !isReload)
         {
-            if(energySystem.canUseEnegy(EnergySystem.SkillType.Reload))
+            if(Bullet < MaxBullet /2)
             {
-                UseReload();
+                if (energySystem.canUseEnegy(EnergySystem.SkillType.Reload))
+                {
+                    UseReload();
+                }
             }
         }
     }
