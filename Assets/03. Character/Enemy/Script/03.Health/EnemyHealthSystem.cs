@@ -61,6 +61,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     public event ToPlayEnemyHit OnEnemyHit;
     public delegate void EnemyDeath();
     public event EnemyDeath OnEnemyDeath;
+    public event EnemyDeath OnEnemyRebirth;
 
     //variable
     private float atCrashTimer;
@@ -98,6 +99,10 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     {
         EnemyCoolingCheck();
         atCrashTimerSystem();
+    }
+    public void SetIsRebirthHide(bool value)
+    {
+        isRebirthHide = value;
     }
     public void giveTargetPlayer()
     {
@@ -271,6 +276,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     #region
     public void Rebirth(Vector3 position, Quaternion rotation)
     {
+        OnEnemyRebirth?.Invoke();
         this.transform.position = position;
         this.transform.rotation = rotation;
         Initialization();

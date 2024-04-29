@@ -1,8 +1,10 @@
 using MoreMountains.Feedbacks;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class EnergyCan : MonoBehaviour ,IHealth
 {
+    [SerializeField] private EnemyHealthSystem healthSystem;
     [Header("FireEnergyObject")]
 	[SerializeField] private GameObject fireEnergy;
 
@@ -14,6 +16,22 @@ public class EnergyCan : MonoBehaviour ,IHealth
 
     [Header("CheckArea")]
     [SerializeField] private GameObject brokenBoomArea;
+
+    private ProgressSystem progressSystem;
+
+    private void Start()
+    {
+        progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
+
+        if(healthSystem ==null)
+        {
+            healthSystem = this.transform.parent.GetComponent<EnemyHealthSystem>();
+        }
+        if(healthSystem != null)
+        {
+            healthSystem.OnEnemyRebirth += OnEnemyRebirth;
+        }
+    }
 
     private bool isBroken = false;
     public int iHealth
@@ -28,7 +46,7 @@ public class EnergyCan : MonoBehaviour ,IHealth
 
         if(health <= 0)
         {
-            Broke();
+            Broke(); 
         }
     }
 
@@ -36,11 +54,27 @@ public class EnergyCan : MonoBehaviour ,IHealth
     {
         if(!isBroken)
         {
-            isBroken = true;
+            setIsBroken(true);
             Feedbacks_Broken.PlayFeedbacks();
-            Object.Instantiate(fireEnergy, transform.position, Quaternion.identity);
+            Instantiate(fireEnergy, transform.position, Quaternion.identity);
             brokenBoomArea.SetActive(true);
-            Destroy(gameObject, 0.25f);
+            DestroyCan();
         }
+    }
+    private void OnEnemyRebirth()
+    {
+        this.gameObject.SetActive(true);
+        brokenBoomArea.SetActive(false);
+        health = 1;
+        setIsBroken(false);
+    }
+    private async void DestroyCan()
+    {
+        await Task.Delay(250);
+        this.gameObject.SetActive(false);
+    }
+    private void setIsBroken(bool value)
+    {
+        isBroken = value;
     }
 }

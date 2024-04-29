@@ -28103,6 +28103,10 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2422790876359040885, guid: 138aa49fca8f38a4692a2aefc505f5d9, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2422790876359040885, guid: 138aa49fca8f38a4692a2aefc505f5d9, type: 3}
       propertyPath: ShapeModule.type
       value: 0
       objectReference: {fileID: 0}
@@ -28285,6 +28289,10 @@ PrefabInstance:
     - target: {fileID: 5267828452029435916, guid: d15da664572c04548ae1247031c32029, type: 3}
       propertyPath: lengthInSec
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5267828452029435916, guid: d15da664572c04548ae1247031c32029, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5267828452029435916, guid: d15da664572c04548ae1247031c32029, type: 3}
       propertyPath: ShapeModule.angle
@@ -28665,6 +28673,10 @@ PrefabInstance:
     - target: {fileID: 2533782729418468816, guid: 828848a3fe6f4a144af79a8cf81f356b, type: 3}
       propertyPath: FeedbacksList.Array.data[4]
       value: 5698134788721344513
+      objectReference: {fileID: 0}
+    - target: {fileID: 2533782729418468816, guid: 828848a3fe6f4a144af79a8cf81f356b, type: 3}
+      propertyPath: managedReferences[867371841465614337].Active
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2533782729418468816, guid: 828848a3fe6f4a144af79a8cf81f356b, type: 3}
       propertyPath: managedReferences[4547940762277904385].TargetGameObject
@@ -29373,6 +29385,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 18
       objectReference: {fileID: 0}
+    - target: {fileID: 5717185955084797111, guid: 9a547a79af14a0d41979f2f035416002, type: 3}
+      propertyPath: healthSystem
+      value: 
+      objectReference: {fileID: 8032919127870789860}
     - target: {fileID: 8980420727329432852, guid: 9a547a79af14a0d41979f2f035416002, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -29409,6 +29425,10 @@ PrefabInstance:
     - target: {fileID: 1857642639812320277, guid: 36881b3d5855b9448ac3e5f3fe37de49, type: 3}
       propertyPath: lengthInSec
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1857642639812320277, guid: 36881b3d5855b9448ac3e5f3fe37de49, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1857642639812320277, guid: 36881b3d5855b9448ac3e5f3fe37de49, type: 3}
       propertyPath: ShapeModule.type
@@ -29750,6 +29770,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 897051314466243144}
     m_Modifications:
+    - target: {fileID: 1028536261795098066, guid: a5cbea55929fc0e4d8290fdb750f5de7, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2318222489805960104, guid: a5cbea55929fc0e4d8290fdb750f5de7, type: 3}
       propertyPath: m_Name
       value: VFX_LegSlash_B
@@ -29758,6 +29782,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: eef8fbcb08dfb0840b1bf8895f3dc6fb, type: 2}
+    - target: {fileID: 5044320906133749558, guid: a5cbea55929fc0e4d8290fdb750f5de7, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7299755662038662247, guid: a5cbea55929fc0e4d8290fdb750f5de7, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -29878,6 +29906,10 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5267377661722736436, guid: 0ea7ce1161c411049ac0566107ba0543, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5267377661722736436, guid: 0ea7ce1161c411049ac0566107ba0543, type: 3}
       propertyPath: ShapeModule.type
       value: 10
       objectReference: {fileID: 0}
@@ -29955,6 +29987,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5267377661722736436, guid: 0ea7ce1161c411049ac0566107ba0543, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6010143986501908368, guid: 0ea7ce1161c411049ac0566107ba0543, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8492030651410565546, guid: 0ea7ce1161c411049ac0566107ba0543, type: 3}
@@ -30235,6 +30271,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: eef8fbcb08dfb0840b1bf8895f3dc6fb, type: 2}
+    - target: {fileID: 4306473045347070395, guid: ee3504a27f927ed459fd58f5dc613cdf, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529615089191956975, guid: ee3504a27f927ed459fd58f5dc613cdf, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8206510852197523473, guid: ee3504a27f927ed459fd58f5dc613cdf, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -30340,6 +30384,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3113491377109263911, guid: 0ea7ce1161c411049ac0566107ba0543, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5267377661722736436, guid: 0ea7ce1161c411049ac0566107ba0543, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6010143986501908368, guid: 0ea7ce1161c411049ac0566107ba0543, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8492030651410565546, guid: 0ea7ce1161c411049ac0566107ba0543, type: 3}
