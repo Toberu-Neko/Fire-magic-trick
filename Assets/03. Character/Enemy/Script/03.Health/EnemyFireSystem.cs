@@ -9,7 +9,7 @@ public class EnemyFireSystem : MonoBehaviour
     [SerializeField] private float spreadTimer;
 
 
-    private EnemyHealthSystem _health;
+    private EnemyHealthSystem health;
 
     private float timerNumber;
     private bool isSpread;
@@ -17,12 +17,24 @@ public class EnemyFireSystem : MonoBehaviour
 
     private void Awake()
     {
-        _health = GetComponent<EnemyHealthSystem>();
+        health = GetComponent<EnemyHealthSystem>();
+    }
+    private void Start()
+    {
+        health.OnEnemyRebirth += Initialized;
     }
     private void Update()
     {
         TrackTargetSystem();
         SpreadTimerSystem();
+    }
+    private void Initialized()
+    {
+        SetIsTimer(false);
+        SetTimerNumber(0);
+        SetIsSpread(false);
+        SetDashFire(false);
+        SetSuperDashFire(false);
     }
     public void FireCheck(PlayerDamage.DamageType damageType)
     {
@@ -47,7 +59,7 @@ public class EnemyFireSystem : MonoBehaviour
     {
         if (!isSpread)
         {
-            if (_health.isIgnite)
+            if (health.isIgnite)
             {
                 SetTrackTarget(true);
             }
@@ -66,11 +78,7 @@ public class EnemyFireSystem : MonoBehaviour
 
         if(timerNumber <=0 && isTimer)
         {
-            SetIsTimer(false);
-            SetTimerNumber(0);
-            SetIsSpread(false);
-            SetDashFire(false);
-            SetSuperDashFire(false);
+            Initialized();
         }
     }
     private void SetIsTimer(bool active)
