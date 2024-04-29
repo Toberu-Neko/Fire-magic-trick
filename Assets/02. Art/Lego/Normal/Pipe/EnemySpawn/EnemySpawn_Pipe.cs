@@ -1,32 +1,53 @@
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class EnemySpawn_Pipe : MonoBehaviour
 {
+    [Header("Setting")]
     [SerializeField] private GameObject Enemy;
     [SerializeField] private Transform SpawnPoint;
     [SerializeField] private float force;
+    [Header("Mode")]
+    [SerializeField] private bool KeepSpawn;
+    [SerializeField] private bool OnceSpawn;
+    [Header("KeepSpawn")]
+    [SerializeField] private bool isTimer;
+    [SerializeField] private float timer;
+    [SerializeField] private float SpawnCD;
     [SerializeField] public List<GameObject> enemys = new List<GameObject>();
 
-    private void Start()
-    {
-
-    }
     private void Update()
     {
-        test();
+        spawnTimer();
     }
-    private void test()
+    public void SpawnStart()
     {
-        if(Input.GetKeyDown(KeyCode.B))
+        timer = 0;
+        setIsTimer(true);
+    }
+    public void SpawnEnd()
+    {
+        setIsTimer(false);
+    }
+    private void spawnTimer()
+    {
+        if(isTimer)
         {
-            Spawn();
+            timer += Time.deltaTime;
+        }
+
+        if(timer > SpawnCD)
+        {
+            timer = 0;
+            timerEnd();
         }
     }
-    private void Spawn()
+    private void timerEnd()
+    {
+        spawn();
+    }
+    private void spawn()
     {
         GameObject enemy = TakeTarget();
         AgentController agent = enemy.GetComponent<AgentController>();
@@ -49,4 +70,10 @@ public class EnemySpawn_Pipe : MonoBehaviour
         enemys.Add(newEnemy);
         return newEnemy;
     }
+    #region set
+    private void setIsTimer(bool active)
+    {
+        isTimer = active;
+    }
+    #endregion
 }

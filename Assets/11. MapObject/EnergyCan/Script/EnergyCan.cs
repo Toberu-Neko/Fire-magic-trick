@@ -57,20 +57,21 @@ public class EnergyCan : MonoBehaviour ,IHealth
             setIsBroken(true);
             Feedbacks_Broken.PlayFeedbacks();
             Instantiate(fireEnergy, transform.position, Quaternion.identity);
-            brokenBoomArea.SetActive(true);
+            
             DestroyCan();
         }
     }
     private void OnEnemyRebirth()
     {
         this.gameObject.SetActive(true);
-        brokenBoomArea.SetActive(false);
         health = 1;
         setIsBroken(false);
     }
     private async void DestroyCan()
     {
+        brokenBoomArea.SetActive(true);
         await Task.Delay(250);
+        brokenBoomArea.SetActive(false);
         this.gameObject.SetActive(false);
     }
     private void setIsBroken(bool value)

@@ -3,11 +3,12 @@ using UnityEngine.Events;
 
 public class TriggerFunction : MonoBehaviour
 {
-    [SerializeField] UnityEvent OnTriggerEvent;
-    [SerializeField] private bool OnlyOnce = true;
     [Header("OnStartTrigger")]
     [SerializeField] private bool OnStartTrigger = false;
     [SerializeField] UnityEvent OnStartTriggerEvent;
+    [Header("OnTriggerEnter")]
+    [SerializeField] UnityEvent OnTriggerEvent;
+    [SerializeField] private bool OnlyOnce = true;
     [Header("OnTriggerStay")]
     [SerializeField] private bool useTriggerStay = false;
     [SerializeField] UnityEvent OnTriggerStayEvent;

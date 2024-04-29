@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class BrokenBoomArea : MonoBehaviour
@@ -9,5 +10,14 @@ public class BrokenBoomArea : MonoBehaviour
             EnemyHealthSystem enemyHealthSystem = other.GetComponent<EnemyHealthSystem>();
             enemyHealthSystem.TakeDamage(2, PlayerDamage.DamageType.SuperDash);
         }
+        if(other.CompareTag("EnergyCan"))
+        {
+            Boom(other);
+        }
+    }
+    private async void Boom(Collider other)
+    {
+        await Task.Delay(150);  
+        other.GetComponent<EnergyCan>().Broke();
     }
 }

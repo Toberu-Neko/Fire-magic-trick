@@ -254,14 +254,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         {
             if(!isTriggerDeath)
             {
-                SetIsTriggerDeath(true);
-                
-                feedbacks_Boom.PlayFeedbacks();
-                BoomBody();
-                feedbacks_Fire.StopFeedbacks();
-                feedbacks_Shock.StopFeedbacks();
-                feedbacks_Steam.StopFeedbacks();
-                OnEnemyDeath?.Invoke();
+                EnemyDeathRightNow();
             }
         }
     }
@@ -353,7 +346,10 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     }
     public void EnemyDeathRightNow()
     {
+        SetIsTriggerDeath(true);
+
         feedbacks_Boom.PlayFeedbacks();
+        BoomBody();
         feedbacks_Fire.StopFeedbacks();
         feedbacks_Shock.StopFeedbacks();
         feedbacks_Steam.StopFeedbacks();

@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class DeathArea : MonoBehaviour
 {
-    private DeathSystem _deathSystem;
+    private EnergySystem energySystem;
 
     private void Start()
     {
-        _deathSystem = GameManager.singleton.UISystem.GetComponent<DeathSystem>();
+        energySystem = GameManager.singleton.Player.GetComponent<EnergySystem>();
     }
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            _deathSystem.Death();
+            energySystem.playerDeath();
         }
         if(other.CompareTag("Enemy"))
         {

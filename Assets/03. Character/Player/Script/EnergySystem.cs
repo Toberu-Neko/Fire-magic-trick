@@ -159,7 +159,7 @@ public class EnergySystem : MonoBehaviour
             playerDeath();
         }
     }
-    private async void playerDeath()
+    public async void playerDeath()
     {
         Feedback_PlayerDeath.PlayFeedbacks();
         Decrease_overburning(100);
