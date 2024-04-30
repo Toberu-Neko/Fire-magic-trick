@@ -17,7 +17,11 @@ public class BrokenBoomArea : MonoBehaviour
     }
     private async void Boom(Collider other)
     {
-        await Task.Delay(150);  
-        other.GetComponent<EnergyCan>().Broke();
+        await Task.Delay(150);
+        EnergyCan can = other.GetComponent<EnergyCan>();
+        if(can != null)
+        {
+            can.Broke();
+        }
     }
 }
