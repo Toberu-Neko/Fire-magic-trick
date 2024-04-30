@@ -2,7 +2,6 @@ using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawn_Pipe : MonoBehaviour
@@ -35,16 +34,12 @@ public class EnemySpawn_Pipe : MonoBehaviour
     [SerializeField] private MMF_Player keep;
     [SerializeField] private MMF_Player once;
 
+    private MyDelegates.OnHandler onPipeFightover;
     private List<GameObject> enemys = new List<GameObject>();
 
     private void Update()
     {
         spawnTimer();
-
-        if(Input.GetKeyDown(KeyCode.B))
-        {
-            Initialization();
-        }
     }
     public void Initialization()
     {
@@ -56,6 +51,12 @@ public class EnemySpawn_Pipe : MonoBehaviour
             Destroy(enemy);
         }
         enemys.Clear();
+    }
+    public void resetPipe(GameObject Enemy, int number, float CD)
+    {
+        this.Enemy = Enemy;
+        this.number = number;
+        this.SpawnCD = CD;
     }
     public void ToSpawn()
     {
@@ -138,6 +139,7 @@ public class EnemySpawn_Pipe : MonoBehaviour
         if (state == spawnState.Max)
         {
             isFightOver = true;
+            onPipeFightover?.Invoke();
             StopSpawn();
         }
     }

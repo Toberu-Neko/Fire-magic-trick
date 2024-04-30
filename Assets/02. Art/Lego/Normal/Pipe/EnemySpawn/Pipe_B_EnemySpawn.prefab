@@ -559,7 +559,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8d570c2e1aa38d64f9a9b681cd6fa9fa, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -857,10 +857,9 @@ MonoBehaviour:
   Enemy: {fileID: 8032919127870789858, guid: 148bd96f721914d41b38e3a206066776, type: 3}
   SpawnPoint: {fileID: 7539010927895166054}
   force: 3
-  mode: 0
-  SpawnCD: 1.5
+  mode: 1
   number: 2
-  isSpawn: 0
+  SpawnCD: 1.5
   isFightOver: 0
   keep: {fileID: 316445087}
   once: {fileID: 996137923}
