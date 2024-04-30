@@ -50,7 +50,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
 
     //Script
     private BehaviorTree bt;
-    private ProgressSystem _progress;
+    private ProgressSystem progress;
     private Transform startPosition;
     private EnemyFireSystem _fireSystem;
     private Vector3 StartPosition;
@@ -81,10 +81,14 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     {
         _fireSystem = GetComponent<EnemyFireSystem>();
     }
+    private void OnDestroy()
+    {
+        progress.OnPlayerDeath -= RebirthSelf;
+    }
     private void Start()
     {
         health = maxHealth;
-        _progress = GameManager.singleton.GetComponent<ProgressSystem>();
+        progress = GameManager.singleton.GetComponent<ProgressSystem>();
         bt = GetComponent<BehaviorTree>();
         startPosition = this.transform;
         StartPosition = this.transform.position;
@@ -319,7 +323,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     {
         if(isTeachEnemy==false)
         {
-            _progress.OnPlayerDeath += RebirthSelf;
+            progress.OnPlayerDeath += RebirthSelf;
         }
     }
     #endregion

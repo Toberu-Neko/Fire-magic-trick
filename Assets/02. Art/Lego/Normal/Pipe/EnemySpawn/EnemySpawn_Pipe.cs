@@ -20,7 +20,7 @@ public class EnemySpawn_Pipe : MonoBehaviour
     }
     [MMReadOnly] public spawnState state;
     [Header("Setting")]
-    [SerializeField] private GameObject Enemy;
+    public GameObject Enemy;
     [SerializeField] private Transform SpawnPoint;
     [SerializeField] private float force;
     [Header("Mode")]
@@ -28,11 +28,9 @@ public class EnemySpawn_Pipe : MonoBehaviour
     [Header("KeepSpawn")]
     private bool isTimer;
     private float timer;
+    public int number;
     [SerializeField] private float SpawnCD;
-    [Header("OnceSpawn")]
-    [SerializeField] private int number;
-    [SerializeField] private bool isSpawn;
-    [SerializeField] private bool isFightOver;
+    public bool isFightOver;
     [Header("Feedbacks")]
     [SerializeField] private MMF_Player keep;
     [SerializeField] private MMF_Player once;
@@ -42,6 +40,22 @@ public class EnemySpawn_Pipe : MonoBehaviour
     private void Update()
     {
         spawnTimer();
+
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            Initialization();
+        }
+    }
+    public void Initialization()
+    {
+        StopSpawn();
+        isFightOver = false;
+
+        foreach (GameObject enemy in enemys)
+        {
+            Destroy(enemy);
+        }
+        enemys.Clear();
     }
     public void ToSpawn()
     {
@@ -99,7 +113,7 @@ public class EnemySpawn_Pipe : MonoBehaviour
             AgentController agent = enemy.GetComponent<AgentController>();
             enemy.GetComponent<EnemyHealthSystem>().Rebirth(SpawnPoint.position, SpawnPoint.transform.rotation);
             enemy.SetActive(true);
-            agent.DisableAgent();
+            if(agent != null) agent.DisableAgent();
             enemy.GetComponent<Rigidbody>().AddForce(SpawnPoint.forward * force * 1000);
 
             if(mode == spawnMode.Once)
