@@ -91,7 +91,7 @@ public class EnemySpawn_GlassBox : MonoBehaviour
         for(int i = 0; i < pipes.Length; i++)
         {
             pipes[i].ChangeMode(EnemySpawn_Pipe.spawnMode.Keep);
-            pipes[i].resetPipe(Enemy_A, 10, 2);
+            pipes[i].resetPipe(Enemy_A, 10, 4);
             pipes[i].ToSpawn();
             workPipes.Add(pipes[i]);
         }
