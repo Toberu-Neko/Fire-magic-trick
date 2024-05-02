@@ -83,6 +83,10 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     }
     private void OnDestroy()
     {
+        if(progress == null)
+        {
+            progress = GameManager.singleton.GetComponent<ProgressSystem>();
+        }
         progress.OnPlayerDeath -= RebirthSelf;
     }
     private void Start()
@@ -103,6 +107,11 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     {
         EnemyCoolingCheck();
         atCrashTimerSystem();
+
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            EnemyDeathRightNow();
+        }
     }
     public void SetIsRebirthHide(bool value)
     {
@@ -346,7 +355,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     {
         atCrash = active;
         
-        Debug.Log("At Crash¡G" + active+"Time:" + Time.time);
     }
     public void EnemyDeathRightNow()
     {

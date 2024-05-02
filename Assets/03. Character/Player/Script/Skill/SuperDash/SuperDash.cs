@@ -360,9 +360,8 @@ public class SuperDash : MonoBehaviour
             {
                 enemyHealthSystem.EnemyDeathRightNow();
             }
-            _playerCollider.hit.collider.gameObject.SetActive(false);
+            //_playerCollider.hit.collider.gameObject.SetActive(false);
         }
-       
         isSuperDashThrough = true;
         superDashSpeed = superDashMaxSpeed;
     }

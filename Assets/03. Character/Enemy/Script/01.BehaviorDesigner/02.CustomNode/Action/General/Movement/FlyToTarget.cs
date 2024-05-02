@@ -36,7 +36,7 @@ public class FlyToTarget : Action
       {
 
       }
-      Debug.Log(isNearKeepDistance(targetObject.Value.transform.position));
+      //Debug.Log(isNearKeepDistance(targetObject.Value.transform.position));
       
       // 看向目標
       LookAtTarget(targetObject.Value.transform.position);

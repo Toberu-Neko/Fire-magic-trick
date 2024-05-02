@@ -56,7 +56,7 @@ public class TriggerFunction : MonoBehaviour
             {
                 if (OnTriggerExitEvent != null)
                 {
-                    Debug.Log("trigger Function");
+                    //Debug.Log("trigger Function");
                     OnTriggerExitEvent.Invoke();
                 }
             }

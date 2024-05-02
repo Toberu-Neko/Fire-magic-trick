@@ -34,7 +34,7 @@ public class EnemySpawn_Pipe : MonoBehaviour
     [SerializeField] private MMF_Player keep;
     [SerializeField] private MMF_Player once;
 
-    private MyDelegates.OnHandler onPipeFightover;
+    public MyDelegates.OnHandler onPipeFightover;
     private List<GameObject> enemys = new List<GameObject>();
 
     private void Update()
@@ -52,8 +52,13 @@ public class EnemySpawn_Pipe : MonoBehaviour
         }
         enemys.Clear();
     }
+    public void ChangeMode(spawnMode mode)
+    {
+        this.mode = mode;
+    }
     public void resetPipe(GameObject Enemy, int number, float CD)
     {
+        Initialization();
         this.Enemy = Enemy;
         this.number = number;
         this.SpawnCD = CD;
@@ -136,12 +141,13 @@ public class EnemySpawn_Pipe : MonoBehaviour
         {
             if (enemy.gameObject.activeSelf == true) return;
         }
-        if (state == spawnState.Max)
-        {
-            isFightOver = true;
-            onPipeFightover?.Invoke();
-            StopSpawn();
-        }
+        fightOver();
+    }
+    private void fightOver()
+    {
+        isFightOver = true;
+        onPipeFightover?.Invoke();
+        StopSpawn();
     }
     private GameObject takeTarget()
     {

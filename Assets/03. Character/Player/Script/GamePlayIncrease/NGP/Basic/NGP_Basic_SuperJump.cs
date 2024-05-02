@@ -96,7 +96,6 @@ public class NGP_Basic_SuperJump : MonoBehaviour
 
                         SuperJump_wind();
                         skillPower.UseWind();
-                        Debug.Log("Wind Super Jump");
                     }
                     else if (isFireJump())
                     {
@@ -107,7 +106,6 @@ public class NGP_Basic_SuperJump : MonoBehaviour
 
                         SuperJump_fire();
                         skillPower.UseFire();
-                        Debug.Log("Fire Super Jump");
                     }
                 }
                 

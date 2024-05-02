@@ -19,7 +19,6 @@ public class SuperJump : MonoBehaviour
     {
         if (other.CompareTag("Glass"))
         {
-            Debug.Log("Glass Broken Glass Broken Glass Broken Glass Broken");
             GlassSystem glass = other.GetComponent<GlassSystem>();
             if(glass!=null)
             {
