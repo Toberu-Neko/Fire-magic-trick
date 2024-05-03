@@ -87,6 +87,13 @@ public class EnemySpawn_Pipe : MonoBehaviour
         keep.StopFeedbacks();
         setIsTimer(false);
     }
+    public void ClearNavigation()
+    {
+        foreach(GameObject enemy in enemys)
+        {
+            enemy.GetComponent<AgentController>().DisableAgent();
+        }
+    }
     private void spawnTimer()
     {
         if(isTimer)

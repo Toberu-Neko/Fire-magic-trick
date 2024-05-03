@@ -2,6 +2,7 @@ using MoreMountains.Feedbacks;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemySpawn_GlassBox : MonoBehaviour
 {
@@ -26,12 +27,18 @@ public class EnemySpawn_GlassBox : MonoBehaviour
     public TriggerArea_DialogueTrigger[] Dialogues;
     private int dialogueNumber;
     [SerializeField] private int EndTime;
+    [Header("End")]
+    [SerializeField] private GlassSystem glass;
+    private BulletTime bulletTime;
 
     private void Awake()
     {
         pipes = GetComponentsInChildren<EnemySpawn_Pipe>();
     }
-    
+    private void Start()
+    {
+        bulletTime = GameManager.singleton.GetComponent<BulletTime>();
+    }
     public void StartFight()
     {
         if(state == Fightstate.Fight_Null)
@@ -40,7 +47,21 @@ public class EnemySpawn_GlassBox : MonoBehaviour
             Fight(state);
         }
     }
-    
+    public void onPlearDeath()
+    {
+        state = Fightstate.Fight_Null;
+        dialogueNumber = 0;
+        foreach (EnemySpawn_Pipe pipe in workPipes)
+        {
+            pipe.onPipeFightover = null;
+        }
+        workPipes.Clear();
+        for (int i = 0; i < pipes.Length; i++)
+        {
+            pipes[i].StopSpawn();
+            pipes[i].Initialization();
+        }
+    }
     public void Fight(Fightstate state)
     {
         triggerDialogue();
@@ -70,7 +91,12 @@ public class EnemySpawn_GlassBox : MonoBehaviour
                 break;
 
             case Fightstate.End:
-
+                for(int i=0;i<pipes.Length;i++)
+                {
+                    pipes[i].ClearNavigation();
+                }
+                glass.BrokenSuperFast();
+                bulletTime.BulletTime_Slow(2.5f);
                 break;
         }
     }
@@ -120,7 +146,10 @@ public class EnemySpawn_GlassBox : MonoBehaviour
         }
 
         //when over,clear event and list.
-        
+        foreach (EnemySpawn_Pipe pipe in workPipes)
+        {
+            pipe.onPipeFightover = null;
+        }
         workPipes.Clear();
 
         //state to next.
