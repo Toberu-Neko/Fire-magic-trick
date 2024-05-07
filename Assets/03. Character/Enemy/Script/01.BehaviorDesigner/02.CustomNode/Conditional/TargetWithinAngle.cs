@@ -41,7 +41,7 @@ public class TargetWithinAngle : Conditional
         // 使用向量夾角計算
         float angle = Vector3.Angle(forwardDirection, toTarget);
 
-        if (angle <= max/2)
+        if (angle <= max/2  )
         {
             return true;
         }
