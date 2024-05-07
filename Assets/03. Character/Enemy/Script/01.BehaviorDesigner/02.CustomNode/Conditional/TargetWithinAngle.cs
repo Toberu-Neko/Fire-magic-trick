@@ -26,16 +26,22 @@ public class TargetWithinAngle : Conditional
 
     private bool isWithinAngle()
     {
-        Vector3 toTarget = targetObject.Value.transform.position - transform.position;
+        // 獲取目標位置，並將其投影到水平平面上
+        Vector3 targetPosition = targetObject.Value.transform.position;
+        Vector3 targetPositionWithoutY = new Vector3(targetPosition.x, transform.position.y, targetPosition.z);
+
+        // 計算到目標的方向向量
+        Vector3 toTarget = targetPositionWithoutY - transform.position;
         toTarget.Normalize();
 
-        // 计算敌人正前方的方向向量
-         Vector3 forwardDirection = transform.forward;
+        // 計算敵人正前方的方向向量
+        Vector3 forwardDirection = transform.forward;
+        forwardDirection.y = 0; // 將 y 軸設置為 0，使其在水平平面上
 
-        // 使用向量夹角计算
+        // 使用向量夾角計算
         float angle = Vector3.Angle(forwardDirection, toTarget);
 
-        if (angle <= max)
+        if (angle <= max/2)
         {
             return true;
         }
