@@ -1,6 +1,5 @@
 using MoreMountains.Feedbacks;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnergyCan : MonoBehaviour ,IHealth
@@ -69,7 +68,7 @@ public class EnergyCan : MonoBehaviour ,IHealth
             setIsBroken(true);
             Feedbacks_Broken.PlayFeedbacks();
             Instantiate(fireEnergy, transform.position, Quaternion.identity);
-            
+            OnBroke?.Invoke();
             DestroyCan();
         }
     }
@@ -83,7 +82,7 @@ public class EnergyCan : MonoBehaviour ,IHealth
         await Task.Delay(250);
         brokenBoomArea.SetActive(false);
         this.gameObject.SetActive(false);
-        OnBroke?.Invoke();
+        
     }
     private void setIsBroken(bool value)
     {

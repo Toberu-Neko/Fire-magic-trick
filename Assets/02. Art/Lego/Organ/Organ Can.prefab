@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5807466639172476411}
+  - component: {fileID: 1554449647}
   m_Layer: 0
   m_Name: Organ Can
   m_TagString: Untagged
@@ -23,16 +24,29 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4885582169110653089}
-  m_LocalRotation: {x: 4.6566134e-10, y: 0.97865295, z: -0.000000001629814, w: -0.20551997}
+  m_LocalRotation: {x: 0, y: -0.9786528, z: 0, w: 0.20552106}
   m_LocalPosition: {x: -1.1570055, y: 1.4109983, z: -0.69399977}
-  m_LocalScale: {x: 0.25000006, y: 0.25, z: 0.25000003}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5605659150939698892}
   - {fileID: 4810854291898004924}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -156.28, z: 0}
+--- !u!114 &1554449647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4885582169110653089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 930eb98be695f43498ce23f97ce84e2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  can: {fileID: 1926603709960134126}
 --- !u!1001 &2901891028992986356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,6 +295,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a547a79af14a0d41979f2f035416002, type: 3}
+--- !u!114 &1926603709960134126 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5717185955084797111, guid: 9a547a79af14a0d41979f2f035416002, type: 3}
+  m_PrefabInstance: {fileID: 6191092175236831577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7a314c899af7234bb08f6068a2d6431, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5605659150939698892 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1738495851683950485, guid: 9a547a79af14a0d41979f2f035416002, type: 3}
