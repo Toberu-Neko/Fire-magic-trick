@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using UnityEngine;
 
@@ -8,89 +9,91 @@ public class OrganStar : MonoBehaviour
 
     [Header("Star")]
     [SerializeField] private GameObject Star;
-    [Header("AnimationCurve")]
-    [SerializeField] private float duration = 1;
-    [SerializeField] private AnimationCurve go;
-    [SerializeField] private AnimationCurve back;
+    [SerializeField] private float speed;
     [Header("Transform")]
+    [MMReadOnly][SerializeField] private Transform target;
     [SerializeField] private Transform origin;
     [SerializeField] private Transform end;
+    [Header("Breaking")]
+    [SerializeField] private ShieldSystem shieldSystem;
+    [SerializeField] private OrganCan organCan;
+    [Header("Feedback")]
+    [SerializeField] private MMF_Player hitShield;
 
     //value
-    private bool isTimer;
+    private Vector3 direction;
+    private Vector3 go;
+    private Vector3 back;
+    private bool isMove;
 
     private void Start()
     {
         origin = this.transform;
+
+        go = (end.position - origin.position).normalized;
+        back = (origin.position - end.position).normalized;
+        direction = go;
     }
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            catapult();
-        }
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            recycle();
-        }
-        animationTimer();
         move();
+        stop();
     }
-    private void animationTimer()
+    public void Catapult()
     {
-        
-        if(isTimer)
-        {
-            if(isCatapult)
-            {
-                timer -= Time.deltaTime;
+        setIsMove(true);
+        setTarget(end);
+        direction = go;
+    }
+    public void Recycle()
+    {
+        setIsMove(true);
+        setTarget(origin);
+        direction = back;
 
-                if (timer <= 0)
-                {
-                    timer = 0;
-                    isTimer = false;
-                }
-            }
-            else
-            {
-                timer += Time.deltaTime;
-
-                if (timer >= duration)
-                {
-                    timer = duration;
-                    isTimer = false;
-                }
-            }
-        }
+        shieldSystem.OpenShield();
     }
     private void move()
     {
-        Vector3 _direction = end.position - origin.position;
-        float lengh = _direction.magnitude;
-        Vector3 direction = _direction.normalized;
-
-        float speed = lengh / duration;
-        float muti = 1 / duration;
-        Vector3 target = Vector3.zero;
-
-        if (isCatapult)
+        if(isMove)
         {
-            target = origin.position + direction * speed * back.Evaluate(timer * muti);
+            Star.transform.position += direction * speed * Time.deltaTime;
         }
-        else
+    }
+    private void stop()
+    {
+        if(isMove)
         {
-            target = origin.position + direction * speed * go.Evaluate(timer * muti);
+            float length = (Star.transform.position - target.position).magnitude;
+
+            if (length < 1.5f)
+            {
+                setIsMove(false);
+                
+                if(!isCatapult)
+                {
+                    shieldSystem.CloseShield();
+                    setIsCatapult(true);
+                    hitShield.PlayFeedbacks();
+                }
+                else
+                {
+                    organCan.Initialization();
+                    setIsCatapult(false);
+                }
+            }
         }
-        Star.transform.position = target;
     }
-    private void catapult()
+    private void setTarget(Transform target)
     {
-        isCatapult = true;
-        isTimer = true;
+        this.target = target;
     }
-    private void recycle()
+    private void setIsMove(bool active)
     {
-        isTimer = true;
-        isCatapult = false;
+        isMove = active;
+    }
+    private void setIsCatapult(bool active)
+    {
+        isCatapult = active;
     }
 }
