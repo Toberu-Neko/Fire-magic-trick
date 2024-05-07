@@ -1,14 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
+    private bool playerInSide;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Bullet"))
+        if(other.CompareTag("Player"))
         {
-            other.GetComponent<Bullet>().OnHitRightNow();
+            playerInSide = true;
+        }
+        if(!playerInSide)
+        {
+            if (other.CompareTag("Bullet"))
+            {
+                other.GetComponent<Bullet>().OnHitRightNow();
+            }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            playerInSide = false;
         }
     }
 }

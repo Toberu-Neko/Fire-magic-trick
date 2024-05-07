@@ -10,6 +10,8 @@ public class OrganStar : MonoBehaviour
     [Header("Star")]
     [SerializeField] private GameObject Star;
     [SerializeField] private float speed;
+    [SerializeField] private float speed_Increase;
+    private float speed_Origin;
     [Header("Transform")]
     [MMReadOnly][SerializeField] private Transform target;
     [SerializeField] private Transform origin;
@@ -29,6 +31,7 @@ public class OrganStar : MonoBehaviour
     private void Start()
     {
         origin = this.transform;
+        speed_Origin = speed;
 
         go = (end.position - origin.position).normalized;
         back = (origin.position - end.position).normalized;
@@ -58,6 +61,7 @@ public class OrganStar : MonoBehaviour
         if(isMove)
         {
             Star.transform.position += direction * speed * Time.deltaTime;
+            speed += speed_Increase * Time.deltaTime;
         }
     }
     private void stop()
@@ -69,15 +73,18 @@ public class OrganStar : MonoBehaviour
             if (length < 1.5f)
             {
                 setIsMove(false);
-                
-                if(!isCatapult)
+                speed = speed_Origin;
+
+                if (!isCatapult)
                 {
                     shieldSystem.CloseShield();
+                    shieldSystem.OnRecycle += Recycle;
                     setIsCatapult(true);
                     hitShield.PlayFeedbacks();
                 }
                 else
                 {
+                    shieldSystem.OnRecycle -= Recycle;
                     organCan.Initialization();
                     setIsCatapult(false);
                 }
