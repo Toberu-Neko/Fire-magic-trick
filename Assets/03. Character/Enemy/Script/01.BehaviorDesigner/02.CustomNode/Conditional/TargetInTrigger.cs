@@ -2,10 +2,21 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class CheckTargetInTrigger : Conditional
+public class TargetInTrigger : Conditional
 {
+    [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
-    [SerializeField] private Collider triggerCollider;
+    [SerializeField] private SharedTransform behaviorObject;
+
+    [Header("Reverse")]
+    [SerializeField] private bool reverse;
+
+    private Collider triggerCollider;
+
+    public override void OnStart()
+    {
+        triggerCollider = behaviorObject.Value.Find("MeleeTrigger").GetComponent<Collider>();
+    }
 
     public override TaskStatus OnUpdate()
     {
@@ -13,14 +24,27 @@ public class CheckTargetInTrigger : Conditional
         if (targetObject.Value != null && triggerCollider != null)
         {
             // 檢查目標物體是否在觸發區域中
-            if (triggerCollider.bounds.Contains(targetObject.Value.transform.position))
+            if (triggerCollider.bounds.Intersects(new Bounds(targetObject.Value.transform.position, Vector3.zero)))
             {
-                // 如果在觸發區域中，返回成功
-                return TaskStatus.Success;
+                if(!reverse)
+                {
+                    return TaskStatus.Success;
+                }
+                else
+                {
+                    return TaskStatus.Failure;
+                }
+                
             }
         }
 
-        // 如果目標不存在或者不在觸發區域中，返回失敗
-        return TaskStatus.Failure;
+        if(!reverse)
+        {
+           return TaskStatus.Failure;
+        }
+        else
+        {
+            return TaskStatus.Success;
+        }
     }
 }
