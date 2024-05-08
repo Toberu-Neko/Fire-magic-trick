@@ -5,40 +5,24 @@ using BehaviorDesigner.Runtime.Tasks;
 public class SohaStateCheck : Conditional
 {
     [Header("SharedVariable")]
-    [SerializeField] private SharedGameObject soha;
+    [SerializeField] private SharedGameObject sohaObject;
 
-    [Header("Reverse")]
-    [SerializeField] private bool reverse;
+    [Header("State")]
+    [SerializeField] private Soha.State targetState;
+    
+    private Soha soha;
 
     public override void OnStart()
     {
-        soha = GetComponent<Soha>();
+        soha = sohaObject.Value.GetComponent<Soha>();
     }
 
     public override TaskStatus OnUpdate()
     {
-        if (!reverse)
+        if(soha.state == targetState)
         {
-            if (targetObject.Value != null)
-            {
-                return TaskStatus.Success;
-            }
-            else
-            {
-                return TaskStatus.Failure;
-            }
+            return TaskStatus.Success;
         }
-        else
-        {
-            if (targetObject.Value != null)
-            {
-                return TaskStatus.Failure;
-            }
-            else
-            {
-                return TaskStatus.Success;
-            }
-        }
-
+        return TaskStatus.Failure;
     }
 }

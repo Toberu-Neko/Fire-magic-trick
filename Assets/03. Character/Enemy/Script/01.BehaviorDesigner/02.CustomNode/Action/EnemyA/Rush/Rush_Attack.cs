@@ -3,7 +3,7 @@ using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine.AI;
 
-public class Rush_Attack : Action
+public class Rush_Attack: Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedTransform behaviorObject;
