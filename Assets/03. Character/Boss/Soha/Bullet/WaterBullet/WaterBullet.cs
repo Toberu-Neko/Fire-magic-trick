@@ -3,20 +3,26 @@ using UnityEngine;
 
 public class WaterBullet : MonoBehaviour
 {
-    [SerializeField] private GameObject Collider;
     [SerializeField] private float ForwardTime;
     [SerializeField] private float speed;
-    [SerializeField] private float TargetPoint;
     [SerializeField] private bool isMove;
     [Header("VFX")]
     [SerializeField] private ParticleSystem vfx_Charge;
     [SerializeField] private ParticleSystem vfx_OnChargeBall;
     [SerializeField] private ParticleSystem vfx_ChageFinishBall;
 
+    private Collider coli;
     private Rigidbody rb;
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        coli = GetComponent<Collider>();
+        particleSetting();
+    }
     private void Start()
     {
-        particleSetting();
+        startDelay();
+        coli.enabled = false;
     }
     private void Update()
     {
@@ -25,6 +31,7 @@ public class WaterBullet : MonoBehaviour
     private void particleSetting()
     {
         var chargemain = vfx_Charge.main;
+        vfx_Charge.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         chargemain.duration = ForwardTime;
 
         var onChargeMain = vfx_OnChargeBall.main;
@@ -37,7 +44,7 @@ public class WaterBullet : MonoBehaviour
     {
         await Task.Delay((int)ForwardTime * 1000);
         isMove = true;
-        Collider.SetActive(true);
+        coli.enabled = true ;
     }
     private void move()
     {

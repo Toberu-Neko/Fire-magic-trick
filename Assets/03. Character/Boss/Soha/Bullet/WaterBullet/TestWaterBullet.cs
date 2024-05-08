@@ -7,7 +7,7 @@ public class TestWaterBullet : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Y))
         {
-            Instantiate(bullet,this.transform.position,Quaternion.identity);
+            Instantiate(bullet,this.transform.position,this.transform.rotation);
         }
     }
 }

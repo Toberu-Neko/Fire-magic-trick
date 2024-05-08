@@ -17,6 +17,7 @@ public class ControllerInput : MonoBehaviour
     public float PressedSensitivity;
     private bool TurnOn = false;
     private bool trigger = false;
+    public bool prohibitRun;
     [Header("Stick")]
     public Vector2 LeftStick;
     public Vector2 RightStick;
@@ -76,6 +77,21 @@ public class ControllerInput : MonoBehaviour
         StopSrint();
         inputModeSystem();
     }
+    public void SetProhibi(bool prohibit)
+    {
+        prohibitRun = prohibit;
+
+        if(prohibit)
+        {
+            TurnOn = false;
+            SprintMode = false;
+        }
+        else
+        {
+            TurnOn = true;
+            SprintMode = true;
+        }
+    }
     private void mouseModeSetting()
     {
         cameraSystem.setIsMouse(true);
@@ -119,6 +135,7 @@ public class ControllerInput : MonoBehaviour
                 SprintMode = false;
             }else
             {
+                if (prohibitRun) return;
                 TurnOn = true;
                 SprintMode = true;
             }

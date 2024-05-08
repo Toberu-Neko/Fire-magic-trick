@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WaterBullet_Collider : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int damage;
+    [SerializeField] private GameObject WaterPool;
+    private void OnCollisionEnter(Collision collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            HealthSystem health = collision.gameObject.GetComponent<HealthSystem>();
+            if (health != null) health.ToDamagePlayer(damage);
+        }
+        Instantiate(WaterPool, this.transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
     }
 }

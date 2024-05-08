@@ -20,6 +20,7 @@ public class PlayerState : MonoBehaviour
     //Script
     private Shooting_Check _shooting_check;
     private PlayerAnimator playerAnimator;
+    private ControllerInput input;
 
     //variable
     private float gravityNormal;
@@ -41,6 +42,7 @@ public class PlayerState : MonoBehaviour
     {
         _controller = GetComponent<ThirdPersonController>();
         playerAnimator = GetComponent<PlayerAnimator>();
+        input = GetComponent<ControllerInput>();
     }
     private void Start()
     {
@@ -231,6 +233,12 @@ public class PlayerState : MonoBehaviour
         await Task.Delay((int)(debuffTime * 1000));
         Feedbacks_Debuff.StopFeedbacks();
         TakeControl();
+    }
+    public async void SlowPlayer(float debufTime)
+    {
+        input.SetProhibi(true);
+        await Task.Delay((int)debufTime * 1000);
+        input.SetProhibi(false);
     }
     private void SetIsToAim(bool active)
     {
