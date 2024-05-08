@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TestWaterBullet : MonoBehaviour
+public class WaterBulletTest : MonoBehaviour
 {
     [SerializeField] private GameObject bullet;
     void Update()
