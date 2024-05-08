@@ -47,6 +47,10 @@ public class PumberManager : MonoBehaviour
         if(Bounce_duration_Ramdon==0) Bounce_duration_Ramdon = 0.25f;
         if (Bounce_duration == 0) Bounce_duration = 5;
     }
+    public void StartNewBossFight()
+    {
+        Boss_30();
+    }
     public void BossFight_PumbersEvent(ArrayLayout eventlayout,int state)
     {
         for (int i = 0; i < pumbersLayout.rows.Length; i++)
