@@ -16,6 +16,13 @@ public class Boss_System : MonoBehaviour
 
     private ProgressSystem progress;
 
+    public delegate void OnStartFightHandler();
+    public event OnStartFightHandler onStartFight;
+    public delegate void OnResetFightHandler();
+    public event OnResetFightHandler onResetFight;
+    public delegate void OnEndFightHandler();
+    public event OnEndFightHandler onEndFight;
+
     private bool isBoss;
     private bool isWin;
 
@@ -46,6 +53,7 @@ public class Boss_System : MonoBehaviour
             barrier.Close();
             boss.ResetBossFight();
             OnResetFight?.Invoke();
+            onResetFight?.Invoke();
             Debug.Log("Boss Fight Reset");
         }
     }
@@ -59,6 +67,7 @@ public class Boss_System : MonoBehaviour
             UI.Boss_Enter(boss_name, boss_littleTitle);
             barrier.Open();
             OnStartFight?.Invoke();
+            onStartFight?.Invoke();
         }
     }
     public void EndBossFight()
@@ -67,6 +76,7 @@ public class Boss_System : MonoBehaviour
         {
             isBoss = false;
 
+            onEndFight?.Invoke();
             UI.Boss_Exit();
             barrier.Close();
             boss.gameObject.SetActive(false);
