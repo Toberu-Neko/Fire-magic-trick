@@ -15,6 +15,7 @@ public class EnemySpawn_Pipe_Child : MonoBehaviour
         progress = GameManager.singleton.GetComponent<ProgressSystem>();
 
         progress.OnPlayerDeath += onPlayerDeath;
+        glassBox.OnFightOver += figthOver;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,5 +43,6 @@ public class EnemySpawn_Pipe_Child : MonoBehaviour
     {
         barrier.Close();
         glassBox.onPlearDeath();
+        isTrigger = false;
     }
 }

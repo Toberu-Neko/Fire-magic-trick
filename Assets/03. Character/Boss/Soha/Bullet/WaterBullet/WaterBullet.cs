@@ -37,12 +37,14 @@ public class WaterBullet : MonoBehaviour
     {
         await Task.Delay((int)ForwardTime * 1000);
         isMove = true;
+        Collider.SetActive(true);
     }
     private void move()
     {
         if(isMove)
         {
             Vector3 direction = this.transform.forward;
+            rb.velocity = direction * speed * Time.deltaTime;
         }
     }
 }

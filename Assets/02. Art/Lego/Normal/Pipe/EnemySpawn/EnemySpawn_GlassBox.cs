@@ -31,6 +31,9 @@ public class EnemySpawn_GlassBox : MonoBehaviour
     [SerializeField] private GlassSystem glass;
     private BulletTime bulletTime;
 
+    public delegate void OnFightOverHandler();
+    public event OnFightOverHandler OnFightOver;
+
     private void Awake()
     {
         pipes = GetComponentsInChildren<EnemySpawn_Pipe>();
@@ -97,6 +100,7 @@ public class EnemySpawn_GlassBox : MonoBehaviour
                 }
                 glass.BrokenSuperFast();
                 bulletTime.BulletTime_Slow(2.5f);
+                OnFightOver?.Invoke();
                 break;
         }
     }
