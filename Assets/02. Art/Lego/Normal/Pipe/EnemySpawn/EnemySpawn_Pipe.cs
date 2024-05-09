@@ -25,6 +25,7 @@ public class EnemySpawn_Pipe : MonoBehaviour
     [Header("Mode")]
     public spawnMode mode;
     [Header("KeepSpawn")]
+    [SerializeField] private bool keepSpawnCheck;
     private bool isTimer;
     private float timer;
     public int number;
@@ -132,11 +133,11 @@ public class EnemySpawn_Pipe : MonoBehaviour
             if(mode == spawnMode.Once)
             {
                 enemy.GetComponent<EnemyHealthSystem>().OnEnemyDeath += onEnemyDeath;
-                
             }
         }else
         {
             //Max or error.
+            if (keepSpawnCheck) return;
             StopSpawn();
             state = spawnState.Max;
         }
