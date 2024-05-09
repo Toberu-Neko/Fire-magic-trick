@@ -19,7 +19,6 @@ public class WaterBullet : MonoBehaviour
         Vector3 direction = this.transform.forward;
         rb.velocity = direction * speed * Time.deltaTime;
         timer = Time.time;
-        print(timer);
     }
     private void Update()
     {

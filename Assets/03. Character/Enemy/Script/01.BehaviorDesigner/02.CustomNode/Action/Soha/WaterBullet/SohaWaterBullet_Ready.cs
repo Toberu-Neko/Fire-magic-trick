@@ -25,6 +25,7 @@ public class SohaWaterBullet_Ready : Action
         // 播放水砲蓄力
         if (bulletCharge != null) 
         {
+            bulletCharge.gameObject.SetActive(true);
             bulletCharge.GetComponent<ParticleSystem>().Play();
         }
 
@@ -60,5 +61,6 @@ public class SohaWaterBullet_Ready : Action
     public override void OnEnd()
     {
         bulletCharge.GetComponent<ParticleSystem>().Stop();
+        bulletCharge.gameObject.SetActive(false);
     }
 }
