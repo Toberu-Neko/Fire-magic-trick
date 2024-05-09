@@ -19,20 +19,21 @@ public class SohaLazer_Ready : Action
     private float timer; // 結束計時器
     private bool hasRing;
 
-    private GameObject lazerA;
-    private GameObject lazerB;
+    private Transform lazerA;
+    private Transform lazerB;
 
     public override void OnStart()
     {
         hasRing = false;
 
         // 抓取雷射
-        lazerA = behaviorObject.Value.Find("VFX_A_LazerPowerCharge").gameObject;
-        lazerB = behaviorObject.Value.Find("VFX_B_LazerAttackCharge").gameObject;
+        lazerA = behaviorObject.Value.Find("VFX_A_LazerPowerCharge");
+        lazerB = behaviorObject.Value.Find("VFX_B_LazerAttackCharge");
 
         // 有雷射Prefab與發射點
         if (lazerA != null) 
         {
+            lazerA.gameObject.SetActive(true);
             lazerA.GetComponent<ParticleSystem>().Play();
         }
 
@@ -45,6 +46,7 @@ public class SohaLazer_Ready : Action
         if(Time.time - timer >= chargeDuration - ringDuration && !hasRing)
         {
             // 生成雷射蓄力
+            lazerB.gameObject.SetActive(true);
             lazerB.GetComponent<ParticleSystem>().Play();
 
             // 設定已生成過環
@@ -75,6 +77,8 @@ public class SohaLazer_Ready : Action
 
     public override void OnEnd()
     {
-
+        // 關閉特效
+        lazerA.gameObject.SetActive(false);
+        lazerB.gameObject.SetActive(false);
     }
 }
