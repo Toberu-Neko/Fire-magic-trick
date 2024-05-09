@@ -3,6 +3,7 @@ using UnityEngine;
 public class Satin_Laser_Collider : MonoBehaviour
 {
     [SerializeField] private float force;
+    [SerializeField] private int damage;
     private HealthSystem healthSystem;
 
     private void Start()
@@ -16,7 +17,7 @@ public class Satin_Laser_Collider : MonoBehaviour
             ImpactReceiver impact = other.GetComponent<ImpactReceiver>();
             Vector3 force = this.transform.up * this.force;
             impact.AddImpact(force);
-            healthSystem.ToDamagePlayer(0);
+            healthSystem.ToDamagePlayer(damage);
         }
     }
 }

@@ -47,7 +47,10 @@ public class EnemyAggroSystem : MonoBehaviour
     {
         FieldOfView();
     }
-
+    public void SettingMaxAggro(float maxAggro)
+    {
+        this.maxAggro = maxAggro;
+    }
     void FieldOfView()
     {
         Collider[] rangeChecks = Physics.OverlapSphere(viewPosition, fovRadius, targetMask);

@@ -25,6 +25,7 @@ public class EnemySpawn_Pipe : MonoBehaviour
     [SerializeField] private float force;
     [Header("Mode")]
     public spawnMode mode;
+    public bool isNeverLoseAggro;
     [Header("KeepSpawn")]
     [SerializeField] private bool keepSpawnCheck;
     private bool isTimer;
@@ -134,6 +135,7 @@ public class EnemySpawn_Pipe : MonoBehaviour
             enemy.GetComponent<EnemyHealthSystem>().Rebirth(SpawnPoint.position, SpawnPoint.transform.rotation);
             enemy.GetComponent<EnemyAggroSystem>().SetAggroTarget(player);
             enemy.SetActive(true);
+            if (isNeverLoseAggro) enemy.GetComponent<EnemyAggroSystem>().SettingMaxAggro(999999999);
             if(agent != null) agent.DisableAgent();
             enemy.GetComponent<Rigidbody>().AddForce(SpawnPoint.forward * force * 1000);
 

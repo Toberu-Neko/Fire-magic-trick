@@ -40,8 +40,11 @@ public class BoomArea : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             health = other.GetComponent<IHealth>();
-            health.TakeDamage(damage, PlayerDamage.DamageType.NormalShoot);
-            kickBackEnemy.kickBackEnemy(other, forceToEnemy);
+            if(health != null)
+            {
+                health.TakeDamage(damage, PlayerDamage.DamageType.NormalShoot);
+                kickBackEnemy.kickBackEnemy(other, forceToEnemy);
+            }
         }
         if(other.CompareTag("Player"))
         {

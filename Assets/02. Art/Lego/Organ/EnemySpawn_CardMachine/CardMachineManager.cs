@@ -3,6 +3,7 @@ using UnityEngine;
 public class CardMachineManager : MonoBehaviour
 {
     private EnemySpawn_CardMachine[] cardMachines;
+    [SerializeField] private bool isNeverLoseAggro;
 
     private void Awake()
     {
@@ -12,6 +13,10 @@ public class CardMachineManager : MonoBehaviour
     {
         for(int i=0;i<cardMachines.Length;i++)
         {
+            if(isNeverLoseAggro)
+            {
+                cardMachines[i].NeverLoseAggro = true;
+            }
             cardMachines[i].ToSpawn();
         }
     }

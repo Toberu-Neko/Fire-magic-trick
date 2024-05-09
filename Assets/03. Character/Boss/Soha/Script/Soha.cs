@@ -24,9 +24,12 @@ public class Soha : MonoBehaviour,IHealth
     [SerializeField] private TriggerArea_DialogueTrigger dialogue_Mid;
     [SerializeField] private TriggerArea_DialogueTrigger dialogue_Low;
     [SerializeField] private TriggerArea_DialogueTrigger dialogue_Death;
+    [Header("Univasal")]
+    [SerializeField] private SteamBoom boom;
     [Header("Mid")]
     [SerializeField] private GlassRoadManager glassRoadManager;
     [SerializeField] private CardMachineManager  topEnemyManager;
+    [SerializeField] private Satun_Laser_Manager laser_Manager;
     [Header("Death")]
     [SerializeField] private TriggerArea_Timeline End;
     [SerializeField] private GameObject FinishRoead;
@@ -116,12 +119,15 @@ public class Soha : MonoBehaviour,IHealth
         changeState(State.Mid);
         eventTrigger(State.Mid);
         topEnemyManager.ToSpawn();
+        boom.SteamBoomRightNow();
         glassRoadManager.StartAll();
     }
     private void Event_Low()
     {
         changeState(State.Low);
         eventTrigger(State.Low);
+        boom.SteamBoomRightNow();
+        laser_Manager.playLaser();
     }
     private void Event_Death()
     {

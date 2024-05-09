@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemySpawn_Manager : MonoBehaviour
 {
     private EnemySpawn_Pipe[] pipes;
+    [SerializeField] private bool isNeverLoseAggro;
 
     private void Awake()
     {
@@ -12,6 +13,10 @@ public class EnemySpawn_Manager : MonoBehaviour
     {
         for(int i=0; i<pipes.Length; i++)
         {
+            if(isNeverLoseAggro)
+            {
+                pipes[i].isNeverLoseAggro = true;
+            }
             pipes[i].ToSpawn();
         }
     }
