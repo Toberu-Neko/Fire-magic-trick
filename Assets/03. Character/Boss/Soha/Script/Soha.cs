@@ -27,6 +27,10 @@ public class Soha : MonoBehaviour,IHealth
     [Header("Mid")]
     [SerializeField] private GlassRoadManager glassRoadManager;
     [SerializeField] private CardMachineManager  topEnemyManager;
+    [Header("Death")]
+    [SerializeField] private TriggerArea_Timeline End;
+    [SerializeField] private GameObject FinishRoead;
+    
     //Script
     private Boss_System system;
 
@@ -79,15 +83,24 @@ public class Soha : MonoBehaviour,IHealth
     {
         if (health <= 0)
         {
-            Event_Death();
+            if(state == State.Low)
+            {
+                Event_Death();
+            }
         }
         else if (health < Health_Low)
         {
-            Event_Low();
+            if (state == State.Mid)
+            {
+                Event_Low();
+            }
         }
         else if (health < Health_Mid)
         {
-            Event_Mid();
+            if (state == State.Full)
+            {
+                Event_Mid();
+            }
         }
         else if (health < 100)
         {
@@ -115,6 +128,8 @@ public class Soha : MonoBehaviour,IHealth
         changeState(State.Death);
         eventTrigger(State.Death);
         system.EndBossFight();
+        End.readyPlay();
+        FinishRoead.SetActive(true);
     }
     private void changeState(State state)
     {
