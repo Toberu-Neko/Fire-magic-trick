@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &141802453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 141802455}
+  m_Layer: 0
+  m_Name: WaterBulletPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &141802455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141802453}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.28, y: 2.52, z: 3.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2068105046338915667}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &510965236926501202
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,6 +1120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6829137587290172703}
   - component: {fileID: 394091644698773359}
+  - component: {fileID: 1359217033}
   m_Layer: 0
   m_Name: Soha_Behavior
   m_TagString: Untagged
@@ -1141,19 +1173,40 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"behaviorObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"modelObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"UnityEventEnemy","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"playerInMeleeRange","IsShared":true,"BooleanmValue":false}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"soha","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"modelObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"playerInMeleeRange","IsShared":true,"BooleanmValue":false}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
         startIndex: 
         dataPosition: 
         unityObjects:
-        - {fileID: 0}
+        - {fileID: 2186621676062772355}
         byteData: 
         byteDataArray: 
       Version: 1.7.7
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
+--- !u!114 &1359217033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2186621676062772355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b08c3f5fb647aa458604508b22ee316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  health: 0
+  Health_Full: 100
+  Health_Mid: 60
+  Health_Low: 30
+  health_Death: 0
+  dialogue_Mid: {fileID: 0}
+  dialogue_Low: {fileID: 0}
+  dialogue_Death: {fileID: 0}
 --- !u!1 &2210932265587252214
 GameObject:
   m_ObjectHideFlags: 0
@@ -3025,6 +3078,7 @@ Transform:
   m_Children:
   - {fileID: 5219560988120215137}
   - {fileID: 5400414350281930850}
+  - {fileID: 141802455}
   m_Father: {fileID: 6829137587290172703}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
