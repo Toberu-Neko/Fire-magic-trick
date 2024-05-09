@@ -26,7 +26,7 @@ public class WaterBullet : MonoBehaviour
 
         if(Time.time - timer >= destroyTime)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
     private void move()

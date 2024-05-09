@@ -6,27 +6,27 @@ using UnityEngine.AI;
 public class SohaWaterBullet_Ready : Action
 {
     [Header("SharedVariable")]
+    [SerializeField] private SharedGameObject targetObject;
     [SerializeField] private SharedTransform behaviorObject;
 
-    [Header("Bullet")]
-    [SerializeField] private GameObject bulletPrefab;
+    [Header("Rotate")]
+    [SerializeField] private float rotateSpeed = 120;
 
     [Header("Duration")]
     [SerializeField] private float duration = 1f;
 
-    private Transform waterBulletPoint; // 水球發射點
     private float timer; // 結束計時器
+    private Transform bulletCharge;
 
     public override void OnStart()
     {
-        // 抓取水砲發射點
-        waterBulletPoint = behaviorObject.Value.Find("WaterBulletPoint");
+        bulletCharge = behaviorObject.Value.Find("SohaWaterBullet_Ready");
 
-        // 有水砲Prefab與發射點
-        if (bulletPrefab != null && waterBulletPoint != null) 
+        // 播放水砲蓄力
+        if (bulletCharge != null) 
         {
-            // 生成水砲蓄力
-            GameObject bullet = Object.Instantiate(bulletPrefab, waterBulletPoint.position, waterBulletPoint.rotation);
+            bulletCharge.gameObject.SetActive(true);
+            bulletCharge.GetComponent<ParticleSystem>().Play();
         }
 
         timer = Time.time;
@@ -34,6 +34,7 @@ public class SohaWaterBullet_Ready : Action
 
     public override TaskStatus OnUpdate()
     {
+        RotateToTarget();
         if(Time.time - timer >= duration)
         {
             return TaskStatus.Success;
@@ -41,8 +42,25 @@ public class SohaWaterBullet_Ready : Action
         return TaskStatus.Running;
     }
 
+    private void RotateToTarget()
+    {
+        Vector3 targetPosition = new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z);
+        Quaternion rotation = Quaternion.LookRotation(targetPosition - transform.position);
+
+        float angle = Quaternion.Angle(transform.rotation, rotation);
+
+        float maxRotationSpeed = rotateSpeed * Time.deltaTime;
+        if (angle > maxRotationSpeed)
+        {
+            float t = maxRotationSpeed / angle;
+            rotation = Quaternion.Slerp(transform.rotation, rotation, t);
+        }
+        transform.rotation = rotation;
+    }
+
     public override void OnEnd()
     {
-
+        bulletCharge.GetComponent<ParticleSystem>().Stop();
+        bulletCharge.gameObject.SetActive(false);
     }
 }

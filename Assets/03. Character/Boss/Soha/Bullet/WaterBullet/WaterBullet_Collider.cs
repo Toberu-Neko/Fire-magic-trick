@@ -11,7 +11,6 @@ public class WaterBullet_Collider : MonoBehaviour
             HealthSystem health = collision.gameObject.GetComponent<HealthSystem>();
             if (health != null) health.ToDamagePlayer(damage);
         }
-        Debug.Log(collision.gameObject.name);
         Instantiate(WaterPool, this.transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
