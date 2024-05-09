@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23f08d2ae4cba14087c1ed36193d82b, type: 3}
+  m_Name: Soha_Lazer
+  m_EditorClassIdentifier: 
+  mBehaviorSource:
+    behaviorName: 
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(-367.597778,-716.5206)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(0,140)"},"ID":1,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"SohaLazer_Ready","NodeData":{"Offset":"(-172.4968,163.624878)"},"ID":2,"Name":"Soha
+        Lazer   Ready","Instant":true,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true,"IsGlobal":true},"SharedTransformbehaviorObject":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"behaviorObject","IsShared":true,"IsGlobal":true},"GameObjectbulletPrefab":0,"GameObjectringPrefab":1,"SinglerotateSpeed":120,"SinglechargeDuration":3,"SingleringDuration":1},{"Type":"SohaLazer_Ready","NodeData":{"Offset":"(-6.03398037,155.417664)"},"ID":3,"Name":"Soha
+        Lazer   Ready","Instant":true,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true,"IsGlobal":true},"SharedTransformbehaviorObject":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"behaviorObject","IsShared":true,"IsGlobal":true},"GameObjectbulletPrefab":2,"GameObjectringPrefab":3,"SinglerotateSpeed":120,"SinglechargeDuration":3,"SingleringDuration":1},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(129.423584,161.6077)","Comment":"\u5f8c\u6416"},"ID":4,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":2.5},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}}'
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects:
+        - {fileID: 6251843819888410225, guid: fc293f8a80aa7a74fab64df2c326562e, type: 3}
+        - {fileID: 1797710801640862549, guid: 669cc3c22a20252488200741c619335c, type: 3}
+        - {fileID: 5464189383046405144, guid: be23dbe096f672246b41562772cd99d0, type: 3}
+        - {fileID: 1797710801640862549, guid: 669cc3c22a20252488200741c619335c, type: 3}
+        byteData: 
+        byteDataArray: 
+      Version: 1.7.7

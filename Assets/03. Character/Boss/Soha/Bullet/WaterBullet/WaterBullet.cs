@@ -19,6 +19,7 @@ public class WaterBullet : MonoBehaviour
         Vector3 direction = this.transform.forward;
         rb.velocity = direction * speed * Time.deltaTime;
         timer = Time.time;
+        print(timer);
     }
     private void Update()
     {
@@ -26,7 +27,7 @@ public class WaterBullet : MonoBehaviour
 
         if(Time.time - timer >= destroyTime)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
     private void move()

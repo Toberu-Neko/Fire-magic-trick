@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &141802453
+--- !u!1 &139476822
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,28 +8,28 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 141802455}
+  - component: {fileID: 139476823}
   m_Layer: 0
-  m_Name: WaterBulletPoint
+  m_Name: LazerPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &141802455
+--- !u!4 &139476823
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 141802453}
+  m_GameObject: {fileID: 139476822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.28, y: 2.52, z: 3.25}
+  m_LocalPosition: {x: 1.84, y: 4.15, z: 3.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2068105046338915667}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &510965236926501202
 GameObject:
@@ -1173,14 +1173,13 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"soha","IsShared":true,"GameObjectmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"modelObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"playerInMeleeRange","IsShared":true,"BooleanmValue":false}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"modelObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"playerInMeleeRange","IsShared":true,"BooleanmValue":false}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
         startIndex: 
         dataPosition: 
-        unityObjects:
-        - {fileID: 2186621676062772355}
+        unityObjects: []
         byteData: 
         byteDataArray: 
       Version: 1.7.7
@@ -3078,7 +3077,8 @@ Transform:
   m_Children:
   - {fileID: 5219560988120215137}
   - {fileID: 5400414350281930850}
-  - {fileID: 141802455}
+  - {fileID: 6336623032295865695}
+  - {fileID: 139476823}
   m_Father: {fileID: 6829137587290172703}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3464,7 +3464,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8475525278993035965}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3848,3 +3848,69 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &4608511987992817539
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2068105046338915667}
+    m_Modifications:
+    - target: {fileID: 7495269814433043164, guid: f07f728b73afcb1478582b8ebbc4d6e7, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495269814433043164, guid: f07f728b73afcb1478582b8ebbc4d6e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.9400024
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495269814433043164, guid: f07f728b73afcb1478582b8ebbc4d6e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.149994
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495269814433043164, guid: f07f728b73afcb1478582b8ebbc4d6e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.7399907
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495269814433043164, guid: f07f728b73afcb1478582b8ebbc4d6e7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495269814433043164, guid: f07f728b73afcb1478582b8ebbc4d6e7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495269814433043164, guid: f07f728b73afcb1478582b8ebbc4d6e7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495269814433043164, guid: f07f728b73afcb1478582b8ebbc4d6e7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -1.1641534e-10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495269814433043164, guid: f07f728b73afcb1478582b8ebbc4d6e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495269814433043164, guid: f07f728b73afcb1478582b8ebbc4d6e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495269814433043164, guid: f07f728b73afcb1478582b8ebbc4d6e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495269814433043165, guid: f07f728b73afcb1478582b8ebbc4d6e7, type: 3}
+      propertyPath: m_Name
+      value: SohaWaterBullet_Ready
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495269814433043165, guid: f07f728b73afcb1478582b8ebbc4d6e7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f07f728b73afcb1478582b8ebbc4d6e7, type: 3}
+--- !u!4 &6336623032295865695 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7495269814433043164, guid: f07f728b73afcb1478582b8ebbc4d6e7, type: 3}
+  m_PrefabInstance: {fileID: 4608511987992817539}
+  m_PrefabAsset: {fileID: 0}

@@ -4823,6 +4823,7 @@ GameObject:
   - component: {fileID: 5655827125529129625}
   - component: {fileID: 7815989863853112765}
   - component: {fileID: 4854698288897815869}
+  - component: {fileID: 1848274129}
   m_Layer: 0
   m_Name: VFX_A_Lazer PowerCharge
   m_TagString: Untagged
@@ -4845,7 +4846,7 @@ Transform:
   - {fileID: 73412138099423449}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &7815989863853112765
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -9625,3 +9626,17 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!136 &1848274129
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6251843819888410225}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.62
+  m_Height: 0
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
