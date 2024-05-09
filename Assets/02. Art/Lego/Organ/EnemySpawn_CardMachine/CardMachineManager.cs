@@ -8,4 +8,18 @@ public class CardMachineManager : MonoBehaviour
     {
         cardMachines = GetComponentsInChildren<EnemySpawn_CardMachine>();
     }
+    public void ToSpawn()
+    {
+        for(int i=0;i<cardMachines.Length;i++)
+        {
+            cardMachines[i].ToSpawn();
+        }
+    }
+    public void  ToClose()
+    {
+        for (int i = 0; i < cardMachines.Length; i++)
+        {
+            cardMachines[i].ToStop();
+        }
+    }
 }

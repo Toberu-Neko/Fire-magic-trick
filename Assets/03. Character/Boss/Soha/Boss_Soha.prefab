@@ -3088,7 +3088,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5074013745404037190
 Transform:
   m_ObjectHideFlags: 0
@@ -3506,45 +3506,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b08c3f5fb647aa458604508b22ee316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 150
+  state: 0
   health: 150
-  invincible: 0
-  isWin: 0
-  stages:
-  - eventName: 
-    onlyOne: 0
-    isTrigger: 0
-    stage_OnHealth: 0
-    stageEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  OnBossDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  Health_Full: 100
+  Health_Mid: 60
+  Health_Low: 30
+  health_Death: 0
+  dialogue_Mid: {fileID: 0}
+  dialogue_Low: {fileID: 0}
+  dialogue_Death: {fileID: 0}
+  glassRoadManager: {fileID: 0}
+  topEnemyManager: {fileID: 0}
 --- !u!1 &3423165994257034283
 GameObject:
   m_ObjectHideFlags: 0
@@ -33400,6 +33372,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Shield: {fileID: 9198858367153473129}
+  RecycleTime: 0
+  timer: 0
 --- !u!1001 &2590537627515083301
 PrefabInstance:
   m_ObjectHideFlags: 0

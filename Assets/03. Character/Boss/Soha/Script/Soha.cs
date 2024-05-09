@@ -24,7 +24,9 @@ public class Soha : MonoBehaviour,IHealth
     [SerializeField] private TriggerArea_DialogueTrigger dialogue_Mid;
     [SerializeField] private TriggerArea_DialogueTrigger dialogue_Low;
     [SerializeField] private TriggerArea_DialogueTrigger dialogue_Death;
-
+    [Header("Mid")]
+    [SerializeField] private GlassRoadManager glassRoadManager;
+    [SerializeField] private CardMachineManager  topEnemyManager;
     //Script
     private Boss_System system;
 
@@ -47,7 +49,7 @@ public class Soha : MonoBehaviour,IHealth
     {
         health = Health_Full;
         system.SetHealth(healthPersentage(health));
-
+        topEnemyManager.ToClose();
         if (state != State.Death) state = State.inactive;
     }
     private void CheckActive()
@@ -100,7 +102,8 @@ public class Soha : MonoBehaviour,IHealth
     {
         changeState(State.Mid);
         eventTrigger(State.Mid);
-
+        topEnemyManager.ToSpawn();
+        glassRoadManager.StartAll();
     }
     private void Event_Low()
     {

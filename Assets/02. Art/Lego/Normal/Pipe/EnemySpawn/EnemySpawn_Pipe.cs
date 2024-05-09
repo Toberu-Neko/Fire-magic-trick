@@ -2,6 +2,7 @@ using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawn_Pipe : MonoBehaviour
@@ -35,9 +36,14 @@ public class EnemySpawn_Pipe : MonoBehaviour
     [SerializeField] private MMF_Player keep;
     [SerializeField] private MMF_Player once;
 
+    private GameObject player;
     public MyDelegates.OnHandler onPipeFightover;
     private List<GameObject> enemys = new List<GameObject>();
 
+    private void Start()
+    {
+        player = GameManager.singleton.Player.gameObject;
+    }
     private void Update()
     {
         spawnTimer();
@@ -126,6 +132,7 @@ public class EnemySpawn_Pipe : MonoBehaviour
             once.PlayFeedbacks();
             AgentController agent = enemy.GetComponent<AgentController>();
             enemy.GetComponent<EnemyHealthSystem>().Rebirth(SpawnPoint.position, SpawnPoint.transform.rotation);
+            enemy.GetComponent<EnemyAggroSystem>().SetAggroTarget(player);
             enemy.SetActive(true);
             if(agent != null) agent.DisableAgent();
             enemy.GetComponent<Rigidbody>().AddForce(SpawnPoint.forward * force * 1000);
@@ -162,7 +169,10 @@ public class EnemySpawn_Pipe : MonoBehaviour
         //to max
         if (enemys.Count >= number)
         {
-            return null;
+            if(!keepSpawnCheck)
+            {
+                return null;
+            }
         }
         //obj pool have enemy
         foreach (GameObject enemy in enemys)
@@ -171,6 +181,10 @@ public class EnemySpawn_Pipe : MonoBehaviour
             { 
                 return enemy;
             }
+        }
+        if (enemys.Count >= number)
+        {
+            return null;
         }
         // Instantiate new enemy
         GameObject newEnemy = Instantiate(Enemy, SpawnPoint.position, SpawnPoint.transform.rotation);
