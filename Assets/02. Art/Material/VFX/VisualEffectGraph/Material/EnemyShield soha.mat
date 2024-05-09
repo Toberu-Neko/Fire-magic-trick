@@ -8,13 +8,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyShield soha
-  m_Shader: {fileID: -6465566751694194690, guid: 224b4920e4e42434e85eed7081456701, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 6748f08c4d40ba04f9fd8bf0270db33c, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -46,17 +46,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Fresnel: 4
     - _Offset: 0.7
-    - _Power: 0
+    - _Power: 0.5
     - _Power_1: 1.69
     - _QueueControl: 0
     - _QueueOffset: 0
     - _TexNoiseScale: 30
-    - _TextureScale: 1.5
+    - _TextureScale: 2
     m_Colors:
-    - _Color: {r: 4.66781, g: 4.708318, b: 0.5108082, a: 0}
+    - _Color: {r: 5.0380316, g: 3.718569, b: 0.31685677, a: 1}
     - _Color_1: {r: 1, g: 0, b: 0, a: 0}
-    - _NoiseSpeed: {r: 0, g: 0.3, b: 0, a: 0}
+    - _NoiseSpeed: {r: 0, g: 0.08, b: 0, a: 0}
     - _NoiseSpeed_1: {r: 0, g: -0.3, b: 0, a: 0}
     - _Vector2: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
