@@ -56,6 +56,7 @@ public class Soha : MonoBehaviour,IHealth
     {
         health = Health_Full;
         system.SetHealth(healthPersentage(health));
+        system.onStartFight += stateEventCheck;
         topEnemyManager.ToClose();
         if (state != State.Death) state = State.inactive;
     }
@@ -105,7 +106,7 @@ public class Soha : MonoBehaviour,IHealth
                 Event_Mid();
             }
         }
-        else if (health < 100)
+        else if (health <= 100)
         {
             Event_Start();
         }
