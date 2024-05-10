@@ -10,8 +10,14 @@ public class WaterBullet_Collider : MonoBehaviour
         {
             HealthSystem health = collision.gameObject.GetComponent<HealthSystem>();
             if (health != null) health.ToDamagePlayer(damage);
+            Instantiate(WaterPool, this.transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
         }
-        Instantiate(WaterPool, this.transform.position, Quaternion.identity);
-        Destroy(this.gameObject);
+        if(collision.gameObject.tag != "WaterBullet")
+        {
+            Instantiate(WaterPool, this.transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
+       
     }
 }

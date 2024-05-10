@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 4208573137861759705}
   m_Layer: 0
   m_Name: Soha_WaterBullet
-  m_TagString: Untagged
+  m_TagString: WaterBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,6 +126,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   WaterPool: {fileID: 6919585319334408982, guid: 7c2be71fbcb82574bb594890103ce514, type: 3}
+  layer:
+    serializedVersion: 2
+    m_Bits: 513
 --- !u!1001 &3439217206852891152
 PrefabInstance:
   m_ObjectHideFlags: 0

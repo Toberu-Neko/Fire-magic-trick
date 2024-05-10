@@ -109,7 +109,7 @@ public class Soha : MonoBehaviour,IHealth
                 Event_Mid();
             }
         }
-        else if (health <= 100)
+        else
         {
             Event_Start();
         }
