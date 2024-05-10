@@ -83,10 +83,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     }
     private void OnDestroy()
     {
-        if(progress == null)
-        {
-            progress = GameManager.singleton.GetComponent<ProgressSystem>();
-        }
         if(progress != null)
         {
             progress.OnPlayerDeath -= RebirthSelf;
