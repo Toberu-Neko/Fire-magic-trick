@@ -9,6 +9,7 @@ public class SohaWaterBullet_Shoot : Action
     [SerializeField] private SharedGameObject targetObject;
     [SerializeField] private SharedTransform behaviorObject;
     [SerializeField] private SharedInt waterBulletCount;
+    [SerializeField] private SharedGameObject soha;
 
     [Header("Bullet")]
     [SerializeField] private GameObject bulletPrefab;
@@ -31,6 +32,9 @@ public class SohaWaterBullet_Shoot : Action
 
         // 抓取水砲發射點
         waterBulletPoint = behaviorObject.Value.Find("WaterBulletPoint");
+
+        // 動畫
+        soha.Value.GetComponent<Animator>().SetTrigger("waterBulletReadyEnd");
     }
 
     public override TaskStatus OnUpdate()
@@ -86,6 +90,7 @@ public class SohaWaterBullet_Shoot : Action
 
     public override void OnEnd()
     {
-
+        // 動畫
+        soha.Value.GetComponent<Animator>().SetBool("isWaterBullet",false);
     }
 }

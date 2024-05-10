@@ -8,6 +8,7 @@ public class SohaWaterBullet_Ready : Action
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
     [SerializeField] private SharedTransform behaviorObject;
+    [SerializeField] private SharedGameObject soha;
 
     [Header("Rotate")]
     [SerializeField] private float rotateSpeed = 120;
@@ -28,6 +29,9 @@ public class SohaWaterBullet_Ready : Action
             bulletCharge.gameObject.SetActive(true);
             bulletCharge.GetComponent<ParticleSystem>().Play();
         }
+
+        // 動畫
+        soha.Value.GetComponent<Animator>().SetBool("isWaterBullet",true);
 
         timer = Time.time;
     }

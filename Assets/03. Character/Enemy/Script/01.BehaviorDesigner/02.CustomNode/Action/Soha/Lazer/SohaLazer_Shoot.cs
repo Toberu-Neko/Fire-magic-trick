@@ -9,6 +9,7 @@ public class SohaLazer_Shoot : Action
     [SerializeField] private SharedGameObject targetObject;
     [SerializeField] private SharedTransform behaviorObject;
     [SerializeField] private SharedInt waterBulletCount;
+    [SerializeField] private SharedGameObject soha;
 
     [Header("Rotate")]
     [SerializeField] private float rotateSpeed = 80;
@@ -71,5 +72,8 @@ public class SohaLazer_Shoot : Action
 
         // 減掉水球使用次數
         waterBulletCount.Value -= 7;
+
+        // 動畫
+        soha.Value.GetComponent<Animator>().SetBool("isLazer",false);
     }
 }
