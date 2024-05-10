@@ -9,6 +9,10 @@ public class SohaStateCheck : Conditional
 
     [Header("State")]
     [SerializeField] private Soha.State targetState;
+
+    [Header("Reverse")]
+    [SerializeField] private bool reverse;
+
     
     private Soha soha;
 
@@ -19,10 +23,21 @@ public class SohaStateCheck : Conditional
 
     public override TaskStatus OnUpdate()
     {
-        if(soha.state == targetState)
+        if(!reverse)
         {
+            if(soha.state == targetState)
+            {
+                return TaskStatus.Success;
+            }
+            return TaskStatus.Failure;
+        }
+        else
+        {
+            if(soha.state == targetState)
+            {
+                return TaskStatus.Failure;
+            }
             return TaskStatus.Success;
         }
-        return TaskStatus.Failure;
     }
 }
