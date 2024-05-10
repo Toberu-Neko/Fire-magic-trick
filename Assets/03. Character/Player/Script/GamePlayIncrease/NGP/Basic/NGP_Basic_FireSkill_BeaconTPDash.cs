@@ -72,7 +72,6 @@ public class NGP_Basic_FireSkill_BeaconTPDash : MonoBehaviour
                         if (HitCount < 0)
                         {
                             TPDashEnd();
-                            Debug.Log("Hitcoun:" + HitCount + "TEPDashEnd");
                         }
                         else
                         {

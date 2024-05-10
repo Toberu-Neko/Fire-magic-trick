@@ -117,7 +117,6 @@ public class GlassSystem : MonoBehaviour
         await Task.Delay((int)(fastTime * 1000));
         SetGlass(false);
 
-        Debug.Log("fastMode");
     }
     private async void delayMode()
     {

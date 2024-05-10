@@ -159,6 +159,5 @@ public class EnemySpawn_GlassBox : MonoBehaviour
         //state to next.
         state++;
         Fight(state);
-        Debug.Log("To Next");
     }
 }

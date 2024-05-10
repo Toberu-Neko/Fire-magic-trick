@@ -28,11 +28,9 @@ public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
     {
         base.FireSkillStart();
         beacomTarget = shot.Shot_Gameobj(beacom,0);
-        Debug.Log("Fire Skill Start");
     }
     protected override void ChargeSkillFire(int power)
     {
-        Debug.Log("Fire Skill power");
         
         if(beacomTarget != null)
         {

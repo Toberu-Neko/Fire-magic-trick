@@ -75,7 +75,6 @@ public class NGP_Basic_ChargeSkill : NGP_Basic_Charge
                 skillPower.UseFire();
             }
         }
-        Debug.Log("ChargePower : " + power);
     }
     protected virtual void ChargeSkillWind(int power) { }
     protected virtual void ChargeSkillFire(int power) { }
