@@ -24284,8 +24284,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.7
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!54 &9198858368181869777
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24330,7 +24330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI: {fileID: 0}
   barrier: {fileID: 0}
-  reserFeedback: {fileID: 0}
+  reserFeedback: {fileID: 9198858368081392734}
   boss_name: "\u68AD\u54C8"
   boss_littleTitle: "\u64B2\u514B\u5927\u9B54\u738B"
 --- !u!114 &6169237153434083370
@@ -24369,7 +24369,7 @@ MonoBehaviour:
   dialogue_Mid: {fileID: 7584644347300647791}
   dialogue_Low: {fileID: 7584644346664692819}
   dialogue_Death: {fileID: 7584644347846214553}
-  boom: {fileID: 7305462462223930690}
+  boom: {fileID: 0}
   glassRoadManager: {fileID: 0}
   topEnemyManager: {fileID: 0}
   laser_Manager: {fileID: 0}
@@ -64224,7 +64224,6 @@ GameObject:
   - component: {fileID: 9198858367253770824}
   - component: {fileID: 9198858367253770838}
   - component: {fileID: 2145570509}
-  - component: {fileID: 7305462462223930690}
   m_Layer: 15
   m_Name: Shield_OnBroke
   m_TagString: Untagged
@@ -64268,7 +64267,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9198858367253770826}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -64333,23 +64332,6 @@ MonoBehaviour:
   edge: {fileID: 7163882591404000424}
   height: 20
   feedback: {fileID: 3530863176746681727}
---- !u!114 &7305462462223930690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9198858367253770826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00708db9a54ca9643b164bf7962fda71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerInside: 0
-  MaxInsideTime: 15
-  edge: {fileID: 1448085657}
-  height: 20
-  feedback: {fileID: 903256490}
 --- !u!1 &9198858367743069234
 GameObject:
   m_ObjectHideFlags: 0
@@ -66665,7 +66647,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 48a7600d6d8ff894589d02435567f156, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48a7600d6d8ff894589d02435567f156, type: 3}
