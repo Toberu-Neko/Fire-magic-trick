@@ -43,7 +43,7 @@ public class EnemySpawn_Pipe : MonoBehaviour
 
     private void Start()
     {
-        player = GameManager.singleton.Player.gameObject;
+        player = GameManager.singleton._input.gameObject;
     }
     private void Update()
     {
@@ -135,7 +135,7 @@ public class EnemySpawn_Pipe : MonoBehaviour
             enemy.GetComponent<EnemyHealthSystem>().Rebirth(SpawnPoint.position, SpawnPoint.transform.rotation);
             enemy.GetComponent<EnemyAggroSystem>().SetAggroTarget(player);
             enemy.SetActive(true);
-            if (isNeverLoseAggro) enemy.GetComponent<EnemyAggroSystem>().SettingMaxAggro(999999999);
+            if (isNeverLoseAggro) enemy.GetComponent<EnemyAggroSystem>().SettingMaxAggro(9999);
             if(agent != null) agent.DisableAgent();
             enemy.GetComponent<Rigidbody>().AddForce(SpawnPoint.forward * force * 1000);
 
