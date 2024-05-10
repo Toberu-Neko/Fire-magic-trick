@@ -8,6 +8,7 @@ public class SohaLazer_Ready : Action
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
     [SerializeField] private SharedTransform behaviorObject;
+    [SerializeField] private SharedGameObject soha;
 
     [Header("Rotate")]
     [SerializeField] private float rotateSpeed = 120;
@@ -37,6 +38,9 @@ public class SohaLazer_Ready : Action
             lazerA.GetComponent<ParticleSystem>().Play();
         }
 
+        // 動畫
+        soha.Value.GetComponent<Animator>().SetBool("isLazer",true);
+
         timer = Time.time;
     }
 
@@ -48,6 +52,9 @@ public class SohaLazer_Ready : Action
             // 生成雷射蓄力
             lazerB.gameObject.SetActive(true);
             lazerB.GetComponent<ParticleSystem>().Play();
+
+            // 動畫
+            soha.Value.GetComponent<Animator>().SetTrigger("lazerReadyEnd");
 
             // 設定已生成過環
             hasRing = true;
