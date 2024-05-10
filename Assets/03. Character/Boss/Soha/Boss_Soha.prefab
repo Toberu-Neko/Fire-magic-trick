@@ -18981,8 +18981,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.7
-  gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 1
+  gizmoViewMode: 0
+  showBehaviorDesignerGizmo: 0
 --- !u!54 &9198858368181869777
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19027,51 +19027,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI: {fileID: 0}
   barrier: {fileID: 0}
-  OnStartFight:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PumberManager, Assembly-CSharp
-        m_MethodName: CloseAllPumbers
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnResetFight:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PumberManager, Assembly-CSharp
-        m_MethodName: CloseAllPumbers
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 9198858368081392734}
-        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Feedbacks
-        m_MethodName: PlayFeedbacks
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  reserFeedback: {fileID: 0}
   boss_name: "\u68AD\u54C8"
   boss_littleTitle: "\u64B2\u514B\u5927\u9B54\u738B"
-  boss: {fileID: 0}
 --- !u!114 &6169237153434083370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19112,6 +19070,7 @@ MonoBehaviour:
   glassRoadManager: {fileID: 0}
   topEnemyManager: {fileID: 0}
   laser_Manager: {fileID: 0}
+  gearsManager: {fileID: 0}
   End: {fileID: 0}
   FinishRoead: {fileID: 0}
 --- !u!95 &6169237153434083375
@@ -48981,7 +48940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9198858368829949483
 Transform:
   m_ObjectHideFlags: 0
@@ -49908,6 +49867,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 48a7600d6d8ff894589d02435567f156, type: 3}
       propertyPath: m_Name
       value: Soha_text
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 48a7600d6d8ff894589d02435567f156, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48a7600d6d8ff894589d02435567f156, type: 3}
