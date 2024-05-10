@@ -9,12 +9,13 @@ public class GearDamage : MonoBehaviour
     private int damage;
     private float force;
     private Transform center;
+    private float t = 5;
     private void Awake()
     {
         gear = this.transform.parent.GetComponent<Gear>();
         damage = gear.damage;
         force = gear.force;
-        center = this.transform
+        center = this.transform;
     }
     private void OnTriggerEnter(Collider other)
     {
