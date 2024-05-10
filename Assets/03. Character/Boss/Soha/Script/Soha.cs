@@ -30,6 +30,8 @@ public class Soha : MonoBehaviour,IHealth
     [SerializeField] private GlassRoadManager glassRoadManager;
     [SerializeField] private CardMachineManager  topEnemyManager;
     [SerializeField] private Satun_Laser_Manager laser_Manager;
+    [Header("Low")]
+    [SerializeField] private GearsManager gearsManager;
     [Header("Death")]
     [SerializeField] private TriggerArea_Timeline End;
     [SerializeField] private GameObject FinishRoead;
@@ -57,6 +59,7 @@ public class Soha : MonoBehaviour,IHealth
         health = Health_Full;
         system.SetHealth(healthPersentage(health));
         system.onStartFight += stateEventCheck;
+        gearsManager.ToStop();
         topEnemyManager.ToClose();
         if (state != State.Death) state = State.inactive;
     }
@@ -129,12 +132,14 @@ public class Soha : MonoBehaviour,IHealth
         eventTrigger(State.Low);
         boom.SteamBoomRightNow();
         laser_Manager.playLaser();
+        gearsManager.ToMove();
     }
     private void Event_Death()
     {
         changeState(State.Death);
         eventTrigger(State.Death);
         system.EndBossFight();
+        gearsManager.ToStop();
         End.readyPlay();
         FinishRoead.SetActive(true);
     }

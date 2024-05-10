@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,13 +7,11 @@ public class Boss_System : MonoBehaviour
     [Header("Setting")]
     public Boss_UI UI;
     public Barrier barrier;
-    public UnityEvent OnStartFight;
-    public UnityEvent OnResetFight;
+    [SerializeField] private MMF_Player reserFeedback;
     [Header("Boss")]
     [SerializeField] private string boss_name;
     [SerializeField] private string boss_littleTitle;
     [Space(10)]
-    [SerializeField] private Boss boss;
 
     private ProgressSystem progress;
 
@@ -51,8 +50,7 @@ public class Boss_System : MonoBehaviour
 
             UI.Boss_Exit();
             barrier.Close();
-            boss.ResetBossFight();
-            OnResetFight?.Invoke();
+            reserFeedback.PlayFeedbacks();
             onResetFight?.Invoke();
             Debug.Log("Boss Fight Reset");
         }
@@ -66,7 +64,7 @@ public class Boss_System : MonoBehaviour
 
             UI.Boss_Enter(boss_name, boss_littleTitle);
             barrier.Open();
-            OnStartFight?.Invoke();
+            reserFeedback.PlayFeedbacks();
             onStartFight?.Invoke();
         }
     }
@@ -79,7 +77,6 @@ public class Boss_System : MonoBehaviour
             onEndFight?.Invoke();
             UI.Boss_Exit();
             barrier.Close();
-            boss.gameObject.SetActive(false);
         }
     }
     public void SetHealth(float newHealthpersen)

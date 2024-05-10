@@ -24,12 +24,14 @@ public class BossSystem_Soha : MonoBehaviour
 
     private void startBossFight()
     {
+        pumberManager.CloseAllPumbers();
         pumberManager.StartNewBossFight();
         spawnManager_card.ToSpawn();
         spawnManager_pipe.ToSpawn();
     }
     private void resetBossFight()
     {
+        pumberManager.CloseAllPumbers();
         pumberManager.StopAllCoroutines();
         spawnManager_card.ToClose();
         spawnManager_pipe.StopSpawn();
