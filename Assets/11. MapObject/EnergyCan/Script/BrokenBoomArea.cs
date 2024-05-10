@@ -8,7 +8,7 @@ public class BrokenBoomArea : MonoBehaviour
         if(other.CompareTag("Enemy"))
         {
             EnemyHealthSystem enemyHealthSystem = other.GetComponent<EnemyHealthSystem>();
-            enemyHealthSystem.TakeDamage(2, PlayerDamage.DamageType.SuperDash);
+            if(enemyHealthSystem !=null) enemyHealthSystem.TakeDamage(2, PlayerDamage.DamageType.SuperDash);
         }
         if(other.CompareTag("EnergyCan"))
         {
