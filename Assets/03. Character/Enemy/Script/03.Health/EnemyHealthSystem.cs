@@ -106,11 +106,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     {
         EnemyCoolingCheck();
         atCrashTimerSystem();
-
-        if(Input.GetKeyDown(KeyCode.N))
-        {
-            EnemyDeathRightNow();
-        }
     }
     public void SetIsRebirthHide(bool value)
     {
