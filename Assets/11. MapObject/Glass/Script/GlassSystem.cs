@@ -31,6 +31,7 @@ public class GlassSystem : MonoBehaviour
     private Collider glassCollider;
     private MeshRenderer glassRender;
     private bool isBroken;
+    private bool isBrokenFoever;
 
     private void Awake()
     {
@@ -50,7 +51,12 @@ public class GlassSystem : MonoBehaviour
     {
           GlassRebirth();
     }
-    
+    public void BrokenFoever()
+    {
+        BrokenSuperFast();
+        isBrokenFoever = true;
+        progressSystem.OnPlayerDeath -= OnPlayerDeathToRebirthGlass;
+    }
     public void BrokenCheck_SuperJump()
     {
         if(canSuperJump)
@@ -109,8 +115,11 @@ public class GlassSystem : MonoBehaviour
     }
     public void GlassRebirth()
     {
-        SetIsBroken(false);
-        SetGlass(true);
+        if(isBrokenFoever)
+        {
+            SetIsBroken(false);
+            SetGlass(true);
+        }
     }
     private async void fastMode()
     {
