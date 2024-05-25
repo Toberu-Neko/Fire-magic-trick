@@ -11,10 +11,16 @@ public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
 
     [Header("Fire Skill")]
     [SerializeField] private Transform beacom;
+    [Header("OverBurning Release")]
+    [SerializeField] private float OverburningRelease=10;
     private GameObject beacomTarget;
+
+    private EnergySystem energySystem;
     protected override void Start()
     {
         base.Start();
+
+        energySystem = GameManager.singleton.Player.GetComponent<EnergySystem>();
     }
     protected override void Update()
     {
@@ -31,16 +37,25 @@ public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
     }
     protected override void ChargeSkillFire(int power)
     {
-        
         if(beacomTarget != null)
         {
             Beacon beacon = beacomTarget.GetComponent<Beacon>();
             beacon.StopRightNow();
             skillPower.UseFire();
+            
+            if(energySystem.isOverBurning)
+            {
+                energySystem.UseEnergy(OverburningRelease);
+            }
         }
     }
     protected override void ChargeSkillWind(int power)
     {
+        if (energySystem.isOverBurning)
+        {
+            energySystem.UseEnergy(OverburningRelease);
+        }
+
         switch (power)
         {
             case 0:

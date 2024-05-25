@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class NGP_SuperJump : NGP_Basic_SuperJump
 {
+    [SerializeField] private float overBurning_UseEnergy=10;
     [SerializeField] private float heavyPressureGravity = 1f;
     [SerializeField] private Transform VFX_SuperDashJump_Wind;
     [SerializeField] private Transform VFX_SuperDashJump_Fire;
+    //Script
+    private EnergySystem energySystem;
     //VFX
     private ParticleSystem VFX_FireCircle;
     private ParticleSystem VFX_WindCricle;
@@ -19,6 +22,8 @@ public class NGP_SuperJump : NGP_Basic_SuperJump
         //vfx
         VFX_FireCircle = GameManager.singleton.VFX_List.VFX_FireCircle;
         VFX_WindCricle = GameManager.singleton.VFX_List.VFX_WindCricle;
+
+        energySystem = GameManager.singleton.Player.GetComponent<EnergySystem>();
     }
     protected override void Update()
     {
@@ -57,6 +62,10 @@ public class NGP_SuperJump : NGP_Basic_SuperJump
     }
     protected override void SuperJump_wind()
     {
+        if(energySystem.isOverBurning)
+        {
+            energySystem.UseEnergy(overBurning_UseEnergy);
+        }
         state.SetGravityToNormal();
         jump.SuperJump(SuperJumpHeight);
         Instantiate(VFX_SuperDashJump_Wind, transform.position, Quaternion.identity);
@@ -64,6 +73,10 @@ public class NGP_SuperJump : NGP_Basic_SuperJump
     }
     protected override void SuperJump_fire()
     {
+        if (energySystem.isOverBurning)
+        {
+            energySystem.UseEnergy(overBurning_UseEnergy);
+        }
         state.SetGravityToNormal();
         jump.SuperJump(SuperJumpHeight);
         Instantiate(VFX_SuperDashJump_Fire, transform.position, Quaternion.identity);
