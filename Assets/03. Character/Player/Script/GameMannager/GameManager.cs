@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
         {
             singleton = this;
         }
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
     private void Start()
     {
