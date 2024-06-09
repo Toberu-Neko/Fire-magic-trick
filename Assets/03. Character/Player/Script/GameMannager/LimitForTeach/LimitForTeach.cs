@@ -4,17 +4,17 @@ public class LimitForTeach : MonoBehaviour
 {
     public bool useTeach;
     
-    private FireFloat _fireFloat;
-    private FireDash _fireDash;
-    private SuperDash _superDash;
-    private SuperDashCameraCheck _superDashCameraCheck;
-    private SuperDashKick _superDashKick;
-    private SuperDashKickDown _superDashKickDown;
+    [SerializeField] private FireFloat _fireFloat;
+    [SerializeField] private FireDash _fireDash;
+    [SerializeField] private SuperDash _superDash;
+    [SerializeField] private SuperDashCameraCheck _superDashCameraCheck;
+    [SerializeField] private SuperDashKick _superDashKick;
+    [SerializeField] private SuperDashKickDown _superDashKickDown;
 
-    private Shooting_Mode _shooting_mode;
-    private Shooting_Magazing _shooting_magazing;
+    [SerializeField] private Shooting_Mode _shooting_mode;
+    [SerializeField] private Shooting_Magazing _shooting_magazing;
 
-    private EnergySystem _energySystem;
+    [SerializeField] private EnergySystem _energySystem;
     [Header("UI")]
     [SerializeField] private GameObject UI_Energy;
     [SerializeField] private GameObject UI_ShootingMagazing;
@@ -22,15 +22,8 @@ public class LimitForTeach : MonoBehaviour
 
     private void Start()
     {
-        _fireFloat = GameManager.singleton.EnergySystem.GetComponent<FireFloat>();
-        _fireDash = GameManager.singleton.EnergySystem.GetComponent<FireDash>();
-        _superDash = GameManager.singleton.EnergySystem.GetComponent<SuperDash>();
-        _superDashCameraCheck = GameManager.singleton.EnergySystem.GetComponent<SuperDashCameraCheck>();
-        _superDashKick = GameManager.singleton.EnergySystem.GetComponent<SuperDashKick>();
-        _superDashKickDown = GameManager.singleton.EnergySystem.GetComponent<SuperDashKickDown>();
+
         _shooting_mode = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Mode>();
-        _shooting_magazing = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Magazing>();
-        _energySystem = GameManager.singleton.Player.GetComponent<EnergySystem>();
 
         Initialization();
     }
@@ -66,7 +59,7 @@ public class LimitForTeach : MonoBehaviour
     }
     public void SetShootingModeScript(bool value)
     {
-        _shooting_mode.enabled = value;
+        // _shooting_mode.enabled = value;
     }
     public void SetFloatingScript(bool value)
     {
@@ -94,7 +87,7 @@ public class LimitForTeach : MonoBehaviour
     }
     public void SetUI_ShootingMode(bool value)
     {
-        UI_ShootingMode.SetActive(value);
+        // UI_ShootingMode.SetActive(value);
     }
     #endregion
 }

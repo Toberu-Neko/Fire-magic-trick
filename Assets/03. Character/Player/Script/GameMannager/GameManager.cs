@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public Feedbacks_List Feedbacks_List;
     public Collider_List Collider_List;
     public GameObject NewGamePlay;
+
     private void Awake()
     {
         if(singleton == null)
@@ -20,9 +21,5 @@ public class GameManager : MonoBehaviour
         }
 
         Cursor.lockState = CursorLockMode.Locked;
-    }
-    private void Start()
-    {
-        Player = _input.gameObject.transform;
     }
 }

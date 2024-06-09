@@ -12,8 +12,6 @@ public class ProgressSystem : MonoBehaviour
     public delegate void PlayerDeathHandler();
     public event PlayerDeathHandler OnPlayerDeath;
 
-    
-
     private void Start()
     {
         _deathSystem = GameManager.singleton.UISystem.GetComponent<DeathSystem>();

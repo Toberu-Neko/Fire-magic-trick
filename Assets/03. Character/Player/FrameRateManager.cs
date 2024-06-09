@@ -10,7 +10,7 @@ public class FrameRateManager : MonoBehaviour
 
     void Start()
     {
-        SetFrameRate(targetFrameRate);
+        // SetFrameRate(targetFrameRate);
     }
 
     public void SetFrameRate(int frameRate)

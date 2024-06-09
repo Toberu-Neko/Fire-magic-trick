@@ -44,7 +44,8 @@ public class LoadSceneManager : MonoBehaviour
 
     private IEnumerator LoadSceneAsyncSingle(string sceneName)
     {
-        LoadingObj.SetActive(true);
+        if(LoadingObj != null)
+            LoadingObj.SetActive(true);
         ObjectPoolManager.ReturnAllObjectsToPool();
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 
@@ -73,6 +74,11 @@ public class LoadSceneManager : MonoBehaviour
 
     private IEnumerator UnloadSceneAsuncAdditive(string sceneName)
     {
+        if(SceneManager.GetSceneByName(sceneName).isLoaded == false)
+        {
+            yield break;
+        }
+
         AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(sceneName);
 
         while (!asyncUnload.isDone)

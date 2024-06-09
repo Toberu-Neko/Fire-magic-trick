@@ -9,7 +9,6 @@ public class MenuSystem : MonoBehaviour
     [Header("Opening")]
     [SerializeField] private GameObject OpeningObj;
     [Header("UI")]
-    [SerializeField] private GameObject MenuUI;
     [SerializeField] private GameObject PauseUI;
     [SerializeField] private GameObject Script;
     [SerializeField] private GameObject UI;
@@ -60,21 +59,12 @@ public class MenuSystem : MonoBehaviour
     }
     public void CheckMenuUse()
     {
-        if(useMenu)
-        {
-            MenuUI.SetActive(true);
-        }
-        else
-        {
-            MenuUI.SetActive(false);
-        }
     }
     #endregion
     private void NullFather()
     {
         NullFatherObj(gameManager.gameObject);
         NullFatherObj(MainCamera.gameObject);
-        NullFatherObj(MenuUI);
         //NullFatherObj(PauseUI);
         NullFatherObj(UI);
         NullFatherObj(CameraPakage);
@@ -108,7 +98,6 @@ public class MenuSystem : MonoBehaviour
     }
     private void SetMenuInterface(bool active)
     {
-        MenuUI.gameObject.SetActive(active);
     }
     public void SetisStartGame(bool active)
     {
@@ -127,15 +116,6 @@ public class MenuSystem : MonoBehaviour
         starterAssets.cursorLocked = true;
         starterAssets.cursorInputForLook = true;
         Cursor.lockState = CursorLockMode.Locked;
-
-    }
-    public void GameSetting()
-    {
-        
-    }
-    public void Credit()
-    {
-
     }
 
     public void LeaveGame()

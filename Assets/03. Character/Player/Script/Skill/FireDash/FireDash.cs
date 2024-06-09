@@ -31,7 +31,6 @@ public class FireDash : MonoBehaviour
     private ThirdPersonController _playerController;
     private ControllerInput _Input;
     private CharacterController _characterController;
-    private EnergySystem _energySystem;
     private FireDashGhost _fireDashGhost;
     private HealthSystem _healthSystem;
 
@@ -42,10 +41,8 @@ public class FireDash : MonoBehaviour
         _Input = GameManager.singleton._input;
         _playerController = _Input.GetComponent<ThirdPersonController>();
         _characterController = _Input.GetComponent<CharacterController>();
-        _energySystem = _Input.GetComponent<EnergySystem>();
         _fireDashGhost = GetComponent<FireDashGhost>();
         _healthSystem = _Input.GetComponent<HealthSystem>();
-        Dash_Normal = DashEffect_Explode_End.gameObject.transform.localScale;
     }
     private void Update()
     {
@@ -202,7 +199,6 @@ public class FireDash : MonoBehaviour
     }
     private void SetDashScale(Vector3 mode)
     {
-        DashEffect_Explode_End.gameObject.transform.localScale = mode;
     }
     IEnumerator DashMove()
     {
