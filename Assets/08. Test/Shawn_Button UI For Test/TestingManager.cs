@@ -19,7 +19,7 @@ public class TestingManager : MonoBehaviour
     private void Start()
     {
         InputEvent.gameObject.transform.parent = this.gameObject.transform;
-        assetsInput = GameManager.singleton.Player.GetComponent<StarterAssetsInputs>();
+        assetsInput = GameManager.Instance.Player.GetComponent<StarterAssetsInputs>();
 
         assetsInput.cursorLocked = false;
         assetsInput.cursorInputForLook = false;

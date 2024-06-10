@@ -1,7 +1,8 @@
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
-    public static GameManager singleton = null;
+    public static GameManager Instance { get; private set; }
+
     public ControllerInput _input;
     public PlayerState _playerState;
     public GameObject UISystem;
@@ -13,11 +14,13 @@ public class GameManager : MonoBehaviour
     public Collider_List Collider_List;
     public GameObject NewGamePlay;
 
+    public bool IsPaused { get; private set; }
+
     private void Awake()
     {
-        if(singleton == null)
+        if(Instance == null)
         {
-            singleton = this;
+            Instance = this;
         }
 
         Cursor.lockState = CursorLockMode.Locked;

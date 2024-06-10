@@ -45,19 +45,19 @@ public class NGP_Basic_Dash : MonoBehaviour
     protected virtual void Start()
     {
         //Script
-        input = GameManager.singleton._input;
+        input = GameManager.Instance._input;
         characterController = input.GetComponent<CharacterController>();
         thirdPersonController = input.GetComponent<ThirdPersonController>();
-        fireDashCollider = GameManager.singleton.Collider_List.DashCrash.GetComponent<FireDashCollider>();
-        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
-        move_Our =GameManager.singleton.Player.GetComponent<Move_Our>();
-        combo = GameManager.singleton.NewGamePlay.GetComponent<NGP_Combo>();
-        shooting_Check = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Check>();
-        energySystem = GameManager.singleton.Player.GetComponent<EnergySystem>();
+        fireDashCollider = GameManager.Instance.Collider_List.DashCrash.GetComponent<FireDashCollider>();
+        playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
+        move_Our =GameManager.Instance.Player.GetComponent<Move_Our>();
+        combo = GameManager.Instance.NewGamePlay.GetComponent<NGP_Combo>();
+        shooting_Check = GameManager.Instance.ShootingSystem.GetComponent<Shooting_Check>();
+        energySystem = GameManager.Instance.Player.GetComponent<EnergySystem>();
 
         //Feedbacks
-        Feedbacks_Dash = GameManager.singleton.Feedbacks_List.Dash;
-        Feedbacks_DashStop = GameManager.singleton.Feedbacks_List.DashStop;
+        Feedbacks_Dash = GameManager.Instance.Feedbacks_List.Dash;
+        Feedbacks_DashStop = GameManager.Instance.Feedbacks_List.DashStop;
 
 
     }

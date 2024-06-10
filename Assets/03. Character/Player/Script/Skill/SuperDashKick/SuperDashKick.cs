@@ -37,8 +37,8 @@ public class SuperDashKick : MonoBehaviour
     
     private void Start()
     {
-        _playerState = GameManager.singleton._playerState;
-        _input = GameManager.singleton._input;
+        _playerState = GameManager.Instance._playerState;
+        _input = GameManager.Instance._input;
         _superDash = GetComponent<SuperDash>();
         _fireFloat = GetComponent<FireFloat>();
         _thirdPersonController = _playerState.GetComponent<ThirdPersonController>();

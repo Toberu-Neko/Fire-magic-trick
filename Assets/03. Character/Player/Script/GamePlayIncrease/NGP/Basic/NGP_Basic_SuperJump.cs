@@ -24,15 +24,15 @@ public class NGP_Basic_SuperJump : MonoBehaviour
     public bool isHeavy;
     protected virtual void Start()
     {
-        skillPower = GameManager.singleton.NewGamePlay.GetComponent<NGP_SkillPower>();
-        input = GameManager.singleton._input;
-        jump = GameManager.singleton.Player.GetComponent<PlayerJump>();
-        state = GameManager.singleton.Player.GetComponent<PlayerState>();
-        dash =GameManager.singleton.NewGamePlay.GetComponent<NGP_Dash>();
+        skillPower = GameManager.Instance.NewGamePlay.GetComponent<NGP_SkillPower>();
+        input = GameManager.Instance._input;
+        jump = GameManager.Instance.Player.GetComponent<PlayerJump>();
+        state = GameManager.Instance.Player.GetComponent<PlayerState>();
+        dash =GameManager.Instance.NewGamePlay.GetComponent<NGP_Dash>();
 
         //vfx
-        VFX_SuperJump_Wind = GameManager.singleton.VFX_List.VFX_SuperJump_Wind;
-        VFX_SuperJump_Fire = GameManager.singleton.VFX_List.VFX_SuperJump_Fire;
+        VFX_SuperJump_Wind = GameManager.Instance.VFX_List.VFX_SuperJump_Wind;
+        VFX_SuperJump_Fire = GameManager.Instance.VFX_List.VFX_SuperJump_Fire;
     }
     protected virtual void Update()
     {

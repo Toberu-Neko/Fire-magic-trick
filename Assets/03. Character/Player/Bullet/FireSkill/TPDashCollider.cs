@@ -16,8 +16,8 @@ public class TPDashCollider : MonoBehaviour, ITriggerNotifier
 
     private void Start()
     {
-        BulletTime = GameManager.singleton.GetComponent<BulletTime>();
-        vibrationController = GameManager.singleton.GetComponent<VibrationController>();
+        BulletTime = GameManager.Instance.GetComponent<BulletTime>();
+        vibrationController = GameManager.Instance.GetComponent<VibrationController>();
     }
     private void OnTriggerEnter(Collider other)
     {

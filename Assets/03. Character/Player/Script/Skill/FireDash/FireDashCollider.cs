@@ -19,10 +19,10 @@ public class FireDashCollider : MonoBehaviour
     private bool isTriggerDamage;
     private void Start()
     {
-        dash = GameManager.singleton.NewGamePlay.GetComponent<NGP_Dash>();
-        _aimSupportSystem = GameManager.singleton.Player.GetComponent<Basic_AimSupportSystem>();
+        dash = GameManager.Instance.NewGamePlay.GetComponent<NGP_Dash>();
+        _aimSupportSystem = GameManager.Instance.Player.GetComponent<Basic_AimSupportSystem>();
         _playerDamage = GetComponent<PlayerDamage>();
-        vibrationController = GameManager.singleton.GetComponent<VibrationController>();
+        vibrationController = GameManager.Instance.GetComponent<VibrationController>();
 
         Initialization();
     }

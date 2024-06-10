@@ -44,7 +44,7 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
     public override void Start()
     {
         base.Start();
-        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
         shot = GetComponent<NewGamePlay_Shot>();
         hover = GetComponent<NewGamePlay_Hover>();
         combo.OnUseSkill += OnUseSkill;

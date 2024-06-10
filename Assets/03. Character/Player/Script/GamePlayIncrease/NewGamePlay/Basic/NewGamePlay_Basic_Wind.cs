@@ -23,7 +23,7 @@ public class NewGamePlay_Basic_Wind : MonoBehaviour
 
     protected virtual void Start()
     {
-        WindVFX = GameManager.singleton.VFX_List.VFX_WindPower;
+        WindVFX = GameManager.Instance.VFX_List.VFX_WindPower;
         emissionModule = WindVFX.emission;
         mainModule = WindVFX.main;
 

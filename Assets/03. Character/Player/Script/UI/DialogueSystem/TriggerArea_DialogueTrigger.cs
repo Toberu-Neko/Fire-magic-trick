@@ -27,9 +27,9 @@ public class TriggerArea_DialogueTrigger : MonoBehaviour
 
     private void Start()
     {
-        dialogueManager = GameManager.singleton.UISystem.GetComponent<DialogueManager>();
-        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
-        progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
+        dialogueManager = GameManager.Instance.UISystem.GetComponent<DialogueManager>();
+        playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
+        progressSystem = GameManager.Instance.GetComponent<ProgressSystem>();
 
         if(!triggerOnce)
         {

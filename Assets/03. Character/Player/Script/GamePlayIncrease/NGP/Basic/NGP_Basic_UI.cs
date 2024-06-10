@@ -19,12 +19,12 @@ public class NGP_Basic_UI : MonoBehaviour
 
     protected virtual void Start()
     {
-        UI_State = GameManager.singleton.Feedbacks_List.GetComponent<Feedbacks_List>().UI_State;
+        UI_State = GameManager.Instance.Feedbacks_List.GetComponent<Feedbacks_List>().UI_State;
 
         //VFX
-        VFX_UI_State_Fire = GameManager.singleton.VFX_List.VFX_UI_State_Fire;
+        VFX_UI_State_Fire = GameManager.Instance.VFX_List.VFX_UI_State_Fire;
         VFX_main_StateFire = VFX_UI_State_Fire.main;
-        VFX_UI_State_Wind = GameManager.singleton.VFX_List.VFX_UI_State_Wind;
+        VFX_UI_State_Wind = GameManager.Instance.VFX_List.VFX_UI_State_Wind;
         VFX_main_StateWind = VFX_UI_State_Wind.main;
 
         //Set

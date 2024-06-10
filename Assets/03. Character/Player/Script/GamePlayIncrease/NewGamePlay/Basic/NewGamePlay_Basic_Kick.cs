@@ -7,7 +7,7 @@ public class NewGamePlay_Basic_Kick : MonoBehaviour
 
     protected virtual void Start()
     {
-        kick =GameManager.singleton.EnergySystem.GetComponent<SuperDashKick>();
+        kick =GameManager.Instance.EnergySystem.GetComponent<SuperDashKick>();
 
         //Subscribe
         kick.OnKick += Onkick;

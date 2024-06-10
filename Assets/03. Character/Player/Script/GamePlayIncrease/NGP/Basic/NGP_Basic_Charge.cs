@@ -28,12 +28,12 @@ public class NGP_Basic_Charge : MonoBehaviour
     protected virtual void Start()
     {
         //Script
-        _input = GameManager.singleton.Player.GetComponent<ControllerInput>();
+        _input = GameManager.Instance.Player.GetComponent<ControllerInput>();
 
         //vfx
-        VFX_Charge = GameManager.singleton.VFX_List.VFX_Charge;
-        VFX_ChargeFinish = GameManager.singleton.VFX_List.VFX_ChargeFinish;
-        VFX_ChargePower = GameManager.singleton.VFX_List.VFX_ChargePower;
+        VFX_Charge = GameManager.Instance.VFX_List.VFX_Charge;
+        VFX_ChargeFinish = GameManager.Instance.VFX_List.VFX_ChargeFinish;
+        VFX_ChargePower = GameManager.Instance.VFX_List.VFX_ChargePower;
 
         //set
         chargeType = ChargeType.Shot;

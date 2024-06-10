@@ -11,7 +11,7 @@ public class NGP_Basic_Shot : MonoBehaviour
 
     public virtual void Start()
     {
-        _shooting_check = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Check>();
+        _shooting_check = GameManager.Instance.ShootingSystem.GetComponent<Shooting_Check>();
     }
     public virtual void Update() { }
     public void Shot(Transform preferb)

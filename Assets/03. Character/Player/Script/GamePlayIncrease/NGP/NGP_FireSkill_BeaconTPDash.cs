@@ -27,9 +27,9 @@ public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
     protected override void Start()
     {
         base.Start();
-        state = GameManager.singleton.Player.GetComponent<PlayerState>();
-        VFX_TPDash = GameManager.singleton.VFX_List.VFX_TPDash;
-        Player = GameManager.singleton.Player;
+        state = GameManager.Instance.Player.GetComponent<PlayerState>();
+        VFX_TPDash = GameManager.Instance.VFX_List.VFX_TPDash;
+        Player = GameManager.Instance.Player;
     }
     protected override void Update() { base.Update(); }
     protected override Transform NullTarget()

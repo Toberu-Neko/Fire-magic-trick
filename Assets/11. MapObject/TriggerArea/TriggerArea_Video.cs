@@ -8,7 +8,7 @@ public class TriggerArea_Video : MonoBehaviour
 
     private void Start()
     {
-        teachVideo = GameManager.singleton.UISystem.GetComponent<TeachVideo>();
+        teachVideo = GameManager.Instance.UISystem.GetComponent<TeachVideo>();
         videoPlayer = teachVideo.videoPlayer;
     }
     private void OnTriggerEnter(Collider other)

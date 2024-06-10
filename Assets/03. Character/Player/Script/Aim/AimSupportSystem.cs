@@ -26,7 +26,7 @@ public class AimSupportSystem : Basic_AimSupportSystem
         base.Start();
 
         //script
-        superDash = GameManager.singleton.EnergySystem.GetComponent<SuperDash>();
+        superDash = GameManager.Instance.EnergySystem.GetComponent<SuperDash>();
 
         //subscribe
         superDash.OnSuperDashStart += NullTarget;

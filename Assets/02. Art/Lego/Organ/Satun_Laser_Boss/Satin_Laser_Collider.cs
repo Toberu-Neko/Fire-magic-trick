@@ -8,7 +8,7 @@ public class Satin_Laser_Collider : MonoBehaviour
 
     private void Start()
     {
-        healthSystem = GameManager.singleton.Player.GetComponent<HealthSystem>();
+        healthSystem = GameManager.Instance.Player.GetComponent<HealthSystem>();
     }
     private void OnTriggerEnter(Collider other)
     {

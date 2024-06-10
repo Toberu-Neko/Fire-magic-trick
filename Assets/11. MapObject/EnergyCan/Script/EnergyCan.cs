@@ -25,7 +25,7 @@ public class EnergyCan : MonoBehaviour ,IHealth
 
     private void Start()
     {
-        progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
+        progressSystem = GameManager.Instance.GetComponent<ProgressSystem>();
 
         if(healthSystem ==null)
         {

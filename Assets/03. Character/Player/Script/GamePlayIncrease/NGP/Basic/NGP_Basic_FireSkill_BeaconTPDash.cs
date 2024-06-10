@@ -17,8 +17,8 @@ public class NGP_Basic_FireSkill_BeaconTPDash : MonoBehaviour
     protected virtual void Start()
     {
         //Script
-        skillPwer = GameManager.singleton.NewGamePlay.GetComponentInParent<NGP_SkillPower>();
-        chargeSkill = GameManager.singleton.NewGamePlay.GetComponentInParent<NGP_ChargeSkill>();
+        skillPwer = GameManager.Instance.NewGamePlay.GetComponentInParent<NGP_SkillPower>();
+        chargeSkill = GameManager.Instance.NewGamePlay.GetComponentInParent<NGP_ChargeSkill>();
 
         //variable
         index = 0;

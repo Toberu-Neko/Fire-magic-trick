@@ -20,8 +20,8 @@ public class PowerReturn : MonoBehaviour
 
     private void Start()
     {
-        player = GameManager.singleton.Player.transform;
-        skillPower = GameManager.singleton.NewGamePlay.GetComponent<NGP_SkillPower>();
+        player = GameManager.Instance.Player.transform;
+        skillPower = GameManager.Instance.NewGamePlay.GetComponent<NGP_SkillPower>();
     }
 
     private void Update()

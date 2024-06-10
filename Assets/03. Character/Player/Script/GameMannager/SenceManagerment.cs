@@ -8,7 +8,7 @@ public class SenceManagerment : MonoBehaviour
 
     private void Start()
     {
-        input= GameManager.singleton.Player.GetComponent<StarterAssetsInputs>();
+        input= GameManager.Instance.Player.GetComponent<StarterAssetsInputs>();
     }
 
     private void Update()

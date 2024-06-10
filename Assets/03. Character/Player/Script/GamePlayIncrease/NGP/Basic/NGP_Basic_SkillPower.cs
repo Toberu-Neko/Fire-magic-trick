@@ -30,11 +30,11 @@ public class NGP_Basic_SkillPower : MonoBehaviour
     protected virtual void Start()
     {
         //Script
-        VFX_WindPower = GameManager.singleton.VFX_List.VFX_WindPower;
-        VFX_FirePower = GameManager.singleton.VFX_List.VFX_FirePower;
-        skillState = GameManager.singleton.NewGamePlay.GetComponent<NGP_SkillState>();
-        chargeSkill = GameManager.singleton.NewGamePlay.GetComponent<NGP_ChargeSkill>();
-        UI = GameManager.singleton.NewGamePlay.GetComponent<NGP_Basic_UI>();
+        VFX_WindPower = GameManager.Instance.VFX_List.VFX_WindPower;
+        VFX_FirePower = GameManager.Instance.VFX_List.VFX_FirePower;
+        skillState = GameManager.Instance.NewGamePlay.GetComponent<NGP_SkillState>();
+        chargeSkill = GameManager.Instance.NewGamePlay.GetComponent<NGP_ChargeSkill>();
+        UI = GameManager.Instance.NewGamePlay.GetComponent<NGP_Basic_UI>();
 
         //VFX
         emissionModule_wind = VFX_WindPower.emission;

@@ -40,13 +40,13 @@ public class NGP_SkillPower : NGP_Basic_SkillPower
         base.Start();
 
         //vfx
-        VFX_WindStart = GameManager.singleton.VFX_List.VFX_WindMaxStart;
-        VFX_FireStart = GameManager.singleton.VFX_List.VFX_FireMaxStart;
-        VFX_UI_Wind = GameManager.singleton.VFX_List.VFX_UI_Wind;
-        VFX_UI_Fire = GameManager.singleton.VFX_List.VFX_UI_Fire;
-        VFX_UI_State_Fire = GameManager.singleton.VFX_List.VFX_UI_State_Fire;
+        VFX_WindStart = GameManager.Instance.VFX_List.VFX_WindMaxStart;
+        VFX_FireStart = GameManager.Instance.VFX_List.VFX_FireMaxStart;
+        VFX_UI_Wind = GameManager.Instance.VFX_List.VFX_UI_Wind;
+        VFX_UI_Fire = GameManager.Instance.VFX_List.VFX_UI_Fire;
+        VFX_UI_State_Fire = GameManager.Instance.VFX_List.VFX_UI_State_Fire;
         VFX_main_StateFire = VFX_UI_State_Fire.main;
-        VFX_UI_State_Wind = GameManager.singleton.VFX_List.VFX_UI_State_Wind;
+        VFX_UI_State_Wind = GameManager.Instance.VFX_List.VFX_UI_State_Wind;
         VFX_main_StateWind = VFX_UI_State_Wind.main;
     }
     protected override void Update() { base.Update(); }

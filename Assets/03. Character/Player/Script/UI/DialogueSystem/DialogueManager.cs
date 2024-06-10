@@ -29,9 +29,9 @@ public class DialogueManager : MonoBehaviour
     {
         contents = new Queue<Dialogue_Content>();
         UI_dialogue.SetActive(false);
-        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
-        healthSystem = GameManager.singleton.Player.GetComponent<HealthSystem>();
-        input = GameManager.singleton.Player.GetComponent<ControllerInput>();
+        playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
+        healthSystem = GameManager.Instance.Player.GetComponent<HealthSystem>();
+        input = GameManager.Instance.Player.GetComponent<ControllerInput>();
 
         //value
         canNext = true;

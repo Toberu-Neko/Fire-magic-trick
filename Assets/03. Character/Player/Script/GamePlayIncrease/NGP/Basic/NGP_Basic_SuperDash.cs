@@ -7,8 +7,8 @@ public class NGP_Basic_SuperDash : MonoBehaviour
     protected NGP_Combo combo;
     protected virtual void Start()
     {
-        superDash = GameManager.singleton.EnergySystem.GetComponent<SuperDash>();
-        combo = GameManager.singleton.NewGamePlay.GetComponent<NGP_Combo>();
+        superDash = GameManager.Instance.EnergySystem.GetComponent<SuperDash>();
+        combo = GameManager.Instance.NewGamePlay.GetComponent<NGP_Combo>();
 
         superDash.OnSuperDashStart += OnSuperDashStart;
         superDash.OnSuperDashHitGround += OnSuperDashHitGround;

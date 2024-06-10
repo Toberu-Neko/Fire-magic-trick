@@ -70,13 +70,13 @@ public class SuperDash : MonoBehaviour
 
     private void Start()
     {
-        _superDashKick = GameManager.singleton.EnergySystem.GetComponent<SuperDashKick>();
-        _playerState = GameManager.singleton._playerState;
-        _input = GameManager.singleton._input;
+        _superDashKick = GameManager.Instance.EnergySystem.GetComponent<SuperDashKick>();
+        _playerState = GameManager.Instance._playerState;
+        _input = GameManager.Instance._input;
         _superDashCameraCheck = GetComponent<SuperDashCameraCheck>();
         _superDashKickDown = GetComponent<SuperDashKickDown>();
         _characterController = _playerState.GetComponent<CharacterController>();
-        _playerCollider = GameManager.singleton.Player.GetComponent<PlayerCollider>();
+        _playerCollider = GameManager.Instance.Player.GetComponent<PlayerCollider>();
         _playerAnimator = _playerState.GetComponent<PlayerAnimator>();
         energySystem = _playerState.GetComponent<EnergySystem>();
         player = _playerState.gameObject;

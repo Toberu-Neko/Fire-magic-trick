@@ -18,8 +18,8 @@ public class SuperDashKickTrigger : MonoBehaviour
     }
     private void Start()
     {
-        _aimSupportSystem = GameManager.singleton.Player.GetComponent<Basic_AimSupportSystem>();
-        vibrationController = GameManager.singleton.GetComponent<VibrationController>();
+        _aimSupportSystem = GameManager.Instance.Player.GetComponent<Basic_AimSupportSystem>();
+        vibrationController = GameManager.Instance.GetComponent<VibrationController>();
     }
     private void Update()
     {

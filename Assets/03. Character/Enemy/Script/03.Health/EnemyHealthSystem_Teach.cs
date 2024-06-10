@@ -48,7 +48,7 @@ public class EnemyHealthSystem_Teach : MonoBehaviour, IHealth
     }
     private void Start()
     {
-        _progress = GameManager.singleton.GetComponent<ProgressSystem>();
+        _progress = GameManager.Instance.GetComponent<ProgressSystem>();
         startPosition = this.transform;
 
     }

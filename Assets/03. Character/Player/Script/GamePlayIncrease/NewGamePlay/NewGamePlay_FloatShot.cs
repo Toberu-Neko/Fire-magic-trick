@@ -23,8 +23,8 @@ public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
     protected override void Start()
     {
         base.Start();
-        bulletTime = GameManager.singleton.GetComponent<BulletTime>();
-        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        bulletTime = GameManager.Instance.GetComponent<BulletTime>();
+        playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
     }
     protected override void Update()
     {

@@ -22,10 +22,10 @@ public class SuperDashCollider : MonoBehaviour
     private bool isCheckAgain;
     private void Start()
     {
-        _superDash = GameManager.singleton.EnergySystem.GetComponent<SuperDash>();
+        _superDash = GameManager.Instance.EnergySystem.GetComponent<SuperDash>();
         _playerDamage = GetComponent<PlayerDamage>();
-        _aimSupportSystem = GameManager.singleton.Player.GetComponent<Basic_AimSupportSystem>();
-        vibrationController = GameManager.singleton.GetComponent<VibrationController>();
+        _aimSupportSystem = GameManager.Instance.Player.GetComponent<Basic_AimSupportSystem>();
+        vibrationController = GameManager.Instance.GetComponent<VibrationController>();
         Initialization();
     }
     public void ToCloseCheckAgain()

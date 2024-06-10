@@ -8,7 +8,7 @@ public class RotateToPlayer : MonoBehaviour
 
     private void Start()
     {
-        Player = GameManager.singleton.Player.gameObject;
+        Player = GameManager.Instance.Player.gameObject;
     }
     private void Update()
     {

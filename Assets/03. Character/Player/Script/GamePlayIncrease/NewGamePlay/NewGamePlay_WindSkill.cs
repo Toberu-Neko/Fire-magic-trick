@@ -21,8 +21,8 @@ public class NewGamePlay_WindSkill : NewGamePlay_Basic_WindSkill
     {
         base.Start();
 
-        jump = GameManager.singleton.Player.GetComponent<PlayerJump>();
-        VFX_SuperJump = GameManager.singleton.VFX_List.VFX_SuperJump_Wind;
+        jump = GameManager.Instance.Player.GetComponent<PlayerJump>();
+        VFX_SuperJump = GameManager.Instance.VFX_List.VFX_SuperJump_Wind;
 
         //Event
         jump.OnSuperJump += VFX_superJump;

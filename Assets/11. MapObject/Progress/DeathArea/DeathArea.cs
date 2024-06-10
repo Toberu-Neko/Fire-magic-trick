@@ -6,7 +6,7 @@ public class DeathArea : MonoBehaviour
 
     private void Start()
     {
-        energySystem = GameManager.singleton.Player.GetComponent<EnergySystem>();
+        energySystem = GameManager.Instance.Player.GetComponent<EnergySystem>();
     }
     private void OnTriggerEnter(Collider other)
     {

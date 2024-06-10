@@ -6,7 +6,7 @@ public class AnimationComplete : MonoBehaviour
 
     private void Start()
     {
-        _progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
+        _progressSystem = GameManager.Instance.GetComponent<ProgressSystem>();
     }
     public void animationComplete()
     {

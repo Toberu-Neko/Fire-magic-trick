@@ -19,7 +19,7 @@ public class BoomArea : MonoBehaviour
 
     private void Start()
     {
-        impactReceiver = GameManager.singleton.Player.GetComponent<ImpactReceiver>();
+        impactReceiver = GameManager.Instance.Player.GetComponent<ImpactReceiver>();
         kickBackEnemy = GetComponent<KickBackEnemy>();
         coli = GetComponent<Collider>();
 

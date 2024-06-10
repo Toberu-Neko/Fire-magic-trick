@@ -38,8 +38,8 @@ public class NGP_Shot : NGP_Basic_Shot
     public override void Start()
     {
         base.Start();
-        shooting_Normal = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Normal>();
-        magazing = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Magazing>();
+        shooting_Normal = GameManager.Instance.ShootingSystem.GetComponent<Shooting_Normal>();
+        magazing = GameManager.Instance.ShootingSystem.GetComponent<Shooting_Magazing>();
     }
     public override void Update()
     {

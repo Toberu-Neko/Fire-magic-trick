@@ -6,7 +6,7 @@ public class NGP_SuperDash : NGP_Basic_SuperDash
     protected override void Start()
     {
         base.Start();
-        vibrationController = GameManager.singleton.GetComponent<VibrationController>();
+        vibrationController = GameManager.Instance.GetComponent<VibrationController>();
     }
     protected override void Update()
     {

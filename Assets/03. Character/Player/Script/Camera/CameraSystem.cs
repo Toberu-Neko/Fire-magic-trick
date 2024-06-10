@@ -21,9 +21,9 @@ public class CameraSystem : MonoBehaviour
 
     private void Start()
     {
-        _input = GameManager.singleton.Player.GetComponent<ControllerInput>();
-        _aimSupportSystem =GameManager.singleton.Player.GetComponent<AimSupportSystem>();
-        superDashCameraCheck = GameManager.singleton.EnergySystem.GetComponent<SuperDashCameraCheck>();
+        _input = GameManager.Instance.Player.GetComponent<ControllerInput>();
+        _aimSupportSystem =GameManager.Instance.Player.GetComponent<AimSupportSystem>();
+        superDashCameraCheck = GameManager.Instance.EnergySystem.GetComponent<SuperDashCameraCheck>();
     }
 
     private void Update()

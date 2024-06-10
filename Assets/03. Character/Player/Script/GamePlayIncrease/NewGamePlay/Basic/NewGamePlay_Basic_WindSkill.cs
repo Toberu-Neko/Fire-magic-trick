@@ -13,7 +13,7 @@ public class NewGamePlay_Basic_WindSkill : NewGamePlay_Basic_Charge
     {
         base.Start();
         wind = GetComponent<NewGamePlay_Wind>();
-        input = GameManager.singleton._input;
+        input = GameManager.Instance._input;
     }
     protected override void Update()
     {

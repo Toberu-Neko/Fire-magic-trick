@@ -24,9 +24,9 @@ public class Shooting_Magazing : MonoBehaviour
     }
     protected virtual void Start()
     {
-        energySystem = GameManager.singleton._playerState.GetComponent<EnergySystem>();
-        magazingUI = GameManager.singleton.UISystem.GetComponent<MagazingUI>();
-        input = GameManager.singleton._input;
+        energySystem = GameManager.Instance._playerState.GetComponent<EnergySystem>();
+        magazingUI = GameManager.Instance.UISystem.GetComponent<MagazingUI>();
+        input = GameManager.Instance._input;
 
         Initialization();  
     }

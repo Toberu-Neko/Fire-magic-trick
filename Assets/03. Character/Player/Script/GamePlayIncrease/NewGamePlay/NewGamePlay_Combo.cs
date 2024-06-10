@@ -54,13 +54,13 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
         base.Start();
 
         //Script
-        kick = GameManager.singleton.EnergySystem.GetComponent<SuperDashKick>();
+        kick = GameManager.Instance.EnergySystem.GetComponent<SuperDashKick>();
         chargeShot = GetComponent<NewGamePlay_ChargeShot>();
         dash = GetComponent<NewGamePlay_Dash>();
 
         //VFX
-        VFX_UseSkill = GameManager.singleton.VFX_List.VFX_UseSkill_Wind;
-        VFX_UseShot = GameManager.singleton.VFX_List.VFX_UseShot;
+        VFX_UseSkill = GameManager.Instance.VFX_List.VFX_UseSkill_Wind;
+        VFX_UseShot = GameManager.Instance.VFX_List.VFX_UseShot;
 
         //Subscribe
         dash.OnDash += UseSkill;

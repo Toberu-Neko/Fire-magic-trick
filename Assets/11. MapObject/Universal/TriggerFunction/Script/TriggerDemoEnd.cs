@@ -13,7 +13,7 @@ public class TriggerDemoEnd : MonoBehaviour
     private bool trigger;
     private void Start()
     {
-        senceManagerment = GameManager.singleton.GetComponent<SenceManagerment>();
+        senceManagerment = GameManager.Instance.GetComponent<SenceManagerment>();
     }
     public async void DemoEnd()
     {

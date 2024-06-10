@@ -20,8 +20,8 @@ public class TriggerArea_SuperPumber : MonoBehaviour
     }
     private void Start()
     {
-        deathSystem = GameManager.singleton.UISystem.GetComponent<DeathSystem>();
-        impactReceiver = GameManager.singleton.Player.GetComponent<ImpactReceiver>();
+        deathSystem = GameManager.Instance.UISystem.GetComponent<DeathSystem>();
+        impactReceiver = GameManager.Instance.Player.GetComponent<ImpactReceiver>();
     }
     private void OnTriggerEnter(Collider other)
     {

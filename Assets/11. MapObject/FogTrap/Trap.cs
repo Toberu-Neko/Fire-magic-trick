@@ -8,7 +8,7 @@ public class Trap : MonoBehaviour
 
     private void Start()
     {
-        impactReceiver = GameManager.singleton.Player.GetComponent<ImpactReceiver>();
+        impactReceiver = GameManager.Instance.Player.GetComponent<ImpactReceiver>();
     }
     public void Play()
     {

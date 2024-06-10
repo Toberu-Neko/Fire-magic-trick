@@ -23,7 +23,7 @@ public class LimitForTeach : MonoBehaviour
     private void Start()
     {
 
-        _shooting_mode = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Mode>();
+        _shooting_mode = GameManager.Instance.ShootingSystem.GetComponent<Shooting_Mode>();
 
         Initialization();
     }

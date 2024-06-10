@@ -6,7 +6,7 @@ public class ProgressCheckPoint_other : MonoBehaviour
     [SerializeField] private TriggerArea_ProgressCheckPointArea _progressCheckPoint;
     private void Start()
     {
-        _progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
+        _progressSystem = GameManager.Instance.GetComponent<ProgressSystem>();
     }
 
     private void OnTriggerEnter(Collider other)

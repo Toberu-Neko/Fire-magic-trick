@@ -162,7 +162,7 @@ namespace StarterAssets
             _input = GetComponent<StarterAssetsInputs>();
             _controllerInput = GetComponent<ControllerInput>();
             _move_Our = GetComponent<Move_Our>();
-            superJump = GameManager.singleton.NewGamePlay.GetComponent<NGP_SuperJump>();
+            superJump = GameManager.Instance.NewGamePlay.GetComponent<NGP_SuperJump>();
 #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
 #else

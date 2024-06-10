@@ -7,7 +7,7 @@ public class TriggerArea_TeachFlaot : MonoBehaviour
     private TeachFloat teachFloat;
     private void Start()
     {
-        teachFloat = GameManager.singleton.UISystem.GetComponent<TeachFloat>();
+        teachFloat = GameManager.Instance.UISystem.GetComponent<TeachFloat>();
     }
     private void OnTriggerEnter(Collider other)
     {
