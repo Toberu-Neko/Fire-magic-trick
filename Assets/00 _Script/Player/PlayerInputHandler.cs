@@ -4,6 +4,49 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
+    #region GameDevice
+    public enum GameDevice
+    {
+        Keyboard,
+        Gamepad
+    }
+
+    public GameDevice ActiveGameDevice { get; private set; }
+    private void HandleActionChange(object arg1, InputActionChange inputActionChange)
+    {
+        if (inputActionChange == InputActionChange.ActionPerformed && arg1 is InputAction)
+        {
+            InputAction inputAction = (InputAction)arg1;
+
+            if (inputAction.activeControl.device.displayName == "VirtualMouse")
+            {
+                return;
+            }
+
+            if (inputAction.activeControl.device is Gamepad)
+            {
+                if (ActiveGameDevice != GameDevice.Gamepad)
+                {
+                    ChangeActiveGameDevice(GameDevice.Gamepad);
+                }
+            }
+            else if ((inputAction.activeControl.device is Keyboard && inputAction.activeControl.device is not Gamepad) || inputAction.activeControl.device is Mouse)
+            {
+                if (ActiveGameDevice != GameDevice.Keyboard)
+                {
+                    ChangeActiveGameDevice(GameDevice.Keyboard);
+                }
+            }
+        }
+    }
+    private void ChangeActiveGameDevice(GameDevice newGameDevice)
+    {
+        ActiveGameDevice = newGameDevice;
+    }
+
+    #endregion
+
+
     public static PlayerInputHandler Instance { get; private set; }
     private GameManager gameManager;
     private PlayerInput playerInput;
@@ -51,6 +94,7 @@ public class PlayerInputHandler : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        InputSystem.onActionChange += HandleActionChange;
     }
 
     private void Start()
@@ -58,6 +102,10 @@ public class PlayerInputHandler : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         cam = Camera.main;
         gameManager = GameManager.Instance;
+    }
+    private void OnDisable()
+    {
+        InputSystem.onActionChange -= HandleActionChange;
     }
 
     public void ResetAllInput()
@@ -77,6 +125,12 @@ public class PlayerInputHandler : MonoBehaviour
         TurnOffUI = false;
         ESCInput = false;
         InteractInput = false;
+
+        AimInput = false;
+        HoldAimInput = false;
+        HoldAttackInput = false;
+        SprintInput = false;
+        FireTransferInput = false;
     }
 
     public void OnESCInput(InputAction.CallbackContext context)

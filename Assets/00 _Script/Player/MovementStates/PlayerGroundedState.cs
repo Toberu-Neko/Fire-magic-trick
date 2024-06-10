@@ -24,11 +24,6 @@ public class PlayerGroundedState : PlayerFSMBaseState
         yInput = player.InputHandler.NormInputY;
         jumpInput = player.InputHandler.JumpInput;
         dashInput = player.InputHandler.DashInput;
-
-        Debug.Log("x " + xInput);
-        Debug.Log("y " + yInput);
-        Debug.Log("j " + jumpInput);
-        Debug.Log("d " + dashInput);
     }
 
 }
