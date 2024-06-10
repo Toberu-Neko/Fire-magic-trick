@@ -59,15 +59,12 @@ public class ControllerInput : MonoBehaviour
     private NGP_CameraSystem cameraSystem;
     private AimSupportSystem aimSupportSystem;
     private Shooting_XBoxCameraCheck shooting_XBoxCameraCheck;
-    private PlayerInput playerInput;
-    private StarterAssetsInputs starterInput;
 
     private void Awake()
     {
         cameraSystem = GetComponent<NGP_CameraSystem>();
         aimSupportSystem = GetComponent<AimSupportSystem>();
         shooting_XBoxCameraCheck = GetComponent<Shooting_XBoxCameraCheck>();
-        starterInput = GetComponent<StarterAssetsInputs>();
     }
     private void Update()
     {
