@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     {
         StateMachine = new PlayerStateMachine();
 
-        IdleState = new PlayerIdleState(this, StateMachine, Data, "idle");
+        IdleState = new PlayerIdleState(this, StateMachine, Data, "Idle");
     }
 
     private void Start()

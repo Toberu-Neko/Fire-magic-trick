@@ -13,8 +13,29 @@ public class PlayerIdleState : PlayerGroundedState
         base.Enter();
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        if(!isExitingState)
+        {
+            if (rawMovementInput != Vector2.zero)
+            {
+                // stateMachine.ChangeState(player.MoveState);
+            }
+            /*
+            else if (jumpInput)
+            {
+                stateMachine.ChangeState(player.JumpState);
+            }
+            */
+        }
     }
+
+
 }
