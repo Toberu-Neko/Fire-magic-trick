@@ -50,7 +50,7 @@ public class PlayerInputHandler : MonoBehaviour
     public static PlayerInputHandler Instance { get; private set; }
     private GameManager gameManager;
     private PlayerInput playerInput;
-    private Camera cam;
+    public Camera MainCam { get; private set; }
 
     public Vector2 RawMouseInput { get; private set; }
     public Vector2 RawMovementInput { get; private set; }
@@ -100,7 +100,7 @@ public class PlayerInputHandler : MonoBehaviour
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
-        cam = Camera.main;
+        MainCam = Camera.main;
         gameManager = GameManager.Instance;
     }
     private void OnDisable()

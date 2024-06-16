@@ -10,7 +10,7 @@ public class Move_Our : MonoBehaviour
     [Header("Speed")]
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float slowRunSpeed = 5f;
-    [SerializeField] private float fastRunSpeed = 7f;
+    [SerializeField] private float fastRunSpeed = 8f;
     [Header("Motion")]
     [SerializeField] private float motion_Move = 1f;
 

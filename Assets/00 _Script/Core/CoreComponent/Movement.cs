@@ -37,9 +37,9 @@ public class Movement : CoreComponent
         SetFinalVelocity();
     }
 
-    public void SetVelocity(Vector2 VectorVelocity)
+    public void SetVelocity(float velocity, Vector2 V2Direction)
     {
-        velocityWorkspace = VectorVelocity;
+        velocityWorkspace.Set(V2Direction.x * velocity, CurrentVelocity.y, V2Direction.y * velocity);
 
         SetFinalVelocity();
     }
@@ -85,6 +85,40 @@ public class Movement : CoreComponent
         RB.velocity = velocityWorkspace;
 
         CurrentVelocity = velocityWorkspace;
+    }
+
+    public void Rotate(float value)
+    {
+        ParentTransform.rotation = Quaternion.Euler(0f, value, 0f);
+    }
+
+    public void Rotate(Vector3 direction)
+    {
+        ParentTransform.rotation = Quaternion.LookRotation(direction);
+    }
+
+    public void Rotate(Vector3 direction, float time)
+    {
+        StopCoroutine(nameof(RotateIE));
+        StartCoroutine(RotateIE(direction, time));
+    }
+
+    private IEnumerator RotateIE(Vector3 direction, float time)
+    {
+        float elapsedTime = 0f;
+        Quaternion startRotation = ParentTransform.rotation;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        while (elapsedTime < time)
+        {
+            ParentTransform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsedTime / time);
+
+            elapsedTime += Time.deltaTime;
+
+            yield return Time.deltaTime;
+        }
+
+        ParentTransform.rotation = targetRotation;
     }
 
 }

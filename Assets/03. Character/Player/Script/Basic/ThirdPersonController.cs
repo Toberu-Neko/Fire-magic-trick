@@ -307,9 +307,9 @@ namespace StarterAssets
                                   _mainCamera.transform.eulerAngles.y;
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                     RotationSmoothTime);
-                getRotation(rotation);
+                PlayerRotation = rotation;
 
-                if(_rotateOnMove)
+                if (_rotateOnMove)
                 {
                     // rotate to face input direction relative to camera position
                     transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
@@ -501,10 +501,6 @@ namespace StarterAssets
         public void SetRotateOnMove(bool newRotateOnMove)
         {
             _rotateOnMove = newRotateOnMove;
-        }
-        private void getRotation(float rotation)
-        {
-            PlayerRotation = rotation;
         }
         public void AddMoveOffset(Vector3 moveOffset)
         {

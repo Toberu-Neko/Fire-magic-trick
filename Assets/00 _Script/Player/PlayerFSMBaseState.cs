@@ -67,4 +67,24 @@ public class PlayerFSMBaseState
     public virtual void AnimationStopMovementTrigger() { isAnimationStartMovement = false; }
 
     public virtual void AnimationSFXTrigger() { }
+
+    protected float targetRotation;
+
+    protected void Rotate(float rotationSpeed, float rotateSmoothTime)
+    {
+        /*
+        float vertical = player.InputHandler.RawMovementInput.y;
+        float horizontal = player.InputHandler.RawMovementInput.x;
+
+        Vector3 inputDr = movement.ParentTransform.forward * vertical + movement.ParentTransform.right * horizontal;
+
+        movement.ParentTransform.forward = Vector3.Lerp(movement.ParentTransform.forward, inputDr.normalized, rotationSpeed * Time.deltaTime);
+        */
+        targetRotation = Mathf.Atan2(player.InputHandler.RawMovementInput.x, player.InputHandler.RawMovementInput.y) * Mathf.Rad2Deg
+            + player.InputHandler.MainCam.transform.eulerAngles.y;
+
+        float rotation = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetRotation,ref rotationSpeed, rotateSmoothTime);
+
+        movement.Rotate(rotation);
+    }
 }

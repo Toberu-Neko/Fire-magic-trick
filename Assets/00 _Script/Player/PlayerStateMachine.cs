@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class PlayerStateMachine
 {
     public PlayerFSMBaseState CurrentState { get; private set; }

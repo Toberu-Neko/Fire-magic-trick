@@ -26,7 +26,8 @@ public class Player : MonoBehaviour
     public Vector2 CameraPosRelateToPlayer { get; private set; }
 
     public PlayerIdleState IdleState { get; private set; }
-    public PlayerMovementState MoveState { get; private set; }
+    public PlayerWalkingState WalkState { get; private set; }
+    public PlayerRunningState RunState { get; private set; }
 
     private void Awake()
     {
@@ -36,8 +37,9 @@ public class Player : MonoBehaviour
 
         StateMachine = new PlayerStateMachine();
 
-        IdleState = new PlayerIdleState(this, StateMachine, Data, "Idle");
-        MoveState = new PlayerMovementState(this, StateMachine, Data, "Move");
+        IdleState = new PlayerIdleState(this, StateMachine, Data, "idle");
+        WalkState = new PlayerWalkingState(this, StateMachine, Data, "move");
+        RunState = new PlayerRunningState(this, StateMachine, Data, "move");
     }
 
     private void Start()
