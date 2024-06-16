@@ -35,9 +35,9 @@ public class PlayerRunningState : PlayerGroundedState
             Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime);
 
             float speed = Mathf.Lerp(playerData.slowRunSpeed, playerData.fastRunSpeed, v3Workspace.magnitude);
+            v2Workspace.Set(targetDirection.x, targetDirection.z);
 
-            movement.SetVelocityX(speed * targetDirection.x);
-            movement.SetVelocityZ(speed * targetDirection.z);
+            movement.SetVelocity(speed, v2Workspace);
             player.Anim.SetFloat("speed", speed);
         }
 

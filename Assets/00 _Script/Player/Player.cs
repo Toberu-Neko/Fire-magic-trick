@@ -50,6 +50,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        Core.LogicUpdate();
+
         StateMachine.CurrentState.LogicUpdate();
 
         cameraWorkspaceV2.Set(playerCamera.position.x - transform.position.x, playerCamera.position.z - transform.position.z);
@@ -58,11 +60,15 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Core.PhysicsUpdate();
+
         StateMachine.CurrentState.PhysicsUpdate();
     }
 
     private void LateUpdate()
     {
+        Core.LateLogicUpdate();
+
         if (useCameraRotate)
         {
             CameraRotation();

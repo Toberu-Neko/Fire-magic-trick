@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class Movement : CoreComponent
 {
+    public Slope Slope { get; set; }
+
     public Rigidbody RB { get; private set; }
     public Transform ParentTransform { get; private set; }
 
     private Vector3 velocityWorkspace;
+    private Vector3 V2ToV3Workspace;
     public Vector3 CurrentVelocity { get; private set; }
+    private float gravityWorkspace;
+    private bool useGravity;
 
     protected override void Awake()
     {
@@ -16,11 +22,16 @@ public class Movement : CoreComponent
 
         ParentTransform = core.transform.parent;
         RB = GetComponentInParent<Rigidbody>();
+
+        useGravity = RB.useGravity;
     }
 
     private void OnEnable()
     {
+        Slope = new();
+
         velocityWorkspace = Vector3.zero;
+        V2ToV3Workspace = Vector3.zero;
     }
 
     public override void LogicUpdate()
@@ -28,6 +39,18 @@ public class Movement : CoreComponent
         base.LogicUpdate();
 
         CurrentVelocity = RB.velocity;
+
+        if (Slope.hasCollisionSenses)
+        {
+            if (Slope.IsOnSlope)
+            {
+                SetGravityZero();
+            }
+            else
+            {
+                SetGravityOrginal();
+            }
+        }
     }
 
     public void SetVelocity(float velocity, Vector3 direction)
@@ -37,9 +60,15 @@ public class Movement : CoreComponent
         SetFinalVelocity();
     }
 
-    public void SetVelocity(float velocity, Vector2 V2Direction)
+    public void SetVelocity(float velocity, Vector2 V2Direction, bool ignoreSlope = false)
     {
         velocityWorkspace.Set(V2Direction.x * velocity, CurrentVelocity.y, V2Direction.y * velocity);
+
+        if (Slope.IsOnSlope && !ignoreSlope && Slope.NormalPrep != Vector3.zero)
+        {
+            SetVelocity(velocity, GetSlopeMoveDirection(V2ToV3(V2Direction)));
+            return;
+        }
 
         SetFinalVelocity();
     }
@@ -48,13 +77,11 @@ public class Movement : CoreComponent
     {
         velocityWorkspace.Set(velocity, CurrentVelocity.y, CurrentVelocity.z);
 
-        /*
-        if (Slope.IsOnSlope && !ignoreSlope && Slope.NormalPrep != Vector2.zero)
+        if (Slope.IsOnSlope && !ignoreSlope && Slope.NormalPrep != Vector3.zero)
         {
-            SetVelocity(velocity, -Slope.NormalPrep);
+            SetVelocity(velocity, GetSlopeMoveDirection(Vector3.right));
             return;
         }
-        */
 
         SetFinalVelocity();
     }
@@ -66,16 +93,22 @@ public class Movement : CoreComponent
         SetFinalVelocity();
     }
 
-    public void SetVelocityZ(float velocity)
+    public void SetVelocityZ(float velocity, bool ignoreSlope = false)
     {
         velocityWorkspace.Set(CurrentVelocity.x, CurrentVelocity.y, velocity);
+
+        if (Slope.IsOnSlope && !ignoreSlope && Slope.NormalPrep != Vector3.zero)
+        {
+            SetVelocity(velocity, GetSlopeMoveDirection(Vector3.forward));
+            return;
+        }
 
         SetFinalVelocity();
     }
 
     public void SetVelocityZero()
     {
-        velocityWorkspace = Vector2.zero;
+        velocityWorkspace = Vector3.zero;
 
         SetFinalVelocity();
     }
@@ -92,6 +125,37 @@ public class Movement : CoreComponent
         ParentTransform.rotation = Quaternion.Euler(0f, value, 0f);
     }
 
+    public Vector3 GetSlopeMoveDirection(Vector3 direction)
+    {
+        return Vector3.ProjectOnPlane(direction, Slope.Hit.normal).normalized;
+    }
+
+    public Vector3 V2ToV3(Vector2 direction)
+    {
+        V2ToV3Workspace.Set(direction.x, 0f, direction.y);
+        return V2ToV3Workspace;
+    }
+
+    #region Set Gravity
+    public void SetGravityZero()
+    {
+        if (useGravity)
+        {
+            RB.useGravity = false;
+        }
+    }
+
+    public void SetGravityOrginal()
+    {
+        if (useGravity)
+        {
+            RB.useGravity = true;
+        }
+    }
+
+    #endregion
+
+    /*
     public void Rotate(Vector3 direction)
     {
         ParentTransform.rotation = Quaternion.LookRotation(direction);
@@ -120,5 +184,5 @@ public class Movement : CoreComponent
 
         ParentTransform.rotation = targetRotation;
     }
-
+    */
 }
