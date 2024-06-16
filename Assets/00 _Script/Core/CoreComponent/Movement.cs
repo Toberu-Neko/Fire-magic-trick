@@ -5,6 +5,7 @@ using UnityEngine;
 public class Movement : CoreComponent
 {
     public Rigidbody RB { get; private set; }
+    public Transform ParentTransform { get; private set; }
 
     private Vector3 velocityWorkspace;
     public Vector3 CurrentVelocity { get; private set; }
@@ -13,6 +14,7 @@ public class Movement : CoreComponent
     {
         base.Awake();
 
+        ParentTransform = core.transform.parent;
         RB = GetComponentInParent<Rigidbody>();
     }
 

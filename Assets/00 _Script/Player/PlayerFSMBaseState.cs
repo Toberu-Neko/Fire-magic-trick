@@ -6,6 +6,10 @@ public class PlayerFSMBaseState
     protected PlayerStateMachine stateMachine;
     protected PlayerData playerData;
 
+    protected Core core;
+    protected Movement movement;
+    protected CollisionSenses collisionSenses;
+
     protected bool isAnimationFinished;
     protected bool isAnimationStartMovement;
     protected bool isExitingState;
@@ -20,6 +24,10 @@ public class PlayerFSMBaseState
         this.stateMachine = stateMachine;
         this.playerData = playerData;
         this.animBoolName = animBoolName;
+
+        core = player.Core;
+        movement = core.GetCoreComponent<Movement>();
+        collisionSenses = core.GetCoreComponent<CollisionSenses>();
 
         StartTime = 0f;
     }

@@ -22,11 +22,17 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.LogicUpdate();
 
+        if (isGrounded)
+        {
+            movement.SetVelocityZero();
+        }
+
+
         if(!isExitingState)
         {
             if (rawMovementInput != Vector2.zero)
             {
-                // stateMachine.ChangeState(player.MoveState);
+                stateMachine.ChangeState(player.MoveState);
             }
             /*
             else if (jumpInput)

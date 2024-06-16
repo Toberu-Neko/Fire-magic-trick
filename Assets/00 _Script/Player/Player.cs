@@ -6,8 +6,10 @@ public class Player : MonoBehaviour
     [field: SerializeField] public PlayerData Data { get; private set; }
     [field: SerializeField] public PlayerInputHandler InputHandler { get; private set; }
     [field: SerializeField] public Animator Anim { get; private set; }
+    [field: SerializeField] public Core Core { get; private set; }
 
     [Header("Camera Settings")]
+    [SerializeField] protected Transform playerCamera;
     [SerializeField] private bool lockCameraPosition = false;
     [SerializeField] private bool useCameraRotate = true;
     [SerializeField] private float sensitivity_x = 1f;
@@ -20,13 +22,22 @@ public class Player : MonoBehaviour
     private float _cinemachineTargetYaw;
     private float _cinemachineTargetPitch;
 
+    private Vector2 cameraWorkspaceV2;
+    public Vector2 CameraPosRelateToPlayer { get; private set; }
+
     public PlayerIdleState IdleState { get; private set; }
+    public PlayerMovementState MoveState { get; private set; }
 
     private void Awake()
     {
+        CameraPosRelateToPlayer = new();
+        cameraWorkspaceV2 = new();
+        cameraWorkspaceV2.Set(playerCamera.position.x - transform.position.x, playerCamera.position.z - transform.position.z);
+
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, Data, "Idle");
+        MoveState = new PlayerMovementState(this, StateMachine, Data, "Move");
     }
 
     private void Start()
@@ -38,6 +49,9 @@ public class Player : MonoBehaviour
     private void Update()
     {
         StateMachine.CurrentState.LogicUpdate();
+
+        cameraWorkspaceV2.Set(playerCamera.position.x - transform.position.x, playerCamera.position.z - transform.position.z);
+        CameraPosRelateToPlayer = cameraWorkspaceV2.normalized;
     }
 
     private void FixedUpdate()

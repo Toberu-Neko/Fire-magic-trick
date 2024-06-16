@@ -10,11 +10,18 @@ public class PlayerGroundedState : PlayerFSMBaseState
 
     private bool jumpInput;
     private bool dashInput;
-    private bool isGrounded;
+    protected bool isGrounded;
     protected bool isOnSlope;
 
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
+    }
+
+    public override void DoChecks()
+    {
+        base.DoChecks();
+
+        isGrounded = collisionSenses.Ground;
     }
 
     public override void LogicUpdate()
