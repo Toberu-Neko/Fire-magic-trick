@@ -27,7 +27,9 @@ public class Player : MonoBehaviour
 
     public PlayerIdleState IdleState { get; private set; }
     public PlayerWalkingState WalkState { get; private set; }
-    public PlayerRunningState RunState { get; private set; }
+    public PlayerRunningState RunningState { get; private set; }
+    public PlayerInAirState InAirState { get; private set; }
+    public PlayerJumpState JumpState { get; private set; }
 
     private void Awake()
     {
@@ -39,7 +41,9 @@ public class Player : MonoBehaviour
 
         IdleState = new PlayerIdleState(this, StateMachine, Data, "idle");
         WalkState = new PlayerWalkingState(this, StateMachine, Data, "move");
-        RunState = new PlayerRunningState(this, StateMachine, Data, "move");
+        RunningState = new PlayerRunningState(this, StateMachine, Data, "move");
+        InAirState = new PlayerInAirState(this, StateMachine, Data, "inAir");
+        JumpState = new PlayerJumpState(this, StateMachine, Data, "inAir");
     }
 
     private void Start()

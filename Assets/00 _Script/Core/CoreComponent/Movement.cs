@@ -73,35 +73,10 @@ public class Movement : CoreComponent
         SetFinalVelocity();
     }
 
-    public void SetVelocityX(float velocity, bool ignoreSlope = false)
-    {
-        velocityWorkspace.Set(velocity, CurrentVelocity.y, CurrentVelocity.z);
-
-        if (Slope.IsOnSlope && !ignoreSlope && Slope.NormalPrep != Vector3.zero)
-        {
-            SetVelocity(velocity, GetSlopeMoveDirection(Vector3.right));
-            return;
-        }
-
-        SetFinalVelocity();
-    }
 
     public void SetVelocityY(float velocity)
     {
         velocityWorkspace.Set(CurrentVelocity.x, velocity, CurrentVelocity.z);
-
-        SetFinalVelocity();
-    }
-
-    public void SetVelocityZ(float velocity, bool ignoreSlope = false)
-    {
-        velocityWorkspace.Set(CurrentVelocity.x, CurrentVelocity.y, velocity);
-
-        if (Slope.IsOnSlope && !ignoreSlope && Slope.NormalPrep != Vector3.zero)
-        {
-            SetVelocity(velocity, GetSlopeMoveDirection(Vector3.forward));
-            return;
-        }
 
         SetFinalVelocity();
     }

@@ -67,8 +67,6 @@ public class CollisionSenses : CoreComponent
                 {
                     slope.Set(normal, angle, hit);
                     slope.SetIsOnSlope(true);
-                    Debug.Log("Slope Angle: " + angle);
-                    Debug.Log("Slope Normal: " + normal);
                     break;
                 }
             }
