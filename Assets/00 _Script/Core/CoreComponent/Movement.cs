@@ -16,6 +16,7 @@ public class Movement : CoreComponent
     public float CurrentVelocityXZMagnitude => new Vector2(CurrentVelocity.x, CurrentVelocity.z).magnitude;
     private float gravityWorkspace;
     private bool useGravity;
+    private bool wasOnSlope;
 
     protected override void Awake()
     {
@@ -45,10 +46,12 @@ public class Movement : CoreComponent
         {
             if (Slope.IsOnSlope)
             {
+                wasOnSlope = true;
                 SetGravityZero();
             }
-            else
+            else if(wasOnSlope)
             {
+                wasOnSlope = false;
                 SetGravityOrginal();
             }
         }
@@ -127,6 +130,11 @@ public class Movement : CoreComponent
         {
             RB.useGravity = true;
         }
+    }
+
+    public void SetIsKinematic(bool value)
+    {
+        RB.isKinematic = value;
     }
 
     #endregion

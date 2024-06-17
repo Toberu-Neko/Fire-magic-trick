@@ -30,7 +30,7 @@ public class PlayerIdleState : PlayerGroundedState
 
         if(!isExitingState)
         {
-            if (rawMovementInput != Vector2.zero)
+            if (MovementInput != Vector2.zero)
             {
                 stateMachine.ChangeState(player.WalkState);
             }

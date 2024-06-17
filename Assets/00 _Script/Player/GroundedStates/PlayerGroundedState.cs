@@ -6,7 +6,6 @@ public class PlayerGroundedState : PlayerFSMBaseState
 {
     protected int xInput;
     protected int yInput;
-    protected Vector2 rawMovementInput;
 
     private bool jumpInput;
     private bool dashInput;
@@ -22,6 +21,7 @@ public class PlayerGroundedState : PlayerFSMBaseState
         base.Enter();
 
         player.JumpState.ResetAmountOfJumpsLeft();
+        player.DashState.ResetCanDash();
     }
 
     public override void DoChecks()
@@ -37,7 +37,6 @@ public class PlayerGroundedState : PlayerFSMBaseState
 
         xInput = player.InputHandler.NormInputX;
         yInput = player.InputHandler.NormInputY;
-        rawMovementInput = player.InputHandler.RawMovementInput;
 
         jumpInput = player.InputHandler.JumpInput;
         dashInput = player.InputHandler.DashInput;
@@ -53,9 +52,9 @@ public class PlayerGroundedState : PlayerFSMBaseState
                 player.InAirState.StartCoyoteTime();
                 stateMachine.ChangeState(player.InAirState);
             }
-            else if (dashInput)
+            else if (dashInput && player.DashState.CanDash())
             {
-                // stateMachine.ChangeState(player.DashState);
+                stateMachine.ChangeState(player.DashState);
             }
         }
     }

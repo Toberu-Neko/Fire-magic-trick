@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c024219c642ae3e419d5eb772d612192, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  rotationSpeed: 15
-  rotateSmoothTime: 0.04
+  rotationSpeed: 20
+  rotateSmoothTime: 0.03
   moveSpeed: 4
   slowRunSpeed: 5
   fastRunSpeed: 8
@@ -23,3 +23,6 @@ MonoBehaviour:
   amountOfJumps: 2
   jumpInpusStopYSpeedMultiplier: 0.35
   coyoteTime: 0.3
+  dashSpeed: 12
+  dashTime: 0.2
+  dashCooldown: 0.35

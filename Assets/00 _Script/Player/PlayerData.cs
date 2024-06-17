@@ -8,7 +8,7 @@ public class PlayerData : ScriptableObject
     public float rotationSpeed = 15f;
     public float rotateSmoothTime = 0.1f;
 
-    [Header("MoveState")]
+    [Header("Move")]
     [Tooltip("Movement")]
     public float moveSpeed = 3f;
     public float slowRunSpeed = 5f;
@@ -16,10 +16,14 @@ public class PlayerData : ScriptableObject
     public float aimMoveSpeed = 2f;
     public float airMoveSpeed = 3f;
 
-    [Header("JumpState")]
+    [Header("Jump")]
     public float jumpVelocity = 15f;
     public int amountOfJumps = 1;
     public float jumpInpusStopYSpeedMultiplier = 0.5f;
     public float coyoteTime = 0.2f;
 
+    [Header("Dash")]
+    public float dashSpeed = 10f;
+    public float dashTime = 0.2f;
+    public float dashCooldown = 1f;
 }

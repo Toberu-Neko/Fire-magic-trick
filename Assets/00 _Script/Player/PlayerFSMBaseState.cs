@@ -15,9 +15,14 @@ public class PlayerFSMBaseState
     protected bool isExitingState;
 
     protected float StartTime;
+    protected float ExitTime;
 
     private string animBoolName;
-    
+
+    protected Vector2 MovementInput { get; private set; }
+    private Vector3 v3Workspace;
+    private Vector2 v2Workspace;
+
     public PlayerFSMBaseState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName)
     {
         this.player = player;
@@ -30,6 +35,7 @@ public class PlayerFSMBaseState
         collisionSenses = core.GetCoreComponent<CollisionSenses>();
 
         StartTime = 0f;
+        ExitTime = 0f;
     }
     
     public virtual void Enter()
@@ -46,9 +52,11 @@ public class PlayerFSMBaseState
     {
         player.Anim.SetBool(animBoolName, false);
         isExitingState = true;
+        ExitTime = Time.time;
     }
     public virtual void LogicUpdate()
     {
+        MovementInput = player.InputHandler.RawMovementInput;
         // player.Anim.speed = Stats.AnimationSpeed;
     }
 
@@ -79,9 +87,38 @@ public class PlayerFSMBaseState
 
         movement.Rotate(rotation);
     }
-    protected void Move(float speed, Vector2 dir, bool ignoreSlope = false)
+
+    protected void MoveAndRotateWithCam(float originalMinSpeed, float originalMaxSpeed = 0f, bool ignoreSlope = false, float rotationSpeed = 0f)
     {
-        movement.SetVelocity(speed, dir, ignoreSlope);
-        player.Anim.SetFloat("speed", speed);
+        v3Workspace.Set(MovementInput.x, 0f, MovementInput.y);
+
+        if (v3Workspace.magnitude > 1f)
+        {
+            v3Workspace.Normalize();
+        }
+
+        Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
+
+        if (v3Workspace.magnitude != 0f)
+        {
+            Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime);
+
+            float speed;
+
+            if (originalMaxSpeed == 0f)
+            {
+                speed = originalMinSpeed * v3Workspace.magnitude;
+            }
+            else
+            {
+                speed = Mathf.Lerp(originalMinSpeed, originalMaxSpeed, v3Workspace.magnitude);
+            }
+
+            v2Workspace.Set(targetDirection.x, targetDirection.z);
+
+            movement.SetVelocity(speed, v2Workspace, ignoreSlope);
+            player.Anim.SetFloat("speed", speed);
+        }
+
     }
 }

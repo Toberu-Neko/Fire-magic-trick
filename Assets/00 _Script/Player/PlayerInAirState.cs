@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerFSMBaseState
 {
-    private Vector2 movementInput;
     private bool jumpInput;
     private bool jumpInputStop;
     private bool dashInput;
@@ -72,7 +71,6 @@ public class PlayerInAirState : PlayerFSMBaseState
 
         CheckCoyoteTime();
 
-        movementInput = player.InputHandler.RawMovementInput;
         jumpInput = player.InputHandler.JumpInput;
         jumpInputStop = player.InputHandler.JumpInputStop;
         dashInput = player.InputHandler.DashInput;
@@ -91,11 +89,11 @@ public class PlayerInAirState : PlayerFSMBaseState
 
         if (collisionSenses.Ground && !IsJumping)
         {
-            if(inAirMovementSpeed > playerData.airMoveSpeed && movementInput != Vector2.zero)
+            if(inAirMovementSpeed > playerData.airMoveSpeed && MovementInput != Vector2.zero)
             {
                 stateMachine.ChangeState(player.RunningState);
             }
-            else if (movementInput != Vector2.zero)
+            else if (MovementInput != Vector2.zero)
             {
                 stateMachine.ChangeState(player.WalkState);
             }
@@ -108,26 +106,13 @@ public class PlayerInAirState : PlayerFSMBaseState
         {
             stateMachine.ChangeState(player.JumpState);
         }
+        else if (dashInput && player.DashState.CanDash())
+        {
+            stateMachine.ChangeState(player.DashState);
+        }
         else
         {
-            v3Workspace.Set(movementInput.x, 0f, movementInput.y);
-
-            if (v3Workspace.magnitude > 1f)
-            {
-                v3Workspace.Normalize();
-            }
-
-            Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
-
-            if (v3Workspace.magnitude != 0f)
-            {
-                Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime);
-
-                float speed = inAirMovementSpeed * v3Workspace.magnitude;
-                v2Workspace.Set(targetDirection.x, targetDirection.z);
-
-                Move(speed, v2Workspace, true);
-            }
+            MoveAndRotateWithCam(inAirMovementSpeed, 0f, true);
         }
     }
 

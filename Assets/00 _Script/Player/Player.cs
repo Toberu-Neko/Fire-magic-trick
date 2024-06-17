@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
     public PlayerRunningState RunningState { get; private set; }
     public PlayerInAirState InAirState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
+    
+    public PlayerDashState DashState { get; private set; }
 
     private void Awake()
     {
@@ -47,6 +49,8 @@ public class Player : MonoBehaviour
         RunningState = new PlayerRunningState(this, StateMachine, Data, "move");
         InAirState = new PlayerInAirState(this, StateMachine, Data, "inAir");
         JumpState = new PlayerJumpState(this, StateMachine, Data, "inAir");
+
+        DashState = new PlayerDashState(this, StateMachine, Data, "dash");
     }
 
     private void Start()
