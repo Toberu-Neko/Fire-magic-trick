@@ -17,6 +17,13 @@ public class PlayerGroundedState : PlayerFSMBaseState
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+
+        player.JumpState.ResetAmountOfJumpsLeft();
+    }
+
     public override void DoChecks()
     {
         base.DoChecks();

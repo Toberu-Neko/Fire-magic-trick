@@ -13,6 +13,7 @@ public class Movement : CoreComponent
     private Vector3 velocityWorkspace;
     private Vector3 V2ToV3Workspace;
     public Vector3 CurrentVelocity { get; private set; }
+    public float CurrentVelocityXZMagnitude => new Vector2(CurrentVelocity.x, CurrentVelocity.z).magnitude;
     private float gravityWorkspace;
     private bool useGravity;
 

@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [field: SerializeField] public PlayerInputHandler InputHandler { get; private set; }
     [field: SerializeField] public Animator Anim { get; private set; }
     [field: SerializeField] public Core Core { get; private set; }
+    public Movement Movement { get; private set; }
 
     [Header("Camera Settings")]
     [SerializeField] protected Transform playerCamera;
@@ -36,6 +37,8 @@ public class Player : MonoBehaviour
         CameraPosRelateToPlayer = new();
         cameraWorkspaceV2 = new();
         cameraWorkspaceV2.Set(playerCamera.position.x - transform.position.x, playerCamera.position.z - transform.position.z);
+
+        Movement = Core.GetCoreComponent<Movement>();
 
         StateMachine = new PlayerStateMachine();
 

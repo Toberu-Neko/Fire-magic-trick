@@ -7,6 +7,7 @@ public class PlayerJumpState : PlayerAbilityState
     public int AmountOfJumpsLeft { get; private set; }
     public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
+        ResetAmountOfJumpsLeft();
     }
 
     public override void Enter()
@@ -46,4 +47,5 @@ public class PlayerJumpState : PlayerAbilityState
     }
 
     public void DecreaseAmountOfJumpsLeft() => AmountOfJumpsLeft--;
+
 }

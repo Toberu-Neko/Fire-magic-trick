@@ -23,7 +23,7 @@ public class PlayerInAirState : PlayerFSMBaseState
     {
         isGrounded = false;
         IsJumping = false;
-        coyoteTime = true;
+        coyoteTime = false;
         inAirMovementSpeed = playerData.airMoveSpeed;
     }
 
@@ -34,6 +34,14 @@ public class PlayerInAirState : PlayerFSMBaseState
         v3Workspace = new Vector3();
         v2Workspace = new Vector2();
 
+        if(movement.CurrentVelocityXZMagnitude > playerData.airMoveSpeed)
+        {
+            SetAirControlSpeed(movement.CurrentVelocityXZMagnitude);
+        }
+        else
+        {
+            SetAirControlSpeed(playerData.airMoveSpeed);
+        }
     }
 
     public override void Exit()
@@ -44,7 +52,7 @@ public class PlayerInAirState : PlayerFSMBaseState
         maxYVelocity = Mathf.NegativeInfinity;
         isGrounded = false;
         IsJumping = false;
-        coyoteTime = true;
+        coyoteTime = false;
         inAirMovementSpeed = playerData.airMoveSpeed;
     }
 
@@ -95,6 +103,10 @@ public class PlayerInAirState : PlayerFSMBaseState
             {
                 stateMachine.ChangeState(player.IdleState);
             }
+        }
+        else if (player.JumpState.CanJump() && jumpInput)
+        {
+            stateMachine.ChangeState(player.JumpState);
         }
         else
         {

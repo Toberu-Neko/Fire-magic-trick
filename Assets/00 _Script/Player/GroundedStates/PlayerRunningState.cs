@@ -38,7 +38,6 @@ public class PlayerRunningState : PlayerGroundedState
             v2Workspace.Set(targetDirection.x, targetDirection.z);
 
             Move(speed, v2Workspace);
-            player.InAirState.SetAirControlSpeed(speed);
         }
 
 
