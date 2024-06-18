@@ -102,6 +102,7 @@ public class Player : MonoBehaviour
         // if there is an input and camera position is not fixed
         if (InputHandler.RawMouseInput.sqrMagnitude >= _threshold && !lockCameraPosition)
         {
+            
             float deltaTimeMultiplier;
             if (InputHandler.ActiveGameDevice == PlayerInputHandler.GameDevice.Keyboard)
             {
@@ -121,8 +122,7 @@ public class Player : MonoBehaviour
         _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, bottomClamp, topClamp);
 
         // Cinemachine will follow this target
-        cinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + cameraAngleOverride,
-            _cinemachineTargetYaw, 0.0f);
+        cinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch, _cinemachineTargetYaw, 0.0f);
     }
 
     private float ClampAngle(float lfAngle, float lfMin, float lfMax)

@@ -16,7 +16,7 @@ public class CollisionSenses : CoreComponent
     [SerializeField] private float slopeCheckDistance = 0.75f;
 
     [SerializeField] private LayerMask whatIsGround;
-
+    [SerializeField] private float maxSlopeAngle = 30f;
     private Slope slope = new();
     protected override void Awake()
     {
@@ -63,7 +63,7 @@ public class CollisionSenses : CoreComponent
                 Vector3 normal = hit.normal;
                 float angle = Vector3.Angle(Vector3.up, normal);
 
-                if (angle != 0)
+                if (angle != 0 && angle < maxSlopeAngle)
                 {
                     slope.Set(normal, angle, hit);
                     slope.SetIsOnSlope(true);

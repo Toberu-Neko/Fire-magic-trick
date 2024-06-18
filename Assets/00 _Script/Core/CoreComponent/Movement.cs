@@ -34,6 +34,8 @@ public class Movement : CoreComponent
 
         velocityWorkspace = Vector3.zero;
         V2ToV3Workspace = Vector3.zero;
+
+        wasOnSlope = false;
     }
 
     public override void LogicUpdate()

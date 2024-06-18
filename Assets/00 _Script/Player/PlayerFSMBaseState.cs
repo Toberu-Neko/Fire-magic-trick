@@ -83,7 +83,7 @@ public class PlayerFSMBaseState
         targetRotation = Mathf.Atan2(player.InputHandler.RawMovementInput.x, player.InputHandler.RawMovementInput.y) * Mathf.Rad2Deg
             + player.InputHandler.MainCam.transform.eulerAngles.y;
 
-        float rotation = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetRotation,ref rotationSpeed, rotateSmoothTime);
+        float rotation = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetRotation, ref rotationSpeed, rotateSmoothTime * Time.fixedDeltaTime);
 
         movement.Rotate(rotation);
     }
