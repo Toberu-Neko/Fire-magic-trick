@@ -10,7 +10,7 @@ public class PlayerData : ScriptableObject
 
     [Header("Move")]
     [Tooltip("Movement")]
-    public float moveSpeed = 3f;
+    public float walkSpeed = 3f;
     public float slowRunSpeed = 5f;
     public float fastRunSpeed = 8f;
     public float aimMoveSpeed = 2f;

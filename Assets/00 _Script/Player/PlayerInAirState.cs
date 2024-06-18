@@ -96,13 +96,13 @@ public class PlayerInAirState : PlayerFSMBaseState
         {
             player.Anim.SetTrigger("land");
 
-            if (inAirMovementSpeed > playerData.moveSpeed && MovementInput != Vector2.zero)
+            if (inAirMovementSpeed > playerData.walkSpeed && MovementInput != Vector2.zero)
             {
                 stateMachine.ChangeState(player.RunningState);
             }
             else if (MovementInput != Vector2.zero)
             {
-                stateMachine.ChangeState(player.WalkState);
+                stateMachine.ChangeState(player.WalkingState);
             }
             else
             {

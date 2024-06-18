@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class PlayerGroundedState : PlayerFSMBaseState
 {
-    protected int xInput;
-    protected int yInput;
-
     private bool jumpInput;
     private bool dashInput;
+    protected bool aimInput;
+
     protected bool isGrounded;
     protected bool isOnSlope;
 
@@ -35,11 +34,10 @@ public class PlayerGroundedState : PlayerFSMBaseState
     {
         base.LogicUpdate();
 
-        xInput = player.InputHandler.NormInputX;
-        yInput = player.InputHandler.NormInputY;
 
         jumpInput = player.InputHandler.JumpInput;
         dashInput = player.InputHandler.DashInput;
+        aimInput = player.InputHandler.AimInput;
 
         if (!isExitingState)
         {

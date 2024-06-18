@@ -33,7 +33,11 @@ public class PlayerRunningState : PlayerGroundedState
             else if (player.InputHandler.SprintInput)
             {
                 player.InputHandler.UseSprintInput();
-                stateMachine.ChangeState(player.WalkState);
+                stateMachine.ChangeState(player.WalkingState);
+            }
+            else if (aimInput)
+            {
+                stateMachine.ChangeState(player.AimWalkingState);
             }
         }
     }

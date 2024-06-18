@@ -43,8 +43,11 @@ public class Player : MonoBehaviour
     public Vector2 CameraPosRelateToPlayer { get; private set; }
 
     public PlayerIdleState IdleState { get; private set; }
-    public PlayerWalkingState WalkState { get; private set; }
+    public PlayerWalkingState WalkingState { get; private set; }
     public PlayerRunningState RunningState { get; private set; }
+    public PlayerAimIdleState AimIdleState { get; private set; }
+    public PlayerAimWalkingState AimWalkingState { get; private set; }
+
     public PlayerInAirState InAirState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
     
@@ -61,8 +64,12 @@ public class Player : MonoBehaviour
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, Data, "idle");
-        WalkState = new PlayerWalkingState(this, StateMachine, Data, "move");
+        WalkingState = new PlayerWalkingState(this, StateMachine, Data, "move");
         RunningState = new PlayerRunningState(this, StateMachine, Data, "move");
+
+        AimIdleState = new PlayerAimIdleState(this, StateMachine, Data, "move");
+        AimWalkingState = new PlayerAimWalkingState(this, StateMachine, Data, "move");
+
         InAirState = new PlayerInAirState(this, StateMachine, Data, "inAir");
         JumpState = new PlayerJumpState(this, StateMachine, Data, "jump");
 
@@ -153,6 +160,11 @@ public class Player : MonoBehaviour
 
     public void ChangeActiveCam(ActiveCamera newActiveCam)
     {
+        if (activeCamera == newActiveCam)
+        {
+            return;
+        }
+
         activeCamera = newActiveCam;
 
         switch (activeCamera)
