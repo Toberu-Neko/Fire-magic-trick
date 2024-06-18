@@ -1,3 +1,4 @@
+using MoreMountains.Tools;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -48,9 +49,10 @@ public class Player : MonoBehaviour
         WalkState = new PlayerWalkingState(this, StateMachine, Data, "move");
         RunningState = new PlayerRunningState(this, StateMachine, Data, "move");
         InAirState = new PlayerInAirState(this, StateMachine, Data, "inAir");
-        JumpState = new PlayerJumpState(this, StateMachine, Data, "inAir");
+        JumpState = new PlayerJumpState(this, StateMachine, Data, "jump");
 
         DashState = new PlayerDashState(this, StateMachine, Data, "dash");
+
     }
 
     private void Start()
@@ -64,6 +66,7 @@ public class Player : MonoBehaviour
         Core.LogicUpdate();
 
         StateMachine.CurrentState.LogicUpdate();
+        Anim.SetFloat("speed", Movement.CurrentVelocityXZMagnitude);
 
         cameraWorkspaceV2.Set(playerCamera.position.x - transform.position.x, playerCamera.position.z - transform.position.z);
         CameraPosRelateToPlayer = cameraWorkspaceV2.normalized;

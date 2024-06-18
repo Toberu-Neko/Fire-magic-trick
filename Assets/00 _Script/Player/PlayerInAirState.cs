@@ -87,9 +87,12 @@ public class PlayerInAirState : PlayerFSMBaseState
         }
 
 
+
         if (collisionSenses.Ground && !IsJumping)
         {
-            if(inAirMovementSpeed > playerData.airMoveSpeed && MovementInput != Vector2.zero)
+            player.Anim.SetTrigger("land");
+
+            if (inAirMovementSpeed > playerData.moveSpeed && MovementInput != Vector2.zero)
             {
                 stateMachine.ChangeState(player.RunningState);
             }

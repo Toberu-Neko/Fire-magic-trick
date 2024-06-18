@@ -124,7 +124,6 @@ public class PlayerFSMBaseState
             v2Workspace.Set(targetDirection.x, targetDirection.z);
 
             movement.SetVelocity(speed, v2Workspace, ignoreSlope);
-            player.Anim.SetFloat("speed", speed);
         }
 
     }
