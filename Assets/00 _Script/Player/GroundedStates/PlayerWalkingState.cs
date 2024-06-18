@@ -15,6 +15,8 @@ public class PlayerWalkingState : PlayerGroundedState
         base.Enter();
         v3Workspace = new();
         v2Workspace = new();
+
+        player.ChangeActiveCam(Player.ActiveCamera.Normal);
     }
 
     public override void LogicUpdate()

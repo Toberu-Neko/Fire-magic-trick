@@ -11,6 +11,8 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+
+        player.ChangeActiveCam(Player.ActiveCamera.Normal);
     }
 
     public override void Exit()

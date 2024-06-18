@@ -23,6 +23,8 @@ public class PlayerDashState : PlayerAbilityState
 
         canUseDash = false;
         currentFrame = 0;
+
+        player.ChangeActiveCam(Player.ActiveCamera.Dash);
     }
 
     public override void Exit()

@@ -10,16 +10,31 @@ public class Player : MonoBehaviour
     [field: SerializeField] public Core Core { get; private set; }
     public Movement Movement { get; private set; }
 
+    [Header("Camera Objects")]
+    [SerializeField] private Transform playerCamera;
+    [SerializeField] private GameObject NormalCam;
+    [SerializeField] private GameObject RunCam;
+    [SerializeField] private GameObject DashCam;
+    [SerializeField] private GameObject AimCam;
+    [SerializeField] private GameObject DeathCam;
+    private ActiveCamera activeCamera;
+    public enum ActiveCamera
+    {
+        Normal,
+        Run,
+        Dash,
+        Aim,
+        Death
+    }
+
     [Header("Camera Settings")]
-    [SerializeField] protected Transform playerCamera;
+    [SerializeField] private GameObject cinemachineCameraTarget;
     [SerializeField] private bool lockCameraPosition = false;
     [SerializeField] private bool useCameraRotate = true;
     [SerializeField] private float sensitivity_x = 1f;
     [SerializeField] private float sensitivity_y = 0.5f;
     [SerializeField] private float topClamp = 70.0f;
     [SerializeField] private float bottomClamp = -30.0f;
-    [SerializeField] private float cameraAngleOverride = 0.0f;
-    [SerializeField] private GameObject cinemachineCameraTarget;
     private const float _threshold = 0.01f;
     private float _cinemachineTargetYaw;
     private float _cinemachineTargetPitch;
@@ -53,6 +68,7 @@ public class Player : MonoBehaviour
 
         DashState = new PlayerDashState(this, StateMachine, Data, "dash");
 
+        ChangeActiveCam(ActiveCamera.Normal);
     }
 
     private void Start()
@@ -133,5 +149,49 @@ public class Player : MonoBehaviour
         if (lfAngle < -360f) lfAngle += 360f;
         if (lfAngle > 360f) lfAngle -= 360f;
         return Mathf.Clamp(lfAngle, lfMin, lfMax);
+    }
+
+    public void ChangeActiveCam(ActiveCamera newActiveCam)
+    {
+        activeCamera = newActiveCam;
+
+        switch (activeCamera)
+        {
+            case ActiveCamera.Normal:
+                NormalCam.SetActive(true);
+                RunCam.SetActive(false);
+                DashCam.SetActive(false);
+                AimCam.SetActive(false);
+                DeathCam.SetActive(false);
+                break;
+            case ActiveCamera.Run:
+                NormalCam.SetActive(false);
+                RunCam.SetActive(true);
+                DashCam.SetActive(false);
+                AimCam.SetActive(false);
+                DeathCam.SetActive(false);
+                break;
+            case ActiveCamera.Dash:
+                NormalCam.SetActive(false);
+                RunCam.SetActive(false);
+                DashCam.SetActive(true);
+                AimCam.SetActive(false);
+                DeathCam.SetActive(false);
+                break;
+            case ActiveCamera.Aim:
+                NormalCam.SetActive(false);
+                RunCam.SetActive(false);
+                DashCam.SetActive(false);
+                AimCam.SetActive(true);
+                DeathCam.SetActive(false);
+                break;
+            case ActiveCamera.Death:
+                NormalCam.SetActive(false);
+                RunCam.SetActive(false);
+                DashCam.SetActive(false);
+                AimCam.SetActive(false);
+                DeathCam.SetActive(true);
+                break;
+        }
     }
 }

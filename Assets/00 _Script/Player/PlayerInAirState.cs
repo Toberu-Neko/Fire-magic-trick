@@ -36,10 +36,14 @@ public class PlayerInAirState : PlayerFSMBaseState
         if(movement.CurrentVelocityXZMagnitude > playerData.airMoveSpeed)
         {
             SetAirControlSpeed(movement.CurrentVelocityXZMagnitude);
+
+            player.ChangeActiveCam(Player.ActiveCamera.Run);
         }
         else
         {
             SetAirControlSpeed(playerData.airMoveSpeed);
+
+            player.ChangeActiveCam(Player.ActiveCamera.Normal);
         }
     }
 
