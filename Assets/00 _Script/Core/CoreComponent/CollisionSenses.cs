@@ -36,17 +36,15 @@ public class CollisionSenses : CoreComponent
     {
         get
         {
-            return Physics.BoxCast(GroundCheck.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, groundCheckDistance, whatIsGround);
-            /*
             if (!Slope.IsOnSlope)
             {
-                return Physics2D.BoxCast(GroundCheck.position, groundCheckV2, 0f, Vector2.down, 0.1f, whatIsGround);
+                return Physics.BoxCast(GroundCheck.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, slopeCheckDistance, whatIsGround);
             }
             else
             {
-                return Physics2D.BoxCast(GroundCheck.position, slopeCheckV2, 0f, Vector2.down, 0.1f, whatIsGround);
+                return Physics.BoxCast(GroundCheck.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, groundCheckDistance, whatIsGround);
             }
-            */
+            
         }
     }
     public Slope Slope

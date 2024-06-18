@@ -74,7 +74,7 @@ public class Shooting_Normal : MonoBehaviour
     private void Shooting()
     {
         ShootCooldown(shootCooldown);
-        _shooting.Shoot_Normal(pfBulletProjectile);
+        _shooting.Shoot(pfBulletProjectile);
 
         if (_shooting_magazing.Bullet <= 0 )
         {

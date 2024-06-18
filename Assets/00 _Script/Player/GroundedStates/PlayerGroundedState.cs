@@ -39,6 +39,12 @@ public class PlayerGroundedState : PlayerFSMBaseState
         dashInput = player.InputHandler.DashInput;
         aimInput = player.InputHandler.AimInput;
 
+        if (AttackInput)
+        {
+            player.InputHandler.UseAttackInput();
+            player.CardSystem.Shoot();
+        }
+
         if (!isExitingState)
         {
             if (jumpInput)

@@ -34,19 +34,7 @@ public class KickBackEnemy : MonoBehaviour
             }
         }
     }
-    public void kickBackEnemy(Collision collision,float force)
-    {
-        if (collision.gameObject.GetComponent<EnemyHealthSystem>() != null)
-        {
-            if (collision.gameObject.GetComponent<EnemyHealthSystem>().kickBackGuard != true) // Could be knock back
-            {
-                Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
-                Vector3 Direction = (collision.transform.position - BackCoordinate.position).normalized;
-                Vector3 ForceDirection = new Vector3(Direction.x, 0, Direction.z);
-                rb.AddForce(ForceDirection * force * collision.gameObject.GetComponent<EnemyHealthSystem>().kickBackRatio, ForceMode.Impulse);
-            }
-        }
-    }
+
     public void kickBackEnemy(Collider other, float force)
     {
         if (other.gameObject.GetComponent<EnemyHealthSystem>() != null)

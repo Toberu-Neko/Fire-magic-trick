@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     public PlayerStateMachine StateMachine { get; private set; }
     [field: SerializeField] public PlayerData Data { get; private set; }
+    [field: SerializeField] public CardSystem CardSystem { get; private set; }
     [field: SerializeField] public PlayerInputHandler InputHandler { get; private set; }
     [field: SerializeField] public Animator Anim { get; private set; }
     [field: SerializeField] public Core Core { get; private set; }
@@ -71,8 +72,8 @@ public class Player : MonoBehaviour
         AimWalkingState = new PlayerAimWalkingState(this, StateMachine, Data, "move");
 
         InAirState = new PlayerInAirState(this, StateMachine, Data, "inAir");
-        JumpState = new PlayerJumpState(this, StateMachine, Data, "jump");
 
+        JumpState = new PlayerJumpState(this, StateMachine, Data, "jump");
         DashState = new PlayerDashState(this, StateMachine, Data, "dash");
 
         ChangeActiveCam(ActiveCamera.Normal);

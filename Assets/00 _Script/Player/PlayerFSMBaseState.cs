@@ -20,6 +20,7 @@ public class PlayerFSMBaseState
     private string animBoolName;
 
     protected Vector2 MovementInput { get; private set; }
+    protected bool AttackInput { get; private set; }
     private Vector3 v3Workspace;
     private Vector2 v2Workspace;
 
@@ -57,6 +58,7 @@ public class PlayerFSMBaseState
     public virtual void LogicUpdate()
     {
         MovementInput = player.InputHandler.RawMovementInput;
+        AttackInput = player.InputHandler.AttackInput;
     }
 
     public virtual void PhysicsUpdate()

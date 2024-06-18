@@ -10,17 +10,22 @@ public class Shooting_Check : MonoBehaviour
     [SerializeField] private float MaxShootDistance;
     [HideInInspector] public Vector3 mouseWorldPosition = Vector3.zero;
 
+    private Vector2 screenCenterPoint;
+    private void Awake()
+    {
+        screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+    }
+
     private void Update()
     {
         ShootRay();
     }
+
     private void ShootRay()
     {
-        Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
 
-        RaycastHit hit;
-        bool raycastHit = Physics.Raycast(ray, out hit, 999f, aimColliderLayerMask);
+        bool raycastHit = Physics.Raycast(ray, out RaycastHit hit, 999f, aimColliderLayerMask);
 
         if (raycastHit)
         {
