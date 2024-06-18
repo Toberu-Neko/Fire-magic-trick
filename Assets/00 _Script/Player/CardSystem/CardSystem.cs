@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CardSystem : MonoBehaviour
 {
+    [SerializeField] private Player player;
     [field: SerializeField] public GameObject NormalCardPrefab { get; private set; }
     [field: SerializeField] public GameObject WindCardPrefab { get; private set; }
     [field: SerializeField] public GameObject FireCardPrefab { get; private set; }
@@ -63,7 +64,9 @@ public class CardSystem : MonoBehaviour
             aimDir = transform.forward;
         }
 
+        player.Anim.SetTrigger("shoot");
         //TODO: Decide which card to shoot in this script
+        // Debug.Log(transform.forward - player.InputHandler.MainCam.transform.forward);
         Instantiate(NormalCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
     }
 }

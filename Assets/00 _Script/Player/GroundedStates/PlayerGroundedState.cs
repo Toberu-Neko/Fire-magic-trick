@@ -19,6 +19,7 @@ public class PlayerGroundedState : PlayerFSMBaseState
     {
         base.Enter();
 
+        player.Anim.ResetTrigger("land");
         player.JumpState.ResetAmountOfJumpsLeft();
         player.DashState.ResetCanDash();
     }
