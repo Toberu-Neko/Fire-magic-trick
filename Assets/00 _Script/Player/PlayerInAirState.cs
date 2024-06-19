@@ -73,6 +73,7 @@ public class PlayerInAirState : PlayerFSMBaseState
     {
         base.LogicUpdate();
 
+        CheckIfShouldShoot();
         CheckCoyoteTime();
 
         jumpInput = player.InputHandler.JumpInput;

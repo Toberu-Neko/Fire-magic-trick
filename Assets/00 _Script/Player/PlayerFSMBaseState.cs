@@ -150,4 +150,13 @@ public class PlayerFSMBaseState
 
         movement.SetVelocity(speed, v2Workspace, ignoreSlope);
     }
+
+    protected void CheckIfShouldShoot()
+    {
+        if (AttackInput)
+        {
+            player.InputHandler.UseAttackInput();
+            player.CardSystem.Shoot();
+        }
+    }
 }
