@@ -21,9 +21,9 @@ public class Shooting_Aim : MonoBehaviour
 
     private void Start()
     {
-        _Input = GameManager.singleton._input;
+        _Input = GameManager.Instance._input;
         thirdPersonController = _Input.GetComponent<ThirdPersonController>();
-        _playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        _playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
     }
 
     private void Update()

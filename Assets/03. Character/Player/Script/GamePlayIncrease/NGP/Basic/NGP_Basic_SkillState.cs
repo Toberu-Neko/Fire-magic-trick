@@ -35,16 +35,16 @@ public class NGP_Basic_SkillState : MonoBehaviour
     {
         //Script
         dash = GetComponent<NGP_Dash>();
-        UI = GameManager.singleton.NewGamePlay.GetComponent<NGP_Basic_UI>();
+        UI = GameManager.Instance.NewGamePlay.GetComponent<NGP_Basic_UI>();
 
         //VFX
-        VFX_UseSkill_Wind = GameManager.singleton.VFX_List.VFX_UseSkill_Wind;
+        VFX_UseSkill_Wind = GameManager.Instance.VFX_List.VFX_UseSkill_Wind;
         orbital_wind = VFX_UseSkill_Wind.velocityOverLifetime;
-        VFX_UseSkill_Fire = GameManager.singleton.VFX_List.VFX_UseSkill_Fire;
+        VFX_UseSkill_Fire = GameManager.Instance.VFX_List.VFX_UseSkill_Fire;
         orbital_fire = VFX_UseSkill_Fire.velocityOverLifetime;
-        VFX_Foot_L = GameManager.singleton.VFX_List.VFX_Foot_L;
-        VFX_Foot_R = GameManager.singleton.VFX_List.VFX_Foot_R;
-        VFX_WindState = GameManager.singleton.VFX_List.VFX_WindState;
+        VFX_Foot_L = GameManager.Instance.VFX_List.VFX_Foot_L;
+        VFX_Foot_R = GameManager.Instance.VFX_List.VFX_Foot_R;
+        VFX_WindState = GameManager.Instance.VFX_List.VFX_WindState;
 
         //Initialize
         OnDashNone();

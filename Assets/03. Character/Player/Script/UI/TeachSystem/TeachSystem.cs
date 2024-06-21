@@ -41,9 +41,9 @@ public class TeachSystem : MonoBehaviour
     }
     private void Start()
     {
-        input = GameManager.singleton._input;
-        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
-        healthSystem = GameManager.singleton.Player.GetComponent<HealthSystem>();
+        input = GameManager.Instance._input;
+        playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
+        healthSystem = GameManager.Instance.Player.GetComponent<HealthSystem>();
 
         //Initialization
         setTeachBar(false);

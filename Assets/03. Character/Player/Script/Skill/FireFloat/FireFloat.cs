@@ -28,11 +28,11 @@ public class FireFloat : MonoBehaviour
 
     private void Start()
     {
-        playerState = GameManager.singleton._playerState;
-        input = GameManager.singleton._input;
-        vfx_float = GameManager.singleton.VFX_List.VFX_Float;
+        playerState = GameManager.Instance._playerState;
+        input = GameManager.Instance._input;
+        vfx_float = GameManager.Instance.VFX_List.VFX_Float;
         energySystem = playerState.GetComponent<EnergySystem>();
-        superJump = GameManager.singleton.NewGamePlay.GetComponent<NGP_SuperJump>();
+        superJump = GameManager.Instance.NewGamePlay.GetComponent<NGP_SuperJump>();
     }
     private void Update()
     {

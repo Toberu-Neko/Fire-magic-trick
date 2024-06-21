@@ -12,7 +12,7 @@ public class EnemySpawn_Pipe_Child : MonoBehaviour
 
     private void Start()
     {
-        progress = GameManager.singleton.GetComponent<ProgressSystem>();
+        progress = GameManager.Instance.GetComponent<ProgressSystem>();
 
         progress.OnPlayerDeath += onPlayerDeath;
         glassBox.OnFightOver += figthOver;

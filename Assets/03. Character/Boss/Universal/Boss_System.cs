@@ -27,7 +27,7 @@ public class Boss_System : MonoBehaviour
 
     private void Start()
     {
-        progress = GameManager.singleton.GetComponent<ProgressSystem>();
+        progress = GameManager.Instance.GetComponent<ProgressSystem>();
 
         progress.OnPlayerDeath += ResetBoss;
     }

@@ -12,7 +12,7 @@ public class TeachSystem_Child : MonoBehaviour
 
     private void Start()
     {
-        teachSystem = GameManager.singleton.UISystem.GetComponent<TeachSystem>();
+        teachSystem = GameManager.Instance.UISystem.GetComponent<TeachSystem>();
     }
     private void OnTriggerEnter(Collider other)
     {

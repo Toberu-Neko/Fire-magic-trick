@@ -20,7 +20,7 @@ public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
     {
         base.Start();
 
-        energySystem = GameManager.singleton.Player.GetComponent<EnergySystem>();
+        energySystem = GameManager.Instance.Player.GetComponent<EnergySystem>();
     }
     protected override void Update()
     {

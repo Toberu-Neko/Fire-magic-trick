@@ -46,7 +46,7 @@ public class PlayerState : MonoBehaviour
     }
     private void Start()
     {
-        _shooting_check = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Check>();
+        _shooting_check = GameManager.Instance.ShootingSystem.GetComponent<Shooting_Check>();
         gravityNormal = _controller.Gravity;
     }
     private void Update()

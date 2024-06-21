@@ -8,7 +8,7 @@ public class NewGamePlay_Basic_Shot : MonoBehaviour
     [SerializeField] private Transform spawnBulletPosition;
     public virtual void Start()
     {
-        _shooting_check = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Check>();
+        _shooting_check = GameManager.Instance.ShootingSystem.GetComponent<Shooting_Check>();
     }
     public virtual void Update()
     {

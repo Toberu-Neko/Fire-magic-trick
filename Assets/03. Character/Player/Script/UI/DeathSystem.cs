@@ -15,7 +15,7 @@ public class DeathSystem : MonoBehaviour
 
     private void Start()
     {
-        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
     }
 
     public void Death()

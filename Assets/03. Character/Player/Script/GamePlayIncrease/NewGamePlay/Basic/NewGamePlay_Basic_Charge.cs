@@ -13,8 +13,8 @@ public class NewGamePlay_Basic_Charge : MonoBehaviour
     protected float chargeTimer;
     public virtual void Start()
     {
-        _input = GameManager.singleton.Player.GetComponent<ControllerInput>();
-        chargeParticle = GameManager.singleton.VFX_List.VFX_Charge;
+        _input = GameManager.Instance.Player.GetComponent<ControllerInput>();
+        chargeParticle = GameManager.Instance.VFX_List.VFX_Charge;
         combo = GetComponent<NewGamePlay_Combo>();
     }
     protected virtual void Update()

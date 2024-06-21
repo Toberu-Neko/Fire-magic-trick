@@ -40,7 +40,7 @@ public class GlassSystem : MonoBehaviour
     }
     private void Start()
     {
-        progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
+        progressSystem = GameManager.Instance.GetComponent<ProgressSystem>();
         progressSystem.OnPlayerDeath += OnPlayerDeathToRebirthGlass;
     }
     private void OnCollisionEnter(Collision collision)

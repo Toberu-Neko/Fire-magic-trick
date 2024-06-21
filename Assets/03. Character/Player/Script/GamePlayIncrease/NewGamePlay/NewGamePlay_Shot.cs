@@ -34,7 +34,7 @@ public class NewGamePlay_Shot : NewGamePlay_Basic_Shot
     public override void Start()
     {
         base.Start();
-        shooting_Normal = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Normal>();
+        shooting_Normal = GameManager.Instance.ShootingSystem.GetComponent<Shooting_Normal>();
         combo = GetComponent<NewGamePlay_Combo>();
     }
     public override void Update()

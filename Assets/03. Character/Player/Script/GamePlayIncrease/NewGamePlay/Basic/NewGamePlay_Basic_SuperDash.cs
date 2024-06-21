@@ -7,7 +7,7 @@ public class NewGamePlay_Basic_SuperDash : MonoBehaviour
     protected NewGamePlay_Combo combo;
     protected virtual void Start()
     {
-        superDash = GameManager.singleton.EnergySystem.GetComponent<SuperDash>();
+        superDash = GameManager.Instance.EnergySystem.GetComponent<SuperDash>();
         combo = GetComponent<NewGamePlay_Combo>();
 
         superDash.OnSuperDashStart += OnSuperDashStart;

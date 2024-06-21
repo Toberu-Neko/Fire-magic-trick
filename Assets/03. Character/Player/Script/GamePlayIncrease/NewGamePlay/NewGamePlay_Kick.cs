@@ -12,7 +12,7 @@ public class NewGamePlay_Kick : NewGamePlay_Basic_Kick
     {
         base.Start();
 
-        bulletTime =  GameManager.singleton.GetComponent<BulletTime>();
+        bulletTime =  GameManager.Instance.GetComponent<BulletTime>();
     }
     protected override void Onkick()
     {

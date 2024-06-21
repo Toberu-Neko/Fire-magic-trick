@@ -15,8 +15,8 @@ public class SteamBoom : MonoBehaviour
     private float timer;
     private void Start()
     {
-        player = GameManager.singleton._input.gameObject;
-        impact = GameManager.singleton.Player.GetComponent<ImpactReceiver>();
+        player = GameManager.Instance._input.gameObject;
+        impact = GameManager.Instance.Player.GetComponent<ImpactReceiver>();
         preferLenght = (edge.position - this.transform.position).magnitude;
     }
     private void OnTriggerEnter(Collider other)

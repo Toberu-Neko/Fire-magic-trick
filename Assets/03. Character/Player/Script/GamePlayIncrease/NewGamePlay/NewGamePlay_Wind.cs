@@ -20,8 +20,8 @@ public class NewGamePlay_Wind : NewGamePlay_Basic_Wind
     {
         base.Start();
 
-        VFX_WindStart = GameManager.singleton.VFX_List.VFX_WindMaxStart;
-        VFX_UI_Wind = GameManager.singleton.VFX_List.VFX_UI_Wind;
+        VFX_WindStart = GameManager.Instance.VFX_List.VFX_WindMaxStart;
+        VFX_UI_Wind = GameManager.Instance.VFX_List.VFX_UI_Wind;
     }
     protected override void Update()
     {

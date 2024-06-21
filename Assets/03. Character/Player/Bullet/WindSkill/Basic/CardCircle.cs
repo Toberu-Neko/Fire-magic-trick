@@ -5,7 +5,7 @@ public class CardCircle : MonoBehaviour
     private Transform player;
     private void Start()
     {
-        player = GameManager.singleton.Player;
+        player = GameManager.Instance.Player;
         SetParent();
     }
     private void SetParent()

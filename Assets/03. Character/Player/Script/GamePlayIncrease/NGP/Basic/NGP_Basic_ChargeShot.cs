@@ -28,12 +28,12 @@ public class NGP_Basic_ChargeShot : NGP_Basic_Charge
     {
         base.Start();
         //Script
-        hover = GameManager.singleton.NewGamePlay.GetComponent<NewGamePlay_Hover>();
-        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        hover = GameManager.Instance.NewGamePlay.GetComponent<NewGamePlay_Hover>();
+        playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
         skillState = GetComponent<NGP_SkillState>();
         shot = GetComponent<NGP_Shot>();
         combo = GetComponent<NGP_Combo>();
-        magazing = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Magazing>();
+        magazing = GameManager.Instance.ShootingSystem.GetComponent<Shooting_Magazing>();
 
 
         chargeType = ChargeType.Shot;

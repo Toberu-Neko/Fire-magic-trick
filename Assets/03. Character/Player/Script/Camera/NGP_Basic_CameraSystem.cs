@@ -15,10 +15,10 @@ public class NGP_Basic_CameraSystem : MonoBehaviour
 
     protected virtual void Start()
     {
-        superDashCameraCheck = GameManager.singleton.EnergySystem.GetComponent<SuperDashCameraCheck>();
-        aimSupport = GameManager.singleton.Player.GetComponent<AimSupportSystem>();
-        input = GameManager.singleton.Player.GetComponent<ControllerInput>();
-        state = GameManager.singleton.Player.GetComponent<PlayerState>();
+        superDashCameraCheck = GameManager.Instance.EnergySystem.GetComponent<SuperDashCameraCheck>();
+        aimSupport = GameManager.Instance.Player.GetComponent<AimSupportSystem>();
+        input = GameManager.Instance.Player.GetComponent<ControllerInput>();
+        state = GameManager.Instance.Player.GetComponent<PlayerState>();
     }
     protected virtual void Update()
     {

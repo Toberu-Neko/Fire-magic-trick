@@ -30,7 +30,7 @@ public class EnergyBall : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         EnemrgyBall = this.gameObject;
-        energySystem = GameManager.singleton.Player.GetComponent<EnergySystem>();
+        energySystem = GameManager.Instance.Player.GetComponent<EnergySystem>();
         rb = GetComponent<Rigidbody>();
 
         startMove(speed_Start);

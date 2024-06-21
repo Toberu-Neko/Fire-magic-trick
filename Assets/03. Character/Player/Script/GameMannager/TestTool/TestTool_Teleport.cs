@@ -9,7 +9,7 @@ public class TestTool_Teleport : MonoBehaviour
 
     private void Start()
     {
-        player = GameManager.singleton.Player;
+        player = GameManager.Instance.Player;
 
     }
     private void Update()

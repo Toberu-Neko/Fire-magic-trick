@@ -17,7 +17,7 @@ public class BulletTimeChild : MonoBehaviour
 
     private void Start()
     {
-        _bulletTimeSystem = GameManager.singleton.GetComponent<BulletTime>();
+        _bulletTimeSystem = GameManager.Instance.GetComponent<BulletTime>();
     }
     private void OnTriggerEnter(Collider other)
     {

@@ -91,7 +91,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     private void Start()
     {
         health = maxHealth;
-        progress = GameManager.singleton.GetComponent<ProgressSystem>();
+        progress = GameManager.Instance.GetComponent<ProgressSystem>();
         bt = GetComponent<BehaviorTree>();
         startPosition = this.transform;
         StartPosition = this.transform.position;
@@ -113,7 +113,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     }
     public void giveTargetPlayer()
     {
-        GameObject player = GameManager.singleton.Player.gameObject;
+        GameObject player = GameManager.Instance.Player.gameObject;
         EnemyAggroSystem enemyAggroSystem = GetComponent<EnemyAggroSystem>();
         if (enemyAggroSystem != null) enemyAggroSystem.GiveAggroTarget(player);
     }

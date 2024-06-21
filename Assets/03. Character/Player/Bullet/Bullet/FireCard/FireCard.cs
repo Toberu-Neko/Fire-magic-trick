@@ -17,7 +17,7 @@ public class FireCard : Bullet
     {
         base.Start();
 
-        superDash = GameManager.singleton.EnergySystem.GetComponent<SuperDash>();
+        superDash = GameManager.Instance.EnergySystem.GetComponent<SuperDash>();
     }
     protected override void Update()
     {
@@ -28,7 +28,7 @@ public class FireCard : Bullet
     }
     private void DistanceCheck()
     {
-        Vector3 Player = GameManager.singleton.Player.transform.position;
+        Vector3 Player = GameManager.Instance.Player.transform.position;
         Vector3 FireCard = transform.position;
         float distance = (Player - FireCard).magnitude;
 

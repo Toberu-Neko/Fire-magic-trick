@@ -66,7 +66,7 @@ namespace StarterAssets
 
         [Header("Cinemachine")]
         [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
-        public GameObject CinemachineCameraTarget;
+        public GameObject cinemachineCameraTarget;
 
         [Tooltip("How far in degrees can you move the camera up")]
         public float TopClamp = 70.0f;
@@ -155,14 +155,14 @@ namespace StarterAssets
 
         private void Start()
         {
-            _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+            _cinemachineTargetYaw = cinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
             _controllerInput = GetComponent<ControllerInput>();
             _move_Our = GetComponent<Move_Our>();
-            superJump = GameManager.singleton.NewGamePlay.GetComponent<NGP_SuperJump>();
+            superJump = GameManager.Instance.NewGamePlay.GetComponent<NGP_SuperJump>();
 #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
 #else
@@ -241,7 +241,7 @@ namespace StarterAssets
             _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
             // Cinemachine will follow this target
-            CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
+            cinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
         }
 
@@ -307,9 +307,9 @@ namespace StarterAssets
                                   _mainCamera.transform.eulerAngles.y;
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                     RotationSmoothTime);
-                getRotation(rotation);
+                PlayerRotation = rotation;
 
-                if(_rotateOnMove)
+                if (_rotateOnMove)
                 {
                     // rotate to face input direction relative to camera position
                     transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
@@ -501,10 +501,6 @@ namespace StarterAssets
         public void SetRotateOnMove(bool newRotateOnMove)
         {
             _rotateOnMove = newRotateOnMove;
-        }
-        private void getRotation(float rotation)
-        {
-            PlayerRotation = rotation;
         }
         public void AddMoveOffset(Vector3 moveOffset)
         {

@@ -40,7 +40,7 @@ public class EnemySpawn_GlassBox : MonoBehaviour
     }
     private void Start()
     {
-        bulletTime = GameManager.singleton.GetComponent<BulletTime>();
+        bulletTime = GameManager.Instance.GetComponent<BulletTime>();
     }
     public void StartFight()
     {

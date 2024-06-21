@@ -14,9 +14,9 @@ public class ProgressSystem : MonoBehaviour
 
     private void Start()
     {
-        _deathSystem = GameManager.singleton.UISystem.GetComponent<DeathSystem>();
-        player = GameManager.singleton.Player;
-        cameraSystem = GameManager.singleton.Player.GetComponent<NGP_CameraSystem>();
+        _deathSystem = GameManager.Instance.UISystem.GetComponent<DeathSystem>();
+        player = GameManager.Instance.Player;
+        cameraSystem = GameManager.Instance.Player.GetComponent<NGP_CameraSystem>();
     }
     
     public void PlayerDeath()

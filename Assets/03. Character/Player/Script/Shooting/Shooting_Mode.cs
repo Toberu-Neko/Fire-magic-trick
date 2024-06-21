@@ -20,9 +20,9 @@ public class Shooting_Mode : MonoBehaviour
     private bool Trigger;
     private void Start()
     {
-        _input = GameManager.singleton._input;
+        _input = GameManager.Instance._input;
         _shooting_Normal = GetComponent<Shooting_Normal>();
-        _shootingModeUI = GameManager.singleton.UISystem.GetComponent<ShootingModeUI>();
+        _shootingModeUI = GameManager.Instance.UISystem.GetComponent<ShootingModeUI>();
 
         ShootingMode(Mode.Normal);
     }

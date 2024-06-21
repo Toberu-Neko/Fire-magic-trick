@@ -1,5 +1,5 @@
 {
-    "name": "StarterAssets",
+    "name": "PlayerInput",
     "maps": [
         {
             "name": "Player",
@@ -34,16 +34,16 @@
                 },
                 {
                     "name": "Sprint",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "980e881e-182c-404c-8cbf-3d09fdb48fef",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
                     "name": "Aim",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "21e9b94f-9e65-4b04-b367-1e8dcb174256",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -60,19 +60,46 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Controller_Button_A",
+                    "name": "BigJump",
                     "type": "Value",
-                    "id": "4855de0e-c43f-4e33-94b7-221fd39e44a4",
+                    "id": "beaa68a0-eb21-430c-b85d-43bbd1bd6276",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Controller_Button_B",
-                    "type": "Value",
+                    "name": "Dash",
+                    "type": "Button",
                     "id": "91d58cc7-a7ab-4bdd-9e6d-0b7553f262c9",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "FireTransfer",
+                    "type": "Button",
+                    "id": "578d5ea8-ab4e-4166-9a9a-ed29099cb02d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Skill",
+                    "type": "Button",
+                    "id": "e55f53b8-b338-4247-951c-d5a3f99ad8da",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ESC",
+                    "type": "Button",
+                    "id": "ab5516b7-e931-43f2-b690-4312c6527ba4",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -81,15 +108,6 @@
                     "name": "Controller_Button_X",
                     "type": "Value",
                     "id": "d99dccce-d1dd-46a7-964d-bc0034a66637",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Controller_Button_Y",
-                    "type": "Value",
-                    "id": "beaa68a0-eb21-430c-b85d-43bbd1bd6276",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -141,15 +159,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Controller_Right_Button",
-                    "type": "Value",
-                    "id": "e55f53b8-b338-4247-951c-d5a3f99ad8da",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Controller_Right_StickButton",
                     "type": "Value",
                     "id": "56112af1-40c8-4b59-850c-9a6a61e2768d",
@@ -168,27 +177,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Controller_Left_Button",
-                    "type": "Value",
-                    "id": "578d5ea8-ab4e-4166-9a9a-ed29099cb02d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Controller_Left_StickButton",
                     "type": "Value",
                     "id": "9a38d049-26f3-4fb4-81f3-bc55793cd622",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Controller_Option",
-                    "type": "Value",
-                    "id": "ab5516b7-e931-43f2-b690-4312c6527ba4",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -328,7 +319,7 @@
                 {
                     "name": "",
                     "id": "dc65b89f-9bd3-43fb-92af-d0d87ba5faa4",
-                    "path": "<Keyboard>/leftShift",
+                    "path": "<Keyboard>/ctrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
@@ -339,21 +330,10 @@
                 {
                     "name": "",
                     "id": "c8fcd86e-dcfd-4f88-8e93-b638cdbf3320",
-                    "path": "<Gamepad>/leftTrigger",
+                    "path": "<Gamepad>/leftStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ebb8b071-1867-4a7e-a2a9-a420915984ef",
-                    "path": "<DualShockGamepad>/leftStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
                     "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -547,45 +527,12 @@
                 },
                 {
                     "name": "",
-                    "id": "2f612ca2-3885-4ece-b975-b851a6088208",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardMouse",
-                    "action": "Controller_Button_A",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "16d1fd67-7d10-4fe7-9883-f81a7b4c36c8",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Controller_Button_A",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "41430fd6-24bc-4460-9801-ed696bf06563",
-                    "path": "<DualShockGamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Controller_Button_A",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e92980dc-2c84-4dc4-b928-45579f7117c4",
                     "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "Controller_Button_B",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -596,7 +543,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Controller_Button_B",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -607,7 +554,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Controller_Button_B",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -641,61 +588,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Controller_Button_X",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b5518d13-ca20-41c9-b7f1-2f81f4f8b73d",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Controller_Button_Y",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "One Modifier",
-                    "id": "22e70484-7ac9-464f-8981-4eb567e85fe5",
-                    "path": "OneModifier",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Controller_Button_Y",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "modifier",
-                    "id": "bad6be24-ea34-48d0-8337-71bea6b49aa5",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Controller_Button_Y",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "binding",
-                    "id": "4f22f9ab-b1b9-49df-b621-cb1658a76bfe",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Controller_Button_Y",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "bfc294d2-a668-4cca-ad19-70cae4bf4360",
-                    "path": "<DualShockGamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Controller_Button_Y",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -866,39 +758,6 @@
                 },
                 {
                     "name": "",
-                    "id": "9917ae0e-d33c-42fd-8511-6e170e37fe1b",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Controller_Right_Button",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "83a87314-0f8e-4377-9bc2-6ca587d40c56",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Controller_Right_Button",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3f38402b-46e9-4ad3-ad75-90694fa6fc57",
-                    "path": "<DualShockGamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Controller_Right_Button",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "9e9e6b06-38b1-4aae-b072-7327004fb748",
                     "path": "<Gamepad>/leftStickPress",
                     "interactions": "",
@@ -938,61 +797,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Controller_Left_Trigger",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "200a51d4-d8ce-430e-9afb-f4d284e697ad",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardMouse",
-                    "action": "Controller_Left_Button",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2901cb5b-9b6e-4a5e-b328-1ae9f2247b72",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Controller_Left_Button",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0e0840db-0821-40a7-b4ca-76a07aeffa19",
-                    "path": "<DualShockGamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Controller_Left_Button",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4d21337b-a9de-4877-bf36-536613484dea",
-                    "path": "<Gamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Controller_Option",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4bd02308-bde8-4aaf-8a91-cc465d353e83",
-                    "path": "<DualShockGamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Controller_Option",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1488,6 +1292,160 @@
                     "processors": "",
                     "groups": "",
                     "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b5518d13-ca20-41c9-b7f1-2f81f4f8b73d",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "BigJump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "22e70484-7ac9-464f-8981-4eb567e85fe5",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BigJump",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "bad6be24-ea34-48d0-8337-71bea6b49aa5",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BigJump",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "4f22f9ab-b1b9-49df-b621-cb1658a76bfe",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BigJump",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "bfc294d2-a668-4cca-ad19-70cae4bf4360",
+                    "path": "<DualShockGamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BigJump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9917ae0e-d33c-42fd-8511-6e170e37fe1b",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "83a87314-0f8e-4377-9bc2-6ca587d40c56",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3f38402b-46e9-4ad3-ad75-90694fa6fc57",
+                    "path": "<DualShockGamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "200a51d4-d8ce-430e-9afb-f4d284e697ad",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "FireTransfer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2901cb5b-9b6e-4a5e-b328-1ae9f2247b72",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "FireTransfer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0e0840db-0821-40a7-b4ca-76a07aeffa19",
+                    "path": "<DualShockGamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FireTransfer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d21337b-a9de-4877-bf36-536613484dea",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ESC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4bd02308-bde8-4aaf-8a91-cc465d353e83",
+                    "path": "<DualShockGamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ESC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "973d6f01-3573-4321-a4c8-7a2d871151c0",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ESC",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

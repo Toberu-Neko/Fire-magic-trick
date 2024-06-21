@@ -43,7 +43,7 @@ public class EnemySpawn_Pipe : MonoBehaviour
 
     private void Start()
     {
-        player = GameManager.singleton._input.gameObject;
+        player = GameManager.Instance._input.gameObject;
     }
     private void Update()
     {

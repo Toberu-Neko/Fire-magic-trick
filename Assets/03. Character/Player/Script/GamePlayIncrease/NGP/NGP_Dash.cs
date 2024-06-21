@@ -46,11 +46,11 @@ public class NGP_Dash : NGP_Basic_Dash
         base.Start();
 
         //Script
-        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
-        animator = GameManager.singleton.Player.GetComponent<PlayerAnimator>();
+        playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
+        animator = GameManager.Instance.Player.GetComponent<PlayerAnimator>();
 
         //feedbacks
-        Feedback_DashBack = GameManager.singleton.Feedbacks_List.DashBack;
+        Feedback_DashBack = GameManager.Instance.Feedbacks_List.DashBack;
 
         //Initialize
         coolingTimer = dashCooling;

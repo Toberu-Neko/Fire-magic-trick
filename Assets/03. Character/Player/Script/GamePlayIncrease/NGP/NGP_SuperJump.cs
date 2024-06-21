@@ -20,10 +20,10 @@ public class NGP_SuperJump : NGP_Basic_SuperJump
         base.Start();
 
         //vfx
-        VFX_FireCircle = GameManager.singleton.VFX_List.VFX_FireCircle;
-        VFX_WindCricle = GameManager.singleton.VFX_List.VFX_WindCricle;
+        VFX_FireCircle = GameManager.Instance.VFX_List.VFX_FireCircle;
+        VFX_WindCricle = GameManager.Instance.VFX_List.VFX_WindCricle;
 
-        energySystem = GameManager.singleton.Player.GetComponent<EnergySystem>();
+        energySystem = GameManager.Instance.Player.GetComponent<EnergySystem>();
     }
     protected override void Update()
     {

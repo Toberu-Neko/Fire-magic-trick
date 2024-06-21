@@ -12,7 +12,7 @@ public class TriggerArea_ProgressCheckPointArea : MonoBehaviour
     }
     private void Start()
     {
-        _progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
+        _progressSystem = GameManager.Instance.GetComponent<ProgressSystem>();
     }
 
     private void OnTriggerEnter(Collider other)

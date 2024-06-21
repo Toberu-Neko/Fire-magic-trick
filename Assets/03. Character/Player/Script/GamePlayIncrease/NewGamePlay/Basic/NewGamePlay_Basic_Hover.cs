@@ -20,9 +20,9 @@ public class NewGamePlay_Basic_Hover : MonoBehaviour
 
     protected virtual void Start()
     {
-        characterController = GameManager.singleton.Player.GetComponent<CharacterController>();
-        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
-        floatShot = GameManager.singleton.NewGamePlay.GetComponent<NewGamePlay_FloatShot>();
+        characterController = GameManager.Instance.Player.GetComponent<CharacterController>();
+        playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
+        floatShot = GameManager.Instance.NewGamePlay.GetComponent<NewGamePlay_FloatShot>();
     }
     protected virtual void Update()
     {

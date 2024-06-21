@@ -30,10 +30,10 @@ public class NewGamePlay_Dash : NewGamePlay_Basic_Dash
         base.Start();
 
         //Script
-        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
 
         //feedbacks
-        Feedback_DashBack = GameManager.singleton.Feedbacks_List.DashBack;
+        Feedback_DashBack = GameManager.Instance.Feedbacks_List.DashBack;
     }
     protected override void Update()
     {

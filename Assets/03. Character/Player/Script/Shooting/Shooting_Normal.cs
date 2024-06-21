@@ -29,10 +29,10 @@ public class Shooting_Normal : MonoBehaviour
     private int ThrowFeedbacksIndex;
     private void Start()
     {
-        _Input = GameManager.singleton._input;
-        _crosshairUI = GameManager.singleton.UISystem.GetComponent<CrosshairUI>();
-        _playerAnimator = GameManager.singleton.Player.GetComponent<PlayerAnimator>();
-        _playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        _Input = GameManager.Instance._input;
+        _crosshairUI = GameManager.Instance.UISystem.GetComponent<CrosshairUI>();
+        _playerAnimator = GameManager.Instance.Player.GetComponent<PlayerAnimator>();
+        _playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
         _shooting = GetComponent<Shooting>();
         _shooting_magazing = GetComponent<Shooting_Magazing>();
     }

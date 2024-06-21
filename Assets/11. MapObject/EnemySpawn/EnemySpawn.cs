@@ -22,7 +22,7 @@ public class EnemySpawn : MonoBehaviour
     private void Start()
     {
         //Script
-        progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
+        progressSystem = GameManager.Instance.GetComponent<ProgressSystem>();
 
         //event
         progressSystem.OnPlayerDeath += ToDeath;

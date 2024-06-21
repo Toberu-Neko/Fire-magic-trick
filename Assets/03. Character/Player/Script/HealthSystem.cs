@@ -19,9 +19,9 @@ public class HealthSystem : MonoBehaviour
 
     private void Start()
     {
-        energySystem = GameManager.singleton.Player.GetComponent<EnergySystem>();
-        impactReceiver = GameManager.singleton.Player.GetComponent<ImpactReceiver>();
-        vibrationController = GameManager.singleton.GetComponent<VibrationController>();
+        energySystem = GameManager.Instance.Player.GetComponent<EnergySystem>();
+        impactReceiver = GameManager.Instance.Player.GetComponent<ImpactReceiver>();
+        vibrationController = GameManager.Instance.GetComponent<VibrationController>();
     }
     public void ToPushPlayer(Vector3 ImpactDirection)
     {

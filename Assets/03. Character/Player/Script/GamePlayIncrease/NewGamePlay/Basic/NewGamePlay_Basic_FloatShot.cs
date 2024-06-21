@@ -15,8 +15,8 @@ public class NewGamePlay_Basic_FloatShot : MonoBehaviour
     private float timer = 0f;
     protected virtual void Start()
     {
-        fireFloat = GameManager.singleton.EnergySystem.GetComponent<FireFloat>();
-        input = GameManager.singleton.Player.GetComponent<ControllerInput>();
+        fireFloat = GameManager.Instance.EnergySystem.GetComponent<FireFloat>();
+        input = GameManager.Instance.Player.GetComponent<ControllerInput>();
 
         fireFloat.OnFloatStart += OnFloatStart;
         fireFloat.OnFloatEnd += OnFloatEnd;

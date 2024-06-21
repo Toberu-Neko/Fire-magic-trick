@@ -67,9 +67,9 @@ public class EnergySystem : MonoBehaviour
 
     private void Start()
     {
-        energySystemUI = GameManager.singleton.UISystem.GetComponent<EnergySystemUI>();
-        deathSystem = GameManager.singleton.UISystem.GetComponent<DeathSystem>();
-        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        energySystemUI = GameManager.Instance.UISystem.GetComponent<EnergySystemUI>();
+        deathSystem = GameManager.Instance.UISystem.GetComponent<DeathSystem>();
+        playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
     }
     private void Update()
     {

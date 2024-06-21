@@ -23,17 +23,17 @@ public class NGP_Basic_ChargeSkill : NGP_Basic_Charge
         base.Start();
 
         //Script
-        skillPower = GameManager.singleton.NewGamePlay.GetComponent<NGP_SkillPower>();
-        shot = GameManager.singleton.NewGamePlay.GetComponent<NGP_Shot>();
+        skillPower = GameManager.Instance.NewGamePlay.GetComponent<NGP_SkillPower>();
+        shot = GameManager.Instance.NewGamePlay.GetComponent<NGP_Shot>();
 
         //Initialize
         chargeType = ChargeType.Skill;
 
         //Script
-        VFX_Charge_Wind = GameManager.singleton.VFX_List.VFX_Charge_Wind;
-        VFX_Charge_Fire = GameManager.singleton.VFX_List.VFX_Charge_Fire;
-        VFX_ChargeFinish_Wind = GameManager.singleton.VFX_List.VFX_ChargeFinish_Wind;
-        VFX_ChargeFinish_Fire = GameManager.singleton.VFX_List.VFX_ChargeFinish_Fire;
+        VFX_Charge_Wind = GameManager.Instance.VFX_List.VFX_Charge_Wind;
+        VFX_Charge_Fire = GameManager.Instance.VFX_List.VFX_Charge_Fire;
+        VFX_ChargeFinish_Wind = GameManager.Instance.VFX_List.VFX_ChargeFinish_Wind;
+        VFX_ChargeFinish_Fire = GameManager.Instance.VFX_List.VFX_ChargeFinish_Fire;
 
         //test
         VFX_Charge = VFX_Charge_Wind;

@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour, IHitNotifier,ITriggerNotifier
     {
         rb = GetComponent<Rigidbody>();
         coli = GetComponent<Collider>();
-        crosshairUI = GameManager.singleton.UISystem.GetComponent<CrosshairUI>();
+        crosshairUI = GameManager.Instance.UISystem.GetComponent<CrosshairUI>();
 
         Destroy(gameObject, lifeTime);
     }

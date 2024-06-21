@@ -38,7 +38,7 @@ public class FireDash : MonoBehaviour
     public event PlayerDashHandler OnDash;
     private void Start()
     {
-        _Input = GameManager.singleton._input;
+        _Input = GameManager.Instance._input;
         _playerController = _Input.GetComponent<ThirdPersonController>();
         _characterController = _Input.GetComponent<CharacterController>();
         _fireDashGhost = GetComponent<FireDashGhost>();

@@ -43,15 +43,15 @@ public class NewGamePlay_Basic_Dash : MonoBehaviour
     protected virtual void Start()
     {
         //Script
-        input = GameManager.singleton._input;
+        input = GameManager.Instance._input;
         characterController = input.GetComponent<CharacterController>();
         thirdPersonController = input.GetComponent<ThirdPersonController>();
-        fireDashCollider = GameManager.singleton.Collider_List.DashCrash.GetComponent<FireDashCollider>();
+        fireDashCollider = GameManager.Instance.Collider_List.DashCrash.GetComponent<FireDashCollider>();
         combo = GetComponent<NewGamePlay_Combo>();
-        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
 
         //Feedbacks
-        Feedbacks_Dash = GameManager.singleton.Feedbacks_List.Dash;
+        Feedbacks_Dash = GameManager.Instance.Feedbacks_List.Dash;
 
         //Initialize
         DashForwardSetting();

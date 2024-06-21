@@ -17,7 +17,7 @@ public class PlayerLoadScene : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("LoadPlayerCollider"))
+        if (other.CompareTag("Player"))
         {
             if (!isLoaded)
             {
@@ -30,7 +30,7 @@ public class PlayerLoadScene : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("LoadPlayerCollider"))
+        if (other.CompareTag("Player"))
         {
             if (isLoaded)
             {

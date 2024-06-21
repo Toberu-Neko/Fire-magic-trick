@@ -28,13 +28,13 @@ public class MenuSystem : MonoBehaviour
     }
     private void Start()
     {
-        starterAssets = GameManager.singleton.Player.GetComponent<StarterAssetsInputs>();
-        gameManager = GameManager.singleton;
-        thirdPersonController = GameManager.singleton.Player.GetComponent<ThirdPersonController>();
-        energySystem = GameManager.singleton.Player.GetComponent<EnergySystem>();
+        starterAssets = GameManager.Instance.Player.GetComponent<StarterAssetsInputs>();
+        gameManager = GameManager.Instance;
+        thirdPersonController = GameManager.Instance.Player.GetComponent<ThirdPersonController>();
+        energySystem = GameManager.Instance.Player.GetComponent<EnergySystem>();
         MainCamera = Camera.main.gameObject;
-        Player = GameManager.singleton.Player.gameObject;
-        state = GameManager.singleton.Player.GetComponent<PlayerState>();
+        Player = GameManager.Instance.Player.gameObject;
+        state = GameManager.Instance.Player.GetComponent<PlayerState>();
 
         if(useMenu)
         {

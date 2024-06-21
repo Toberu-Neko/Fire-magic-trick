@@ -19,7 +19,7 @@ public class TriggerArea_Timeline : MonoBehaviour
         {
             timelinePlayable = GetComponent<PlayableDirector>();
         }
-        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
     }
     private void Update()
     {

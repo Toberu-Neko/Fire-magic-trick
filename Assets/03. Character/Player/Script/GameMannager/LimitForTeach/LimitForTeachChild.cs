@@ -16,7 +16,7 @@ public class LimitForTeachChild : MonoBehaviour
 
     private void Start()
     {
-        _limitForTeach = GameManager.singleton.GetComponent<LimitForTeach>();
+        _limitForTeach = GameManager.Instance.GetComponent<LimitForTeach>();
     }
     private void OnTriggerEnter(Collider other)
     {

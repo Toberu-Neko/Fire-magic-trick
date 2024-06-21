@@ -20,9 +20,9 @@ public class PauseSystem : MonoBehaviour
 
     private void Start()
     {
-        _input = GameManager.singleton._input;
-        menuSystem = GameManager.singleton.GetComponent<MenuSystem>();
-        thirdPersonController = GameManager.singleton.Player.GetComponent<ThirdPersonController>();
+        _input = GameManager.Instance._input;
+        menuSystem = GameManager.Instance.GetComponent<MenuSystem>();
+        thirdPersonController = GameManager.Instance.Player.GetComponent<ThirdPersonController>();
     }
 
     private void Update()

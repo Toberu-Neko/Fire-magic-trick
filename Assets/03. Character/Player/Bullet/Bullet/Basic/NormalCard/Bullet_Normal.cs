@@ -23,7 +23,7 @@ public class Bullet_Normal : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         bulletCollider = GetComponent<Collider>();
-        _crosshairUI = GameManager.singleton.UISystem.GetComponent<CrosshairUI>();
+        _crosshairUI = GameManager.Instance.UISystem.GetComponent<CrosshairUI>();
         _playerDamage = GetComponent<PlayerDamage>();
         Initialization();
     }

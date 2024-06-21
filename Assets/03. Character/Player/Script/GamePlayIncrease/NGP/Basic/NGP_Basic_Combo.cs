@@ -40,8 +40,8 @@ public class NGP_Basic_Combo : MonoBehaviour
     protected virtual void Start() 
     {
         //Script
-        dash = GameManager.singleton.NewGamePlay.GetComponent<NGP_Dash>();
-        chargeShot = GameManager.singleton.NewGamePlay.GetComponent<NGP_ChargeShot>();
+        dash = GameManager.Instance.NewGamePlay.GetComponent<NGP_Dash>();
+        chargeShot = GameManager.Instance.NewGamePlay.GetComponent<NGP_ChargeShot>();
 
         //Initialize
         setCanComboShot(false);

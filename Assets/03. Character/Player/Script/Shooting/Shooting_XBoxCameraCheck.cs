@@ -16,7 +16,7 @@ public class Shooting_XBoxCameraCheck : MonoBehaviour
 
     private void Start()
     {
-        thirdPersonController = GameManager.singleton.Player.GetComponent<ThirdPersonController>();
+        thirdPersonController = GameManager.Instance.Player.GetComponent<ThirdPersonController>();
     }
 
     private void Update()

@@ -15,7 +15,7 @@ public class SuperDashCameraCheck : MonoBehaviour
 
     private void Start()
     {
-        _crosshairUI = GameManager.singleton.UISystem.GetComponent<CrosshairUI>();
+        _crosshairUI = GameManager.Instance.UISystem.GetComponent<CrosshairUI>();
         _superDash = GetComponent<SuperDash>();
     }
 

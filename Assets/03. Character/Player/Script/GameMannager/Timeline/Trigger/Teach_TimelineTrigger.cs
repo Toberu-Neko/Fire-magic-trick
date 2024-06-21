@@ -10,8 +10,8 @@ public class Teach_TimelineTrigger : MonoBehaviour
     private PlayableDirector _playableDirector;
     private void Start()
     {
-        _progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
-        _playableDirector = GameManager.singleton.GetComponent<TimelineSystem>().PlayableDirector;
+        _progressSystem = GameManager.Instance.GetComponent<ProgressSystem>();
+        _playableDirector = GameManager.Instance.GetComponent<TimelineSystem>().PlayableDirector;
         _progressSystem.OnPlayerDeath += ResetTrigger;
     }
     private void OnTriggerEnter(Collider other)
