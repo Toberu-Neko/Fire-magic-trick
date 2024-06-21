@@ -32,19 +32,19 @@ public class TrackSystem : MonoBehaviour
     }
     private void Update()
     {
-        shootRay();
-        trackRotate();
-        trackRotateTimer();
+        ShootRay();
+        TrackRotate();
+        TrackRotateTimer();
     }
-    private void shootRay()
+    private void ShootRay()
     {
         Vector3 origin = transform.position;
         Vector3 direction = transform.forward;
-        Ray ray = new Ray(origin, direction);
+        Ray ray = new(origin, direction);
 
         raycastHit = Physics.Raycast(ray, out HitInfo, CheckDistance, TrackLayerMask);
     }
-    private void trackRotateTimer()
+    private void TrackRotateTimer()
     {
         if (isRotate)
         {
@@ -60,7 +60,7 @@ public class TrackSystem : MonoBehaviour
             RotateSpeed = TrackCurve.Evaluate(deltaTime) * MaxRotateSpeed;
         }
     }
-    private void trackRotate()
+    private void TrackRotate()
     {
         if (raycastHit)
         {
@@ -79,6 +79,7 @@ public class TrackSystem : MonoBehaviour
             this.transform.rotation = Quaternion.LookRotation(newDirection);
         }
     }
+
     private void SetIsRotate(bool value)
     {
         isRotate = value;

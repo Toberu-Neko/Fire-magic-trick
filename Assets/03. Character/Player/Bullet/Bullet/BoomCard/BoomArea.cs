@@ -51,7 +51,7 @@ public class BoomArea : MonoBehaviour
             Vector3 direction = (other.transform.position - this.transform.position).normalized;
             Vector3 directionXZ = new Vector3(direction.x, 0, direction.z);
             Vector3 directionY = new Vector3(0, direction.y, 0);
-            impactReceiver.ToImpact(directionXZ*0.3f*forceToPlayer+directionY*0.6f*forceToPlayer);
+            impactReceiver.ToImpact(directionXZ * 0.3f * forceToPlayer + directionY * 0.6f * forceToPlayer);
         }
     }
 }

@@ -14,8 +14,6 @@ public class CrosshairUI : MonoBehaviour
     [SerializeField] private MMF_Player hitNear;
     [SerializeField] private MMF_Player hitFar;
 
-    //interface
-    private IHitNotifier hitNotifier;
 
     private void Start()
     {

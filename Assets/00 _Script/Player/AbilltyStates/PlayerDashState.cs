@@ -23,6 +23,9 @@ public class PlayerDashState : PlayerAbilityState
 
         canUseDash = false;
         currentFrame = 0;
+
+
+        player.ChangeActiveCam(Player.ActiveCamera.Dash);
     }
 
     public override void Exit()
@@ -39,6 +42,18 @@ public class PlayerDashState : PlayerAbilityState
         if(currentFrame <= 3)
         {
             Rotate(playerData.rotationSpeed * 20f, 0.01f);
+        }
+
+        if (currentFrame == 1)
+        {
+            if (MovementInput.y > 0f)
+            {
+                player.CardSystem.ChangeCard(CardSystem.CardType.Fire);
+            }
+            else
+            {
+                player.CardSystem.ChangeCard(CardSystem.CardType.Wind);
+            }
         }
 
         currentFrame += 1;

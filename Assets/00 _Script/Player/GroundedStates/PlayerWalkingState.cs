@@ -15,13 +15,15 @@ public class PlayerWalkingState : PlayerGroundedState
         base.Enter();
         v3Workspace = new();
         v2Workspace = new();
+
+        player.ChangeActiveCam(Player.ActiveCamera.Normal);
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        MoveAndRotateWithCam(playerData.moveSpeed);
+        MoveAndRotateWithCam(playerData.walkSpeed);
 
         if (!isExitingState)
         {
@@ -33,6 +35,10 @@ public class PlayerWalkingState : PlayerGroundedState
             {
                 player.InputHandler.UseSprintInput();
                 stateMachine.ChangeState(player.RunningState);
+            }
+            else if (aimInput)
+            {
+                stateMachine.ChangeState(player.AimWalkingState);
             }
         }
     }

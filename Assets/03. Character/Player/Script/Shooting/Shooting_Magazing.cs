@@ -38,14 +38,10 @@ public class Shooting_Magazing : MonoBehaviour
             {
                 if (energySystem.canUseEnegy(EnergySystem.SkillType.Reload))
                 {
-                    UseReload();
+                    Reload();
                 }
             }
         }
-    }
-    public void UseReload()
-    {
-        Reload();
     }
     public void UseBullet()
     {

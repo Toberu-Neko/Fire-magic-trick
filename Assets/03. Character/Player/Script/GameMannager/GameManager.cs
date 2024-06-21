@@ -24,5 +24,6 @@ public class GameManager : MonoBehaviour
         }
 
         Cursor.lockState = CursorLockMode.Locked;
+        Application.targetFrameRate = -1;
     }
 }

@@ -20,6 +20,7 @@ public class PlayerFSMBaseState
     private string animBoolName;
 
     protected Vector2 MovementInput { get; private set; }
+    protected bool AttackInput { get; private set; }
     private Vector3 v3Workspace;
     private Vector2 v2Workspace;
 
@@ -57,7 +58,7 @@ public class PlayerFSMBaseState
     public virtual void LogicUpdate()
     {
         MovementInput = player.InputHandler.RawMovementInput;
-        // player.Anim.speed = Stats.AnimationSpeed;
+        AttackInput = player.InputHandler.AttackInput;
     }
 
     public virtual void PhysicsUpdate()
@@ -76,19 +77,33 @@ public class PlayerFSMBaseState
 
     public virtual void AnimationSFXTrigger() { }
 
-    protected float targetRotation;
+    private float targetRotation;
 
-    protected void Rotate(float rotationSpeed, float rotateSmoothTime)
+    protected void Rotate(float rotationSpeed, float rotateSmoothTime, bool turnRelateWithInput = true)
     {
-        targetRotation = Mathf.Atan2(player.InputHandler.RawMovementInput.x, player.InputHandler.RawMovementInput.y) * Mathf.Rad2Deg
-            + player.InputHandler.MainCam.transform.eulerAngles.y;
+        if (turnRelateWithInput)
+        {
+            if (player.InputHandler.RawMovementInput != Vector2.zero)
+            {
+                targetRotation = Mathf.Atan2(player.InputHandler.RawMovementInput.x, player.InputHandler.RawMovementInput.y) * Mathf.Rad2Deg
+                    + player.InputHandler.MainCam.transform.eulerAngles.y;
+            }
+            else
+            {
+                targetRotation = Mathf.Atan2(0f, -1f) * Mathf.Rad2Deg + player.InputHandler.MainCam.transform.eulerAngles.y;
+            }
+        }
+        else
+        {
+            targetRotation = player.InputHandler.MainCam.transform.eulerAngles.y;
+        }
 
-        float rotation = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetRotation,ref rotationSpeed, rotateSmoothTime);
+        float rotation = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetRotation, ref rotationSpeed, rotateSmoothTime * Time.fixedDeltaTime);
 
         movement.Rotate(rotation);
     }
 
-    protected void MoveAndRotateWithCam(float originalMinSpeed, float originalMaxSpeed = 0f, bool ignoreSlope = false, float rotationSpeed = 0f)
+    protected void MoveAndRotateWithCam(float originalMinSpeed, float originalMaxSpeed = 0f, bool ignoreSlope = false)
     {
         v3Workspace.Set(MovementInput.x, 0f, MovementInput.y);
 
@@ -117,8 +132,31 @@ public class PlayerFSMBaseState
             v2Workspace.Set(targetDirection.x, targetDirection.z);
 
             movement.SetVelocity(speed, v2Workspace, ignoreSlope);
-            player.Anim.SetFloat("speed", speed);
         }
 
+    }
+
+    protected void MoveWithFacingDir(float speed, bool ignoreSlope = false)
+    {
+        v3Workspace.Set(MovementInput.x, 0f, MovementInput.y);
+
+        if (v3Workspace.magnitude > 1f)
+        {
+            v3Workspace.Normalize();
+        }
+
+        Vector3 targetDirection = movement.ParentTransform.forward * v3Workspace.z + movement.ParentTransform.right * v3Workspace.x;
+        v2Workspace.Set(targetDirection.x, targetDirection.z);
+
+        movement.SetVelocity(speed, v2Workspace, ignoreSlope);
+    }
+
+    protected void CheckIfShouldShoot()
+    {
+        if (AttackInput)
+        {
+            player.InputHandler.UseAttackInput();
+            player.CardSystem.Shoot();
+        }
     }
 }

@@ -36,10 +36,14 @@ public class PlayerInAirState : PlayerFSMBaseState
         if(movement.CurrentVelocityXZMagnitude > playerData.airMoveSpeed)
         {
             SetAirControlSpeed(movement.CurrentVelocityXZMagnitude);
+
+            player.ChangeActiveCam(Player.ActiveCamera.Run);
         }
         else
         {
             SetAirControlSpeed(playerData.airMoveSpeed);
+
+            player.ChangeActiveCam(Player.ActiveCamera.Normal);
         }
     }
 
@@ -69,6 +73,7 @@ public class PlayerInAirState : PlayerFSMBaseState
     {
         base.LogicUpdate();
 
+        CheckIfShouldShoot();
         CheckCoyoteTime();
 
         jumpInput = player.InputHandler.JumpInput;
@@ -87,15 +92,18 @@ public class PlayerInAirState : PlayerFSMBaseState
         }
 
 
+
         if (collisionSenses.Ground && !IsJumping)
         {
-            if(inAirMovementSpeed > playerData.airMoveSpeed && MovementInput != Vector2.zero)
+            player.Anim.SetTrigger("land");
+
+            if (inAirMovementSpeed > playerData.walkSpeed && MovementInput != Vector2.zero)
             {
                 stateMachine.ChangeState(player.RunningState);
             }
             else if (MovementInput != Vector2.zero)
             {
-                stateMachine.ChangeState(player.WalkState);
+                stateMachine.ChangeState(player.WalkingState);
             }
             else
             {

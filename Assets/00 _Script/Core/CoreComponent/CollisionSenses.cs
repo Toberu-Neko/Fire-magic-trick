@@ -16,7 +16,7 @@ public class CollisionSenses : CoreComponent
     [SerializeField] private float slopeCheckDistance = 0.75f;
 
     [SerializeField] private LayerMask whatIsGround;
-
+    [SerializeField] private float maxSlopeAngle = 30f;
     private Slope slope = new();
     protected override void Awake()
     {
@@ -36,17 +36,15 @@ public class CollisionSenses : CoreComponent
     {
         get
         {
-            return Physics.BoxCast(GroundCheck.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, groundCheckDistance, whatIsGround);
-            /*
             if (!Slope.IsOnSlope)
             {
-                return Physics2D.BoxCast(GroundCheck.position, groundCheckV2, 0f, Vector2.down, 0.1f, whatIsGround);
+                return Physics.BoxCast(GroundCheck.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, slopeCheckDistance, whatIsGround);
             }
             else
             {
-                return Physics2D.BoxCast(GroundCheck.position, slopeCheckV2, 0f, Vector2.down, 0.1f, whatIsGround);
+                return Physics.BoxCast(GroundCheck.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, groundCheckDistance, whatIsGround);
             }
-            */
+            
         }
     }
     public Slope Slope
@@ -63,7 +61,7 @@ public class CollisionSenses : CoreComponent
                 Vector3 normal = hit.normal;
                 float angle = Vector3.Angle(Vector3.up, normal);
 
-                if (angle != 0)
+                if (angle != 0 && angle < maxSlopeAngle)
                 {
                     slope.Set(normal, angle, hit);
                     slope.SetIsOnSlope(true);
