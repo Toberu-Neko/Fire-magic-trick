@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class E_State_Alert : EnemyFSMBaseState
+public class E_State_Attack : EnemyFSMBaseState
 {
-    public E_State_Alert(Enemy enemy, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName) : base(enemy, stateMachine, enemyData, animBoolName)
+    public E_State_Attack(Enemy_A1 enemy, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName) : base(enemy, stateMachine, enemyData, animBoolName)
     {
     }
     public override void Enter()
     {
         base.Enter();
-        enemy.changeState_Enum(E_State.Alert);
+        entity.changeState_Enum(E_State.Attack);
     }
 
     public override void Exit()

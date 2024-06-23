@@ -2,6 +2,8 @@ public class EnemyStateMachine
 {
     public EnemyFSMBaseState CurrentState { get; private set; }
 
+    private bool canChangeState = true;
+
     public void Initialize(EnemyFSMBaseState startingState)
     {
         CurrentState = startingState;
@@ -12,5 +14,9 @@ public class EnemyStateMachine
         CurrentState.Exit();
         CurrentState = newState;
         CurrentState.Enter();
+    }
+    public void SetCanChangeState(bool canChangeState)
+    {
+        this.canChangeState = canChangeState;
     }
 }

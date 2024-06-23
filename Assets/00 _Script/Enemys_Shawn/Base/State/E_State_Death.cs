@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class E_State_Idel : EnemyFSMBaseState
+public class E_State_Death : EnemyFSMBaseState
 {
-    public E_State_Idel(Enemy enemy, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName) : base(enemy, stateMachine, enemyData, animBoolName)
+    public E_State_Death(Enemy_A1 enemy, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName) : base(enemy, stateMachine, enemyData, animBoolName)
     {
     }
     public override void Enter()
     {
         base.Enter();
-        enemy.changeState_Enum(E_State.Idel);
+        entity.changeState_Enum(E_State.Death);
     }
 
     public override void Exit()
