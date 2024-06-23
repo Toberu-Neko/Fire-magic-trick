@@ -77,7 +77,16 @@ public class Movement : CoreComponent
 
         SetFinalVelocity();
     }
+    public void SetVelocity(Vector2 velocity, bool ignoreSlope = false)
+    {
+        if ((collisionSenses.Slope.IsOnSlope && !collisionSenses.Slope.ExceedsMaxSlopeAngle) && !ignoreSlope && collisionSenses.Slope.NormalPrep != Vector3.zero && collisionSenses.Ground)
+        {
+            SetVelocity(velocity.magnitude, GetSlopeMoveDirection(V2ToV3(velocity.normalized)));
+            return;
+        }
 
+        SetFinalVelocity();
+    }
 
     public void SetVelocityY(float velocity)
     {
@@ -98,6 +107,11 @@ public class Movement : CoreComponent
         RB.velocity = velocityWorkspace;
 
         CurrentVelocity = velocityWorkspace;
+    }
+
+    public void AddForce(float speed, Vector3 dir)
+    {
+        RB.AddForce(speed * dir, ForceMode.Acceleration);
     }
 
     public void Rotate(float value)

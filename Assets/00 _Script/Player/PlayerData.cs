@@ -39,4 +39,11 @@ public class PlayerData : ScriptableObject
     public float superDashJumpTime = 0.5f;
     public float superDashJumpVelocity = 10f;
     public AnimationCurve superDashDecaySpeedGraph;
+
+    [Header("Fireball")]
+    public float fireballSpeed = 4f;
+    public float fireballForceValue = 12.5f;
+    public float fireballMaxYVelocity = -0.5f;
+    public float fireballMinYVelocity = -2f;
+    public float fireballMaxTime = 3f;
 }

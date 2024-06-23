@@ -93,7 +93,7 @@ public class PlayerSuperDashState : PlayerAbilityState
         else
         {
             movement.SetVelocity(movement.RB.velocity.magnitude * playerData.afterSuperDashMultiplier, targetVector);
-            isAbilityDone = true;
+            stateMachine.ChangeState(player.FireballState);
         }
     }
 }
