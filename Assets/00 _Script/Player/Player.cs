@@ -53,6 +53,8 @@ public class Player : MonoBehaviour
     public PlayerJumpState JumpState { get; private set; }
     
     public PlayerDashState DashState { get; private set; }
+    public PlayerSuperDashState SuperDashState { get; private set; }
+    public PlayerAfterSuperDashJump AfterSuperDashJump { get; private set; }
 
     private void Awake()
     {
@@ -75,6 +77,8 @@ public class Player : MonoBehaviour
 
         JumpState = new PlayerJumpState(this, StateMachine, Data, "jump");
         DashState = new PlayerDashState(this, StateMachine, Data, "dash");
+        SuperDashState = new PlayerSuperDashState(this, StateMachine, Data, "superDash");
+        AfterSuperDashJump = new PlayerAfterSuperDashJump(this, StateMachine, Data, "superDashJump");
 
         ChangeActiveCam(ActiveCamera.Normal);
     }

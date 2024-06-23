@@ -57,6 +57,11 @@ public class PlayerGroundedState : PlayerFSMBaseState
             {
                 stateMachine.ChangeState(player.DashState);
             }
+            else if (player.InputHandler.FireTransferInput && player.CardSystem.HasSuperDashTarget && player.SuperDashState.CanSuperDash())
+            {
+                player.SuperDashState.SetTarget(player.CardSystem.SuperDashTarget);
+                stateMachine.ChangeState(player.SuperDashState);
+            }
         }
     }
 

@@ -19,7 +19,7 @@ public class PlayerInAirState : PlayerFSMBaseState
     private Vector2 v2Workspace;
     private float inAirMovementSpeed;
 
-    private float targetSlideDownSpeed;
+    private bool setAirControlSpeed;
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
         isGrounded = false;
@@ -34,19 +34,29 @@ public class PlayerInAirState : PlayerFSMBaseState
 
         v3Workspace = new Vector3();
         v2Workspace = new Vector2();
-        targetSlideDownSpeed = -playerData.slideDownSlopeSpeed;
 
-        if (movement.CurrentVelocityXZMagnitude > playerData.airMoveSpeed)
+        if (!setAirControlSpeed)
         {
-            SetAirControlSpeed(movement.CurrentVelocityXZMagnitude);
+            if (movement.CurrentVelocityXZMagnitude > playerData.airMoveSpeed)
+            {
+                if (movement.CurrentVelocityXZMagnitude > playerData.dashSpeed)
+                {
+                    SetAirControlSpeed(playerData.dashSpeed);
+                }
+                else
+                {
+                    SetAirControlSpeed(movement.CurrentVelocityXZMagnitude);
+                }
 
-            player.ChangeActiveCam(Player.ActiveCamera.Run);
-        }
-        else
-        {
-            SetAirControlSpeed(playerData.airMoveSpeed);
 
-            player.ChangeActiveCam(Player.ActiveCamera.Normal);
+                player.ChangeActiveCam(Player.ActiveCamera.Run);
+            }
+            else
+            {
+                SetAirControlSpeed(playerData.airMoveSpeed);
+
+                player.ChangeActiveCam(Player.ActiveCamera.Normal);
+            }
         }
     }
 
@@ -60,6 +70,7 @@ public class PlayerInAirState : PlayerFSMBaseState
         IsJumping = false;
         coyoteTime = false;
         inAirMovementSpeed = playerData.airMoveSpeed;
+        setAirControlSpeed = false;
     }
 
     public override void DoChecks()
@@ -98,13 +109,13 @@ public class PlayerInAirState : PlayerFSMBaseState
         {
             player.Anim.SetTrigger("land");
 
-            if (inAirMovementSpeed > playerData.walkSpeed && MovementInput != Vector2.zero)
+            if (inAirMovementSpeed < playerData.slowRunSpeed && MovementInput != Vector2.zero)
             {
-                stateMachine.ChangeState(player.RunningState);
+                stateMachine.ChangeState(player.WalkingState);
             }
             else if (MovementInput != Vector2.zero)
             {
-                stateMachine.ChangeState(player.WalkingState);
+                stateMachine.ChangeState(player.RunningState);
             }
             else
             {
@@ -119,8 +130,15 @@ public class PlayerInAirState : PlayerFSMBaseState
         {
             stateMachine.ChangeState(player.DashState);
         }
+        else if (player.InputHandler.FireTransferInput && player.CardSystem.HasSuperDashTarget && player.SuperDashState.CanSuperDash())
+        {
+            player.SuperDashState.SetTarget(player.CardSystem.SuperDashTarget);
+            stateMachine.ChangeState(player.SuperDashState);
+        }
         else
         {
+            MoveAndRotateWithCam(inAirMovementSpeed, 0f, true);
+            /*
             if (!IsJumping && collisionSenses.Slope.IsOnSlope && collisionSenses.Slope.ExceedsMaxSlopeAngle)
             {
                 Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime);
@@ -128,8 +146,9 @@ public class PlayerInAirState : PlayerFSMBaseState
             }
             else
             {
-                MoveAndRotateWithCam(inAirMovementSpeed, 0f, true);
+                
             }
+            */
         }
     }
 
@@ -171,5 +190,6 @@ public class PlayerInAirState : PlayerFSMBaseState
     public void SetAirControlSpeed(float speed)
     {
         inAirMovementSpeed = speed;
+        setAirControlSpeed = true;
     }
 }
