@@ -52,6 +52,8 @@ public class EnemyFSMBaseState
     }
     public virtual void DoChecks() { }
 
+    public virtual void OnHit() { }
+
     public virtual void AnimationActionTrigger() { }
 
     public virtual void AnimationFinishTrigger() => isAnimationFinished = true;

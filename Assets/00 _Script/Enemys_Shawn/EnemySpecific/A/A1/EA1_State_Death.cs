@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class E_State_Death : EnemyFSMBaseState
+public class EA1_State_Death : State_Death
 {
-    public E_State_Death(Enemy_A1 enemy, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName) : base(enemy, stateMachine, enemyData, animBoolName)
+    public EA1_State_Death(Enemy_A1 enemy, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName) : base(enemy, stateMachine, enemyData, animBoolName)
     {
     }
     public override void Enter()
