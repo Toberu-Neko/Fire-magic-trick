@@ -15,6 +15,7 @@ public class PlayerData : ScriptableObject
     public float fastRunSpeed = 8f;
     public float aimMoveSpeed = 2f;
     public float airMoveSpeed = 3f;
+    public float slideDownSlopeSpeed = 20f;
 
     [Header("Jump")]
     public float jumpVelocity = 15f;

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Movement : CoreComponent
 {
-    public Slope Slope { get; set; }
+    private CollisionSenses collisionSenses;
 
     public Rigidbody RB { get; private set; }
     public Transform ParentTransform { get; private set; }
@@ -24,14 +24,13 @@ public class Movement : CoreComponent
 
         ParentTransform = core.transform.parent;
         RB = GetComponentInParent<Rigidbody>();
+        collisionSenses = core.GetCoreComponent<CollisionSenses>();
 
         useGravity = RB.useGravity;
     }
 
     private void OnEnable()
     {
-        Slope = new();
-
         velocityWorkspace = Vector3.zero;
         V2ToV3Workspace = Vector3.zero;
 
@@ -44,9 +43,9 @@ public class Movement : CoreComponent
 
         CurrentVelocity = RB.velocity;
 
-        if (Slope.hasCollisionSenses)
+        if (collisionSenses.Slope.hasCollisionSenses)
         {
-            if (Slope.IsOnSlope)
+            if ((collisionSenses.Slope.IsOnSlope && !collisionSenses.Slope.ExceedsMaxSlopeAngle) && collisionSenses.Ground)
             {
                 wasOnSlope = true;
                 SetGravityZero();
@@ -70,7 +69,7 @@ public class Movement : CoreComponent
     {
         velocityWorkspace.Set(V2Direction.x * velocity, CurrentVelocity.y, V2Direction.y * velocity);
 
-        if (Slope.IsOnSlope && !ignoreSlope && Slope.NormalPrep != Vector3.zero)
+        if ((collisionSenses.Slope.IsOnSlope && !collisionSenses.Slope.ExceedsMaxSlopeAngle) && !ignoreSlope && collisionSenses.Slope.NormalPrep != Vector3.zero && collisionSenses.Ground)
         {
             SetVelocity(velocity, GetSlopeMoveDirection(V2ToV3(V2Direction)));
             return;
@@ -108,7 +107,7 @@ public class Movement : CoreComponent
 
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
-        return Vector3.ProjectOnPlane(direction, Slope.Hit.normal).normalized;
+        return Vector3.ProjectOnPlane(direction, collisionSenses.Slope.Hit.normal).normalized;
     }
 
     public Vector3 V2ToV3(Vector2 direction)

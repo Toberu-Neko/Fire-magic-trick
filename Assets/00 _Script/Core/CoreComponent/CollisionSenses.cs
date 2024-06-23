@@ -14,10 +14,13 @@ public class CollisionSenses : CoreComponent
     [SerializeField] private Vector3 groundCheckV3;
     [SerializeField] private float groundCheckDistance = 0.25f;
     [SerializeField] private float slopeCheckDistance = 0.75f;
+    [SerializeField] private float longSlopeCheckDistance = 1.5f;
 
     [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private LayerMask whatIsSlopeDetection;
     [SerializeField] private float maxSlopeAngle = 30f;
     private Slope slope = new();
+
     protected override void Awake()
     {
         base.Awake();
@@ -28,8 +31,6 @@ public class CollisionSenses : CoreComponent
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        movement.Slope = Slope;
     }
 
     public bool Ground
@@ -54,17 +55,18 @@ public class CollisionSenses : CoreComponent
             slope = new();
             slope.hasCollisionSenses = true;
 
-            RaycastHit[] down = Physics.BoxCastAll(GroundCheck.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, slopeCheckDistance, whatIsGround);
+            RaycastHit[] down = Physics.BoxCastAll(GroundCheck.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, longSlopeCheckDistance, whatIsSlopeDetection);
 
             foreach (RaycastHit hit in down)
             {
                 Vector3 normal = hit.normal;
                 float angle = Vector3.Angle(Vector3.up, normal);
 
-                if (angle != 0 && angle < maxSlopeAngle)
+                if (angle != 0)
                 {
                     slope.Set(normal, angle, hit);
                     slope.SetIsOnSlope(true);
+                    // Debug.Log(slope.DownAngle);
                     break;
                 }
             }
@@ -96,6 +98,7 @@ public class Slope
     public Vector3 NormalPrep { get; private set; }
     public float DownAngle { get; private set; }
     public bool IsOnSlope { get; private set; }
+    public bool ExceedsMaxSlopeAngle => DownAngle > 30f;
     public bool hasCollisionSenses;
 
     public Slope()
@@ -105,7 +108,6 @@ public class Slope
         IsOnSlope = false;
         hasCollisionSenses = false;
     }
-
 
     public void SetIsOnSlope(bool isOnSlope)
     {

@@ -18,6 +18,8 @@ public class PlayerInAirState : PlayerFSMBaseState
     private Vector3 v3Workspace;
     private Vector2 v2Workspace;
     private float inAirMovementSpeed;
+
+    private float targetSlideDownSpeed;
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
         isGrounded = false;
@@ -32,8 +34,9 @@ public class PlayerInAirState : PlayerFSMBaseState
 
         v3Workspace = new Vector3();
         v2Workspace = new Vector2();
+        targetSlideDownSpeed = -playerData.slideDownSlopeSpeed;
 
-        if(movement.CurrentVelocityXZMagnitude > playerData.airMoveSpeed)
+        if (movement.CurrentVelocityXZMagnitude > playerData.airMoveSpeed)
         {
             SetAirControlSpeed(movement.CurrentVelocityXZMagnitude);
 
@@ -91,9 +94,7 @@ public class PlayerInAirState : PlayerFSMBaseState
             maxYVelocity = movement.CurrentVelocity.y;
         }
 
-
-
-        if (collisionSenses.Ground && !IsJumping)
+        if (collisionSenses.Ground && !IsJumping && !collisionSenses.Slope.ExceedsMaxSlopeAngle)
         {
             player.Anim.SetTrigger("land");
 
@@ -120,7 +121,15 @@ public class PlayerInAirState : PlayerFSMBaseState
         }
         else
         {
-            MoveAndRotateWithCam(inAirMovementSpeed, 0f, true);
+            if (!IsJumping && collisionSenses.Slope.IsOnSlope && collisionSenses.Slope.ExceedsMaxSlopeAngle)
+            {
+                Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime);
+                movement.SetVelocityY(Mathf.Lerp(movement.CurrentVelocity.y, -playerData.slideDownSlopeSpeed, 2f * Time.deltaTime));
+            }
+            else
+            {
+                MoveAndRotateWithCam(inAirMovementSpeed, 0f, true);
+            }
         }
     }
 

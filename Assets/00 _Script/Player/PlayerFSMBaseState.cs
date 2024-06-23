@@ -24,6 +24,7 @@ public class PlayerFSMBaseState
     private Vector3 v3Workspace;
     private Vector2 v2Workspace;
 
+
     public PlayerFSMBaseState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName)
     {
         this.player = player;
