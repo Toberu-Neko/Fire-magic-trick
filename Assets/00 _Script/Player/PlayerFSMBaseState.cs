@@ -24,6 +24,7 @@ public class PlayerFSMBaseState
     private Vector3 v3Workspace;
     private Vector2 v2Workspace;
 
+
     public PlayerFSMBaseState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName)
     {
         this.player = player;
@@ -103,7 +104,7 @@ public class PlayerFSMBaseState
         movement.Rotate(rotation);
     }
 
-    protected void MoveAndRotateWithCam(float originalMinSpeed, float originalMaxSpeed = 0f, bool ignoreSlope = false)
+    protected void MoveAndRotateWithCam(float originalMinSpeed, float originalMaxSpeed = 0f, bool ignoreSlope = false, bool overwriteSpeed = true)
     {
         v3Workspace.Set(MovementInput.x, 0f, MovementInput.y);
 
@@ -131,7 +132,14 @@ public class PlayerFSMBaseState
 
             v2Workspace.Set(targetDirection.x, targetDirection.z);
 
-            movement.SetVelocity(speed, v2Workspace, ignoreSlope);
+            if (overwriteSpeed)
+            {
+                movement.SetVelocity(speed, v2Workspace, ignoreSlope);
+            }
+            else
+            {
+                movement.AddForce(speed, targetDirection);
+            }
         }
 
     }

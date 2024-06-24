@@ -19,6 +19,13 @@ public class CardSystem : MonoBehaviour
     [SerializeField] private float maxShootDistance;
     [SerializeField] private float minShootDistance;
     [SerializeField] private float shootCooldown;
+    [SerializeField] private float cardStateDuration = 5f;
+
+    [Header("Super Dash")]
+    [SerializeField] private LayerMask whatIsSuperDashTarget;
+    [SerializeField] private float superDashDistance = 10f;
+    public Transform SuperDashTarget { get; private set; }
+    public bool HasSuperDashTarget { get; private set; }
 
     private Vector3 targetPosition;
     private Vector2 screenCenterPoint;
@@ -31,7 +38,6 @@ public class CardSystem : MonoBehaviour
         Fire
     }
 
-    [SerializeField] private float cardStateDuration = 5f;
     private float startCardStateTime;
     private float endCardStateTime;
 
@@ -39,10 +45,6 @@ public class CardSystem : MonoBehaviour
 
     private int windCardEnergy;
     private int fireCardEnergy;
-
-    private void Awake()
-    {
-    }
 
     private void OnEnable()
     {
@@ -53,6 +55,8 @@ public class CardSystem : MonoBehaviour
         startCardStateTime = 0f;
         endCardStateTime = 0f;
         startShootTime = 0f;
+
+        HasSuperDashTarget = false;
     }
 
     private void Update()
@@ -70,9 +74,10 @@ public class CardSystem : MonoBehaviour
 
     private void ShootRay()
     {
-        Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+        Ray ray = player.InputHandler.MainCam.ScreenPointToRay(screenCenterPoint);
 
         bool raycastHit = Physics.Raycast(ray, out RaycastHit hit, 999f, aimColliderLayerMask);
+        bool superDashRaycastHit = Physics.Raycast(ray, out RaycastHit superDashHit, superDashDistance, whatIsSuperDashTarget);
 
         if (raycastHit)
         {
@@ -83,6 +88,17 @@ public class CardSystem : MonoBehaviour
         {
             debugTransform.position = ray.origin + ray.direction * maxShootDistance;
             targetPosition = debugTransform.position;
+        }
+
+        if (superDashRaycastHit)
+        {
+            HasSuperDashTarget = true;
+            SuperDashTarget = superDashHit.transform;
+        }
+        else
+        {
+            HasSuperDashTarget = false;
+            SuperDashTarget = null;
         }
     }
 
@@ -103,7 +119,6 @@ public class CardSystem : MonoBehaviour
         }
 
         player.Anim.SetTrigger("shoot");
-        //TODO: Decide which card to shoot in this script
         // Debug.Log(transform.forward - player.InputHandler.MainCam.transform.forward);
 
         switch (currentCardType)
@@ -131,5 +146,11 @@ public class CardSystem : MonoBehaviour
         startCardStateTime = Time.time;
         endCardStateTime = startCardStateTime + cardStateDuration;
         currentCardType = cardType;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, superDashDistance);
     }
 }

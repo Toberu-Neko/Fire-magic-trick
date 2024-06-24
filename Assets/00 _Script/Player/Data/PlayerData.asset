@@ -14,15 +14,86 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 20
   rotateSmoothTime: 1.5
-  moveSpeed: 4
+  walkSpeed: 3.25
   slowRunSpeed: 5
   fastRunSpeed: 8
   aimMoveSpeed: 3
-  airMoveSpeed: 4
+  airMoveSpeed: 3
   jumpVelocity: 7
+  jumpVelocityAfterSuperDash: 50
   amountOfJumps: 2
-  jumpInpusStopYSpeedMultiplier: 0.8
+  jumpInpusStopYSpeedMultiplier: 1
   coyoteTime: 0.3
   dashSpeed: 12
   dashTime: 0.2
   dashCooldown: 0.35
+  baseSuperDashSpeed: 5
+  maxSuperDashSpeed: 25
+  superDashSpeedGraph:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.025728988
+      outSlope: -0.025728988
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.36666667
+    - serializedVersion: 3
+      time: 0.6913349
+      value: 0.27467075
+      inSlope: 1.1103599
+      outSlope: 1.1103599
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1.0023592
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  speedUpTime: 0.5
+  maxSuperDashTime: 2
+  superDashCooldown: 0.75
+  afterSuperDashMultiplier: 0.65
+  superDashJumpTime: 0.5
+  superDashJumpVelocity: 15
+  superDashDecaySpeedGraph:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.0000122
+      value: 0.000001296401
+      inSlope: 0.000005983051
+      outSlope: 0.000005983051
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3312227
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fireballSpeed: 4
+  fireballForceValue: 15
+  fireballMaxYVelocity: -0.35
+  fireballMinYVelocity: -2.5
+  fireballMaxTime: 2.5
