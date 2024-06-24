@@ -17,10 +17,13 @@ public class EnemyFSMBaseState
     protected float StartTime;
     protected float ExitTime;
 
-
     //animation...if we have.
     protected string animBoolName;
     protected bool saidThings;
+
+    //State
+    protected Movement Movement { get; private set; }
+    protected CollisionSenses CollisionSenses { get; private set; }
 
     public EnemyFSMBaseState(Entity entity, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName)
     {
@@ -29,8 +32,12 @@ public class EnemyFSMBaseState
         this.enemyData = enemyData;
         this.animBoolName = animBoolName;
 
+        //core and core component
         core = this.entity.Core;
+        Movement = core.GetCoreComponent<Movement>();
+        CollisionSenses = core.GetCoreComponent<CollisionSenses>();
 
+        //initialize
         StartTime = 0f;
         ExitTime = 0f;
     }
