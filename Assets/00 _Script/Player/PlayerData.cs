@@ -35,6 +35,7 @@ public class PlayerData : ScriptableObject
     public float maxSuperDashTime = 2f;
     public float superDashCooldown = 0.75f;
     public float afterSuperDashMultiplier = 0.65f;
+    public float targetYOffset = 1f;
 
     public float superDashJumpTime = 0.5f;
     public float superDashJumpVelocity = 10f;

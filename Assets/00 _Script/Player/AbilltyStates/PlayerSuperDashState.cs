@@ -1,3 +1,4 @@
+using MagicaCloth2;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class PlayerSuperDashState : PlayerAbilityState
 {
     private Transform target;
     private Vector3 targetVector;
+    private Vector3 targetPos;
 
     private bool jumpInput;
     private bool goToAirJumpState;
@@ -30,10 +32,14 @@ public class PlayerSuperDashState : PlayerAbilityState
         }
 
         movement.SetVelocityZero();
-        targetVector = target.position - player.transform.position;
+        targetPos.Set(target.position.x, target.transform.position.y + playerData.targetYOffset, target.position.z);
+        targetVector = targetPos - player.transform.position;
         targetVector.Normalize();
         goToAirJumpState = false;
 
+        player.SetCollider(false);
+        player.SetPlayerModel(false);
+        player.VFXController.SetSuperDashVFX(true);
     }
 
     public override void Exit()
@@ -41,6 +47,9 @@ public class PlayerSuperDashState : PlayerAbilityState
         base.Exit();
 
         target = null;
+        player.SetCollider(true);
+        player.SetPlayerModel(true);
+        player.VFXController.SetSuperDashVFX(false);
     }
 
     public override void LogicUpdate()
@@ -49,6 +58,7 @@ public class PlayerSuperDashState : PlayerAbilityState
 
         jumpInput = player.InputHandler.JumpInput;
 
+        targetPos.Set(target.position.x, target.transform.position.y + playerData.targetYOffset, target.position.z);
         if (jumpInput)
         {
             player.InputHandler.UseJumpInput();
@@ -61,7 +71,7 @@ public class PlayerSuperDashState : PlayerAbilityState
             return;
         }
 
-        if (Vector3.Distance(player.transform.position, target.position) <= 2f)
+        if (Vector3.Distance(player.transform.position, targetPos) <= 0.5f)
         {
             DetermineNextState();
             return;
@@ -73,6 +83,8 @@ public class PlayerSuperDashState : PlayerAbilityState
         }
         else
         {
+            targetVector = targetPos - player.transform.position;
+            targetVector.Normalize();
             float speed = playerData.maxSuperDashSpeed * playerData.superDashSpeedGraph.Evaluate(Mathf.Clamp01((Time.time - StartTime) / playerData.speedUpTime));
             movement.SetVelocity(speed, targetVector);
         }

@@ -9,6 +9,10 @@ public class Player : MonoBehaviour
     [field: SerializeField] public PlayerInputHandler InputHandler { get; private set; }
     [field: SerializeField] public Animator Anim { get; private set; }
     [field: SerializeField] public Core Core { get; private set; }
+    [field: SerializeField] public PlayerVFXController VFXController { get; private set; }
+    [SerializeField] private CapsuleCollider col;
+    [SerializeField] private GameObject playerModel;
+    private float colOrgHight;
     public Movement Movement { get; private set; }
 
     [Header("Camera Objects")]
@@ -62,6 +66,7 @@ public class Player : MonoBehaviour
         CameraPosRelateToPlayer = new();
         cameraWorkspaceV2 = new();
         cameraWorkspaceV2.Set(playerCamera.position.x - transform.position.x, playerCamera.position.z - transform.position.z);
+        colOrgHight = col.height;
 
         Movement = Core.GetCoreComponent<Movement>();
 
@@ -78,9 +83,9 @@ public class Player : MonoBehaviour
 
         JumpState = new PlayerJumpState(this, StateMachine, Data, "jump");
         DashState = new PlayerDashState(this, StateMachine, Data, "dash");
-        SuperDashState = new PlayerSuperDashState(this, StateMachine, Data, "superDash");
-        AfterSuperDashJump = new PlayerAfterSuperDashJump(this, StateMachine, Data, "superDashJump");
-        FireballState = new PlayerFireballState(this, StateMachine, Data, "fireball");
+        SuperDashState = new PlayerSuperDashState(this, StateMachine, Data, "inAir");
+        AfterSuperDashJump = new PlayerAfterSuperDashJump(this, StateMachine, Data, "backFlip");
+        FireballState = new PlayerFireballState(this, StateMachine, Data, "inAir");
 
         ChangeActiveCam(ActiveCamera.Normal);
     }
@@ -212,5 +217,25 @@ public class Player : MonoBehaviour
                 DeathCam.SetActive(true);
                 break;
         }
+    }
+
+    public void SetCollider(float value)
+    {
+        col.height = value;
+    }
+
+    public void SetCollider(bool value)
+    {
+        col.enabled = value;
+    }
+
+    public void SetColliderOrg()
+    {
+        col.height = colOrgHight;
+    }
+
+    public void SetPlayerModel(bool value)
+    {
+        playerModel.SetActive(value);
     }
 }
