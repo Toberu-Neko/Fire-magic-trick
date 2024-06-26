@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_Death : EnemyFSMBaseState
 {
-    public State_Death(Entity entity, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName) : base(entity, stateMachine, enemyData, animBoolName)
+    public State_Death(Entity entity, EnemyStateMachine stateMachine, EnemyBaseData enemyData, string animBoolName) : base(entity, stateMachine, animBoolName)
     {
     }
     public override void Enter()

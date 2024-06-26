@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_Patrol : EnemyFSMBaseState
 {
-    public State_Patrol(Entity entity, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName) : base(entity, stateMachine, enemyData, animBoolName)
+    public State_Patrol(Entity entity, EnemyStateMachine stateMachine, ED_EnemyPatrol enemyData, string animBoolName) : base(entity, stateMachine, animBoolName)
     {
     }
     public override void Enter()
@@ -17,6 +17,7 @@ public class State_Patrol : EnemyFSMBaseState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        Movement.SetVelocity(10,Vector3.forward);
     }
     public override void DoChecks()
     {

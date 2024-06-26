@@ -5,7 +5,6 @@ public class EnemyFSMBaseState
     //Base Setting for Enemy State.
     protected Entity entity;
     protected EnemyStateMachine stateMachine;
-    protected EnemyData enemyData;
     protected Core core;
 
     //Animation state
@@ -25,11 +24,10 @@ public class EnemyFSMBaseState
     protected Movement Movement { get; private set; }
     protected CollisionSenses CollisionSenses { get; private set; }
 
-    public EnemyFSMBaseState(Entity entity, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName)
+    public EnemyFSMBaseState(Entity entity, EnemyStateMachine stateMachine, string animBoolName)
     {
         this.entity = entity;
         this.stateMachine = stateMachine;
-        this.enemyData = enemyData;
         this.animBoolName = animBoolName;
 
         //core and core component

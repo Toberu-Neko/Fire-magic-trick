@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class Movement : CoreComponent
@@ -79,6 +76,7 @@ public class Movement : CoreComponent
     }
     public void SetVelocity(Vector2 velocity, bool ignoreSlope = false)
     {
+        //ignore y.
         if ((collisionSenses.Slope.IsOnSlope && !collisionSenses.Slope.ExceedsMaxSlopeAngle) && !ignoreSlope && collisionSenses.Slope.NormalPrep != Vector3.zero && collisionSenses.Ground)
         {
             SetVelocity(velocity.magnitude, GetSlopeMoveDirection(V2ToV3(velocity.normalized)));

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_Alert : EnemyFSMBaseState
 {
-    public State_Alert(Entity entity, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName) : base(entity, stateMachine, enemyData, animBoolName)
+    public State_Alert(Entity entity, EnemyStateMachine stateMachine, EnemyBaseData enemyData, string animBoolName) : base(entity, stateMachine, animBoolName)
     {
     }
     public override void Enter()

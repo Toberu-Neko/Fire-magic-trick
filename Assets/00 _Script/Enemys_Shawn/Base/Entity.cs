@@ -1,20 +1,8 @@
-using MoreMountains.Tools;
 using UnityEngine;
 
-public enum E_State
-{
-    Idel,
-    Alert,
-    Attack,
-    Patrol,
-    OnHit,
-    Death
-}
 public class Entity : MonoBehaviour
 {
     [field: SerializeField] public EnemyStateMachine StateMachine { get; private set; }
-    [MMReadOnly][SerializeField] private E_State e_State;
-    public void changeState_Enum(E_State state) { e_State = state; }
     [SerializeField] private D_Entity EntityData;
     //[SerializeField] public SpriteRenderer spriteRenderer;
     [SerializeField] private Collider col;
@@ -33,6 +21,7 @@ public class Entity : MonoBehaviour
 
     public virtual void Awake()
     {
+        StateMachine = new();
         Core = GetComponentInChildren<Core>();
 
         movement = Core.GetCoreComponent<Movement>();
@@ -48,7 +37,6 @@ public class Entity : MonoBehaviour
         //collisionAttackDetails = EntityData.collisionAttackDetails;
 
         //movement.OrginalGravityScale = EntityData.gravityScale;
-        StateMachine = new();
     }
 
     protected virtual void OnEnable()

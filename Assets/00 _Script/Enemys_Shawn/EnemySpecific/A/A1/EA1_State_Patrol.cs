@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class EA1_State_Patrol : State_Patrol
 {
-    public EA1_State_Patrol(Enemy_A1 enemy, EnemyStateMachine stateMachine, EnemyData enemyData, string animBoolName) : base(enemy, stateMachine, enemyData, animBoolName)
+    public Enemy_A1 enemy;
+    public EA1_State_Patrol(Enemy_A1 enemy, EnemyStateMachine stateMachine, ED_EnemyPatrol enemyData, string animBoolName) : base(enemy, stateMachine, enemyData, animBoolName)
     {
+        this.enemy = enemy;
     }
     public override void Enter()
     {
         base.Enter();
-        entity.changeState_Enum(E_State.Patrol);
     }
-
     public override void Exit()
     {
         base.Exit();
