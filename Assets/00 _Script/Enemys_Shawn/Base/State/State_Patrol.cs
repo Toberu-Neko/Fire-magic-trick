@@ -17,7 +17,7 @@ public class State_Patrol : EnemyFSMBaseState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        Movement.SetVelocity(10,Vector3.forward);
+        Movement.SetVelocity(4,Vector3.forward);
     }
     public override void DoChecks()
     {
