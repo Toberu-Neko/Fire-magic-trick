@@ -25,4 +25,7 @@ public class CoreComponent : MonoBehaviour
     public virtual void PhysicsUpdate()
     {
     }
+    public virtual void OnDrawGizmos()
+    {
+    }
 }

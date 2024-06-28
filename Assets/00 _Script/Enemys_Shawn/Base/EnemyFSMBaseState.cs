@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyFSMBaseState
 {
@@ -23,6 +24,7 @@ public class EnemyFSMBaseState
     //State
     protected Movement Movement { get; private set; }
     protected CollisionSenses CollisionSenses { get; private set; }
+    protected EnemyNavigation Navigation { get; private set; }
 
     public EnemyFSMBaseState(Entity entity, EnemyStateMachine stateMachine, string animBoolName)
     {
@@ -34,6 +36,7 @@ public class EnemyFSMBaseState
         core = this.entity.Core;
         Movement = core.GetCoreComponent<Movement>();
         CollisionSenses = core.GetCoreComponent<CollisionSenses>();
+        Navigation = core.GetCoreComponent<EnemyNavigation>();
 
         //initialize
         StartTime = 0f;

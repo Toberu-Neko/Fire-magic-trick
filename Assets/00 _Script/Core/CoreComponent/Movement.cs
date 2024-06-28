@@ -116,7 +116,11 @@ public class Movement : CoreComponent
     {
         ParentTransform.rotation = Quaternion.Euler(0f, value, 0f);
     }
-
+    public void RotateIncrease(float value)
+    {
+        var rotation = ParentTransform.rotation;
+        ParentTransform.rotation *= Quaternion.Euler(rotation.x, rotation.y + value, rotation.z);
+    }
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
         return Vector3.ProjectOnPlane(direction, collisionSenses.Slope.Hit.normal).normalized;

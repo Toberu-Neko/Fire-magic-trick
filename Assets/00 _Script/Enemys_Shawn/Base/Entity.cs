@@ -9,9 +9,11 @@ public class Entity : MonoBehaviour
 
     [field: SerializeField] public GameObject DeathParticles { get; private set; }
 
+    //Core and Core Components
     public Core Core { get; private set; }
     protected Movement movement;
 
+    //Animation
     public Animator Anim { get; private set; }
 
     //public Stats Stats { get; private set; }

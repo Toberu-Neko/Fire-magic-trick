@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class Enemy_A1 : Entity
+public class Enemy_A1 : Enemy_A
 {
     //Base setting for enemy class.
     [field: SerializeField] public EA1_StateData Data { get; private set; }
-
+    
     //Animation
 
     //general state for enemys.

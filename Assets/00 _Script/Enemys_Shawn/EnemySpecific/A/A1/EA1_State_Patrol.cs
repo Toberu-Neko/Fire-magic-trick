@@ -15,12 +15,10 @@ public class EA1_State_Patrol : State_Patrol
     {
         base.Exit();
     }
-
     public override void LogicUpdate()
     {
         base.LogicUpdate();
     }
-
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
