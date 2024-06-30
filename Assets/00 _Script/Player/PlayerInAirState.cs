@@ -32,6 +32,8 @@ public class PlayerInAirState : PlayerFSMBaseState
         IsJumping = false;
         coyoteTime = false;
         inAirMovementSpeed = playerData.airMoveSpeed;
+
+        jumpStartTime = 0f;
     }
 
     public override void Enter()
@@ -40,7 +42,6 @@ public class PlayerInAirState : PlayerFSMBaseState
         floatCount = 0;
         isFloating = false;
         startFloatingTime = 0f;
-        jumpStartTime = 0f;
 
         v3Workspace = new Vector3();
         v2Workspace = new Vector2();
@@ -73,6 +74,8 @@ public class PlayerInAirState : PlayerFSMBaseState
     public override void Exit()
     {
         base.Exit();
+
+        jumpStartTime = 0f;
 
         minYVelocity = Mathf.Infinity;
         maxYVelocity = Mathf.NegativeInfinity;
@@ -187,7 +190,7 @@ public class PlayerInAirState : PlayerFSMBaseState
     {
         if (IsJumping)
         {
-            if (jumpInputStop && Time.time - jumpStartTime > 3f * Time.deltaTime)
+            if (jumpInputStop && Time.time - jumpStartTime > 2f * Time.fixedDeltaTime)
             {
                 movement.SetVelocityY(movement.CurrentVelocity.y * playerData.jumpInpusStopYSpeedMultiplier);
 
