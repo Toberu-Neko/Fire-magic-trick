@@ -22,6 +22,10 @@ public class PlayerData : ScriptableObject
     public float jumpInpusStopYSpeedMultiplier = 0.5f;
     public float coyoteTime = 0.2f;
 
+    [Header("InAirFloat")]
+    public float inAirFloatYVelocity = -1f;
+    public float inAriMaxFloatTime = 3f;
+
     [Header("Dash")]
     public float dashSpeed = 10f;
     public float dashTime = 0.2f;

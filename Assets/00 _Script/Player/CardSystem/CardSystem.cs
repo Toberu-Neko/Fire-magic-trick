@@ -23,6 +23,7 @@ public class CardSystem : MonoBehaviour
 
     [Header("Super Dash")]
     [SerializeField] private LayerMask whatIsSuperDashTarget;
+    [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private float superDashDistance = 10f;
     public Transform SuperDashTarget { get; private set; }
     public bool HasSuperDashTarget { get; private set; }
@@ -92,8 +93,18 @@ public class CardSystem : MonoBehaviour
 
         if (superDashRaycastHit)
         {
-            HasSuperDashTarget = true;
-            SuperDashTarget = superDashHit.transform;
+            bool groundHit = Physics.Raycast(ray, out RaycastHit groundHitOut, superDashHit.distance, whatIsGround);
+
+            if (!groundHit)
+            {
+                HasSuperDashTarget = true;
+                SuperDashTarget = superDashHit.transform;
+            }
+            else
+            {
+                HasSuperDashTarget = false;
+                SuperDashTarget = null;
+            }
         }
         else
         {
