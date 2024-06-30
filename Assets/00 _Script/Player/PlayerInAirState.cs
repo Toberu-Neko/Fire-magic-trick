@@ -12,6 +12,8 @@ public class PlayerInAirState : PlayerFSMBaseState
     private float maxYVelocity;
 
     private bool isGrounded;
+
+    private float jumpStartTime;
     public bool IsJumping { get; private set; }
     private bool coyoteTime;
 
@@ -20,6 +22,10 @@ public class PlayerInAirState : PlayerFSMBaseState
     private float inAirMovementSpeed;
 
     private bool setAirControlSpeed;
+
+    private bool isFloating;
+    private float startFloatingTime;
+    private int floatCount;
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
         isGrounded = false;
@@ -31,6 +37,10 @@ public class PlayerInAirState : PlayerFSMBaseState
     public override void Enter()
     {
         base.Enter();
+        floatCount = 0;
+        isFloating = false;
+        startFloatingTime = 0f;
+        jumpStartTime = 0f;
 
         v3Workspace = new Vector3();
         v2Workspace = new Vector2();
@@ -122,7 +132,7 @@ public class PlayerInAirState : PlayerFSMBaseState
                 stateMachine.ChangeState(player.IdleState);
             }
         }
-        else if (player.JumpState.CanJump() && jumpInput)
+        else if (player.JumpState.CanJump() && jumpInput && Time.time - player.InputHandler.JumpInputStartTime < playerData.floatHoldJumpTime)
         {
             stateMachine.ChangeState(player.JumpState);
         }
@@ -138,6 +148,26 @@ public class PlayerInAirState : PlayerFSMBaseState
         else
         {
             MoveAndRotateWithCam(inAirMovementSpeed, 0f, true);
+
+            if (!isFloating && floatCount < playerData.maxFloatCount && player.InputHandler.OrgJumpInput && minYVelocity < -1f)
+            {
+                player.InputHandler.UseJumpInput();
+                isFloating = true;
+                startFloatingTime = Time.time;
+            }
+            else if (isFloating && (!player.InputHandler.OrgJumpInput || Time.time - startFloatingTime > playerData.inAirMaxFloatTime))
+            {
+                isFloating = false;
+                floatCount++;
+            }
+
+            if (isFloating)
+            {
+                movement.SetVelocityY(playerData.floatSpeed);
+            }
+
+            inAirMovementSpeed = Mathf.Lerp(inAirMovementSpeed, playerData.airMoveSpeed, playerData.frameOfDecaySpeed * Time.deltaTime);
+
             /*
             if (!IsJumping && collisionSenses.Slope.IsOnSlope && collisionSenses.Slope.ExceedsMaxSlopeAngle)
             {
@@ -150,13 +180,14 @@ public class PlayerInAirState : PlayerFSMBaseState
             }
             */
         }
+
     }
 
     private void CheckJumpMultiplier()
     {
         if (IsJumping)
         {
-            if (jumpInputStop)
+            if (jumpInputStop && Time.time - jumpStartTime > 3f * Time.deltaTime)
             {
                 movement.SetVelocityY(movement.CurrentVelocity.y * playerData.jumpInpusStopYSpeedMultiplier);
 
@@ -180,6 +211,8 @@ public class PlayerInAirState : PlayerFSMBaseState
 
     public void SetIsJumping()
     {
+        jumpStartTime = Time.time;
+
         IsJumping = true;
     }
     public void StartCoyoteTime()

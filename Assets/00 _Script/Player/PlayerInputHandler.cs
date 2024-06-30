@@ -56,6 +56,7 @@ public class PlayerInputHandler : MonoBehaviour
     public Vector2 RawMovementInput { get; private set; }
     public int NormInputX { get; private set; }
     public int NormInputY { get; private set; }
+    public bool OrgJumpInput { get; private set; }
     public bool JumpInput { get; private set; }
     public bool JumpInputStop { get; private set; }
     public bool DashInput { get; private set; }
@@ -81,7 +82,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     [SerializeField] private float inputHoldTime = 0.2f;
 
-    private float jumpInputStartTime;
+    public float JumpInputStartTime { get; private set; }
     private float dashInputStartTime;
 
     private void Awake()
@@ -349,18 +350,25 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.started)
         {
             JumpInput = true;
+            OrgJumpInput = true;
             JumpInputStop = false;
-            jumpInputStartTime = Time.time;
+            JumpInputStartTime = Time.time;
         }
         if (context.canceled)
         {
+            OrgJumpInput = false;
             JumpInputStop = true;
         }
     }
-    public void UseJumpInput() => JumpInput = false;
+
+    public void UseJumpInput()
+    {
+        JumpInput = false;
+    }
+
     private void CheckJumpInputHoldTime()
     {
-        if (Time.time >= jumpInputStartTime + inputHoldTime)
+        if (Time.time >= JumpInputStartTime + inputHoldTime)
         {
             JumpInput = false;
         }

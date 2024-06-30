@@ -21,6 +21,13 @@ public class PlayerData : ScriptableObject
     public int amountOfJumps = 1;
     public float jumpInpusStopYSpeedMultiplier = 0.5f;
     public float coyoteTime = 0.2f;
+    public float frameOfDecaySpeed = 0.75f;
+
+    [Header("InAir")]
+    public int maxFloatCount = 1;
+    public float floatSpeed = -1f;
+    public float floatHoldJumpTime = 0.2f;
+    public float inAirMaxFloatTime = 3f;
 
     [Header("Dash")]
     public float dashSpeed = 10f;

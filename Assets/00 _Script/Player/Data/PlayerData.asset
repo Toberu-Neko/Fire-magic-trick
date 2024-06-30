@@ -24,6 +24,10 @@ MonoBehaviour:
   amountOfJumps: 2
   jumpInpusStopYSpeedMultiplier: 1
   coyoteTime: 0.3
+  maxFloatCount: 1
+  floatSpeed: -0.2
+  floatHoldJumpTime: 0.5
+  inAirMaxFloatTime: 3
   dashSpeed: 12
   dashTime: 0.2
   dashCooldown: 0.35
@@ -66,6 +70,7 @@ MonoBehaviour:
   maxSuperDashTime: 2
   superDashCooldown: 0.75
   afterSuperDashMultiplier: 0.65
+  targetYOffset: 1
   superDashJumpTime: 0.5
   superDashJumpVelocity: 15
   superDashDecaySpeedGraph:
