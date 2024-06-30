@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Networking.Types;
 
 public class NGP_Basic_FireSkill_BeaconTPDash : MonoBehaviour
 {
