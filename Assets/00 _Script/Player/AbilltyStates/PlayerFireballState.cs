@@ -16,6 +16,24 @@ public class PlayerFireballState : PlayerAbilityState
 
         maxSpeed = movement.CurrentVelocityXZMagnitude;
         useOverrideSpeed = false;
+
+        player.SetCollider(false);
+        player.SetPlayerModel(false);
+        player.VFXController.SetSuperDashVFX(true);
+
+        if (collisionSenses.Ground)
+        {
+            isAbilityDone = true;
+        }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        player.SetCollider(true);
+        player.SetPlayerModel(true);
+        player.VFXController.SetSuperDashVFX(false);
     }
 
     public override void LogicUpdate()
