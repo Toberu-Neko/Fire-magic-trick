@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Movement : CoreComponent
@@ -116,11 +117,37 @@ public class Movement : CoreComponent
     {
         ParentTransform.rotation = Quaternion.Euler(0f, value, 0f);
     }
+
+    public void RotateSmooth(float value, float time)
+    {
+        StopCoroutine(nameof(SmoothRotate));
+        StartCoroutine(SmoothRotate(value, time));
+    }
+
+    private IEnumerator SmoothRotate(float value, float smoothTime)
+    {
+        float elapsedTime = 0f;
+        Quaternion startRotation = ParentTransform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(ParentTransform.rotation.x, ParentTransform.rotation.y + value, ParentTransform.rotation.z);
+
+        while (elapsedTime < smoothTime)
+        {
+            ParentTransform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsedTime / smoothTime);
+
+            elapsedTime += Time.deltaTime;
+
+            yield return Time.deltaTime;
+        }
+
+        ParentTransform.rotation = targetRotation;
+    }
+
     public void RotateIncrease(float value)
     {
         var rotation = ParentTransform.rotation;
         ParentTransform.rotation *= Quaternion.Euler(rotation.x, rotation.y + value, rotation.z);
     }
+
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
         return Vector3.ProjectOnPlane(direction, collisionSenses.Slope.Hit.normal).normalized;
