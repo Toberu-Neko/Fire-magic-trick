@@ -50,6 +50,29 @@ public class PlayerSuperDashState : PlayerAbilityState
         player.SetCollider(true);
         player.SetPlayerModel(true);
         player.VFXController.SetSuperDashVFX(false);
+
+        Collider[] detectedCol = Physics.OverlapSphere(player.transform.position, playerData.superDashRadius, playerData.whatIsCombatDetectable);
+
+        if (detectedCol.Length > 0) 
+        {
+            foreach (Collider col in detectedCol)
+            {
+                if (col.TryGetComponent(out IDamageable damageable))
+                {
+                    damageable.Damage(playerData.superDashDamage, player.transform.position);
+                }
+
+                if (col.TryGetComponent(out IKnockbackable knockbackable))
+                {
+                    knockbackable.Knockback(player.transform.position, playerData.superDashKnockbackForce);
+                }
+
+                if (col.TryGetComponent(out IFlammable flammable))
+                {
+                    flammable.SetOnFire(playerData.superDashBurnTime);
+                }
+            }
+        }
     }
 
     public override void LogicUpdate()
