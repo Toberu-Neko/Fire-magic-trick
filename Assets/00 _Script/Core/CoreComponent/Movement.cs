@@ -15,6 +15,7 @@ public class Movement : CoreComponent
     private float gravityWorkspace;
     private bool useGravity;
     private bool wasOnSlope;
+    public bool CanSetVelocity { get; private set; } = true;
 
     protected override void Awake()
     {
@@ -33,6 +34,7 @@ public class Movement : CoreComponent
         V2ToV3Workspace = Vector3.zero;
 
         wasOnSlope = false;
+        CanSetVelocity = true;
     }
 
     public override void LogicUpdate()
@@ -103,9 +105,17 @@ public class Movement : CoreComponent
 
     private void SetFinalVelocity()
     {
-        RB.velocity = velocityWorkspace;
+        if(!CanSetVelocity)
+        {
+            return;
+        }
 
+        RB.velocity = velocityWorkspace;
         CurrentVelocity = velocityWorkspace;
+    }
+    public void SetCanSetVelocity(bool a)
+    {
+        CanSetVelocity = a;
     }
 
     public void AddForce(float speed, Vector3 dir)

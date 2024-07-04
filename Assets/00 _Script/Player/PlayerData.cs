@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newPlayerData", menuName = "Data/Player Data/Base Data")]
 public class PlayerData : ScriptableObject
 {
+    [Header("Basic")]
+    public LayerMask whatIsCombatDetectable;
     public float rotationSpeed = 15f;
     public float rotateSmoothTime = 0.1f;
 
@@ -43,7 +45,12 @@ public class PlayerData : ScriptableObject
     public float superDashCooldown = 0.75f;
     public float afterSuperDashMultiplier = 0.65f;
     public float targetYOffset = 1f;
+    public float superDashDamage = 10f;
+    public float superDashKnockbackForce = 10f;
+    public float superDashRadius = 1.5f;
+    public float superDashBurnTime = 5f;
 
+    [Header("Super Dash Jump")]
     public float superDashJumpTime = 0.5f;
     public float superDashJumpVelocity = 10f;
     public AnimationCurve superDashDecaySpeedGraph;

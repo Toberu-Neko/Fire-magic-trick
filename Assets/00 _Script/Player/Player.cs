@@ -238,4 +238,13 @@ public class Player : MonoBehaviour
     {
         playerModel.SetActive(value);
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.gray;
+        if (Data)
+        {
+            Gizmos.DrawWireSphere(transform.position, Data.superDashRadius);
+        }
+    }
 }
