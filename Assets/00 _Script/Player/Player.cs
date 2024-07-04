@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject playerModel;
     private float colOrgHight;
     public Movement Movement { get; private set; }
+    public Stats Stats { get; private set; }
 
     [Header("Camera Objects")]
     [SerializeField] private Transform playerCamera;
@@ -69,6 +70,7 @@ public class Player : MonoBehaviour
         colOrgHight = col.height;
 
         Movement = Core.GetCoreComponent<Movement>();
+        Stats = Core.GetCoreComponent<Stats>();
 
         StateMachine = new PlayerStateMachine();
 
@@ -246,5 +248,10 @@ public class Player : MonoBehaviour
         {
             Gizmos.DrawWireSphere(transform.position, Data.superDashRadius);
         }
+    }
+
+    public void DecreaseHealthUntilInit(float value)
+    {
+        Stats.Health.DecreaseUntilInitValue(value);
     }
 }

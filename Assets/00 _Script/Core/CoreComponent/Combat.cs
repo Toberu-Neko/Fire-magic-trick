@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,6 +38,27 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable, IFlammable
         DetectedDamageables = new();
         DetectedKnockbackables = new();
         DetectedFlammables = new();
+    }
+
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+
+
+        if (isKnockbackActive)
+            CheckKnockback();
+    }
+
+    private void CheckKnockback()
+    {
+        if (isKnockbackActive && ((movement.CurrentVelocity.y <= 0.01f && collisionSenses.Ground) || Time.time >= knockbackStartTime + maxKnockbackTime))
+        {
+            movement.SetCanSetVelocity(true);
+
+            // movement.SetKnockbackKinematic();
+
+            isKnockbackActive = false;
+        }
     }
 
     public void Damage(float damageAmount, Vector3 damagePosition)
@@ -91,7 +111,6 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable, IFlammable
         isKnockbackActive = true;
         knockbackStartTime = Time.time;
     }
-
     #endregion
 
     public void SetOnFire(float duration)

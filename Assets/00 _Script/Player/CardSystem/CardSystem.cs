@@ -44,6 +44,8 @@ public class CardSystem : MonoBehaviour
 
     private float startShootTime;
 
+    [SerializeField] private int windMaxEnergy;
+    [SerializeField] private int fireMaxEnergy;
     private int windCardEnergy;
     private int fireCardEnergy;
 
@@ -157,6 +159,18 @@ public class CardSystem : MonoBehaviour
         startCardStateTime = Time.time;
         endCardStateTime = startCardStateTime + cardStateDuration;
         currentCardType = cardType;
+    }
+
+    public void AddWindCardEnergy()
+    {
+        windCardEnergy++;
+        Mathf.Clamp(windCardEnergy, 0, windMaxEnergy);
+    }
+
+    public void AddFireCardEnergy()
+    {
+        fireCardEnergy++;
+        Mathf.Clamp(fireCardEnergy, 0, fireMaxEnergy);
     }
 
     private void OnDrawGizmos()

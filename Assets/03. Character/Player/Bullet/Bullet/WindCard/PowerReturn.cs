@@ -1,12 +1,10 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class PowerReturn : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
     [SerializeField] private float absorbDistance = 0.5f;
-
-    //Scritp
-    private NGP_SkillPower skillPower;
 
     //variable
     private Transform player;
@@ -21,33 +19,29 @@ public class PowerReturn : MonoBehaviour
     private void Start()
     {
         player = GameManager.Instance.Player.transform;
-        skillPower = GameManager.Instance.NewGamePlay.GetComponent<NGP_SkillPower>();
     }
 
     private void Update()
     {
-        MoveToPlayer();
-        absorb();
-    }
-    private void MoveToPlayer()
-    {
         transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
     }
-    private void absorb()
-    {
-        float distance = Vector3.Distance(transform.position, player.position);
 
-        if (distance < absorbDistance)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
-            if(type == Type.Fire)
+            if (type == Type.Fire)
             {
-                if (skillPower != null) skillPower.AddFirePower();
+                other.TryGetComponent(out CardSystem sys);
+                sys.AddFireCardEnergy();
             }
             else
             if (type == Type.Wind)
             {
-                if (skillPower != null) skillPower.AddWindPower();
+                other.TryGetComponent(out CardSystem sys);
+                sys.AddWindCardEnergy();
             }
+
             Destroy(gameObject);
         }
     }

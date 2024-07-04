@@ -84,6 +84,8 @@ public class PlayerInAirState : PlayerFSMBaseState
         coyoteTime = false;
         inAirMovementSpeed = playerData.airMoveSpeed;
         setAirControlSpeed = false;
+
+        player.VFXController.SetFloatVFX(false);
     }
 
     public override void DoChecks()
@@ -157,11 +159,13 @@ public class PlayerInAirState : PlayerFSMBaseState
                 player.InputHandler.UseJumpInput();
                 isFloating = true;
                 startFloatingTime = Time.time;
+                player.VFXController.SetFloatVFX(true);
             }
             else if (isFloating && (!player.InputHandler.OrgJumpInput || Time.time - startFloatingTime > playerData.inAirMaxFloatTime))
             {
                 isFloating = false;
                 floatCount++;
+                player.VFXController.SetFloatVFX(false);
             }
 
             if (isFloating)

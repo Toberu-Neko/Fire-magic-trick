@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class EnergyBall : MonoBehaviour
@@ -22,15 +20,12 @@ public class EnergyBall : MonoBehaviour
     private bool isTimer;
     private bool isTimerFinish;
 
-    private EnergySystem energySystem;
-    private GameObject EnemrgyBall;
     private GameObject player;
     private Rigidbody rb;
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        EnemrgyBall = this.gameObject;
-        energySystem = GameManager.Instance.Player.GetComponent<EnergySystem>();
+        player = GameManager.Instance.Player.gameObject;
+
         rb = GetComponent<Rigidbody>();
 
         startMove(speed_Start);
@@ -39,7 +34,6 @@ public class EnergyBall : MonoBehaviour
     private void Update()
     {
         CheckBallMoveToPlayerDistance();
-        CheckPlayerAbsorbDistance();
         timerSystem();
     }
     private void timerSystem()
@@ -55,6 +49,7 @@ public class EnergyBall : MonoBehaviour
             SetIsTimerFinish(true);
         }
     }
+
     private void startMove(float speed)
     {
         float x = Random.Range(-rotateDeviation, rotateDeviation);
@@ -65,6 +60,7 @@ public class EnergyBall : MonoBehaviour
         rb.drag = 3;
         rb.AddForce(transform.up * speed,ForceMode.Impulse);
     }
+
     private void CheckBallMoveToPlayerDistance()
     {
         if (distanceToPlayer() <= movementStartDistance)
@@ -72,37 +68,34 @@ public class EnergyBall : MonoBehaviour
             moveToPlayer();
         }
     }
-    private void CheckPlayerAbsorbDistance()
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (distanceToPlayer() <= absorbDistance)
+        if (other.CompareTag("Player"))
         {
-            giveEnergyToPlayer();
+            other.TryGetComponent(out Player player);
+            player.DecreaseHealthUntilInit(Energy);
             Destroy(gameObject);
         }
     }
-    private void recoverPlayerEnergy(float value)
-    {
-        energySystem.GetEnergy(value);
-    }
+
     private void moveToPlayer()
     {
         if(isTimerFinish)
         {
             rb.drag = 0;
-            Vector3 Direction = player.transform.position - EnemrgyBall.transform.position;
+            Vector3 Direction = player.transform.position - transform.position;
             rb.velocity = (Direction.normalized * speed);
         }
     }
-    private void giveEnergyToPlayer()
-    {
-        recoverPlayerEnergy(Energy);
-    }
+
     private float distanceToPlayer()
     {
-        Vector3 distanceVector = player.transform.position - EnemrgyBall.transform.position;
+        Vector3 distanceVector = player.transform.position - transform.position;
         float distanceToPlayer = distanceVector.magnitude;
         return distanceToPlayer;
     }
+
     private void SetIsTimer(bool value)
     {
         isTimer = value;

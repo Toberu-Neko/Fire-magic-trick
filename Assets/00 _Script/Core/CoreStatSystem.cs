@@ -51,4 +51,25 @@ public class CoreStatSystem
         OnValueChanged?.Invoke();
         OnValueDecreased?.Invoke();
     }
+
+    public void DecreaseUntilInitValue(float amount)
+    {
+        if(CurrentValue < InitValue)
+        {
+            return;
+        }
+        else if (CurrentValue - amount <= InitValue)
+        {
+            CurrentValue = InitValue;
+            OnValueChanged?.Invoke();
+            OnValueDecreased?.Invoke();
+            return;
+        }
+        else
+        {
+            CurrentValue -= amount;
+            OnValueChanged?.Invoke();
+            OnValueDecreased?.Invoke();
+        }
+    }
 }
