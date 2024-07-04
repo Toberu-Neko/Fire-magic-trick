@@ -18,6 +18,8 @@ public class Stats : CoreComponent
         IsBurning = false;
         startBurnTime = 0f;
         burnDuration = 0f;
+
+        Health.Init();
     }
 
     public void SetOnFire(float time)

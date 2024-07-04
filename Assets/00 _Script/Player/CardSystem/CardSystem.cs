@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,6 +49,8 @@ public class CardSystem : MonoBehaviour
     [SerializeField] private int fireMaxEnergy;
     private int windCardEnergy;
     private int fireCardEnergy;
+    public event Action<int> OnWindCardEnergyChanged;
+    public event Action<int> OnFireCardEnergyChanged;
 
     private void OnEnable()
     {
@@ -164,13 +167,29 @@ public class CardSystem : MonoBehaviour
     public void AddWindCardEnergy()
     {
         windCardEnergy++;
-        Mathf.Clamp(windCardEnergy, 0, windMaxEnergy);
+        windCardEnergy = Mathf.Clamp(windCardEnergy, 0, windMaxEnergy);
+        OnWindCardEnergyChanged?.Invoke(windCardEnergy);
+    }
+
+    public void DecreaseWindCardEnergy(int value)
+    {
+        windCardEnergy -= value;
+        windCardEnergy = Mathf.Clamp(windCardEnergy, 0, windMaxEnergy);
+        OnWindCardEnergyChanged?.Invoke(windCardEnergy);
     }
 
     public void AddFireCardEnergy()
     {
         fireCardEnergy++;
-        Mathf.Clamp(fireCardEnergy, 0, fireMaxEnergy);
+        fireCardEnergy = Mathf.Clamp(fireCardEnergy, 0, fireMaxEnergy);
+        OnFireCardEnergyChanged?.Invoke(fireCardEnergy);
+    }
+
+    public void DecreaseFireCardEnergy(int value)
+    {
+        fireCardEnergy -= value;
+        fireCardEnergy = Mathf.Clamp(fireCardEnergy, 0, fireMaxEnergy);
+        OnFireCardEnergyChanged?.Invoke(fireCardEnergy);
     }
 
     private void OnDrawGizmos()
