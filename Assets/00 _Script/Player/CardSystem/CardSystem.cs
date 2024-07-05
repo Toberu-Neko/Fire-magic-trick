@@ -33,6 +33,7 @@ public class CardSystem : MonoBehaviour
     private Vector2 screenCenterPoint;
 
     private CardType currentCardType;
+    public CardType CurrentEquipedCard { get; private set; }
     public enum CardType
     {
         Normal,
@@ -58,6 +59,7 @@ public class CardSystem : MonoBehaviour
         screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
 
         currentCardType = CardType.Normal;
+        CurrentEquipedCard = CardType.Fire;
         startCardStateTime = 0f;
         endCardStateTime = 0f;
         startShootTime = 0f;
@@ -73,7 +75,7 @@ public class CardSystem : MonoBehaviour
         {
             if(Time.time >= endCardStateTime)
             {
-                currentCardType = CardType.Normal;
+                ChangeCard(CardType.Normal);
             }
         }
     }
@@ -82,10 +84,10 @@ public class CardSystem : MonoBehaviour
     {
         Ray ray = player.InputHandler.MainCam.ScreenPointToRay(screenCenterPoint);
 
-        bool raycastHit = Physics.Raycast(ray, out RaycastHit hit, 999f, aimColliderLayerMask);
+        bool shootRaycastHit = Physics.Raycast(ray, out RaycastHit hit, 999f, aimColliderLayerMask);
         bool superDashRaycastHit = Physics.Raycast(ray, out RaycastHit superDashHit, superDashDistance, whatIsSuperDashTarget);
 
-        if (raycastHit)
+        if (shootRaycastHit)
         {
             debugTransform.position = hit.point;
             targetPosition = hit.point;
@@ -98,7 +100,7 @@ public class CardSystem : MonoBehaviour
 
         if (superDashRaycastHit)
         {
-            bool groundHit = Physics.Raycast(ray, out RaycastHit groundHitOut, superDashHit.distance, whatIsGround);
+            bool groundHit = Physics.Raycast(ray, superDashHit.distance, whatIsGround);
 
             if (!groundHit)
             {
@@ -154,14 +156,100 @@ public class CardSystem : MonoBehaviour
 
     public void ChangeCard(CardType cardType)
     {
-        if(currentCardType == cardType)
+        if(cardType != CardType.Normal)
         {
-            return;
+            CurrentEquipedCard = cardType;
         }
 
         startCardStateTime = Time.time;
         endCardStateTime = startCardStateTime + cardStateDuration;
         currentCardType = cardType;
+    }
+
+    public int CheckCurrentCardEnergy()
+    {
+        if(windCardEnergy == 0 && fireCardEnergy == 0)
+        {
+            return 0;
+        }
+
+        if(CurrentEquipedCard == CardType.Wind)
+        {
+            if(windCardEnergy == 0)
+            {
+                CurrentEquipedCard = CardType.Fire;
+                return fireCardEnergy;
+            }
+            else
+            {
+                return windCardEnergy;
+            }
+        }
+        else
+        {
+            if (fireCardEnergy == 0)
+            {
+                CurrentEquipedCard = CardType.Wind;
+                return windCardEnergy;
+            }
+            else
+            { 
+                return fireCardEnergy;
+            }
+        }
+    }
+
+    public bool CheckCardEnergy(int amount)
+    {
+        if (windCardEnergy == 0 && fireCardEnergy == 0)
+        {
+            return false;
+        }
+
+        if (CurrentEquipedCard == CardType.Wind)
+        {
+            if(windCardEnergy >= amount)
+            {
+                return true;
+            }
+            else
+            {
+                if (fireCardEnergy >= amount)
+                {
+                    CurrentEquipedCard = CardType.Fire;
+                    return true;
+                }
+            }
+        }
+        else if (CurrentEquipedCard == CardType.Fire)
+        {
+            if (fireCardEnergy >= amount)
+            {
+                return true;
+            }
+            else
+            {
+                if (windCardEnergy >= amount)
+                {
+                    CurrentEquipedCard = CardType.Wind;
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public void DecreaseCardEnergy(int amount)
+    {
+        if(CurrentEquipedCard == CardType.Wind)
+        {
+            DecreaseWindCardEnergy(amount);
+        }
+        else if(CurrentEquipedCard == CardType.Fire)
+        {
+            DecreaseFireCardEnergy(amount);
+        }
     }
 
     public void AddWindCardEnergy()

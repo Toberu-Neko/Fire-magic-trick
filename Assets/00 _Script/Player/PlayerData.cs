@@ -36,6 +36,11 @@ public class PlayerData : ScriptableObject
     public float dashTime = 0.2f;
     public float dashCooldown = 1f;
 
+    [Header("Super Jump")]
+    public float superJumpVelocity = 30f;
+    public int superJumpEnergyCost = 3;
+    public float superJumpFallAddForce = 10f;
+
     [Header("Super Dash")]
     public float baseSuperDashSpeed = 5f;
     public float maxSuperDashSpeed = 25f;

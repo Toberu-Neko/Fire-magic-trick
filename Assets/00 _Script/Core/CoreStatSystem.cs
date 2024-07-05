@@ -12,6 +12,14 @@ public class CoreStatSystem
 
     [field: SerializeField] public float MaxValue { get; set; }
     [field: SerializeField] public float InitValue { get; set; }
+    public float CurrentValuePercentage
+    {
+        get => CurrentValue / MaxValue;
+        private set
+        {
+
+        }
+    }
     // public float DeltaValue { get; private set; } = 0f;
 
     public float CurrentValue
@@ -26,8 +34,6 @@ public class CoreStatSystem
             }
         }
     }
-
-    public float CurrentValuePercentage => CurrentValue / MaxValue;
 
     [HideInInspector] public bool decreaseable = true;
     private float currentValue;
@@ -68,6 +74,26 @@ public class CoreStatSystem
         else
         {
             CurrentValue -= amount;
+            OnValueChanged?.Invoke();
+            OnValueDecreased?.Invoke();
+        }
+    }
+
+    public void IncreaseUntilInitValue(float amount)
+    {
+        if (CurrentValue > InitValue)
+        {
+            return;
+        }
+        else if (CurrentValue + amount > InitValue)
+        {
+            CurrentValue = InitValue;
+            OnValueChanged?.Invoke();
+            return;
+        }
+        else
+        {
+            CurrentValue += amount;
             OnValueChanged?.Invoke();
             OnValueDecreased?.Invoke();
         }

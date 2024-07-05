@@ -69,7 +69,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool HoldAimInput { get; private set; }
     public bool AttackInput { get; private set; }
     public bool HoldAttackInput { get; private set; }
-    public bool BigJumpInput { get; private set; }
+    public bool SuperJumpInput { get; private set; }
     public bool SkillInput { get; private set; }
     public bool SkillHoldInput { get; private set; }
 
@@ -119,7 +119,7 @@ public class PlayerInputHandler : MonoBehaviour
         DashInput = false;
         DashInputStop = false;
         AttackInput = false;
-        BigJumpInput = false;
+        SuperJumpInput = false;
         SkillInput = false;
         SkillHoldInput = false;
         DebugInput = false;
@@ -288,15 +288,15 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (context.started)
         {
-            BigJumpInput = true;
+            SuperJumpInput = true;
         }
         if (context.canceled)
         {
-            BigJumpInput = false;
+            SuperJumpInput = false;
         }
     }
 
-    public void UseBigJumpInput() => BigJumpInput = false;
+    public void UseSuperJumpInput() => SuperJumpInput = false;
 
     public void OnDashInput(InputAction.CallbackContext context)
     {

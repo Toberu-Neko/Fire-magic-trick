@@ -115,7 +115,7 @@ public class PlayerSuperDashState : PlayerAbilityState
 
     public bool CanSuperDash()
     {
-        return Time.time >= ExitTime + playerData.superDashCooldown;
+        return Time.time >= ExitTime + playerData.superDashCooldown && player.CardSystem.HasSuperDashTarget;
     }
 
     private void DetermineNextState()

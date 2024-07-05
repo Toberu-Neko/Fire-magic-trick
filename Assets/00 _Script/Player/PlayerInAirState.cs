@@ -145,7 +145,11 @@ public class PlayerInAirState : PlayerFSMBaseState
         {
             stateMachine.ChangeState(player.DashState);
         }
-        else if (player.InputHandler.FireTransferInput && player.CardSystem.HasSuperDashTarget && player.SuperDashState.CanSuperDash())
+        else if(player.InputHandler.SuperJumpInput && player.SuperJumpState.CanUseAbility())
+        {
+            stateMachine.ChangeState(player.SuperJumpState);
+        }
+        else if (player.InputHandler.FireTransferInput && player.SuperDashState.CanSuperDash())
         {
             player.SuperDashState.SetTarget(player.CardSystem.SuperDashTarget);
             stateMachine.ChangeState(player.SuperDashState);

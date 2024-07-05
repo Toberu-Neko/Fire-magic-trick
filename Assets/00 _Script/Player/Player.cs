@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     [field: SerializeField] public PlayerVFXController VFXController { get; private set; }
     [SerializeField] private CapsuleCollider col;
     [SerializeField] private GameObject playerModel;
-    private float colOrgHight;
     public Movement Movement { get; private set; }
     public Stats Stats { get; private set; }
 
@@ -61,13 +60,13 @@ public class Player : MonoBehaviour
     public PlayerSuperDashState SuperDashState { get; private set; }
     public PlayerAfterSuperDashJump AfterSuperDashJump { get; private set; }
     public PlayerFireballState FireballState { get; private set; }
+    public PlayerSuperJumpState SuperJumpState { get; private set; }
 
     private void Awake()
     {
         CameraPosRelateToPlayer = new();
         cameraWorkspaceV2 = new();
         cameraWorkspaceV2.Set(playerCamera.position.x - transform.position.x, playerCamera.position.z - transform.position.z);
-        colOrgHight = col.height;
 
         Movement = Core.GetCoreComponent<Movement>();
         Stats = Core.GetCoreComponent<Stats>();
@@ -88,6 +87,7 @@ public class Player : MonoBehaviour
         SuperDashState = new PlayerSuperDashState(this, StateMachine, Data, "inAir");
         AfterSuperDashJump = new PlayerAfterSuperDashJump(this, StateMachine, Data, "backFlip");
         FireballState = new PlayerFireballState(this, StateMachine, Data, "inAir");
+        SuperJumpState = new PlayerSuperJumpState(this, StateMachine, Data, "jump");
 
         ChangeActiveCam(ActiveCamera.Normal);
     }
@@ -221,19 +221,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SetCollider(float value)
-    {
-        col.height = value;
-    }
-
     public void SetCollider(bool value)
     {
         col.enabled = value;
-    }
-
-    public void SetColliderOrg()
-    {
-        col.height = colOrgHight;
     }
 
     public void SetPlayerModel(bool value)

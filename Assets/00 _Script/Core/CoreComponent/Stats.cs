@@ -7,8 +7,14 @@ public class Stats : CoreComponent
     // 0 = Die, < 100 = burn,  100 = Normal, 200 = NoSkill
     [field: SerializeField] public CoreStatSystem Health { get; private set; }
 
-    private float healthRegenRate = 0.5f;
+    private float healthRegenPerSec = 0f;
 
+    public bool IsInvincible { get; private set; }
+    public bool InCombat { get; private set; }
+    [SerializeField] private float combatTimer = 5f;
+    private float startCombatTime;
+
+    [SerializeField] private float burnWhenHealthBelowPercentage = 0.5f;
     public bool IsBurning { get; private set; }
     private float startBurnTime;
     private float burnDuration;
@@ -18,8 +24,47 @@ public class Stats : CoreComponent
         IsBurning = false;
         startBurnTime = 0f;
         burnDuration = 0f;
+        startCombatTime = 0f;
 
         Health.Init();
+        SetInvincible(false);
+
+        Health.OnValueDecreased += Health_OnValueDecreased;
+    }
+
+    private void OnDisable()
+    {
+        Health.OnValueDecreased -= Health_OnValueDecreased;
+    }
+
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+
+        if (InCombat && Time.time >= startCombatTime + combatTimer)
+        {
+            InCombat = false;
+        }
+
+        if (!InCombat && Health.CurrentValue < Health.InitValue && healthRegenPerSec > 0f)
+        {
+            Health.IncreaseUntilInitValue(healthRegenPerSec * Time.deltaTime);
+        }
+
+        if(Health.CurrentValuePercentage < burnWhenHealthBelowPercentage)
+        {
+            IsBurning = true;
+        }
+        else if (IsBurning)
+        {
+            BurnCheck();
+        }
+    }
+
+    private void Health_OnValueDecreased()
+    {
+        startCombatTime = Time.time;
+        InCombat = true;
     }
 
     public void SetOnFire(float time)
@@ -35,17 +80,21 @@ public class Stats : CoreComponent
         }
 
         IsBurning = true;
-        StopCoroutine(BurnCheck());
-        StartCoroutine(BurnCheck());
     }
 
-    private IEnumerator BurnCheck()
+    private void BurnCheck()
     {
-        while (Time.time < startBurnTime + burnDuration)
+        if (Time.time < startBurnTime + burnDuration)
         {
-            yield return new WaitForSeconds(Time.deltaTime);
+            return;
         }
 
         IsBurning = false;
+    }
+
+
+    public void SetInvincible(bool value)
+    {
+        IsInvincible = value;
     }
 }

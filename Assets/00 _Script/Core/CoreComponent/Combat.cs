@@ -63,7 +63,7 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable, IFlammable
 
     public void Damage(float damageAmount, Vector3 damagePosition)
     {
-        if (stats.Health.CurrentValue <= 0)
+        if (stats.Health.CurrentValue <= 0 || stats.IsInvincible)
         {
             return;
         }
@@ -99,7 +99,7 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable, IFlammable
 
     private void HandleKnockback(Vector3 dir, float strength)
     {
-        if (strength == 0f || dir == Vector3.zero)
+        if (strength == 0f || dir == Vector3.zero || stats.IsInvincible)
         {
             return;
         }
@@ -115,6 +115,11 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable, IFlammable
 
     public void SetOnFire(float duration)
     {
+        if (stats.IsInvincible)
+        {
+            return;
+        }
+
         stats.SetOnFire(duration);
     }
 
