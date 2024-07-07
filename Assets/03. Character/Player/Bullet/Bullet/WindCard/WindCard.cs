@@ -22,6 +22,7 @@ public class WindCard : Bullet
     {
         base.Update();
     }
+
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
@@ -31,12 +32,13 @@ public class WindCard : Bullet
             trackSystem.enabled = false;
         }
     }
+
     protected override void OnHitEnemy()
     {
         base.OnHitEnemy();
         Instantiate(WindCardReturn, transform.position, Quaternion.identity);
     }
-    protected override bool needHitFeedback()
+    protected override bool NeedHitFeedback()
     {
         return false;
     }

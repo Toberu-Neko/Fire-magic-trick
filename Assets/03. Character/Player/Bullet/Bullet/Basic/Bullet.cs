@@ -10,7 +10,6 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
     [SerializeField] protected float speed;
 
     //Script
-    // private CrosshairUI crosshairUI;
     private Rigidbody rb;
     private Collider coli;
 
@@ -21,6 +20,10 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
     //variable
     protected bool useTriggerEnter = false;
 
+    private void Awake()
+    {
+    }
+
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -29,10 +32,12 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
 
         Destroy(gameObject, lifeTime);
     }
+
     protected virtual void Update()
     {
-        GiveSpeed();
+        rb.velocity = transform.forward * speed;
     }
+
     private void OnCollisionEnter(Collision collision)
     {   
         if(!useTriggerEnter)
@@ -47,15 +52,15 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
             {
                 OnHit?.Invoke(collision);
                 OnHitEnemy();
+                SpawnVFX(hitEnemyPrefab, transform.position, Quaternion.identity, 1f);
+
                 // crosshairUI.EnemyHitImpluse(this.transform.position);
-                GameObject enemyhit = Instantiate(hitEnemyPrefab, pos, rot);
-                Destroy(enemyhit, 1f);
             }
             OnHitSomething();
 
-            newHit(pos, rot);
-            CroshairFeedback();
+            SpawnVFX(cardSlashPrefab, transform.position, Quaternion.identity, 1.5f);
             DestroyBullet();
+            CroshairFeedback();
         }
     }
     protected virtual void OnTriggerEnter(Collider other)
@@ -67,37 +72,30 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
                 OnTrigger?.Invoke(other);
                 OnHitEnemy();
                 // crosshairUI.EnemyHitImpluse(this.transform.position);
-                GameObject enemyhit = Instantiate(hitEnemyPrefab,other.transform.position, Quaternion.identity);
-                Destroy(enemyhit, 1f);
+                SpawnVFX(hitEnemyPrefab, transform.position, Quaternion.identity, 1f);
             }
-            if(needHitFeedback())
+            if(NeedHitFeedback())
             {
                 OnHitSomething();
-                newHit(other.transform.position, Quaternion.identity);
+                SpawnVFX(cardSlashPrefab, transform.position, Quaternion.identity, 1.5f);
             }
-           
+
             CroshairFeedback();
         }
     }
     public void OnHitRightNow()
     {
-        GameObject enemyhit = Instantiate(hitEnemyPrefab, this.transform.position, Quaternion.identity);
-        OnHitSomething();
-        newHit(this.transform.position, Quaternion.identity);
-        Destroy(enemyhit, 1f); 
+        SpawnVFX(hitEnemyPrefab, transform.position, Quaternion.identity, 1f);
+        SpawnVFX(cardSlashPrefab, transform.position, Quaternion.identity, 1.5f);
         DestroyBullet();
     }
-    protected virtual bool needHitFeedback() { return true; }
+    protected virtual bool NeedHitFeedback() { return true; }
     protected virtual void OnHitEnemy() { }
     protected virtual void OnHitSomething() { }
-    private void newHit(Vector3 pos, Quaternion rot)
+    private void SpawnVFX(GameObject obj, Vector3 pos, Quaternion rot, float time = 1f)
     {
-        var hitVFX = Instantiate(cardSlashPrefab, pos, rot);
-        Destroy(hitVFX, 1.5f);
-    }
-    protected virtual void GiveSpeed()
-    {
-        rb.velocity = transform.forward * speed;
+        var hitVFX = Instantiate(obj, pos, rot);
+        Destroy(hitVFX, time);
     }
     private void CroshairFeedback()
     {

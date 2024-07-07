@@ -44,7 +44,7 @@ public class KickBackEnemy : MonoBehaviour
                 Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
                 Vector3 Direction = (other.transform.position - BackCoordinate.position).normalized;
                 Vector3 ForceDirection = new Vector3(Direction.x, 0, Direction.z);
-                rb.AddForce(ForceDirection * force * other.gameObject.GetComponent<EnemyHealthSystem>().kickBackRatio, ForceMode.Impulse);
+                rb.AddForce(force * other.gameObject.GetComponent<EnemyHealthSystem>().kickBackRatio * ForceDirection, ForceMode.Impulse);
             }
         }
     }

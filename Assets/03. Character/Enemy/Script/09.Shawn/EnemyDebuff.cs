@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class EnemyDebuff : MonoBehaviour
 {
@@ -28,9 +27,9 @@ public class EnemyDebuff : MonoBehaviour
     }
     private void Update()
     {
-        debuffTimer();
+        DebuffTimer();
     }
-    private void debuffTimer()
+    private void DebuffTimer()
     {
         if(isDebuff)
         {
@@ -40,7 +39,7 @@ public class EnemyDebuff : MonoBehaviour
         if(timer <=0)
         {
             Initialization();
-            setIsDebuff(false);
+            SetIsDebuff(false);
         }
     }
     private void Initialization()
@@ -72,11 +71,11 @@ public class EnemyDebuff : MonoBehaviour
                 this.transform.localScale = new Vector3(x,y,z);
 
                 //set isDebuff
-                setIsDebuff(true);
+                SetIsDebuff(true);
                 break;
             default:
                 break;
         }
     }
-    private void setIsDebuff(bool value) { isDebuff = value; }
+    private void SetIsDebuff(bool value) { isDebuff = value; }
 }

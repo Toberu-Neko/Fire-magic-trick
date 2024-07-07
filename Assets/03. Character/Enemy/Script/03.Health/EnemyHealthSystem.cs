@@ -1,12 +1,9 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using BehaviorDesigner.Runtime;
-using System.Runtime.CompilerServices;
 
 public class EnemyHealthSystem : MonoBehaviour, IHealth
 {
-    
-
     [SerializeField] private bool isTeachEnemy;
     [SerializeField] private bool isOnceEnemy;
     [SerializeField] private bool isRebirthHide;
@@ -51,7 +48,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     //Script
     private BehaviorTree bt;
     private ProgressSystem progress;
-    private Transform startPosition;
     private EnemyFireSystem _fireSystem;
     private Vector3 StartPosition;
     private Quaternion StartRotation;
@@ -93,7 +89,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         health = maxHealth;
         progress = GameManager.Instance.GetComponent<ProgressSystem>();
         bt = GetComponent<BehaviorTree>();
-        startPosition = this.transform;
         StartPosition = this.transform.position;
         StartRotation = this.transform.rotation;
         if (isTeachEnemy == false)
@@ -105,19 +100,21 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     private void Update()
     {
         EnemyCoolingCheck();
-        atCrashTimerSystem();
+        AtCrashTimerSystem();
     }
     public void SetIsRebirthHide(bool value)
     {
         isRebirthHide = value;
     }
-    public void giveTargetPlayer()
+
+    public void GiveTargetPlayer()
     {
         GameObject player = GameManager.Instance.Player.gameObject;
-        EnemyAggroSystem enemyAggroSystem = GetComponent<EnemyAggroSystem>();
-        if (enemyAggroSystem != null) enemyAggroSystem.GiveAggroTarget(player);
+        if (TryGetComponent(out EnemyAggroSystem enemyAggroSystem)) 
+            enemyAggroSystem.GiveAggroTarget(player);
     }
-    private void atCrashTimerSystem()
+
+    private void AtCrashTimerSystem()
     {
         if(atCrash)
         {
@@ -130,11 +127,12 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
             atCrashTimer = 0;
         }
     }
+
     #region Cooling
     private void EnemyCoolingCheck()
     {
-        isCooling = Time.time - hitTimer > coolingTime ? true : false;
-        isInterval = Time.time - coolingTimer > coolingInterval ? true : false;
+        isCooling = Time.time - hitTimer > coolingTime;
+        isInterval = Time.time - coolingTimer > coolingInterval;
 
         if (health < maxHealth && isCooling && isInterval)
         {
@@ -145,16 +143,17 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     {
         health++;
         coolingTimer = Time.time;
-        healthFeedback(health);
+        GealthFeedback(health);
     }
     #endregion
+
     #region Damage
     public void TakeDamage(int damage , PlayerDamage.DamageType damageType)
     {
         health -= damage;
         hitTimer = Time.time;
 
-        healthFeedback(health);
+        GealthFeedback(health);
 
         if(!kickBackGuard)
         {
@@ -182,7 +181,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     }
     #endregion
     #region Feedback
-    private void healthFeedback(int health)
+    private void GealthFeedback(int health)
     {
         if(health == 6)
         {

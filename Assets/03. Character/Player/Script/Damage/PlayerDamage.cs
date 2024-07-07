@@ -3,33 +3,24 @@ using UnityEngine;
 public class PlayerDamage : MonoBehaviour
 {
     [SerializeField] private DamageType damageType;
+    private Bullet bullet;
+    [SerializeField] private int damage;
 
-    public int damage;
-
-    //interface
-    IHitNotifier[] hitNotifier;
-    ITriggerNotifier[] triggerNotifier;
-
-    private void Start()
+    private void Awake()
     {
-        hitNotifier = GetComponents<IHitNotifier>();
-        triggerNotifier = GetComponents<ITriggerNotifier>();
+        bullet = GetComponent<Bullet>();
+    }
 
-        for (int i = 0; i < hitNotifier.Length; i++)
-        {
-            if (hitNotifier[i] != null)
-            {
-                hitNotifier[i].OnHit += ToDamageEnemy;
-            }
-        }
+    private void OnEnable()
+    {
+        bullet.OnHit += ToDamageEnemy;
+        bullet.OnTrigger += ToDamageEnemy;
+    }
 
-        for (int i = 0; i < triggerNotifier.Length; i++)
-        {
-            if (triggerNotifier[i] != null)
-            {
-                triggerNotifier[i].OnTrigger += ToDamageEnemy;
-            }
-        }
+    private void OnDisable()
+    {
+        bullet.OnHit -= ToDamageEnemy;
+        bullet.OnTrigger -= ToDamageEnemy;
     }
 
     public enum DamageType
@@ -40,10 +31,10 @@ public class PlayerDamage : MonoBehaviour
         SuperDash,
         Kick
     }
+
     public void ToDamageEnemy(Collider other)
     {
-        IHealth _health = other.gameObject.GetComponent<IHealth>();
-        if (_health != null)
+        if (other.gameObject.TryGetComponent<IHealth>(out var _health))
         {
             if(other.gameObject != null)
             {
@@ -51,10 +42,10 @@ public class PlayerDamage : MonoBehaviour
             }
         }
     }
+
     public void ToDamageEnemy(Collision Collision)
     {
-        IHealth _health = Collision.gameObject.GetComponent<IHealth>();
-        if (_health != null)
+        if (Collision.gameObject.TryGetComponent<IHealth>(out var _health))
         {
             if(Collision.gameObject != null)
             {

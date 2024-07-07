@@ -50,8 +50,7 @@ public class AgentController : MonoBehaviour
 
     bool IsOnNavMesh() // 偵測是否落在NavMesh上
     {
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(transform.position, out hit, distance, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, distance, NavMesh.AllAreas))
         {
             return true;
         }

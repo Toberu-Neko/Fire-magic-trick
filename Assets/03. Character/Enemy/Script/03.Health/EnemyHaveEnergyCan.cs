@@ -6,10 +6,19 @@ public class EnemyHaveEnergyCan : MonoBehaviour
     [SerializeField] private EnergyCan energyCanSystem;
 
     private EnemyHealthSystem healthSystem;
-    private void Start()
+    private void Awake()
     {
         healthSystem = GetComponent<EnemyHealthSystem>();
+    }
+
+    private void OnEnable()
+    {
         healthSystem.OnEnemyDeath += EnergyCanBroke;
+    }
+
+    private void OnDisable()
+    {
+        healthSystem.OnEnemyDeath -= EnergyCanBroke;
     }
 
     private void EnergyCanBroke()

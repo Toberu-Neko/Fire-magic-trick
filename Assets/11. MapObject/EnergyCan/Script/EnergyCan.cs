@@ -10,23 +10,18 @@ public class EnergyCan : MonoBehaviour ,IHealth
 
     [Header("EnemyHealth")]
     [SerializeField] private int health;
-    private int originHealth;
 
     [Header("Feedbacks")]
     [SerializeField] private MMF_Player Feedbacks_Broken;
 
     [Header("CheckArea")]
     [SerializeField] private GameObject brokenBoomArea;
-
-    private ProgressSystem progressSystem;
     //delegate
     public delegate void OnBrokenHandler();
     public event OnBrokenHandler OnBroke;
 
     private void Start()
     {
-        progressSystem = GameManager.Instance.GetComponent<ProgressSystem>();
-
         if(healthSystem ==null)
         {
             healthSystem = this.transform.parent.GetComponent<EnemyHealthSystem>();
@@ -35,8 +30,6 @@ public class EnergyCan : MonoBehaviour ,IHealth
         {
             healthSystem.OnEnemyRebirth += OnEnemyRebirth;
         }
-
-        originHealth = health;
     }
 
     private bool isBroken = false;
@@ -49,7 +42,7 @@ public class EnergyCan : MonoBehaviour ,IHealth
     {
         this.gameObject.SetActive(true);
         health = 1;
-        setIsBroken(false);
+        SetIsBroken(false);
     }
     public void TakeDamage(int damage , PlayerDamage.DamageType damageType)
     {
@@ -65,7 +58,7 @@ public class EnergyCan : MonoBehaviour ,IHealth
     {
         if(!isBroken)
         {
-            setIsBroken(true);
+            SetIsBroken(true);
             Feedbacks_Broken.PlayFeedbacks();
             Instantiate(fireEnergy, transform.position, Quaternion.identity);
             OnBroke?.Invoke();
@@ -84,7 +77,7 @@ public class EnergyCan : MonoBehaviour ,IHealth
         this.gameObject.SetActive(false);
         
     }
-    private void setIsBroken(bool value)
+    private void SetIsBroken(bool value)
     {
         isBroken = value;
     }

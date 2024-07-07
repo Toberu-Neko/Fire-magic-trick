@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ParticleManager : CoreComponent
 {
-
     public GameObject StartParticles(GameObject particlePrefab, Vector3 position, Quaternion rotation)
     {
         return ObjectPoolManager.SpawnObject(particlePrefab, position, rotation, ObjectPoolManager.PoolType.ParticleSystem);

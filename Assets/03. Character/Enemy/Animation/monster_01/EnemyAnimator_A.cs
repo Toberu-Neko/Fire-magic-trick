@@ -8,7 +8,16 @@ public class EnemyAnimator_A : MonoBehaviour
     private void Awake()
     {
         _healthSystem = GetComponent<EnemyHealthSystem>();
+    }
+
+    private void OnEnable()
+    {
         _healthSystem.OnEnemyHit += AnimatorHurt;
+    }
+
+    private void OnDisable()
+    {
+        _healthSystem.OnEnemyHit -= AnimatorHurt;
     }
 
     private void AnimatorHurt()
