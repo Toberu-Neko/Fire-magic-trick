@@ -159,7 +159,7 @@ public class PlayerInAirState : PlayerFSMBaseState
         {
             MoveAndRotateWithCam(inAirMovementSpeed, 0f, true);
 
-            if (!isFloating && floatCount < playerData.maxFloatCount && player.InputHandler.OrgJumpInput && minYVelocity < -1f)
+            if (!isFloating && floatCount < playerData.maxFloatCount && player.InputHandler.OrgJumpInput && minYVelocity < -1f && !collisionSenses.LongGround)
             {
                 player.InputHandler.UseJumpInput();
                 isFloating = true;
@@ -167,7 +167,7 @@ public class PlayerInAirState : PlayerFSMBaseState
                 player.VFXController.SetFloatVFX(true);
                 player.CardSystem.SetStrongShoot(true);
             }
-            else if (isFloating && (!player.InputHandler.OrgJumpInput || Time.time - startFloatingTime > playerData.inAirMaxFloatTime))
+            else if (isFloating && (!player.InputHandler.OrgJumpInput || Time.time - startFloatingTime > playerData.inAirMaxFloatTime || collisionSenses.LongGround))
             {
                 isFloating = false;
                 floatCount++;

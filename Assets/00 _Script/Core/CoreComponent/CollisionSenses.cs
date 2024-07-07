@@ -13,6 +13,7 @@ public class CollisionSenses : CoreComponent
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Vector3 groundCheckV3;
     [SerializeField] private float groundCheckDistance = 0.25f;
+    [SerializeField] private float longGroundCheckDistance = 1.25f;
     [SerializeField] private float slopeCheckDistance = 0.75f;
     [SerializeField] private float longSlopeCheckDistance = 1.5f;
 
@@ -48,6 +49,15 @@ public class CollisionSenses : CoreComponent
             
         }
     }
+
+    public bool LongGround
+    {
+        get
+        {
+            return Physics.BoxCast(GroundCheck.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, longGroundCheckDistance, whatIsGround);
+        }
+    }
+
     public Slope Slope
     {
         get
@@ -76,8 +86,10 @@ public class CollisionSenses : CoreComponent
         }
     }
 
-    private void OnDrawGizmos()
+    public override void OnDrawGizmos()
     {
+        base.OnDrawGizmos();
+
         Gizmos.color = Color.cyan;
         if (GroundCheck)
         {

@@ -163,7 +163,7 @@ public class PlayerFSMBaseState
     {
         if (AttackInput)
         {
-            player.InputHandler.UseAttackInput();
+            // player.InputHandler.UseAttackInput();
             player.CardSystem.Shoot();
         }
     }

@@ -127,12 +127,12 @@ public class CardSystem : MonoBehaviour
 
     public void Shoot()
     {
-        if (Time.time < startShootTime + shootCooldown)
+        if (Time.unscaledTime < startShootTime + shootCooldown)
         {
             return;
         }
 
-        startShootTime = Time.time;
+        startShootTime = Time.unscaledTime;
 
         Vector3 aimDir = (targetPosition - frontSpawnPos.position).normalized;
 
