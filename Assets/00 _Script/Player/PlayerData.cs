@@ -40,6 +40,7 @@ public class PlayerData : ScriptableObject
     public float superJumpVelocity = 30f;
     public int superJumpEnergyCost = 3;
     public float superJumpFallAddForce = 10f;
+    public float superJumpFallInitVelocity = -6f;
 
     [Header("Super Dash")]
     public float baseSuperDashSpeed = 5f;
@@ -60,10 +61,18 @@ public class PlayerData : ScriptableObject
     public float superDashJumpVelocity = 10f;
     public AnimationCurve superDashDecaySpeedGraph;
 
-    [Header("Fireball")]
+    [Header("Fireball Fall")]
     public float fireballSpeed = 4f;
     public float fireballForceValue = 12.5f;
     public float fireballMaxYVelocity = -0.5f;
     public float fireballMinYVelocity = -2f;
     public float fireballMaxTime = 3f;
+
+    [Header("WindAlt")]
+    public int windAltEnergyCost = 6;
+    public float windAltSpeed = 10f;
+    public float windAltMaxTime = 5f;
+
+    [Header("FireAlt")]
+    public int fireAltEnergyCost = 6;
 }

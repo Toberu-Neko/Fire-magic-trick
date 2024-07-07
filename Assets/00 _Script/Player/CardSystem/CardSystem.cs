@@ -15,12 +15,14 @@ public class CardSystem : MonoBehaviour
     [SerializeField] private Transform backSpawnPos;
 
     [Header("Shoot Check")]
+    [SerializeField] private float strongShootBulletTimeDuration;
     [SerializeField] private LayerMask aimColliderLayerMask;
     [SerializeField] public Transform debugTransform;
     [SerializeField] private float maxShootDistance;
     [SerializeField] private float minShootDistance;
     [SerializeField] private float shootCooldown;
     [SerializeField] private float cardStateDuration = 5f;
+    public bool StrongShoot { get; private set; }
 
     [Header("Super Dash")]
     [SerializeField] private LayerMask whatIsSuperDashTarget;
@@ -65,6 +67,7 @@ public class CardSystem : MonoBehaviour
         startShootTime = 0f;
 
         HasSuperDashTarget = false;
+        StrongShoot = false;
     }
 
     private void Update()
@@ -79,6 +82,8 @@ public class CardSystem : MonoBehaviour
             }
         }
     }
+
+    #region Shoot
 
     private void ShootRay()
     {
@@ -151,8 +156,20 @@ public class CardSystem : MonoBehaviour
                 Instantiate(fireCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
                 break;
         }
-        
+
+        if (StrongShoot)
+        {
+            BulletTimeManager.Instance.BulletTime_Slow(strongShootBulletTimeDuration);
+        }
+
     }
+
+    public void SetStrongShoot(bool value)
+    {
+        StrongShoot = value;
+    }
+    #endregion
+
 
     public void ChangeCard(CardType cardType)
     {
@@ -165,6 +182,8 @@ public class CardSystem : MonoBehaviour
         endCardStateTime = startCardStateTime + cardStateDuration;
         currentCardType = cardType;
     }
+
+    #region Card Energy
 
     public int CheckCurrentCardEnergy()
     {
@@ -279,6 +298,7 @@ public class CardSystem : MonoBehaviour
         fireCardEnergy = Mathf.Clamp(fireCardEnergy, 0, fireMaxEnergy);
         OnFireCardEnergyChanged?.Invoke(fireCardEnergy);
     }
+    #endregion
 
     private void OnDrawGizmos()
     {

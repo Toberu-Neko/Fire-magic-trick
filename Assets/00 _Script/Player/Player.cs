@@ -62,6 +62,9 @@ public class Player : MonoBehaviour
     public PlayerFireballState FireballState { get; private set; }
     public PlayerSuperJumpState SuperJumpState { get; private set; }
 
+    public PlayerWindAltState WindAltState { get; private set; }
+    public PlayerFireAltState FireAltState { get; private set; }
+
     private void Awake()
     {
         CameraPosRelateToPlayer = new();
@@ -87,7 +90,10 @@ public class Player : MonoBehaviour
         SuperDashState = new PlayerSuperDashState(this, StateMachine, Data, "inAir");
         AfterSuperDashJump = new PlayerAfterSuperDashJump(this, StateMachine, Data, "backFlip");
         FireballState = new PlayerFireballState(this, StateMachine, Data, "inAir");
-        SuperJumpState = new PlayerSuperJumpState(this, StateMachine, Data, "jump");
+        SuperJumpState = new PlayerSuperJumpState(this, StateMachine, Data, "inAir");
+
+        WindAltState = new PlayerWindAltState(this, StateMachine, Data, "inAir");
+        FireAltState = new PlayerFireAltState(this, StateMachine, Data, "inAir");
 
         ChangeActiveCam(ActiveCamera.Normal);
     }

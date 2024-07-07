@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BulletTimeChild : MonoBehaviour
 {
-    private BulletTime _bulletTimeSystem;
+    private BulletTimeManager _bulletTimeSystem;
     public enum BulletTimeType
     {
         Slow,
@@ -17,7 +17,7 @@ public class BulletTimeChild : MonoBehaviour
 
     private void Start()
     {
-        _bulletTimeSystem = GameManager.Instance.GetComponent<BulletTime>();
+        _bulletTimeSystem = GameManager.Instance.GetComponent<BulletTimeManager>();
     }
     private void OnTriggerEnter(Collider other)
     {

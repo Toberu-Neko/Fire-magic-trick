@@ -4,9 +4,7 @@ using UnityEngine.Playables;
 public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
 {
     //Script
-    private NGP_SuperJump superJump;
     private NGP_Shot shot;
-    private BulletTime bulletTime;
     private PlayerState playerState;
     [SerializeField] private AudioSource S_floatShot;
     [Space(10)]
@@ -18,12 +16,10 @@ public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
     private void Awake()
     {
         shot = GetComponent<NGP_Shot>();
-        superJump = GetComponent<NGP_SuperJump>();
     }
     protected override void Start()
     {
         base.Start();
-        bulletTime = GameManager.Instance.GetComponent<BulletTime>();
         playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
     }
     protected override void Update()
@@ -45,20 +41,22 @@ public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
     {
         base.OnFloatShotStart();
 
-        bulletTime.BulletTime_Slow();
+        BulletTimeManager.Instance.BulletTime_Slow();
         S_floatShot.Play();
     }
+
     protected override void OnFloatEnd()
     {
         base.OnFloatEnd();
         playerState.SetGravityToNormal();
-        bulletTime.BulletTime_Normal();
+        BulletTimeManager.Instance.BulletTime_Normal();
         S_floatShot.Stop();
     }
+
     protected override void OnFloatShotStop()
     {
         base.OnFloatShotStop();
 
-        bulletTime.BulletTime_Normal();
+        BulletTimeManager.Instance.BulletTime_Normal();
     }
 }

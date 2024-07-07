@@ -6,13 +6,13 @@ public class NewGamePlay_Kick : NewGamePlay_Basic_Kick
     [SerializeField] private float bulletKeepTime;
 
     //Script
-    private BulletTime bulletTime;
+    private BulletTimeManager bulletTime;
 
     protected override void Start()
     {
         base.Start();
 
-        bulletTime =  GameManager.Instance.GetComponent<BulletTime>();
+        bulletTime =  GameManager.Instance.GetComponent<BulletTimeManager>();
     }
     protected override void Onkick()
     {

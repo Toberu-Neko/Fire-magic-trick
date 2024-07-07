@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSuperJumpState : PlayerAbilityState
 {
     private float minYVelocity;
+    private int currentFrame;
+    private bool firstTimeDrop;
     public PlayerSuperJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -13,36 +13,67 @@ public class PlayerSuperJumpState : PlayerAbilityState
     {
         base.Enter();
 
-        player.JumpState.DecreaseAmountOfJumpsLeft();
+        currentFrame = 0;
+        firstTimeDrop = false;
+
         player.InputHandler.UseSuperJumpInput();
         player.CardSystem.DecreaseCardEnergy(playerData.superJumpEnergyCost);
         movement.SetVelocityY(playerData.superJumpVelocity);
         minYVelocity = Mathf.Infinity;
 
-        //TODO Diferent SuperJump Ability
+        //TODO Different SuperJump Ability
         if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
         {
-            // 起跳會聚攏敵人，墜地再一次重擊
+            // 起跳會聚攏敵人
         }
         else
         {
             // 震退並燃燒敵人
         }
-
-        isAbilityDone = true;
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        minYVelocity = Mathf.Min(minYVelocity, movement.CurrentVelocity.y);
+        currentFrame++;
 
-        if (minYVelocity < 0)
+        MoveAndRotateWithCam(playerData.airMoveSpeed);
+
+        if(currentFrame > 5)
         {
-            movement.AddForce(playerData.superJumpFallAddForce, Vector3.down);
-            stateMachine.ChangeState(player.InAirState);
+            minYVelocity = Mathf.Min(minYVelocity, movement.CurrentVelocity.y);
+
+            if (minYVelocity < -1f)
+            {
+                if (!firstTimeDrop)
+                {
+                    firstTimeDrop = true;
+                    movement.SetVelocityY(playerData.superJumpFallInitVelocity);
+                }
+
+                movement.AddForce(playerData.superJumpFallAddForce, Vector3.down);
+
+                if (collisionSenses.Ground)
+                {
+                    //TODO Different SuperJump Ability
+                    if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
+                    {
+                        // 起跳會聚攏敵人
+                    }
+                    else
+                    {
+                        // 更大的震退並燃燒敵人
+                    }
+                    isAbilityDone = true;
+                }
+            }
         }
+        else
+        {
+            movement.SetVelocityY(playerData.superJumpVelocity);
+        }
+
     }
 
     public bool CanUseAbility()

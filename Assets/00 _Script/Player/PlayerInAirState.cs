@@ -86,6 +86,7 @@ public class PlayerInAirState : PlayerFSMBaseState
         setAirControlSpeed = false;
 
         player.VFXController.SetFloatVFX(false);
+        player.CardSystem.SetStrongShoot(false);
     }
 
     public override void DoChecks()
@@ -164,12 +165,14 @@ public class PlayerInAirState : PlayerFSMBaseState
                 isFloating = true;
                 startFloatingTime = Time.time;
                 player.VFXController.SetFloatVFX(true);
+                player.CardSystem.SetStrongShoot(true);
             }
             else if (isFloating && (!player.InputHandler.OrgJumpInput || Time.time - startFloatingTime > playerData.inAirMaxFloatTime))
             {
                 isFloating = false;
                 floatCount++;
                 player.VFXController.SetFloatVFX(false);
+                player.CardSystem.SetStrongShoot(false);
             }
 
             if (isFloating)
@@ -178,18 +181,6 @@ public class PlayerInAirState : PlayerFSMBaseState
             }
 
             inAirMovementSpeed = Mathf.Lerp(inAirMovementSpeed, playerData.airMoveSpeed, playerData.frameOfDecaySpeed * Time.deltaTime);
-
-            /*
-            if (!IsJumping && collisionSenses.Slope.IsOnSlope && collisionSenses.Slope.ExceedsMaxSlopeAngle)
-            {
-                Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime);
-                movement.SetVelocityY(Mathf.Lerp(movement.CurrentVelocity.y, -playerData.slideDownSlopeSpeed, 2f * Time.deltaTime));
-            }
-            else
-            {
-                
-            }
-            */
         }
 
     }

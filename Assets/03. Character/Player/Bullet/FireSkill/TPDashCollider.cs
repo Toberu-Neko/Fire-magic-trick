@@ -11,12 +11,12 @@ public class TPDashCollider : MonoBehaviour, ITriggerNotifier
     public event MyDelegates.OnTriggerHandler OnTrigger;
 
     //Script
-    private BulletTime BulletTime;
+    private BulletTimeManager BulletTime;
     private VibrationController vibrationController;
 
     private void Start()
     {
-        BulletTime = GameManager.Instance.GetComponent<BulletTime>();
+        BulletTime = GameManager.Instance.GetComponent<BulletTimeManager>();
         vibrationController = GameManager.Instance.GetComponent<VibrationController>();
     }
     private void OnTriggerEnter(Collider other)
