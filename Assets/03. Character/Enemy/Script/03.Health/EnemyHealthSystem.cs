@@ -158,6 +158,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     #region Damage
     public void TakeDamage(int damage , PlayerDamage.DamageType damageType)
     {
+        // 這個改由Stats中的Health.decreaseValue事件觸發
         health -= damage;
         hitTimer = Time.time;
 
