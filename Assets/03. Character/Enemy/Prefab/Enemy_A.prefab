@@ -10044,8 +10044,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Health>k__BackingField:
-    <MaxValue>k__BackingField: 30
-    <InitValue>k__BackingField: 30
+    <MaxValue>k__BackingField: 100
+    <InitValue>k__BackingField: 100
     decreaseable: 1
   combatTimer: 5
   burnWhenHealthBelowPercentage: 0.5
@@ -10858,7 +10858,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealthSystesm: {fileID: 8032919127870789860}
-  rb: {fileID: 0}
 --- !u!1 &4088897034370677817
 GameObject:
   m_ObjectHideFlags: 0
@@ -27096,9 +27095,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7330725990032040161}
   - component: {fileID: 5723004103967271840}
+  - component: {fileID: 1446520576652787523}
+  - component: {fileID: 1574456818623946854}
   m_Layer: 14
   m_Name: Combat
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27112,7 +27113,7 @@ Transform:
   m_GameObject: {fileID: 7044947906803746180}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.301, z: -0.054}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27130,6 +27131,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425a5072388748343b09b5f00a76dabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1446520576652787523
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044947906803746180}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.64159006, z: 1}
+  m_Center: {x: 0, y: 0.013274461, z: 0.053097725}
+--- !u!65 &1574456818623946854
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044947906803746180}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.72, z: 0.31}
+  m_Center: {x: 0, y: 0.66, z: 0.07}
 --- !u!1 &7460148122351459871
 GameObject:
   m_ObjectHideFlags: 0
@@ -27651,7 +27694,7 @@ GameObject:
   - component: {fileID: -3967696137766167190}
   m_Layer: 14
   m_Name: Enemy_A
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27726,7 +27769,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.25
   m_Height: 1.3
@@ -27790,13 +27833,8 @@ MonoBehaviour:
   isTeachEnemy: 0
   isOnceEnemy: 0
   isRebirthHide: 0
-  isHurt: 0
-  isSteam: 0
-  isFire: 0
-  isShock: 0
   Boom: 0
   StartHealth: 6
-  health: 6
   maxHealth: 6
   ignitionPoint: 4
   coolingInterval: 2.5

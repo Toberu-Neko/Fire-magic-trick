@@ -6,8 +6,6 @@ public class FireBall : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float lifeTime;
 
-    private IHealth health;
-
     private void Start()
     {
         Destroy(gameObject, lifeTime);
@@ -16,8 +14,8 @@ public class FireBall : MonoBehaviour
     {
         if(other.CompareTag("Enemy"))
         {
-            health = other.GetComponent<IHealth>();
-            health.TakeDamage(damage,PlayerDamage.DamageType.ChargeShoot);
+            other.TryGetComponent(out IDamageable damageable);
+            damageable?.Damage(damage, transform.position);
         }
     }
 }

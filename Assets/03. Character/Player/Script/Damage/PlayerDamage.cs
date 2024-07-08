@@ -4,7 +4,7 @@ public class PlayerDamage : MonoBehaviour
 {
     [SerializeField] private DamageType damageType;
     private Bullet bullet;
-    [SerializeField] private int damage;
+    [SerializeField] private float damage;
 
     private void Awake()
     {
@@ -36,24 +36,11 @@ public class PlayerDamage : MonoBehaviour
     {
         other.TryGetComponent(out IDamageable damageable);
         damageable?.Damage(damage, transform.position);
-
-        if (other.gameObject.TryGetComponent<IHealth>(out var _health))
-        {
-            if(other.gameObject != null)
-            {
-                _health.TakeDamage(damage, damageType);
-            }
-        }
     }
 
     public void ToDamageEnemy(Collision Collision)
     {
-        if (Collision.gameObject.TryGetComponent<IHealth>(out var _health))
-        {
-            if(Collision.gameObject != null)
-            {
-                _health.TakeDamage(damage, damageType);
-            }
-        }
+        Collision.gameObject.TryGetComponent(out IDamageable damageable);
+        damageable?.Damage(damage, transform.position);
     }
 }

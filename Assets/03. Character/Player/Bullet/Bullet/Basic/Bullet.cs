@@ -39,42 +39,31 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
     }
 
     private void OnCollisionEnter(Collision collision)
-    {   
-        if(!useTriggerEnter)
+    {
+
+        //Hit
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnergyCan"))
         {
-            //Contact 
-            ContactPoint contact = collision.contacts[0];
-            Quaternion rot = Quaternion.FromToRotation(Vector3.up, collision.contacts[0].normal);
-            Vector3 pos = contact.point;
+            OnHit?.Invoke(collision);
+            OnHitEnemy();
+            SpawnVFX(hitEnemyPrefab, transform.position, Quaternion.identity, 1f);
 
-            //Hit
-            if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnergyCan"))
-            {
-                OnHit?.Invoke(collision);
-                OnHitEnemy();
-                SpawnVFX(hitEnemyPrefab, transform.position, Quaternion.identity, 1f);
-
-                // crosshairUI.EnemyHitImpluse(this.transform.position);
-            }
-            OnHitSomething();
-
-            SpawnVFX(cardSlashPrefab, transform.position, Quaternion.identity, 1.5f);
-            DestroyBullet();
-            CroshairFeedback();
+            // crosshairUI.EnemyHitImpluse(this.transform.position);
         }
+        OnHitSomething();
+        SpawnVFX(cardSlashPrefab, transform.position, Quaternion.identity, 1.5f);
+        DestroyBullet();
+        CroshairFeedback();
     }
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (useTriggerEnter)
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            if (other.gameObject.CompareTag("Enemy"))
-            {
-                OnTrigger?.Invoke(other);
-                OnHitEnemy();
-                // crosshairUI.EnemyHitImpluse(this.transform.position);
-                SpawnVFX(hitEnemyPrefab, transform.position, Quaternion.identity, 1f);
-            }
-            if(NeedHitFeedback())
+            OnTrigger?.Invoke(other);
+            OnHitEnemy();
+            // crosshairUI.EnemyHitImpluse(this.transform.position);
+            SpawnVFX(hitEnemyPrefab, transform.position, Quaternion.identity, 1f);
+            if (NeedHitFeedback())
             {
                 OnHitSomething();
                 SpawnVFX(cardSlashPrefab, transform.position, Quaternion.identity, 1.5f);

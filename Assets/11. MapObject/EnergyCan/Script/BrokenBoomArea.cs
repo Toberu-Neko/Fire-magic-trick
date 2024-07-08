@@ -7,21 +7,21 @@ public class BrokenBoomArea : MonoBehaviour
     {
         if(other.CompareTag("Enemy"))
         {
-            EnemyHealthSystem enemyHealthSystem = other.GetComponent<EnemyHealthSystem>();
-            if(enemyHealthSystem !=null) enemyHealthSystem.TakeDamage(2, PlayerDamage.DamageType.SuperDash);
+            other.TryGetComponent(out IDamageable damageable);
+            damageable?.Damage(2f, transform.position);
+
+            other.TryGetComponent(out IFlammable flammable);
+            flammable?.SetOnFire(3f);
+
+            Debug.LogError("Haven't implement variable yet");
         }
+
         if(other.CompareTag("EnergyCan"))
         {
-            Boom(other);
-        }
-    }
-    private async void Boom(Collider other)
-    {
-        await Task.Delay(150);
-        EnergyCan can = other.GetComponent<EnergyCan>();
-        if(can != null)
-        {
-            can.Broke();
+            if (other.TryGetComponent(out EnergyCan can))
+            {
+                can.Broke();
+            }
         }
     }
 }

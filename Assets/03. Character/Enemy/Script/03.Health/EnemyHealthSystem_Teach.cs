@@ -1,10 +1,11 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using System.Threading.Tasks;
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 
-public class EnemyHealthSystem_Teach : MonoBehaviour, IHealth
+public class EnemyHealthSystem_Teach : MonoBehaviour
 {
+    //TODO: 這看起來沒在用
+
     [Header("State")]
     public bool isIgnite;
     public bool isHurt;

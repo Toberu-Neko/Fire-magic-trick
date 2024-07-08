@@ -3,8 +3,8 @@ using UnityEngine;
 public class BoomCard : Bullet
 {
     [Header("Boom Card")]
-    [SerializeField] private Transform boomArea;
-    [SerializeField] private Transform fireRetrun;
+    [SerializeField] private GameObject boomArea;
+    [SerializeField] private GameObject fireRetrun;
     protected override void OnHitEnemy()
     {
         base.OnHitEnemy();

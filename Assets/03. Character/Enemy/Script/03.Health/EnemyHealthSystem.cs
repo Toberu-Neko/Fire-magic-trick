@@ -14,15 +14,6 @@ public class EnemyHealthSystem : MonoBehaviour
     private bool isShockVFX;
     public bool Boom;
 
-    [Header("Health")]
-    [SerializeField] private int StartHealth;
-    [SerializeField] private int maxHealth;
-    [SerializeField] private int ignitionPoint;
-
-    [Header("Cooling")]
-    [SerializeField] private float coolingInterval;
-    [SerializeField] private float coolingTime;
-
     [Header("Feedbacks")]
     [SerializeField] private EyeColorController _eye;
     [SerializeField] private MMF_Player feedbacks_Steam;
@@ -58,21 +49,19 @@ public class EnemyHealthSystem : MonoBehaviour
 
     //variable
     private float atCrashTimer;
-    private float hitTimer;
-    private float coolingTimer;
-    private bool isCooling;
-    private bool isInterval;
     private bool isTriggerDeath;
 
     public Core Core { get; private set; }
     public Stats Stats { get; private set; }
     public Combat Combat { get; private set; }
+    public Movement Movement { get; private set; }
 
     private void Awake()
     {
         Core = GetComponentInChildren<Core>();
         Stats = Core.GetCoreComponent<Stats>();
         Combat = Core.GetCoreComponent<Combat>();
+        Movement = Core.GetCoreComponent<Movement>();
 
         _fireSystem = GetComponent<EnemyFireSystem>();
     }
@@ -103,6 +92,7 @@ public class EnemyHealthSystem : MonoBehaviour
 
     private void Health_OnValueChanged()
     {
+        Debug.Log(Stats.Health.CurrentValuePercentage);
         GealthFeedback(Stats.Health.CurrentValuePercentage);
     }
 
@@ -143,21 +133,6 @@ public class EnemyHealthSystem : MonoBehaviour
         }
     }
 
-    #region Damage
-    public void TakeDamage(int damage , PlayerDamage.DamageType damageType)
-    {
-        // 這個改由Stats中的Health.decreaseValue事件觸發
-        hitTimer = Time.time;
-
-        if(!kickBackGuard)
-        {
-            if (damageType == PlayerDamage.DamageType.NormalShoot || damageType == PlayerDamage.DamageType.ChargeShoot)
-            {
-            }
-        }
-
-    }
-    #endregion
     #region Feedback
     private void GealthFeedback(float healthPercentage)
     {
@@ -303,20 +278,16 @@ public class EnemyHealthSystem : MonoBehaviour
     {
         if(Boom)
         {
-            InstantiateSpreadArea();
+            GameObject spreadObj = Instantiate(spreadArea, this.transform.position, Quaternion.identity);
+            Destroy(spreadObj, 1.5f);
             feedbacks_FlyBoom.PlayFeedbacks();
             bt.enabled = false;
         }
     }
-    private void InstantiateSpreadArea()
-    {
-        GameObject spreadObj = Instantiate(spreadArea, this.transform.position, Quaternion.identity);
-        Destroy(spreadObj, 1.5f);
-    }
+
     public void SetAtCrash(bool active)
     {
         atCrash = active;
-        
     }
     public void EnemyDeathRightNow()
     {
