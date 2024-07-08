@@ -242,7 +242,9 @@ public class Player : MonoBehaviour
         Gizmos.color = Color.gray;
         if (Data)
         {
-            Gizmos.DrawWireSphere(transform.position, Data.superDashRadius);
+            Gizmos.DrawWireSphere(transform.position, Data.closeRangeDetectRadius);
+            Gizmos.DrawWireSphere(transform.position, Data.midRangeDetectRadius);
+            Gizmos.DrawWireSphere(transform.position, Data.longRangeDetectRadius);
         }
     }
 

@@ -159,12 +159,27 @@ public class PlayerFSMBaseState
         movement.SetVelocity(speed, v2Workspace, ignoreSlope);
     }
 
-    protected void CheckIfShouldShoot()
+    protected void CheckIfShouldShoot(bool resetAttackInput = true)
     {
         if (AttackInput)
         {
-            // player.InputHandler.UseAttackInput();
+            if(resetAttackInput)
+            {
+                player.InputHandler.UseAttackInput();
+            }
             player.CardSystem.Shoot();
         }
+    }
+    protected Collider[] CloseRangeSphereDetection()
+    {
+        return Physics.OverlapSphere(player.transform.position, playerData.closeRangeDetectRadius, playerData.whatIsCombatDetectable);
+    }
+    protected Collider[] MidRangeSphereDetection()
+    {
+        return Physics.OverlapSphere(player.transform.position, playerData.midRangeDetectRadius, playerData.whatIsCombatDetectable);
+    }
+    protected Collider[] LongRangeSphereDetection()
+    {
+        return Physics.OverlapSphere(player.transform.position, playerData.longRangeDetectRadius, playerData.whatIsCombatDetectable);
     }
 }

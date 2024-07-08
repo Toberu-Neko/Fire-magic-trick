@@ -25,10 +25,30 @@ public class PlayerSuperJumpState : PlayerAbilityState
         if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
         {
             // 起跳會聚攏敵人
+            foreach(var col in LongRangeSphereDetection())
+            {
+                if (col != null)
+                {
+                    col.TryGetComponent(out IKnockbackable knockbackable);
+                    knockbackable?.Knockback((player.transform.position - col.transform.position).normalized, 
+                        Vector3.Distance(col.transform.position, player.transform.position) * 3f, player.transform.position);
+                }
+            }
         }
         else
         {
             // 震退並燃燒敵人
+
+            foreach(var col in CloseRangeSphereDetection())
+            {
+                if (col != null)
+                {
+                    col.TryGetComponent(out IKnockbackable knockbackable);
+                    knockbackable?.Knockback(player.transform.position, playerData.superJumpFireKnockbackForce);
+                    col.TryGetComponent(out IDamageable damageable);
+                    damageable?.Damage(playerData.superJumpFireDamage, player.transform.position);
+                }
+            }
         }
     }
 
@@ -56,15 +76,17 @@ public class PlayerSuperJumpState : PlayerAbilityState
 
                 if (collisionSenses.Ground)
                 {
-                    //TODO Different SuperJump Ability
-                    if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
+                    foreach (var col in LongRangeSphereDetection())
                     {
-                        // 起跳會聚攏敵人
+                        if (col != null)
+                        {
+                            col.TryGetComponent(out IKnockbackable knockbackable);
+                            knockbackable?.Knockback(player.transform.position, playerData.superJumpFireKnockbackForce);
+                            col.TryGetComponent(out IDamageable damageable);
+                            damageable?.Damage(playerData.superJumpFireDamage, player.transform.position);
+                        }
                     }
-                    else
-                    {
-                        // 更大的震退並燃燒敵人
-                    }
+
                     isAbilityDone = true;
                 }
             }

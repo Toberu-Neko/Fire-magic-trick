@@ -92,7 +92,6 @@ public class EnemyHealthSystem : MonoBehaviour
 
     private void Health_OnValueChanged()
     {
-        Debug.Log(Stats.Health.CurrentValuePercentage);
         GealthFeedback(Stats.Health.CurrentValuePercentage);
     }
 

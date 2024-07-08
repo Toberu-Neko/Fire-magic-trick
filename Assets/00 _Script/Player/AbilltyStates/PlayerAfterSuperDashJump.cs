@@ -18,8 +18,11 @@ public class PlayerAfterSuperDashJump : PlayerAbilityState
 
         foreach(var col in Physics.OverlapBox(player.transform.position, playerData.superDashFootDetectBox, player.transform.rotation))
         {
-            col.TryGetComponent(out IKnockbackable knockbackable);
-            knockbackable?.Knockback(Vector3.down,  playerData.superDashJumpKnockbackSpeed, player.transform.position);
+            if (!col.CompareTag("Player"))
+            {
+                col.TryGetComponent(out IKnockbackable knockbackable);
+                knockbackable?.Knockback(Vector3.down,  playerData.superDashJumpKnockbackSpeed, player.transform.position);        
+            }
         }
 
         isAbilityDone = true;

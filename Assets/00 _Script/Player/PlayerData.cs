@@ -9,6 +9,9 @@ public class PlayerData : ScriptableObject
     public LayerMask whatIsCombatDetectable;
     public float rotationSpeed = 15f;
     public float rotateSmoothTime = 0.1f;
+    public float closeRangeDetectRadius = 2f;
+    public float midRangeDetectRadius = 3f;
+    public float longRangeDetectRadius = 4f;
 
     [Header("Move")]
     public float walkSpeed = 3f;
@@ -42,6 +45,13 @@ public class PlayerData : ScriptableObject
     public float superJumpFallAddForce = 10f;
     public float superJumpFallInitVelocity = -6f;
 
+    [Header("Super Jump Attack")]
+    public float superJumpWindDamage = 20f;
+    public float superJumpWindKnockbackForce = 15f;
+    public float superJumpFireDamage = 30f;
+    public float superJumpFireKnockbackForce = 10f;
+    public float superJumpBurnTime = 2f;
+
     [Header("Super Dash")]
     public float baseSuperDashSpeed = 5f;
     public float maxSuperDashSpeed = 25f;
@@ -53,7 +63,6 @@ public class PlayerData : ScriptableObject
     public float targetYOffset = 1f;
     public float superDashDamage = 10f;
     public float superDashKnockbackForce = 10f;
-    public float superDashRadius = 1.5f;
     public float superDashBurnTime = 5f;
 
     [Header("Super Dash Jump")]

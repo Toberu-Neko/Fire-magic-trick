@@ -51,7 +51,7 @@ public class PlayerSuperDashState : PlayerAbilityState
         player.SetPlayerModel(true);
         player.VFXController.SetSuperDashVFX(false);
 
-        Collider[] detectedCol = Physics.OverlapSphere(player.transform.position, playerData.superDashRadius, playerData.whatIsCombatDetectable);
+        Collider[] detectedCol = CloseRangeSphereDetection();
 
         if (detectedCol.Length > 0) 
         {
