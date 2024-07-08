@@ -17,6 +17,7 @@ public class FireDashCollider : MonoBehaviour
     private bool IsDash;
     private bool canTriggerDamage;
     private bool isTriggerDamage;
+
     private void Start()
     {
         dash = GameManager.Instance.NewGamePlay.GetComponent<NGP_Dash>();
@@ -26,6 +27,7 @@ public class FireDashCollider : MonoBehaviour
 
         Initialization();
     }
+
     private void Initialization()
     {
         CrashForce = dash.CrashForce;
@@ -36,11 +38,13 @@ public class FireDashCollider : MonoBehaviour
         ToDashHitEnemy(other);
         ToHitGlass(other);
     }
+
     private void OnTriggerStay(Collider other)
     {
         ToDashHitEnemy(other);
         ToHitGlass(other);
     }
+
     private void ToDashHitEnemy(Collider other)
     {
         if (IsDash)
@@ -52,8 +56,6 @@ public class FireDashCollider : MonoBehaviour
                     vibrationController.Vibrate(0.5f, 0.25f);               
 
                     canTriggerDamage = false;
-                    Vector3 playerposition = transform.parent.transform.position;
-                    Vector3 EnemyPosition = other.transform.position;
                     Vector3 direction = transform.parent.transform.forward;
                     Vector3 Enemyup = other.transform.up;
 
@@ -63,8 +65,7 @@ public class FireDashCollider : MonoBehaviour
                         SetIsTriggerDamage(true);
                     }
 
-                    EnemyHealthSystem enemy = other.GetComponent<EnemyHealthSystem>();
-                    if(enemy != null)
+                    if(other.TryGetComponent(out EnemyHealthSystem enemy))
                     {
                         enemy.SetAtCrash(true);
                     }
@@ -86,9 +87,8 @@ public class FireDashCollider : MonoBehaviour
         {
             if (other.CompareTag("Glass"))
             {
-                GlassSystem glass = other.GetComponent<GlassSystem>();
-
-                if(glass !=null)
+                
+                if(other.TryGetComponent(out GlassSystem glass))
                 {
                     if (glass.canCrash)
                     {
@@ -99,11 +99,13 @@ public class FireDashCollider : MonoBehaviour
             }
         }
     }
+
     public void SetIsDash(bool value)
     {
         IsDash = value;
         canTriggerDamage = value;
     }
+
     public void SetIsTriggerDamage(bool active)
     {
         isTriggerDamage = active;

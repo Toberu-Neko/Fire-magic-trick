@@ -34,6 +34,9 @@ public class PlayerDamage : MonoBehaviour
 
     public void ToDamageEnemy(Collider other)
     {
+        other.TryGetComponent(out IDamageable damageable);
+        damageable?.Damage(damage, transform.position);
+
         if (other.gameObject.TryGetComponent<IHealth>(out var _health))
         {
             if(other.gameObject != null)

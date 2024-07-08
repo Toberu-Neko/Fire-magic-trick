@@ -18,6 +18,7 @@ public class AgentController : MonoBehaviour
         if (navMeshAgent == null)
         {
             Debug.LogError(gameObject.name + "的AgentController沒有放入Agent");
+            gameObject.SetActive(false);
         }
     }
 

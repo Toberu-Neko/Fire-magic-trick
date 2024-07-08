@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Combat : CoreComponent, IDamageable, IKnockbackable, IFlammable
 {
-    private float maxKnockbackTime = 0.2f;
+    private float maxKnockbackTime = 0.4f;
 
     public List<IDamageable> DetectedDamageables { get; private set; } = new();
     public List<IKnockbackable> DetectedKnockbackables { get; private set; } = new();
@@ -44,7 +44,6 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable, IFlammable
     {
         base.LogicUpdate();
 
-
         if (isKnockbackActive)
             CheckKnockback();
     }
@@ -72,12 +71,14 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable, IFlammable
         OnDamaged?.Invoke();
         OnDamageAmount?.Invoke(damageAmount);
 
+        /*
         if (stats.Health.CurrentValue <= 0)
         {
             movement.SetVelocity(0f, Vector3.zero);
             movement.SetCanSetVelocity(false);
             movement.SetGravityZero();
         }
+        */
     }
 
     public GameObject GetGameObject()
@@ -103,6 +104,8 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable, IFlammable
         {
             return;
         }
+
+        // Debug.Log("Knockback in Core");
 
         OnKnockback?.Invoke();
 

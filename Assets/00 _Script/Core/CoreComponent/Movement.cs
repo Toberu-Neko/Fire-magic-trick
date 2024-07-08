@@ -58,9 +58,9 @@ public class Movement : CoreComponent
         }
     }
 
-    public void SetVelocity(float velocity, Vector3 direction)
+    public void SetVelocity(float velocity, Vector3 v3Direction, bool ignoreSlope = false)
     {
-        velocityWorkspace = direction * velocity;
+        velocityWorkspace = v3Direction * velocity;
 
         SetFinalVelocity();
     }

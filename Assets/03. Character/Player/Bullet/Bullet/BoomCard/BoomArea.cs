@@ -9,17 +9,11 @@ public class BoomArea : MonoBehaviour
     [SerializeField] private float forceToEnemy = 30;
     [SerializeField] private float forceToPlayer = 90;
 
-    //interface
-    private IHealth health;
-
-    //Scritp
-    private ImpactReceiver impactReceiver;
     private KickBackEnemy kickBackEnemy;
     private Collider coli;
 
     private void Start()
     {
-        impactReceiver = GameManager.Instance.Player.GetComponent<ImpactReceiver>();
         kickBackEnemy = GetComponent<KickBackEnemy>();
         coli = GetComponent<Collider>();
 
@@ -39,19 +33,17 @@ public class BoomArea : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            health = other.GetComponent<IHealth>();
-            if(health != null)
+            other.TryGetComponent(out IDamageable damageable);
+            damageable?.Damage(damage, transform.position);
+
+            if(other.TryGetComponent(out IHealth health))
             {
                 health.TakeDamage(damage, PlayerDamage.DamageType.NormalShoot);
                 kickBackEnemy.kickBackEnemy(other, forceToEnemy);
             }
         }
-        if(other.CompareTag("Player"))
-        {
-            Vector3 direction = (other.transform.position - this.transform.position).normalized;
-            Vector3 directionXZ = new Vector3(direction.x, 0, direction.z);
-            Vector3 directionY = new Vector3(0, direction.y, 0);
-            //impactReceiver.ToImpact(directionXZ * 0.3f * forceToPlayer + directionY * 0.6f * forceToPlayer);
-        }
+
+        other.TryGetComponent(out IKnockbackable knockbackable);
+        knockbackable?.Knockback(transform.position, forceToPlayer);
     }
 }

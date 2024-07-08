@@ -32,6 +32,7 @@ public class AgentMover : MonoBehaviour
 
     private void Update()
     {
+
         OnSpeedChanged?.Invoke(
             Mathf.Clamp01(_Agent.velocity.magnitude / _Agent.speed));
 

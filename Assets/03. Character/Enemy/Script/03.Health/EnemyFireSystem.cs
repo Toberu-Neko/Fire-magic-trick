@@ -59,7 +59,7 @@ public class EnemyFireSystem : MonoBehaviour
     {
         if (!isSpread)
         {
-            if (health.isIgnite)
+            if (health.Stats.IsBurning)
             {
                 SetTrackTarget(true);
             }

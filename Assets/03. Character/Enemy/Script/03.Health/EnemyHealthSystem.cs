@@ -1,6 +1,7 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using BehaviorDesigner.Runtime;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class EnemyHealthSystem : MonoBehaviour, IHealth
 {
@@ -8,7 +9,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     [SerializeField] private bool isOnceEnemy;
     [SerializeField] private bool isRebirthHide;
     [Header("State")]
-    public bool isIgnite;
     public bool isHurt;
     public bool isSteam;
     public bool isFire;
@@ -73,8 +73,16 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         set { health = value; }
     }
 
+    public Core Core { get; private set; }
+    public Stats Stats { get; private set; }
+    public Combat Combat { get; private set; }
+
     private void Awake()
     {
+        Core = GetComponentInChildren<Core>();
+        Stats = Core.GetCoreComponent<Stats>();
+        Combat = Core.GetCoreComponent<Combat>();
+
         _fireSystem = GetComponent<EnemyFireSystem>();
     }
     private void OnDestroy()
@@ -169,15 +177,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         {
             _fireSystem.FireCheck(damageType);
         }
-
-        if (health <= ignitionPoint)
-        {
-            EnemyIgnite();
-        }
-    }
-    private void EnemyIgnite()
-    {
-        isIgnite = true;
     }
     #endregion
     #region Feedback
@@ -267,7 +266,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     private void BoomBody()
     {
         if (VFX_Death == null) return;
-        Vector3 offset = new Vector3(0, 1, 0);
+        Vector3 offset = new(0, 1, 0);
         GameObject VFX = Instantiate(VFX_Death, this.transform.position+ offset, Quaternion.identity);
         Destroy(VFX, 3.5f);
     }
@@ -288,6 +287,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
             Rebirth(StartPosition, StartRotation);
         }
     }
+
     private void Initialization()
     {
         if(isOnceEnemy)
@@ -305,7 +305,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         {
             this.gameObject.SetActive(true);
         }
-        isIgnite = false;
         isHurt = false;
         isSteam = false;
         isFire = false;
