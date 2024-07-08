@@ -19,10 +19,18 @@ public class EnemyFireSystem : MonoBehaviour
     {
         health = GetComponent<EnemyHealthSystem>();
     }
-    private void Start()
+
+    private void OnEnable()
     {
         health.OnEnemyRebirth += Initialized;
+        Initialized();
     }
+
+    private void OnDisable()
+    {
+        health.OnEnemyRebirth -= Initialized;
+    }
+
     private void Update()
     {
         TrackTargetSystem();
@@ -36,25 +44,25 @@ public class EnemyFireSystem : MonoBehaviour
         SetDashFire(false);
         SetSuperDashFire(false);
     }
-    public void FireCheck(PlayerDamage.DamageType damageType)
+
+    public void FireCheck()
     {
-        if(damageType == PlayerDamage.DamageType.FireDash)
+
+        if(Random.Range(0, 2) == 0)
         {
-            SetIsSpread(true);
             SetDashFire(true);
-            SetTrackTarget(true);
-            SetIsTimer(true);
-            SetTimerNumber(spreadTimer);
         }
-        if(damageType == PlayerDamage.DamageType.SuperDash || damageType == PlayerDamage.DamageType.Kick)
+        else
         {
-            SetIsSpread(true);
             SetSuperDashFire(true);
-            SetTrackTarget(true);
-            SetIsTimer(true);
-            SetTimerNumber(spreadTimer);
         }
+
+        SetIsSpread(true);
+        SetTrackTarget(true);
+        SetIsTimer(true);
+        SetTimerNumber(spreadTimer);
     }
+
     private void TrackTargetSystem()
     {
         if (!isSpread)

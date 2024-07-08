@@ -1,23 +1,21 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using BehaviorDesigner.Runtime;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
-public class EnemyHealthSystem : MonoBehaviour, IHealth
+public class EnemyHealthSystem : MonoBehaviour
 {
     [SerializeField] private bool isTeachEnemy;
     [SerializeField] private bool isOnceEnemy;
     [SerializeField] private bool isRebirthHide;
     [Header("State")]
-    public bool isHurt;
-    public bool isSteam;
-    public bool isFire;
-    public bool isShock;
+    private bool isHurt;
+    private bool isSteam;
+    private bool isFireVFX;
+    private bool isShockVFX;
     public bool Boom;
 
     [Header("Health")]
     [SerializeField] private int StartHealth;
-    public int health;
     [SerializeField] private int maxHealth;
     [SerializeField] private int ignitionPoint;
 
@@ -47,7 +45,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
 
     //Script
     private BehaviorTree bt;
-    private ProgressSystem progress;
     private EnemyFireSystem _fireSystem;
     private Vector3 StartPosition;
     private Quaternion StartRotation;
@@ -67,12 +64,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     private bool isInterval;
     private bool isTriggerDeath;
 
-    public int iHealth
-    {
-        get { return health; }
-        set { health = value; }
-    }
-
     public Core Core { get; private set; }
     public Stats Stats { get; private set; }
     public Combat Combat { get; private set; }
@@ -85,29 +76,45 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
 
         _fireSystem = GetComponent<EnemyFireSystem>();
     }
-    private void OnDestroy()
+
+    private void OnEnable()
     {
-        if(progress != null)
+        Stats.Health.OnValueDecreased += Health_OnValueDecreased;
+        Stats.Health.OnValueChanged += Health_OnValueChanged;
+    }
+
+
+    private void OnDisable()
+    {
+        Stats.Health.OnValueDecreased -= Health_OnValueDecreased;
+        Stats.Health.OnValueChanged -= Health_OnValueChanged;
+    }
+
+    private void Health_OnValueDecreased()
+    {
+        bt.SendEvent("HitByPlayer");
+        OnEnemyHit?.Invoke();
+
+        if (_fireSystem != null)
         {
-            progress.OnPlayerDeath -= RebirthSelf;
+            _fireSystem.FireCheck();
         }
     }
+
+    private void Health_OnValueChanged()
+    {
+        GealthFeedback(Stats.Health.CurrentValuePercentage);
+    }
+
     private void Start()
     {
-        health = maxHealth;
-        progress = GameManager.Instance.GetComponent<ProgressSystem>();
         bt = GetComponent<BehaviorTree>();
         StartPosition = this.transform.position;
         StartRotation = this.transform.rotation;
-        if (isTeachEnemy == false)
-        {
-            RebirthScription();
-        }  
     }
 
     private void Update()
     {
-        EnemyCoolingCheck();
         AtCrashTimerSystem();
     }
     public void SetIsRebirthHide(bool value)
@@ -136,131 +143,102 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         }
     }
 
-    #region Cooling
-    private void EnemyCoolingCheck()
-    {
-        isCooling = Time.time - hitTimer > coolingTime;
-        isInterval = Time.time - coolingTimer > coolingInterval;
-
-        if (health < maxHealth && isCooling && isInterval)
-        {
-            EnemyCooling();
-        }
-    }
-    private void EnemyCooling()
-    {
-        health++;
-        coolingTimer = Time.time;
-        GealthFeedback(health);
-    }
-    #endregion
-
     #region Damage
     public void TakeDamage(int damage , PlayerDamage.DamageType damageType)
     {
         // 這個改由Stats中的Health.decreaseValue事件觸發
-        health -= damage;
         hitTimer = Time.time;
-
-        GealthFeedback(health);
 
         if(!kickBackGuard)
         {
             if (damageType == PlayerDamage.DamageType.NormalShoot || damageType == PlayerDamage.DamageType.ChargeShoot)
             {
-                bt.SendEvent("HitByPlayer");
             }
         }
 
-        OnEnemyHit?.Invoke();
-
-        if (_fireSystem != null)
-        {
-            _fireSystem.FireCheck(damageType);
-        }
     }
     #endregion
     #region Feedback
-    private void GealthFeedback(int health)
+    private void GealthFeedback(float healthPercentage)
     {
-        if(health == 6)
+        if (healthPercentage == 0)
         {
-            _eye.SetYellow();
-
-            if(isHurt)
+            if (!isTriggerDeath)
             {
-                isHurt = false;
+                EnemyDeathRightNow();
             }
         }
-        if (health == 5) 
+        else if(healthPercentage < 1f / 6f)
         {
-            isHurt = true;
+            isShockVFX = true;
 
-            _eye.SetOrange();
-
-            if(isSteam)
+            if (this.transform.gameObject != null)
             {
-                isSteam = false;
-                feedbacks_Steam.StopFeedbacks();
+                feedbacks_Shock.PlayFeedbacks();
+            }
+
+            if (!isFireVFX)
+            {
+                isFireVFX = true;
+                feedbacks_Fire.PlayFeedbacks();
             }
         }
-        if (health == 4)
+        else if(healthPercentage < 2f / 6f)
+        {
+            isFireVFX = true;
+
+            feedbacks_Steam.StopFeedbacks();
+            feedbacks_Fire.PlayFeedbacks();
+
+            if (isShockVFX)
+            {
+                isShockVFX = false;
+                feedbacks_Shock.StopFeedbacks();
+            }
+        }
+        else if(healthPercentage < 3f / 6f)
+        {
+            _eye.SetPurple();
+
+            if (!isSteam)
+            {
+                isSteam = true;
+                feedbacks_Steam.PlayFeedbacks();
+            }
+
+            if (isFireVFX)
+            {
+                isFireVFX = false;
+                feedbacks_Steam.PlayFeedbacks();
+                feedbacks_Fire.StopFeedbacks();
+            }
+        }
+        else if(healthPercentage < 4f / 6f)
         {
             isSteam = true;
 
             _eye.SetRed();
             feedbacks_Steam.PlayFeedbacks();
         }
-        if (health == 3)
+        else if(healthPercentage < 5f / 6f)
         {
-            _eye.SetPurple();
+            isHurt = true;
 
-            if(!isSteam)
-            {
-                isSteam = true;
-                feedbacks_Steam.PlayFeedbacks();
-            }
+            _eye.SetOrange();
 
-            if(isFire)
+            if (isSteam)
             {
-                isFire = false;
-                feedbacks_Steam.PlayFeedbacks();
-                feedbacks_Fire.StopFeedbacks();
+                isSteam = false;
+                feedbacks_Steam.StopFeedbacks();
             }
         }
-        if (health == 2)
+        else
         {
-            isFire = true;
+             _eye.SetYellow();
 
-            feedbacks_Steam.StopFeedbacks();
-            feedbacks_Fire.PlayFeedbacks();
-
-            if(isShock)
+            if (isHurt)
             {
-                isShock = false;
-                feedbacks_Shock.StopFeedbacks();
-            }
-        }
-        if (health == 1)
-        {
-            isShock = true;
-
-            if(this.transform.gameObject !=null)
-            {
-                feedbacks_Shock.PlayFeedbacks();
-            }
-
-            if (!isFire)
-            {
-                isFire = true;
-                feedbacks_Fire.PlayFeedbacks();
-            }
-        }
-        if (health == 0 || health<0)
-        {
-            if(!isTriggerDeath)
-            {
-                EnemyDeathRightNow();
+                isHurt = false;
             }
         }
     }
@@ -308,8 +286,8 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         }
         isHurt = false;
         isSteam = false;
-        isFire = false;
-        isShock = false;
+        isFireVFX = false;
+        isShockVFX = false;
         Boom = false;
         _eye.SetYellow();
         feedbacks_Steam.StopFeedbacks();
@@ -317,16 +295,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         feedbacks_Shock.StopFeedbacks();
         feedbacks_Boom.StopFeedbacks();
         feedbacks_FlyBoom.StopFeedbacks();
-        health = StartHealth;
         SetIsTriggerDeath(false);
-    }
-    
-    private void RebirthScription()
-    {
-        if(isTeachEnemy==false)
-        {
-            progress.OnPlayerDeath += RebirthSelf;
-        }
     }
     #endregion
 

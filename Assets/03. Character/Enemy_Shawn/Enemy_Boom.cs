@@ -3,7 +3,7 @@ using UnityEngine;
 public class Enemy_Boom : MonoBehaviour
 {
     [SerializeField] private EnemyHealthSystem enemyHealthSystesm;
-    [HideInInspector]public Rigidbody rb;
+    [HideInInspector]private Rigidbody rb;
     private void Awake()        
     {
         rb = enemyHealthSystesm.GetComponent<Rigidbody>();

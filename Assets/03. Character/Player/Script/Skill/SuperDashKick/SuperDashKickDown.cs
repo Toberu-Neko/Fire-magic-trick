@@ -17,10 +17,7 @@ public class SuperDashKickDown : MonoBehaviour
         if(Target != null)
         {
             Enemy_Boom enemy_Boom = Target.GetComponent<Enemy_Boom>();
-            Rigidbody rb = enemy_Boom.rb;
             enemy_Boom.Boom();
-            Vector3 rbUp = rb.gameObject.transform.up;
-            rb.velocity = -rbUp * kickDownForce;
         }
     }
 }

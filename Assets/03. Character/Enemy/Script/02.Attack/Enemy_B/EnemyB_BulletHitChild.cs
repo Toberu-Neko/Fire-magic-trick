@@ -6,8 +6,10 @@ public class EnemyB_BulletHitChild : MonoBehaviour
     {
         if(other.CompareTag("Enemy"))
         {
-            EnemyHealthSystem healthSystem = other.gameObject.GetComponent<EnemyHealthSystem>();
-            healthSystem.TakeDamage(0,PlayerDamage.DamageType.SuperDash);
+            Debug.LogWarning("Haven't implement burn duration variable.");
+            other.TryGetComponent(out IFlammable flammable);
+            flammable.SetOnFire(3f);
+
         }
     }
 }

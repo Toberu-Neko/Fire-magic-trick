@@ -16,6 +16,12 @@ public class PlayerAfterSuperDashJump : PlayerAbilityState
         player.InAirState.SetAirControlSpeed(playerData.walkSpeed);
         player.InAirState.SetIsJumping();
 
+        foreach( var col in Physics.OverlapBox(player.transform.position, playerData.superDashFootDetectBox, player.transform.rotation))
+        {
+            col.TryGetComponent(out IKnockbackable knockbackable);
+            knockbackable?.Knockback(Vector3.down,  playerData.superDashJumpKnockbackSpeed, player.transform.position);
+        }
+
         isAbilityDone = true;
     }
 
