@@ -67,7 +67,6 @@ public class PlayerData : ScriptableObject
     public float superDashBurnTime = 5f;
 
     [Header("Super Dash Jump")]
-    public float superDashJumpTime = 0.5f;
     public float superDashJumpVelocity = 10f;
     public Vector3 superDashFootDetectBox;
     public float superDashJumpKnockbackSpeed = 10f;

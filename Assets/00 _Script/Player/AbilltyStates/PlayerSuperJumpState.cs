@@ -87,30 +87,38 @@ public class PlayerSuperJumpState : PlayerAbilityState
             movement.SetVelocityY(playerData.superJumpVelocity);
         }
 
+        if (player.InputHandler.JumpInput)
+        {
+            isAbilityDone = true;
+        }
+
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        foreach (var col in SphereDetection(playerData.longRangeDetectRadius))
+        if(collisionSenses.Ground || collisionSenses.Enemy)
         {
-            if (col != null)
+            foreach (var col in SphereDetection(playerData.longRangeDetectRadius))
             {
-                col.TryGetComponent(out IKnockbackable knockbackable);
-                knockbackable?.Knockback(player.transform.position, playerData.superJumpFireJumpKnockbackForce);
-                col.TryGetComponent(out IDamageable damageable);
-                damageable?.Damage(playerData.superJumpFireDamage, player.transform.position);
+                if (col != null)
+                {
+                    col.TryGetComponent(out IKnockbackable knockbackable);
+                    knockbackable?.Knockback(player.transform.position, playerData.superJumpFireJumpKnockbackForce);
+                    col.TryGetComponent(out IDamageable damageable);
+                    damageable?.Damage(playerData.superJumpFireDamage, player.transform.position);
+                }
             }
-        }
 
-        if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
-        {
-            player.VFXController.ActivateWindLandVFX();
-        }
-        else
-        {
-            player.VFXController.ActivateFireLandVFX();
+            if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
+            {
+                player.VFXController.ActivateWindLandVFX();
+            }
+            else
+            {
+                player.VFXController.ActivateFireLandVFX();
+            }
         }
     }
 

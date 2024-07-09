@@ -21,20 +21,10 @@ public class PlayerAfterSuperDashJump : PlayerAbilityState
             if (!col.CompareTag("Player"))
             {
                 col.TryGetComponent(out IKnockbackable knockbackable);
-                knockbackable?.Knockback(Vector3.down,  playerData.superDashJumpKnockbackSpeed, player.transform.position);        
+                knockbackable?.Knockback(Vector3.down,  playerData.superDashJumpKnockbackSpeed, player.transform.position);
             }
         }
 
         isAbilityDone = true;
-    }
-
-    public override void LogicUpdate()
-    {
-        base.LogicUpdate();
-
-        if(Time.time >= StartTime + playerData.superDashJumpTime)
-        {
-            isAbilityDone = true;
-        }
     }
 }

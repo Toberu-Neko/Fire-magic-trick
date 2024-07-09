@@ -6,6 +6,11 @@ public class PlayerWindAltState : PlayerAbilityState
 {
     private List<DetectionInfo> detectionInfos;
     public float hitTime;
+    private Vector3 startPos;
+    private int attackCount;
+    private bool gotoOrgPos;
+    private float gotoOrgPosTime;
+
     private class DetectionInfo
     {
         public DetectionInfo(IDamageable damageable, IKnockbackable knockbackable, Transform pos, float distance)
@@ -35,6 +40,7 @@ public class PlayerWindAltState : PlayerAbilityState
         stats.SetInvincible(true);
         movement.SetGravityZero();
         player.VFXController.SetWindFeetCardVFX(true);
+        startPos = player.transform.position;
 
         //Detect Enemy
         detectionInfos = new();
@@ -53,6 +59,7 @@ public class PlayerWindAltState : PlayerAbilityState
         detectionInfos.Sort((a, b) => a.distance.CompareTo(b.distance));
 
         hitTime = Time.time;
+        attackCount = 0;
     }
 
     public override void LogicUpdate()
@@ -71,22 +78,48 @@ public class PlayerWindAltState : PlayerAbilityState
             return;
         }
 
-        Vector3 target = new(detectionInfos[0].transform.position.x, detectionInfos[0].transform.position.y + 1f, detectionInfos[0].transform.position.z);
-        Vector3 targetDir = target - player.transform.position;
-        float speed = playerData.windAltMaxSpeed * playerData.windAltSpeedCurve.Evaluate(Mathf.Clamp01((Time.time - StartTime) / playerData.windAltSpeedUpTime));
-        movement.SetVelocity(speed, targetDir.normalized, true);
-
-        if (Vector3.Distance(player.transform.position, target) < 0.5f)
+        if (!gotoOrgPos)
         {
-            detectionInfos[0].knockbackable.Knockback(targetDir.normalized, 10f, player.transform.position);
-            detectionInfos[0].damageable.Damage(playerData.windAltDamage, player.transform.position);
-            BulletTimeManager.Instance.BulletTime_Slow(0.2f);
 
-            hitTime = Time.time;
+            Vector3 target = new(detectionInfos[0].transform.position.x, detectionInfos[0].transform.position.y + 1f, detectionInfos[0].transform.position.z);
+            Vector3 targetDir = target - player.transform.position;
+            float speed = playerData.windAltMaxSpeed * playerData.windAltSpeedCurve.Evaluate(Mathf.Clamp01((Time.time - StartTime) / playerData.windAltSpeedUpTime));
+            movement.SetVelocity(speed, targetDir.normalized, true);
 
-            detectionInfos.RemoveAt(0);
+            if (Vector3.Distance(player.transform.position, target) < 0.5f)
+            {
+                detectionInfos[0].knockbackable.Knockback(targetDir.normalized, 10f, player.transform.position);
+                detectionInfos[0].damageable.Damage(playerData.windAltDamage, player.transform.position);
+                BulletTimeManager.Instance.BulletTime_Slow(0.2f);
+
+                hitTime = Time.time;
+                attackCount++;
+
+                if (detectionInfos.Count == 1 && attackCount < 3)
+                {
+                    gotoOrgPos = true;
+                    gotoOrgPosTime = Time.time;
+                }
+                else
+                {
+                    detectionInfos.RemoveAt(0);
+                }
+            }
         }
+        else
+        {
+            if (Time.time > gotoOrgPosTime + 0.3f)
+            {
+                gotoOrgPos = false;
+            }
+            else
+            {
+                Vector3 targetDir = startPos - player.transform.position;
+                float speed = playerData.windAltMaxSpeed * playerData.windAltSpeedCurve.Evaluate(Mathf.Clamp01((Time.time - StartTime) / playerData.windAltSpeedUpTime));
+                movement.SetVelocity(speed, targetDir.normalized, true);
+            }
 
+        }
     }
 
     public override void Exit()

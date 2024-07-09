@@ -34,6 +34,18 @@ public class PlayerFireballState : PlayerAbilityState
         player.SetCollider(true);
         player.SetPlayerModel(true);
         player.VFXController.SetSuperDashVFX(false);
+
+        foreach (var col in SphereDetection(playerData.longRangeDetectRadius))
+        {
+            if (col != null)
+            {
+                col.TryGetComponent(out IKnockbackable knockbackable);
+                knockbackable?.Knockback(player.transform.position, playerData.superJumpFireJumpKnockbackForce);
+                col.TryGetComponent(out IDamageable damageable);
+                damageable?.Damage(playerData.superJumpFireDamage, player.transform.position);
+            }
+        }
+        player.VFXController.ActivateFireLandVFX();
     }
 
     public override void LogicUpdate()
@@ -61,4 +73,5 @@ public class PlayerFireballState : PlayerAbilityState
             isAbilityDone = true;
         }
     }
+
 }
