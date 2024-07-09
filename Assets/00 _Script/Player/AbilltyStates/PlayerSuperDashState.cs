@@ -64,7 +64,7 @@ public class PlayerSuperDashState : PlayerAbilityState
 
                 if (col.TryGetComponent(out IKnockbackable knockbackable))
                 {
-                    knockbackable.Knockback(player.transform.position, playerData.superDashKnockbackForce);
+                    knockbackable.Knockback(player.transform.position, playerData.superDashKnockbackForce, false);
                 }
 
                 if (col.TryGetComponent(out IFlammable flammable))
