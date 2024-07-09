@@ -98,7 +98,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
     {
         base.Exit();
 
-        if(collisionSenses.Ground || collisionSenses.Enemy)
+        if (collisionSenses.Ground || collisionSenses.Enemy)
         {
             foreach (var col in SphereDetection(playerData.longRangeDetectRadius))
             {

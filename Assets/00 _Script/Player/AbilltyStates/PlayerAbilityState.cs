@@ -30,6 +30,8 @@ public class PlayerAbilityState : PlayerFSMBaseState
             {
                 stateMachine.ChangeState(player.InAirState);
             }
+
+            return;
         }
     }
 

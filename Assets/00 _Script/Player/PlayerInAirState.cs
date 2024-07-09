@@ -39,7 +39,6 @@ public class PlayerInAirState : PlayerFSMBaseState
     public override void Enter()
     {
         base.Enter();
-        floatCount = 0;
         isFloating = false;
         startFloatingTime = 0f;
 
@@ -190,7 +189,6 @@ public class PlayerInAirState : PlayerFSMBaseState
 
             inAirMovementSpeed = Mathf.Lerp(inAirMovementSpeed, playerData.airMoveSpeed, playerData.frameOfDecaySpeed * Time.deltaTime);
         }
-
     }
 
     private void CheckJumpMultiplier()
@@ -208,6 +206,11 @@ public class PlayerInAirState : PlayerFSMBaseState
                 IsJumping = false;
             }
         }
+    }
+
+    public void ResetFloatCount()
+    {
+        floatCount = 0;
     }
 
     private void CheckCoyoteTime()

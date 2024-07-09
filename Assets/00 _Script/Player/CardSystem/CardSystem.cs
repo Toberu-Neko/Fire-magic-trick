@@ -151,24 +151,26 @@ public class CardSystem : MonoBehaviour
         player.Anim.SetTrigger("shoot");
         // Debug.Log(transform.forward - player.InputHandler.MainCam.transform.forward);
 
-        switch (currentCardType)
-        {
-            case CardType.Normal:
-                Instantiate(normalCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
-                break;
-            case CardType.Wind:
-                Instantiate(windCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
-                break;
-            case CardType.Fire:
-                Instantiate(fireCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
-                break;
-        }
-
         if (StrongShoot)
         {
             BulletTimeManager.Instance.BulletTime_Slow(strongShootBulletTimeDuration);
+            Instantiate(normalCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
         }
-
+        else
+        {
+            switch (currentCardType)
+            {
+                case CardType.Normal:
+                    Instantiate(normalCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
+                    break;
+                case CardType.Wind:
+                    Instantiate(windCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
+                    break;
+                case CardType.Fire:
+                    Instantiate(fireCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
+                    break;
+            }
+        }
     }
 
     public void SetStrongShoot(bool value)

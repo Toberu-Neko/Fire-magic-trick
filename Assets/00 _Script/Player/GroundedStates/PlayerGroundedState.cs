@@ -22,6 +22,7 @@ public class PlayerGroundedState : PlayerFSMBaseState
         player.Anim.ResetTrigger("land");
         player.JumpState.ResetAmountOfJumpsLeft();
         player.DashState.ResetCanDash();
+        player.InAirState.ResetFloatCount();
     }
 
     public override void DoChecks()
