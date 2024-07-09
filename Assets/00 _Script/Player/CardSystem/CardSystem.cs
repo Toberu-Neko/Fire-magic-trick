@@ -74,6 +74,13 @@ public class CardSystem : MonoBehaviour
     {
         ShootRay();
 
+        if (player.InputHandler.DebugInput)
+        {
+            player.InputHandler.UseDebugInput();
+            AddFireCardEnergy();
+            AddWindCardEnergy();
+        }
+
         if(currentCardType != CardType.Normal)
         {
             if(Time.time >= endCardStateTime)

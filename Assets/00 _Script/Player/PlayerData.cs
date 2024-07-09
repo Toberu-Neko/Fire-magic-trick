@@ -47,9 +47,10 @@ public class PlayerData : ScriptableObject
 
     [Header("Super Jump Attack")]
     public float superJumpWindDamage = 20f;
-    public float superJumpWindKnockbackForce = 15f;
+    public float superJumpWindKnockbackForce = 10f;
     public float superJumpFireDamage = 30f;
-    public float superJumpFireKnockbackForce = 10f;
+    public float superJumpFireJumpKnockbackForce = 8f;
+    public float superJumpFireLandKnockbackForce = 14f;
     public float superJumpBurnTime = 2f;
 
     [Header("Super Dash")]
@@ -68,7 +69,6 @@ public class PlayerData : ScriptableObject
     [Header("Super Dash Jump")]
     public float superDashJumpTime = 0.5f;
     public float superDashJumpVelocity = 10f;
-    public AnimationCurve superDashDecaySpeedGraph;
     public Vector3 superDashFootDetectBox;
     public float superDashJumpKnockbackSpeed = 10f;
 
@@ -81,9 +81,11 @@ public class PlayerData : ScriptableObject
 
     [Header("WindAlt")]
     public int windAltEnergyCost = 6;
-    public float windAltSpeed = 10f;
     public float windAltMaxTime = 5f;
     public float windAltDamage = 20f;
+    public float windAltSpeedUpTime = 2.5f;
+    public float windAltMaxSpeed = 24f;
+    public AnimationCurve windAltSpeedCurve;
 
     [Header("FireAlt")]
     public int fireAltEnergyCost = 6;

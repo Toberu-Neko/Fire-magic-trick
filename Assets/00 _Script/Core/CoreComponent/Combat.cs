@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Combat : CoreComponent, IDamageable, IKnockbackable, IFlammable
 {
-    private float maxKnockbackTime = 0.4f;
+    [SerializeField] private float maxKnockbackTime = 0.4f;
 
     public List<IDamageable> DetectedDamageables { get; private set; } = new();
     public List<IKnockbackable> DetectedKnockbackables { get; private set; } = new();
@@ -92,9 +92,17 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable, IFlammable
         dir = dir.normalized;
         HandleKnockback(dir, force);
     }
-    public void Knockback(Vector3 damagePosition, float force)
+    public void Knockback(Vector3 damagePosition, float force, bool knockUp = true)
     {
-        Vector3 dir = (movement.ParentTransform.position - damagePosition).normalized;
+        Vector3 dir;
+        if (knockUp)
+        {
+            dir = (movement.ParentTransform.position - new Vector3(damagePosition.x, damagePosition.y - 2f, damagePosition.z)).normalized;
+        }
+        else
+        {
+            dir = (movement.ParentTransform.position - damagePosition).normalized;
+        }
         HandleKnockback(dir, force);
     }
 

@@ -61,20 +61,22 @@ public class PlayerWindAltState : PlayerAbilityState
 
         if (detectionInfos.Count == 0)
         {
-            isAbilityDone = true;
+            stateMachine.ChangeState(player.AfterSuperDashJump);
             return;
         }
 
         if (Time.time > hitTime + playerData.windAltMaxTime)
         {
-            isAbilityDone = true;
+            stateMachine.ChangeState(player.AfterSuperDashJump);
             return;
         }
 
-        Vector3 targetDir = detectionInfos[0].transform.position - player.transform.position;
-        movement.SetVelocity(12f, targetDir.normalized, true);
+        Vector3 target = new(detectionInfos[0].transform.position.x, detectionInfos[0].transform.position.y + 1f, detectionInfos[0].transform.position.z);
+        Vector3 targetDir = target - player.transform.position;
+        float speed = playerData.windAltMaxSpeed * playerData.windAltSpeedCurve.Evaluate(Mathf.Clamp01((Time.time - StartTime) / playerData.windAltSpeedUpTime));
+        movement.SetVelocity(speed, targetDir.normalized, true);
 
-        if (Vector3.Distance(player.transform.position, detectionInfos[0].transform.position) < 0.05f)
+        if (Vector3.Distance(player.transform.position, target) < 0.5f)
         {
             detectionInfos[0].knockbackable.Knockback(targetDir.normalized, 10f, player.transform.position);
             detectionInfos[0].damageable.Damage(playerData.windAltDamage, player.transform.position);
@@ -92,6 +94,7 @@ public class PlayerWindAltState : PlayerAbilityState
         player.SetCollider(true);
         player.SetPlayerModel(true);
         stats.SetInvincible(false);
+        movement.SetVelocityZero();
         movement.SetGravityOrginal();
         player.VFXController.SetWindFeetCardVFX(false);
     }

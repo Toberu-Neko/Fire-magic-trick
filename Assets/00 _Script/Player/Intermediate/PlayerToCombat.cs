@@ -31,7 +31,7 @@ public class PlayerToCombat : MonoBehaviour, IDamageable, IKnockbackable, IFlamm
         combat.Knockback(dir, force, damagePosition);
     }
 
-    public void Knockback(Vector3 damagePosition, float force)
+    public void Knockback(Vector3 damagePosition, float force, bool knockUp)
     {
         combat.Knockback(damagePosition, force);
     }

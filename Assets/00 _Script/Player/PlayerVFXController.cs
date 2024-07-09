@@ -8,8 +8,10 @@ public class PlayerVFXController : MonoBehaviour
     [SerializeField] private GameObject windFeetCardVFX;
     [SerializeField] private GameObject superDashVFX;
 
-    [Header("Super Jump Land")]
+    [Header("Super Jump")]
     [SerializeField] private Transform feetPosition;
+    [SerializeField] private GameObject superJumpWindStartVFXPrefab;
+    [SerializeField] private GameObject superJumpFireStartVFXPrefab;
     [SerializeField] private GameObject superJumpLandWindVFXPrefab;
     [SerializeField] private GameObject superJumpLandFireVFXPrefab;
 
@@ -31,12 +33,22 @@ public class PlayerVFXController : MonoBehaviour
         superDashVFX.SetActive(value);
     }
 
-    public void ActivateSuperJumpLandWindVFX()
+    public void ActivateWindStartVFX()
+    {
+        particleManager.StartParticles(superJumpWindStartVFXPrefab, feetPosition.position);
+    }
+
+    public void ActivateFireStartVFX()
+    {
+        particleManager.StartParticles(superJumpFireStartVFXPrefab, feetPosition.position);
+    }
+
+    public void ActivateWindLandVFX()
     {
         particleManager.StartParticles(superJumpLandWindVFXPrefab, feetPosition.position);
     }
 
-    public void ActivateSuperJumpLandFireVFX()
+    public void ActivateFireLandVFX()
     {
         particleManager.StartParticles(superJumpLandFireVFXPrefab, feetPosition.position);
     }

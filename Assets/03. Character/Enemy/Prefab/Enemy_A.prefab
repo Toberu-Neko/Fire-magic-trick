@@ -9984,6 +9984,7 @@ Transform:
   - {fileID: 7330725990032040161}
   - {fileID: 6364195941553546831}
   - {fileID: 5529959973947197753}
+  - {fileID: 5790129269927690605}
   m_Father: {fileID: 8032919127870789881}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4912684722972160450
@@ -22223,6 +22224,66 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &6363221836729811717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5790129269927690605}
+  - component: {fileID: 6865343455767628015}
+  m_Layer: 14
+  m_Name: CollisionSenses
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5790129269927690605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363221836729811717}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 217573908265264033}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6865343455767628015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363221836729811717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8395957ab2f87f545b540c8f9b5042c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheck: {fileID: 8032919127870789881}
+  groundCheckV3: {x: 0.25, y: 0.25, z: 0.25}
+  groundCheckDistance: 0.25
+  longGroundCheckDistance: 1.25
+  slopeCheckDistance: 0.75
+  longSlopeCheckDistance: 1.5
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8705
+  whatIsSlopeDetection:
+    serializedVersion: 2
+    m_Bits: 8193
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 16384
+  maxSlopeAngle: 30
 --- !u!1 &6668711632333899796
 GameObject:
   m_ObjectHideFlags: 0
@@ -27131,6 +27192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425a5072388748343b09b5f00a76dabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxKnockbackTime: 0.4
 --- !u!65 &1446520576652787523
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27816,8 +27878,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.7
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!114 &8032919127870789860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28003,7 +28065,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c85fc67a9ffeab4e8b361bb8d2a7def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navMeshAgent: {fileID: 167774824}
   distance: 0.1
 --- !u!114 &-3967696137766167190
 MonoBehaviour:

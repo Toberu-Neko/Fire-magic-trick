@@ -104,8 +104,21 @@ public class EnemyHealthSystem : MonoBehaviour
 
     private void Update()
     {
+        Core.LogicUpdate();
+
         AtCrashTimerSystem();
     }
+
+    private void LateUpdate()
+    {
+        Core.LateLogicUpdate();
+    }
+
+    private void FixedUpdate()
+    {
+        Core.PhysicsUpdate();
+    }
+
     public void SetIsRebirthHide(bool value)
     {
         isRebirthHide = value;

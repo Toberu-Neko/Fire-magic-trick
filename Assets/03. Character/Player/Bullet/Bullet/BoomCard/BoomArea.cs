@@ -9,12 +9,10 @@ public class BoomArea : MonoBehaviour
     [SerializeField] private float forceToEnemy = 30;
     [SerializeField] private float forceToPlayer = 90;
 
-    private KickBackEnemy kickBackEnemy;
     private Collider coli;
 
     private void Start()
     {
-        kickBackEnemy = GetComponent<KickBackEnemy>();
         coli = GetComponent<Collider>();
 
         delayBoom();
@@ -35,12 +33,6 @@ public class BoomArea : MonoBehaviour
         {
             other.TryGetComponent(out IDamageable damageable);
             damageable?.Damage(damage, transform.position);
-
-            if(other.TryGetComponent(out IHealth health))
-            {
-                health.TakeDamage(damage, PlayerDamage.DamageType.NormalShoot);
-                kickBackEnemy.kickBackEnemy(other, forceToEnemy);
-            }
         }
 
         other.TryGetComponent(out IKnockbackable knockbackable);

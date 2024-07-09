@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.VFX;
 
 public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
@@ -8,6 +9,7 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
     [SerializeField] protected GameObject cardSlashPrefab;
     [SerializeField] protected float lifeTime;
     [SerializeField] protected float speed;
+    [SerializeField] private LayerMask whatIsEnemy;
 
     //Script
     private Rigidbody rb;
@@ -19,10 +21,6 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
 
     //variable
     protected bool useTriggerEnter = false;
-
-    private void Awake()
-    {
-    }
 
     protected virtual void Start()
     {
@@ -40,16 +38,13 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
 
     private void OnCollisionEnter(Collision collision)
     {
-
-        //Hit
-        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnergyCan"))
+        int hitLayerMask = 1 << collision.gameObject.layer;
+        if((hitLayerMask & whatIsEnemy) != 0)
         {
-            OnHit?.Invoke(collision);
-            OnHitEnemy();
-            SpawnVFX(hitEnemyPrefab, transform.position, Quaternion.identity, 1f);
-
-            // crosshairUI.EnemyHitImpluse(this.transform.position);
+            return;
         }
+
+
         OnHitSomething();
         SpawnVFX(cardSlashPrefab, transform.position, Quaternion.identity, 1.5f);
         DestroyBullet();
@@ -68,7 +63,6 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
                 OnHitSomething();
                 SpawnVFX(cardSlashPrefab, transform.position, Quaternion.identity, 1.5f);
             }
-
             CroshairFeedback();
         }
     }

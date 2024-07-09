@@ -21,11 +21,12 @@ public class PlayerSuperJumpState : PlayerAbilityState
         movement.SetVelocityY(playerData.superJumpVelocity);
         minYVelocity = Mathf.Infinity;
 
-        //TODO Different SuperJump Ability
         if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
         {
+            player.VFXController.ActivateWindStartVFX();
+
             // °_¸õ·|»EÃl¼Ä¤H
-            foreach(var col in SphereDetection(playerData.longRangeDetectRadius))
+            foreach (var col in SphereDetection(playerData.longRangeDetectRadius))
             {
                 if (col != null)
                 {
@@ -37,14 +38,15 @@ public class PlayerSuperJumpState : PlayerAbilityState
         }
         else
         {
-            // ¾_°h¨Ã¿U¿N¼Ä¤H
+            player.VFXController.ActivateFireStartVFX();
 
-            foreach(var col in SphereDetection(playerData.closeRangeDetectRadius))
+            // ¾_°h¨Ã¿U¿N¼Ä¤H
+            foreach (var col in SphereDetection(playerData.midRangeDetectRadius))
             {
                 if (col != null)
                 {
                     col.TryGetComponent(out IKnockbackable knockbackable);
-                    knockbackable?.Knockback(player.transform.position, playerData.superJumpFireKnockbackForce);
+                    knockbackable?.Knockback(player.transform.position, playerData.superJumpFireJumpKnockbackForce);
                     col.TryGetComponent(out IDamageable damageable);
                     damageable?.Damage(playerData.superJumpFireDamage, player.transform.position);
                 }
@@ -96,7 +98,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
             if (col != null)
             {
                 col.TryGetComponent(out IKnockbackable knockbackable);
-                knockbackable?.Knockback(player.transform.position, playerData.superJumpFireKnockbackForce);
+                knockbackable?.Knockback(player.transform.position, playerData.superJumpFireJumpKnockbackForce);
                 col.TryGetComponent(out IDamageable damageable);
                 damageable?.Damage(playerData.superJumpFireDamage, player.transform.position);
             }
@@ -104,11 +106,11 @@ public class PlayerSuperJumpState : PlayerAbilityState
 
         if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
         {
-            player.VFXController.ActivateSuperJumpLandWindVFX();
+            player.VFXController.ActivateWindLandVFX();
         }
         else
         {
-            player.VFXController.ActivateSuperJumpLandFireVFX();
+            player.VFXController.ActivateFireLandVFX();
         }
     }
 

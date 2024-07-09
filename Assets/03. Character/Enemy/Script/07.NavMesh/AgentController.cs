@@ -7,28 +7,54 @@ using UnityEngine.AI;
 public class AgentController : MonoBehaviour
 {
     [Header("NavMesh")]
-    [SerializeField, Tooltip("請放入此物件")] private NavMeshAgent navMeshAgent;
+    private NavMeshAgent navMeshAgent;
     [SerializeField, Tooltip("地面偵測距離")] private float distance = 0.1f;
 
     private bool isAgentDisabled = false;
+    private bool firstTime;
 
-    // 見面三秒即除錯
-    void Start()
+    private Core core;
+    private Movement movement;
+
+    private void Awake()
     {
-        if (navMeshAgent == null)
+        core = GetComponentInChildren<Core>();
+        movement = core.GetCoreComponent<Movement>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+    }
+
+    private void OnEnable()
+    {
+        firstTime = true;
+    }
+
+    private void Update()
+    {
+        if (movement.CanSetVelocity)
         {
-            Debug.LogError(gameObject.name + "的AgentController沒有放入Agent");
-            gameObject.SetActive(false);
+            if (isAgentDisabled && IsOnNavMesh())
+            {
+                EnableAgent();
+            }
         }
+        else if (!movement.CanSetVelocity)
+        {
+            if(!isAgentDisabled)
+            {
+                DisableAgent();
+            }
+        }
+
     }
 
     // 當敵人落地時
     void OnCollisionEnter(Collision collision)
     {
         // 碰到的是障礙物、Agnet關閉中、冷卻完成
-        if (isAgentDisabled)
+        if (isAgentDisabled && firstTime)
         {
-            if(IsOnNavMesh())
+            firstTime = false;
+            if (IsOnNavMesh())
             {
                 EnableAgent();
             }  

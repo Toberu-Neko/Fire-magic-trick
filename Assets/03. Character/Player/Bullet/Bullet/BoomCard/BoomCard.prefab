@@ -24190,7 +24190,6 @@ GameObject:
   - component: {fileID: 6077979604380879128}
   - component: {fileID: 812234833019504672}
   - component: {fileID: 3722614939301698987}
-  - component: {fileID: 1228862197945287159}
   - component: {fileID: 6719289997504853123}
   - component: {fileID: 3791141052154015985}
   m_Layer: 7
@@ -24283,22 +24282,11 @@ MonoBehaviour:
   cardSlashPrefab: {fileID: 7966352229167342560, guid: 8eaa4e0e527b85a4aa75debdb29d5f12, type: 3}
   lifeTime: 0.75
   speed: 40
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 16384
   boomArea: {fileID: 6951562086653755707, guid: 9630f8faae652c54a97bf62d734d0cce, type: 3}
   fireRetrun: {fileID: 7991532180455964518, guid: b46456e62257edd4d9c728d96ba3df49, type: 3}
---- !u!114 &1228862197945287159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4681020241941845620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d9a0ded04b7f7848bc86b5764d38b97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BackCoordinate: {fileID: 9164246563085282913}
-  force: 10
 --- !u!114 &6719289997504853123
 MonoBehaviour:
   m_ObjectHideFlags: 0

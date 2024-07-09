@@ -43,9 +43,10 @@ MonoBehaviour:
   superJumpFallAddForce: 20
   superJumpFallInitVelocity: -6
   superJumpWindDamage: 20
-  superJumpWindKnockbackForce: 8
+  superJumpWindKnockbackForce: 10
   superJumpFireDamage: 25
-  superJumpFireKnockbackForce: 10
+  superJumpFireJumpKnockbackForce: 8
+  superJumpFireLandKnockbackForce: 14
   superJumpBurnTime: 3
   baseSuperDashSpeed: 5
   maxSuperDashSpeed: 25
@@ -92,30 +93,6 @@ MonoBehaviour:
   superDashBurnTime: 5
   superDashJumpTime: 0.5
   superDashJumpVelocity: 15
-  superDashDecaySpeedGraph:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1.0000122
-      value: 0.000001296401
-      inSlope: 0.000005983051
-      outSlope: 0.000005983051
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.3312227
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   superDashFootDetectBox: {x: 1, y: 1, z: 1}
   superDashJumpKnockbackSpeed: 10
   fireballSpeed: 4
@@ -124,6 +101,41 @@ MonoBehaviour:
   fireballMinYVelocity: -2.5
   fireballMaxTime: 2.5
   windAltEnergyCost: 6
-  windAltSpeed: 10
   windAltMaxTime: 5
+  windAltDamage: 20
+  windAltSpeedUpTime: 1
+  windAltMaxSpeed: 22
+  windAltSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5072566
+      value: 0.27021575
+      inSlope: 0.9395174
+      outSlope: 0.9395174
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   fireAltEnergyCost: 6
