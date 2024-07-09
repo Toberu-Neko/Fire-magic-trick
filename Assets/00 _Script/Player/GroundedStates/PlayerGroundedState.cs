@@ -66,6 +66,14 @@ public class PlayerGroundedState : PlayerFSMBaseState
             {
                 stateMachine.ChangeState(player.SuperJumpState);
             }
+            else if (player.InputHandler.SkillInput && player.WindAltState.CanUseAbility())
+            {
+                stateMachine.ChangeState(player.WindAltState);
+            }
+            else if (player.InputHandler.SkillInput && player.FireAltState.CanUseAbility())
+            {
+                stateMachine.ChangeState(player.FireAltState);
+            }
         }
     }
 

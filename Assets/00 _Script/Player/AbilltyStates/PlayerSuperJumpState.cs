@@ -25,7 +25,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
         if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
         {
             // 起跳會聚攏敵人
-            foreach(var col in LongRangeSphereDetection())
+            foreach(var col in SphereDetection(playerData.longRangeDetectRadius))
             {
                 if (col != null)
                 {
@@ -39,7 +39,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
         {
             // 震退並燃燒敵人
 
-            foreach(var col in CloseRangeSphereDetection())
+            foreach(var col in SphereDetection(playerData.closeRangeDetectRadius))
             {
                 if (col != null)
                 {
@@ -74,19 +74,8 @@ public class PlayerSuperJumpState : PlayerAbilityState
 
                 movement.AddForce(playerData.superJumpFallAddForce, Vector3.down);
 
-                if (collisionSenses.Ground)
+                if (collisionSenses.Ground || collisionSenses.Enemy)
                 {
-                    foreach (var col in LongRangeSphereDetection())
-                    {
-                        if (col != null)
-                        {
-                            col.TryGetComponent(out IKnockbackable knockbackable);
-                            knockbackable?.Knockback(player.transform.position, playerData.superJumpFireKnockbackForce);
-                            col.TryGetComponent(out IDamageable damageable);
-                            damageable?.Damage(playerData.superJumpFireDamage, player.transform.position);
-                        }
-                    }
-
                     isAbilityDone = true;
                 }
             }
@@ -96,6 +85,31 @@ public class PlayerSuperJumpState : PlayerAbilityState
             movement.SetVelocityY(playerData.superJumpVelocity);
         }
 
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        foreach (var col in SphereDetection(playerData.longRangeDetectRadius))
+        {
+            if (col != null)
+            {
+                col.TryGetComponent(out IKnockbackable knockbackable);
+                knockbackable?.Knockback(player.transform.position, playerData.superJumpFireKnockbackForce);
+                col.TryGetComponent(out IDamageable damageable);
+                damageable?.Damage(playerData.superJumpFireDamage, player.transform.position);
+            }
+        }
+
+        if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
+        {
+            player.VFXController.ActivateSuperJumpLandWindVFX();
+        }
+        else
+        {
+            player.VFXController.ActivateSuperJumpLandFireVFX();
+        }
     }
 
     public bool CanUseAbility()

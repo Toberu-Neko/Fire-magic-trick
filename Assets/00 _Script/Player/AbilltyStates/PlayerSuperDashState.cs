@@ -51,11 +51,11 @@ public class PlayerSuperDashState : PlayerAbilityState
         player.SetPlayerModel(true);
         player.VFXController.SetSuperDashVFX(false);
 
-        Collider[] detectedCol = CloseRangeSphereDetection();
+        List<GameObject> detectedobj = SphereDetection(playerData.closeRangeDetectRadius);
 
-        if (detectedCol.Length > 0) 
+        if (detectedobj.Count > 0) 
         {
-            foreach (Collider col in detectedCol)
+            foreach (GameObject col in detectedobj)
             {
                 if (col.TryGetComponent(out IDamageable damageable))
                 {

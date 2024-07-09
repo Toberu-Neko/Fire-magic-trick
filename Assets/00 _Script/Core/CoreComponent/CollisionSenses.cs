@@ -19,6 +19,8 @@ public class CollisionSenses : CoreComponent
 
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private LayerMask whatIsSlopeDetection;
+    [SerializeField] private LayerMask whatIsEnemy;
+
     [SerializeField] private float maxSlopeAngle = 30f;
     private Slope slope = new();
 
@@ -55,6 +57,13 @@ public class CollisionSenses : CoreComponent
         get
         {
             return Physics.BoxCast(GroundCheck.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, longGroundCheckDistance, whatIsGround);
+        }
+    }
+    public bool Enemy
+    {
+        get
+        {
+            return Physics.BoxCast(GroundCheck.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, slopeCheckDistance, whatIsEnemy);
         }
     }
 

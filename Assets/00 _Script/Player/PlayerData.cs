@@ -83,6 +83,7 @@ public class PlayerData : ScriptableObject
     public int windAltEnergyCost = 6;
     public float windAltSpeed = 10f;
     public float windAltMaxTime = 5f;
+    public float windAltDamage = 20f;
 
     [Header("FireAlt")]
     public int fireAltEnergyCost = 6;

@@ -50,8 +50,8 @@ public class CardSystem : MonoBehaviour
 
     [SerializeField] private int windMaxEnergy;
     [SerializeField] private int fireMaxEnergy;
-    private int windCardEnergy;
-    private int fireCardEnergy;
+    public int WindCardEnergy { get; private set; }
+    public int FireCardEnergy { get; private set; }
     public event Action<int> OnWindCardEnergyChanged;
     public event Action<int> OnFireCardEnergyChanged;
 
@@ -187,53 +187,53 @@ public class CardSystem : MonoBehaviour
 
     public int CheckCurrentCardEnergy()
     {
-        if(windCardEnergy == 0 && fireCardEnergy == 0)
+        if(WindCardEnergy == 0 && FireCardEnergy == 0)
         {
             return 0;
         }
 
         if(CurrentEquipedCard == CardType.Wind)
         {
-            if(windCardEnergy == 0)
+            if(WindCardEnergy == 0)
             {
                 CurrentEquipedCard = CardType.Fire;
-                return fireCardEnergy;
+                return FireCardEnergy;
             }
             else
             {
-                return windCardEnergy;
+                return WindCardEnergy;
             }
         }
         else
         {
-            if (fireCardEnergy == 0)
+            if (FireCardEnergy == 0)
             {
                 CurrentEquipedCard = CardType.Wind;
-                return windCardEnergy;
+                return WindCardEnergy;
             }
             else
             { 
-                return fireCardEnergy;
+                return FireCardEnergy;
             }
         }
     }
 
     public bool CheckCardEnergy(int amount)
     {
-        if (windCardEnergy == 0 && fireCardEnergy == 0)
+        if (WindCardEnergy == 0 && FireCardEnergy == 0)
         {
             return false;
         }
 
         if (CurrentEquipedCard == CardType.Wind)
         {
-            if(windCardEnergy >= amount)
+            if(WindCardEnergy >= amount)
             {
                 return true;
             }
             else
             {
-                if (fireCardEnergy >= amount)
+                if (FireCardEnergy >= amount)
                 {
                     CurrentEquipedCard = CardType.Fire;
                     return true;
@@ -242,13 +242,13 @@ public class CardSystem : MonoBehaviour
         }
         else if (CurrentEquipedCard == CardType.Fire)
         {
-            if (fireCardEnergy >= amount)
+            if (FireCardEnergy >= amount)
             {
                 return true;
             }
             else
             {
-                if (windCardEnergy >= amount)
+                if (WindCardEnergy >= amount)
                 {
                     CurrentEquipedCard = CardType.Wind;
                     return true;
@@ -273,30 +273,30 @@ public class CardSystem : MonoBehaviour
 
     public void AddWindCardEnergy()
     {
-        windCardEnergy++;
-        windCardEnergy = Mathf.Clamp(windCardEnergy, 0, windMaxEnergy);
-        OnWindCardEnergyChanged?.Invoke(windCardEnergy);
+        WindCardEnergy++;
+        WindCardEnergy = Mathf.Clamp(WindCardEnergy, 0, windMaxEnergy);
+        OnWindCardEnergyChanged?.Invoke(WindCardEnergy);
     }
 
     public void DecreaseWindCardEnergy(int value)
     {
-        windCardEnergy -= value;
-        windCardEnergy = Mathf.Clamp(windCardEnergy, 0, windMaxEnergy);
-        OnWindCardEnergyChanged?.Invoke(windCardEnergy);
+        WindCardEnergy -= value;
+        WindCardEnergy = Mathf.Clamp(WindCardEnergy, 0, windMaxEnergy);
+        OnWindCardEnergyChanged?.Invoke(WindCardEnergy);
     }
 
     public void AddFireCardEnergy()
     {
-        fireCardEnergy++;
-        fireCardEnergy = Mathf.Clamp(fireCardEnergy, 0, fireMaxEnergy);
-        OnFireCardEnergyChanged?.Invoke(fireCardEnergy);
+        FireCardEnergy++;
+        FireCardEnergy = Mathf.Clamp(FireCardEnergy, 0, fireMaxEnergy);
+        OnFireCardEnergyChanged?.Invoke(FireCardEnergy);
     }
 
     public void DecreaseFireCardEnergy(int value)
     {
-        fireCardEnergy -= value;
-        fireCardEnergy = Mathf.Clamp(fireCardEnergy, 0, fireMaxEnergy);
-        OnFireCardEnergyChanged?.Invoke(fireCardEnergy);
+        FireCardEnergy -= value;
+        FireCardEnergy = Mathf.Clamp(FireCardEnergy, 0, fireMaxEnergy);
+        OnFireCardEnergyChanged?.Invoke(FireCardEnergy);
     }
     #endregion
 

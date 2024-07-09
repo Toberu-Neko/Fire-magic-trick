@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFSMBaseState
@@ -9,6 +10,7 @@ public class PlayerFSMBaseState
     protected Core core;
     protected Movement movement;
     protected CollisionSenses collisionSenses;
+    protected Stats stats;
 
     protected bool isAnimationFinished;
     protected bool isAnimationStartMovement;
@@ -35,6 +37,7 @@ public class PlayerFSMBaseState
         core = player.Core;
         movement = core.GetCoreComponent<Movement>();
         collisionSenses = core.GetCoreComponent<CollisionSenses>();
+        stats = core.GetCoreComponent<Stats>();
 
         StartTime = 0f;
         ExitTime = 0f;
@@ -56,6 +59,7 @@ public class PlayerFSMBaseState
         isExitingState = true;
         ExitTime = Time.time;
     }
+
     public virtual void LogicUpdate()
     {
         MovementInput = player.InputHandler.RawMovementInput;
@@ -159,7 +163,7 @@ public class PlayerFSMBaseState
         movement.SetVelocity(speed, v2Workspace, ignoreSlope);
     }
 
-    protected void CheckIfShouldShoot(bool resetAttackInput = true)
+    protected void CheckIfShouldShoot(bool resetAttackInput = false)
     {
         if (AttackInput)
         {
@@ -170,16 +174,23 @@ public class PlayerFSMBaseState
             player.CardSystem.Shoot();
         }
     }
-    protected Collider[] CloseRangeSphereDetection()
+    protected List<GameObject> SphereDetection(float detectRadius)
     {
-        return Physics.OverlapSphere(player.transform.position, playerData.closeRangeDetectRadius, playerData.whatIsCombatDetectable);
-    }
-    protected Collider[] MidRangeSphereDetection()
-    {
-        return Physics.OverlapSphere(player.transform.position, playerData.midRangeDetectRadius, playerData.whatIsCombatDetectable);
-    }
-    protected Collider[] LongRangeSphereDetection()
-    {
-        return Physics.OverlapSphere(player.transform.position, playerData.longRangeDetectRadius, playerData.whatIsCombatDetectable);
+        List<GameObject> objs = new();
+        foreach(var col in Physics.OverlapSphere(player.transform.position, detectRadius, playerData.whatIsCombatDetectable))
+        {
+            if(col.gameObject == player.gameObject)
+            {
+                continue;
+            }
+
+            if(objs.Contains(col.gameObject))
+            {
+                continue;
+            }
+
+            objs.Add(col.gameObject);
+        }
+        return objs;
     }
 }

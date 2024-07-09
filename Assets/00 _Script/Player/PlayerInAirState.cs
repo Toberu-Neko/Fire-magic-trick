@@ -155,6 +155,14 @@ public class PlayerInAirState : PlayerFSMBaseState
             player.SuperDashState.SetTarget(player.CardSystem.SuperDashTarget);
             stateMachine.ChangeState(player.SuperDashState);
         }
+        else if (player.InputHandler.SkillInput && player.WindAltState.CanUseAbility())
+        {
+            stateMachine.ChangeState(player.WindAltState);
+        }
+        else if (player.InputHandler.SkillInput && player.FireAltState.CanUseAbility())
+        {
+            stateMachine.ChangeState(player.FireAltState);
+        }
         else
         {
             MoveAndRotateWithCam(inAirMovementSpeed, 0f, true);

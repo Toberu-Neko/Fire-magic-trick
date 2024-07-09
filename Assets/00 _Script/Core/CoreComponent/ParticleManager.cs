@@ -6,6 +6,10 @@ public class ParticleManager : CoreComponent
     {
         return ObjectPoolManager.SpawnObject(particlePrefab, position, rotation, ObjectPoolManager.PoolType.ParticleSystem);
     }
+    public GameObject StartParticles(GameObject particlePrefab, Vector3 position)
+    {
+        return ObjectPoolManager.SpawnObject(particlePrefab, position, particlePrefab.transform.rotation, ObjectPoolManager.PoolType.ParticleSystem);
+    }
 
     public GameObject StartParticles(GameObject particlePrefab)
     {
