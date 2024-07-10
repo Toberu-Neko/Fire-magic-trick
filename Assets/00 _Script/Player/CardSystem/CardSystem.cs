@@ -13,6 +13,7 @@ public class CardSystem : MonoBehaviour
     [Header("Spawn Position")]
     [SerializeField] private Transform frontSpawnPos;
     [SerializeField] private Transform backSpawnPos;
+    [SerializeField] private Transform[] fireAltSpawnPos;
 
     [Header("Shoot Check")]
     [SerializeField] private float strongShootBulletTimeDuration;
@@ -171,6 +172,14 @@ public class CardSystem : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void FireAltShoot()
+    {
+        Transform target = fireAltSpawnPos[UnityEngine.Random.Range(0, fireAltSpawnPos.Length)];
+        Vector3 aimDir = (target.position - transform.position).normalized;
+
+        Instantiate(normalCardPrefab, target.position, Quaternion.LookRotation(aimDir, Vector3.up));
     }
 
     public void SetStrongShoot(bool value)

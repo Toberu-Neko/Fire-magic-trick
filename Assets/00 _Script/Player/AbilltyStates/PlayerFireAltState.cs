@@ -27,6 +27,8 @@ public class PlayerFireAltState : PlayerAbilityState
 
         player.SetCollider(false);
         stats.SetInvincible(true);
+        player.SetPlayerModel(false);
+        player.VFXController.SetSuperDashVFX(true);
 
         movement.SetVelocityY(playerData.superJumpVelocity);
 
@@ -41,7 +43,10 @@ public class PlayerFireAltState : PlayerAbilityState
     {
         base.LogicUpdate();
 
-        currentFrame++;
+        if (currentFrame == 0)
+        {
+            movement.SetVelocityY(playerData.superJumpVelocity);
+        }
 
         if(currentFrame > 5)
         {
@@ -53,14 +58,14 @@ public class PlayerFireAltState : PlayerAbilityState
                 {
                     firstTimeDrop = false;
                     startShootingTime = Time.time;
-                    player.VFXController.SetFloatVFX(true);
                 }
 
                 movement.SetVelocityY(-0.5f);
                 MoveWithInput(playerData.aimMoveSpeed, 0f, true);
 
-
                 //shoot
+                player.CardSystem.FireAltShoot();
+
 
                 if (Time.time > startShootingTime + playerData.fireAltFireTime)
                 {
@@ -72,6 +77,8 @@ public class PlayerFireAltState : PlayerAbilityState
                 MoveRelateWithCam(playerData.airMoveSpeed, 0f, true);
             }
         }
+
+        currentFrame++;
     }
 
     public override void PhysicsUpdate()
@@ -94,6 +101,7 @@ public class PlayerFireAltState : PlayerAbilityState
 
         player.SetCollider(true);
         stats.SetInvincible(false);
-        player.VFXController.SetFloatVFX(false);
+        player.SetPlayerModel(true);
+        player.VFXController.SetSuperDashVFX(false);
     }
 }
