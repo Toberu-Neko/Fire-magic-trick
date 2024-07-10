@@ -19,6 +19,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
         player.InputHandler.UseSuperJumpInput();
         player.JumpState.DecreaseAmountOfJumpsLeft();
         player.CardSystem.DecreaseCardEnergy(playerData.superJumpEnergyCost);
+        movement.SetCanSetVelocity(true);
         movement.SetVelocityY(playerData.superJumpVelocity);
         minYVelocity = Mathf.Infinity;
 
@@ -76,6 +77,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
                 if (!firstTimeDrop)
                 {
                     firstTimeDrop = true;
+                    BulletTimeManager.Instance.BulletTime_Slow(0.2f);
                     movement.SetVelocityY(playerData.superJumpFallStartVelocity);
                 }
 
