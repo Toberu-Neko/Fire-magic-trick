@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class Stats : CoreComponent
 
     [SerializeField] private float burnWhenHealthBelowPercentage = 0.5f;
     public bool IsBurning { get; private set; }
+    public event Action OnBurnChanged;
     private float startBurnTime;
     private float burnDuration;
 
@@ -53,7 +55,7 @@ public class Stats : CoreComponent
 
         if(Health.CurrentValuePercentage < burnWhenHealthBelowPercentage)
         {
-            IsBurning = true;
+            SetIsBurning(true);
         }
         else if (IsBurning)
         {
@@ -79,7 +81,7 @@ public class Stats : CoreComponent
             burnDuration += time;
         }
 
-        IsBurning = true;
+        SetIsBurning(true);
     }
 
     private void BurnCheck()
@@ -89,7 +91,13 @@ public class Stats : CoreComponent
             return;
         }
 
-        IsBurning = false;
+        SetIsBurning(false);
+    }
+
+    private void SetIsBurning(bool value)
+    {
+        IsBurning = value;
+        OnBurnChanged?.Invoke();
     }
 
 

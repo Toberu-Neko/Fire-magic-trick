@@ -17,6 +17,9 @@ public class CollisionSenses : CoreComponent
     [SerializeField] private float slopeCheckDistance = 0.75f;
     [SerializeField] private float longSlopeCheckDistance = 1.5f;
 
+    [SerializeField] private Transform orgPoint;
+    [SerializeField] private float orgPointDistance = 1.25f;
+
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private LayerMask whatIsSlopeDetection;
     [SerializeField] private LayerMask whatIsEnemy;
@@ -59,6 +62,15 @@ public class CollisionSenses : CoreComponent
             return Physics.BoxCast(GroundCheck.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, longGroundCheckDistance, whatIsGround);
         }
     }
+
+    public bool OrgPointGround
+    {
+        get
+        {
+            return Physics.BoxCast(orgPoint.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, orgPointDistance, whatIsGround);
+        }
+    }
+
     public bool Enemy
     {
         get

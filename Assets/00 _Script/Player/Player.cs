@@ -113,6 +113,11 @@ public class Player : MonoBehaviour
 
         cameraWorkspaceV2.Set(playerCamera.position.x - transform.position.x, playerCamera.position.z - transform.position.z);
         CameraPosRelateToPlayer = cameraWorkspaceV2.normalized;
+
+        if(Stats.IsInvincible && !Movement.CanSetVelocity)
+        {
+            Movement.SetCanSetVelocity(true);
+        }
     }
 
     private void FixedUpdate()

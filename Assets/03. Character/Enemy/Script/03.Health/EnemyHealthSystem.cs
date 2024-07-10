@@ -70,13 +70,26 @@ public class EnemyHealthSystem : MonoBehaviour
     {
         Stats.Health.OnValueDecreased += Health_OnValueDecreased;
         Stats.Health.OnValueChanged += Health_OnValueChanged;
+        Stats.OnBurnChanged += Stats_OnBurnChanged;
     }
 
+    private void Stats_OnBurnChanged()
+    {
+        if(Stats.IsBurning)
+        {
+            feedbacks_Fire.PlayFeedbacks();
+        }
+        else
+        {
+            feedbacks_Fire.StopFeedbacks();
+        }
+    }
 
     private void OnDisable()
     {
         Stats.Health.OnValueDecreased -= Health_OnValueDecreased;
         Stats.Health.OnValueChanged -= Health_OnValueChanged;
+        Stats.OnBurnChanged -= Stats_OnBurnChanged;
     }
 
     private void Health_OnValueDecreased()
@@ -92,7 +105,7 @@ public class EnemyHealthSystem : MonoBehaviour
 
     private void Health_OnValueChanged()
     {
-        GealthFeedback(Stats.Health.CurrentValuePercentage);
+        GealthFeedbackByHP(Stats.Health.CurrentValuePercentage);
     }
 
     private void Start()
@@ -146,7 +159,7 @@ public class EnemyHealthSystem : MonoBehaviour
     }
 
     #region Feedback
-    private void GealthFeedback(float healthPercentage)
+    private void GealthFeedbackByHP(float healthPercentage)
     {
         if (healthPercentage == 0)
         {
@@ -164,18 +177,10 @@ public class EnemyHealthSystem : MonoBehaviour
                 feedbacks_Shock.PlayFeedbacks();
             }
 
-            if (!isFireVFX)
-            {
-                isFireVFX = true;
-                feedbacks_Fire.PlayFeedbacks();
-            }
         }
         else if(healthPercentage < 2f / 6f)
         {
-            isFireVFX = true;
-
             feedbacks_Steam.StopFeedbacks();
-            feedbacks_Fire.PlayFeedbacks();
 
             if (isShockVFX)
             {
@@ -195,9 +200,7 @@ public class EnemyHealthSystem : MonoBehaviour
 
             if (isFireVFX)
             {
-                isFireVFX = false;
                 feedbacks_Steam.PlayFeedbacks();
-                feedbacks_Fire.StopFeedbacks();
             }
         }
         else if(healthPercentage < 4f / 6f)

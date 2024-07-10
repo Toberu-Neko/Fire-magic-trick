@@ -29,6 +29,7 @@ public class PlayerFireAltState : PlayerAbilityState
         stats.SetInvincible(true);
         player.SetPlayerModel(false);
         player.VFXController.SetSuperDashVFX(true);
+        BulletTimeManager.Instance.BulletTime_Slow(0.2f);
 
         movement.SetVelocityY(playerData.superJumpVelocity);
 
@@ -58,6 +59,8 @@ public class PlayerFireAltState : PlayerAbilityState
                 {
                     firstTimeDrop = false;
                     startShootingTime = Time.time;
+
+                    BulletTimeManager.Instance.BulletTime_Slow(0.2f);
                 }
 
                 movement.SetVelocityY(-0.5f);

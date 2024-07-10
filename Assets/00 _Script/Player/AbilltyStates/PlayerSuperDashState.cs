@@ -120,7 +120,7 @@ public class PlayerSuperDashState : PlayerAbilityState
 
     private void DetermineNextState()
     {
-        if (goToAirJumpState)
+        if (goToAirJumpState || collisionSenses.OrgPointGround)
         {
             movement.SetVelocityZero();
             stateMachine.ChangeState(player.AfterSuperDashJump);
