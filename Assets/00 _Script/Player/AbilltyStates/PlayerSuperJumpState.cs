@@ -17,9 +17,12 @@ public class PlayerSuperJumpState : PlayerAbilityState
         firstTimeDrop = false;
 
         player.InputHandler.UseSuperJumpInput();
+        player.JumpState.DecreaseAmountOfJumpsLeft();
         player.CardSystem.DecreaseCardEnergy(playerData.superJumpEnergyCost);
         movement.SetVelocityY(playerData.superJumpVelocity);
         minYVelocity = Mathf.Infinity;
+
+        player.VFXController.SetCanComboVFX(player.InAirState.CheckCanFloat());
 
         if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
         {
@@ -49,6 +52,8 @@ public class PlayerSuperJumpState : PlayerAbilityState
                     knockbackable?.Knockback(player.transform.position, playerData.superJumpFireJumpKnockbackForce);
                     col.TryGetComponent(out IDamageable damageable);
                     damageable?.Damage(playerData.superJumpFireDamage, player.transform.position);
+                    col.TryGetComponent(out IFlammable flammable);
+                    flammable?.SetOnFire(playerData.superJumpBurnTime);
                 }
             }
         }
@@ -60,7 +65,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
 
         currentFrame++;
 
-        MoveAndRotateWithCam(playerData.airMoveSpeed);
+        MoveRelateWithCam(playerData.airMoveSpeed);
 
         if(currentFrame > 5)
         {
@@ -71,7 +76,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
                 if (!firstTimeDrop)
                 {
                     firstTimeDrop = true;
-                    movement.SetVelocityY(playerData.superJumpFallInitVelocity);
+                    movement.SetVelocityY(playerData.superJumpFallStartVelocity);
                 }
 
                 movement.AddForce(playerData.superJumpFallAddForce, Vector3.down);
@@ -87,11 +92,17 @@ public class PlayerSuperJumpState : PlayerAbilityState
             movement.SetVelocityY(playerData.superJumpVelocity);
         }
 
-        if (player.InputHandler.JumpInput)
+        if (player.InputHandler.JumpInput && player.InAirState.CheckCanFloat())
         {
             isAbilityDone = true;
         }
+    }
 
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime);
     }
 
     public override void Exit()
@@ -105,7 +116,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
                 if (col != null)
                 {
                     col.TryGetComponent(out IKnockbackable knockbackable);
-                    knockbackable?.Knockback(player.transform.position, playerData.superJumpFireJumpKnockbackForce);
+                    knockbackable?.Knockback(player.transform.position, playerData.superJumpLandKnockbackForce);
                     col.TryGetComponent(out IDamageable damageable);
                     damageable?.Damage(playerData.superJumpFireDamage, player.transform.position);
                 }
@@ -120,6 +131,8 @@ public class PlayerSuperJumpState : PlayerAbilityState
                 player.VFXController.ActivateFireLandVFX();
             }
         }
+
+        player.VFXController.SetCanComboVFX(false);
     }
 
     public bool CanUseAbility()

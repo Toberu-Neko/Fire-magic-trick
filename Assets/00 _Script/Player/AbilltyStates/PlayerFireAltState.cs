@@ -1,9 +1,14 @@
+using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFireAltState : PlayerAbilityState
 {
+    private float minYVelocity;
+    private int currentFrame;
+    private float startShootingTime;
+    private bool firstTimeDrop;
     public PlayerFireAltState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -12,11 +17,83 @@ public class PlayerFireAltState : PlayerAbilityState
     {
         base.Enter();
 
-        isAbilityDone = true;
+        minYVelocity = Mathf.Infinity;
+        currentFrame = 0;
+        firstTimeDrop = true;
+        startShootingTime = 0f;
+
+        player.InputHandler.UseSkillInput();
+        player.CardSystem.DecreaseCardEnergy(playerData.altEnergyCost);
+
+        player.SetCollider(false);
+        stats.SetInvincible(true);
+
+        movement.SetVelocityY(playerData.superJumpVelocity);
+
+        foreach(var obj in SphereDetection(playerData.longRangeDetectRadius))
+        {
+            obj.TryGetComponent(out IFlammable flammable);
+            flammable?.SetOnFire(6f);
+        }
     }
 
-    public bool CanUseAbility()
+    public override void LogicUpdate()
     {
-        return player.CardSystem.CheckCardEnergy(playerData.fireAltEnergyCost);
+        base.LogicUpdate();
+
+        currentFrame++;
+
+        if(currentFrame > 5)
+        {
+            minYVelocity = Mathf.Min(minYVelocity, movement.CurrentVelocity.y);
+
+            if(minYVelocity < -1f)
+            {
+                if (firstTimeDrop)
+                {
+                    firstTimeDrop = false;
+                    startShootingTime = Time.time;
+                    player.VFXController.SetFloatVFX(true);
+                }
+
+                movement.SetVelocityY(-0.5f);
+                MoveWithInput(playerData.aimMoveSpeed, 0f, true);
+
+
+                //shoot
+
+                if (Time.time > startShootingTime + playerData.fireAltFireTime)
+                {
+                    isAbilityDone = true;
+                }
+            }
+            else
+            {
+                MoveRelateWithCam(playerData.airMoveSpeed, 0f, true);
+            }
+        }
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        if(minYVelocity < -1f)
+        {
+            movement.RotateAdd(10f);
+        }
+        else
+        {
+            Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime);
+        }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        player.SetCollider(true);
+        stats.SetInvincible(false);
+        player.VFXController.SetFloatVFX(false);
     }
 }

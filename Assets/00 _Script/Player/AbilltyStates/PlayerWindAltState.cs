@@ -34,7 +34,7 @@ public class PlayerWindAltState : PlayerAbilityState
     {
         base.Enter();
 
-        player.CardSystem.DecreaseCardEnergy(playerData.windAltEnergyCost);
+        player.CardSystem.DecreaseCardEnergy(playerData.altEnergyCost);
         player.SetCollider(false);
         player.SetPlayerModel(false);
         stats.SetInvincible(true);
@@ -136,6 +136,6 @@ public class PlayerWindAltState : PlayerAbilityState
 
     public bool CanUseAbility()
     {
-        return player.CardSystem.CheckCardEnergy(playerData.windAltEnergyCost) && SphereDetection(playerData.longRangeDetectRadius).Count > 0;
+        return player.CardSystem.CheckCardEnergy(playerData.altEnergyCost) && SphereDetection(playerData.longRangeDetectRadius).Count > 0;
     }
 }

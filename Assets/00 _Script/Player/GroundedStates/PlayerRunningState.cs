@@ -22,7 +22,7 @@ public class PlayerRunningState : PlayerGroundedState
     {
         base.LogicUpdate();
 
-        MoveAndRotateWithCam(playerData.slowRunSpeed, playerData.fastRunSpeed);
+        MoveRelateWithCam(playerData.slowRunSpeed, playerData.fastRunSpeed);
 
         if (!isExitingState)
         {
@@ -40,5 +40,12 @@ public class PlayerRunningState : PlayerGroundedState
                 stateMachine.ChangeState(player.AimWalkingState);
             }
         }
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime);
     }
 }

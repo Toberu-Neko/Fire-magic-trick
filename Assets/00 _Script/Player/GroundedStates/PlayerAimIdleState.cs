@@ -24,7 +24,6 @@ public class PlayerAimIdleState : PlayerGroundedState
     {
         base.LogicUpdate();
 
-        Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime, false);
 
         if (!isExitingState)
         {
@@ -42,5 +41,7 @@ public class PlayerAimIdleState : PlayerGroundedState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+
+        Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime, false);
     }
 }

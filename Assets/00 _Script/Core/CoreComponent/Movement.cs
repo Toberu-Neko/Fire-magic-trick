@@ -125,9 +125,15 @@ public class Movement : CoreComponent
 
     public void Rotate(float value)
     {
-        ParentTransform.rotation = Quaternion.Euler(0f, value, 0f);
+        RB.MoveRotation(Quaternion.Euler(0f, value, 0f));
     }
 
+    public void RotateAdd(float value)
+    {
+        RB.MoveRotation(Quaternion.Euler(0f, RB.transform.eulerAngles.y + value, 0f));
+    }
+
+    /*
     public void RotateSmooth(float value, float time)
     {
         StopCoroutine(nameof(SmoothRotate));
@@ -151,6 +157,7 @@ public class Movement : CoreComponent
 
         ParentTransform.rotation = targetRotation;
     }
+    */
 
     public void RotateIncrease(float value)
     {

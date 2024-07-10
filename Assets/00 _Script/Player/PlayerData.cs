@@ -22,7 +22,6 @@ public class PlayerData : ScriptableObject
 
     [Header("Jump")]
     public float jumpVelocity = 15f;
-    public float jumpVelocityAfterSuperDash = 25f;
     public int amountOfJumps = 1;
     public float jumpInpusStopYSpeedMultiplier = 0.5f;
     public float coyoteTime = 0.2f;
@@ -43,18 +42,15 @@ public class PlayerData : ScriptableObject
     public float superJumpVelocity = 30f;
     public int superJumpEnergyCost = 3;
     public float superJumpFallAddForce = 10f;
-    public float superJumpFallInitVelocity = -6f;
+    public float superJumpFallStartVelocity = -6f;
 
     [Header("Super Jump Attack")]
-    public float superJumpWindDamage = 20f;
-    public float superJumpWindKnockbackForce = 10f;
     public float superJumpFireDamage = 30f;
     public float superJumpFireJumpKnockbackForce = 8f;
-    public float superJumpFireLandKnockbackForce = 14f;
+    public float superJumpLandKnockbackForce = 14f;
     public float superJumpBurnTime = 2f;
 
     [Header("Super Dash")]
-    public float baseSuperDashSpeed = 5f;
     public float maxSuperDashSpeed = 25f;
     public AnimationCurve superDashSpeedGraph;
     public float speedUpTime = 0.5f;
@@ -78,8 +74,8 @@ public class PlayerData : ScriptableObject
     public float fireballMinYVelocity = -2f;
     public float fireballMaxTime = 3f;
 
+    public int altEnergyCost = 6;
     [Header("WindAlt")]
-    public int windAltEnergyCost = 6;
     public float windAltMaxTime = 5f;
     public float windAltDamage = 20f;
     public float windAltSpeedUpTime = 2.5f;
@@ -87,5 +83,5 @@ public class PlayerData : ScriptableObject
     public AnimationCurve windAltSpeedCurve;
 
     [Header("FireAlt")]
-    public int fireAltEnergyCost = 6;
+    public float fireAltFireTime = 5f;
 }

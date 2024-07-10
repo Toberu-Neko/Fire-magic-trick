@@ -23,10 +23,9 @@ MonoBehaviour:
   walkSpeed: 3.25
   slowRunSpeed: 5
   fastRunSpeed: 8
-  aimMoveSpeed: 3
+  aimMoveSpeed: 2
   airMoveSpeed: 3
   jumpVelocity: 7
-  jumpVelocityAfterSuperDash: 50
   amountOfJumps: 1
   jumpInpusStopYSpeedMultiplier: 1
   coyoteTime: 0.2
@@ -41,14 +40,11 @@ MonoBehaviour:
   superJumpVelocity: 20
   superJumpEnergyCost: 3
   superJumpFallAddForce: 20
-  superJumpFallInitVelocity: -6
-  superJumpWindDamage: 20
-  superJumpWindKnockbackForce: 10
+  superJumpFallStartVelocity: -6
   superJumpFireDamage: 25
   superJumpFireJumpKnockbackForce: 8
-  superJumpFireLandKnockbackForce: 14
+  superJumpLandKnockbackForce: 14
   superJumpBurnTime: 3
-  baseSuperDashSpeed: 5
   maxSuperDashSpeed: 25
   superDashSpeedGraph:
     serializedVersion: 2
@@ -99,7 +95,7 @@ MonoBehaviour:
   fireballMaxYVelocity: -0.35
   fireballMinYVelocity: -2.5
   fireballMaxTime: 2.5
-  windAltEnergyCost: 6
+  altEnergyCost: 6
   windAltMaxTime: 5
   windAltDamage: 20
   windAltSpeedUpTime: 1
@@ -137,4 +133,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  fireAltEnergyCost: 6
+  fireAltFireTime: 3

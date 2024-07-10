@@ -84,6 +84,7 @@ public class PlayerInAirState : PlayerFSMBaseState
         inAirMovementSpeed = playerData.airMoveSpeed;
         setAirControlSpeed = false;
 
+        player.VFXController.SetCanComboVFX(false);
         player.VFXController.SetFloatVFX(false);
         player.CardSystem.SetStrongShoot(false);
     }
@@ -154,20 +155,33 @@ public class PlayerInAirState : PlayerFSMBaseState
             player.SuperDashState.SetTarget(player.CardSystem.SuperDashTarget);
             stateMachine.ChangeState(player.SuperDashState);
         }
-        else if (player.InputHandler.SkillInput && player.WindAltState.CanUseAbility())
+        else if (player.InputHandler.SkillInput && player.CardSystem.CheckCardEnergy(playerData.altEnergyCost))
         {
-            stateMachine.ChangeState(player.WindAltState);
-        }
-        else if (player.InputHandler.SkillInput && player.FireAltState.CanUseAbility())
-        {
-            stateMachine.ChangeState(player.FireAltState);
+            if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind && SphereDetection(playerData.longRangeDetectRadius).Count > 0)
+            {
+                stateMachine.ChangeState(player.WindAltState);
+            }
+            else if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Fire)
+            {
+                stateMachine.ChangeState(player.FireAltState);
+            }
         }
         else
         {
-            MoveAndRotateWithCam(inAirMovementSpeed, 0f, true);
+            MoveRelateWithCam(inAirMovementSpeed, 0f, true);
+
+            if(!isFloating && floatCount < playerData.maxFloatCount && minYVelocity < -1f && !collisionSenses.LongGround)
+            {
+                player.VFXController.SetCanComboVFX(true);
+            }
+            else
+            {
+                player.VFXController.SetCanComboVFX(false);
+            }
 
             if (!isFloating && floatCount < playerData.maxFloatCount && player.InputHandler.OrgJumpInput && minYVelocity < -1f && !collisionSenses.LongGround)
             {
+                floatCount++;
                 player.InputHandler.UseJumpInput();
                 isFloating = true;
                 startFloatingTime = Time.time;
@@ -177,7 +191,6 @@ public class PlayerInAirState : PlayerFSMBaseState
             else if (isFloating && (!player.InputHandler.OrgJumpInput || Time.time - startFloatingTime > playerData.inAirMaxFloatTime || collisionSenses.LongGround))
             {
                 isFloating = false;
-                floatCount++;
                 player.VFXController.SetFloatVFX(false);
                 player.CardSystem.SetStrongShoot(false);
             }
@@ -189,6 +202,13 @@ public class PlayerInAirState : PlayerFSMBaseState
 
             inAirMovementSpeed = Mathf.Lerp(inAirMovementSpeed, playerData.airMoveSpeed, playerData.frameOfDecaySpeed * Time.deltaTime);
         }
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime);
     }
 
     private void CheckJumpMultiplier()
@@ -211,6 +231,11 @@ public class PlayerInAirState : PlayerFSMBaseState
     public void ResetFloatCount()
     {
         floatCount = 0;
+    }
+
+    public bool CheckCanFloat()
+    {
+        return floatCount < playerData.maxFloatCount;
     }
 
     private void CheckCoyoteTime()

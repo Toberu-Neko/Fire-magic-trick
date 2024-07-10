@@ -67,13 +67,16 @@ public class PlayerGroundedState : PlayerFSMBaseState
             {
                 stateMachine.ChangeState(player.SuperJumpState);
             }
-            else if (player.InputHandler.SkillInput && player.WindAltState.CanUseAbility())
+            else if (player.InputHandler.SkillInput && player.CardSystem.CheckCardEnergy(playerData.altEnergyCost))
             {
-                stateMachine.ChangeState(player.WindAltState);
-            }
-            else if (player.InputHandler.SkillInput && player.FireAltState.CanUseAbility())
-            {
-                stateMachine.ChangeState(player.FireAltState);
+                if(player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
+                {
+                    stateMachine.ChangeState(player.WindAltState);
+                }
+                else if(player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Fire)
+                {
+                    stateMachine.ChangeState(player.FireAltState);
+                }
             }
         }
     }

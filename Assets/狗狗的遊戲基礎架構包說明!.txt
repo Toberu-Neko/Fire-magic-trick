@@ -1,0 +1,44 @@
+包含:
+- 存檔(永久性)
+- 音效
+- 轉場
+- 時間(停格，遊戲暫停...)
+- 粒子特效
+
+
+
+在新場景直接把 ---System--- 遊戲物件 拉進去就可以了，阿想加就再加
+
+
+程式有使用 Text Mash Pro 和 Cinemachine，先確保兩個都有載~
+
+
+
+
+
+
+程式有命名規則!
+
+基本上尾端是 Call 的(PauseCall:叫暫停 ,PlayEffectCall:放粒子效果 )是外部可以呼叫執行用
+
+
+尾端是 Announce 的是執行回傳!(PauseAnnounce:暫停公告, PlayerDiedAnnounce:當玩家死亡時公告),可以用來綁執行碼的~
+
+公告函數不同的話用 Lambda Expression 綁 
+
+舉例:
+
+PlayerDiedAnnounce += LogDeath;    // 綁定程式碼
+
+
+void LogDeath()
+{
+	Debug. Log("玩家死了!");
+}
+
+OnDestory()
+{
+	PlayerDiedAnnounce -= LogDeath;     // 解除綁定
+}
+
+有綁 Announce 的程式記得要在物件刪除前退掉喔! 要不然會Missing Error

@@ -108,7 +108,24 @@ public class PlayerFSMBaseState
         movement.Rotate(rotation);
     }
 
-    protected void MoveAndRotateWithCam(float originalMinSpeed, float originalMaxSpeed = 0f, bool ignoreSlope = false, bool overwriteSpeed = true)
+    protected void MoveWithInput(float minSpeed, float maxSpeed, bool ignoreSlope = false)
+    {
+        v3Workspace.Set(MovementInput.x, 0f, MovementInput.y);
+
+        if (v3Workspace.magnitude > 1f)
+        {
+            v3Workspace.Normalize();
+        }
+
+        float speed = GetRelativeSpeedWithInput(minSpeed, maxSpeed, v3Workspace.magnitude);
+
+        Vector3 targetDirection = movement.ParentTransform.forward * v3Workspace.z + movement.ParentTransform.right * v3Workspace.x;
+        v2Workspace.Set(targetDirection.x, targetDirection.z);
+
+        movement.SetVelocity(speed, v2Workspace, ignoreSlope);
+    }
+
+    protected void MoveRelateWithCam(float originalMinSpeed, float originalMaxSpeed = 0f, bool ignoreSlope = false, bool overwriteSpeed = true)
     {
         v3Workspace.Set(MovementInput.x, 0f, MovementInput.y);
 
@@ -121,18 +138,7 @@ public class PlayerFSMBaseState
 
         if (v3Workspace.magnitude != 0f)
         {
-            Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime);
-
-            float speed;
-
-            if (originalMaxSpeed == 0f)
-            {
-                speed = originalMinSpeed * v3Workspace.magnitude;
-            }
-            else
-            {
-                speed = Mathf.Lerp(originalMinSpeed, originalMaxSpeed, v3Workspace.magnitude);
-            }
+            float speed = GetRelativeSpeedWithInput(originalMinSpeed, originalMaxSpeed, v3Workspace.magnitude);
 
             v2Workspace.Set(targetDirection.x, targetDirection.z);
 
@@ -145,7 +151,22 @@ public class PlayerFSMBaseState
                 movement.AddForce(speed, targetDirection);
             }
         }
+    }
 
+    private float GetRelativeSpeedWithInput(float min, float max, float magnitude)
+    {
+        float speed;
+
+        if (max == 0f)
+        {
+            speed = min * magnitude;
+        }
+        else
+        {
+            speed = Mathf.Lerp(min, max, magnitude);
+        }
+
+        return speed;
     }
 
     protected void MoveWithFacingDir(float speed, bool ignoreSlope = false)

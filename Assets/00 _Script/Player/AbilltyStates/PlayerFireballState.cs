@@ -55,13 +55,13 @@ public class PlayerFireballState : PlayerAbilityState
         if(movement.CurrentVelocityXZMagnitude <= playerData.fireballSpeed || useOverrideSpeed)
         {
             useOverrideSpeed = true;
-            MoveAndRotateWithCam(playerData.fireballSpeed);
+            MoveRelateWithCam(playerData.fireballSpeed);
         }
         else
         {
             if(movement.CurrentVelocityXZMagnitude < maxSpeed)
             {
-                MoveAndRotateWithCam(playerData.fireballForceValue, 0f, true, false);
+                MoveRelateWithCam(playerData.fireballForceValue, 0f, true, false);
                 maxSpeed = movement.CurrentVelocityXZMagnitude;
             }
         }
@@ -72,6 +72,13 @@ public class PlayerFireballState : PlayerAbilityState
         {
             isAbilityDone = true;
         }
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime);
     }
 
 }

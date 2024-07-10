@@ -19,7 +19,6 @@ public class PlayerAimWalkingState : PlayerGroundedState
     {
         base.LogicUpdate();
 
-        Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime, false);
 
         MoveWithFacingDir(playerData.walkSpeed);
 
@@ -34,5 +33,12 @@ public class PlayerAimWalkingState : PlayerGroundedState
                 stateMachine.ChangeState(player.AimIdleState);
             }
         }
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime, false);
     }
 }
