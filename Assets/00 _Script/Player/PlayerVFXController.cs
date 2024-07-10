@@ -15,6 +15,7 @@ public class PlayerVFXController : MonoBehaviour
     [SerializeField] private GameObject superJumpFireStartVFXPrefab;
     [SerializeField] private GameObject superJumpLandWindVFXPrefab;
     [SerializeField] private GameObject superJumpLandFireVFXPrefab;
+    [SerializeField] private GameObject deathVFXPrefab;
 
     private Core core;
     private ParticleManager particleManager;
@@ -23,6 +24,11 @@ public class PlayerVFXController : MonoBehaviour
         core = GetComponentInChildren<Core>();
         particleManager = core.GetCoreComponent<ParticleManager>();
 
+        Init();
+    }
+
+    public void Init()
+    {
         superDashVFX.SetActive(false);
         floatVFX.SetActive(false);
         windFeetCardVFX.SetActive(false);
@@ -53,6 +59,11 @@ public class PlayerVFXController : MonoBehaviour
     public void ActivateFireLandVFX()
     {
         particleManager.StartParticles(superJumpLandFireVFXPrefab, feetPosition.position);
+    }
+
+    public void ActivateDeathVFX()
+    {
+       particleManager.StartParticles(deathVFXPrefab, feetPosition.position);
     }
 
     public void SetCanComboVFX(bool value)

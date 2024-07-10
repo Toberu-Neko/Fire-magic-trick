@@ -232,6 +232,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void PlayerDeath()
+    {
+        // TODO: Reborn and reset everything
+    }
+
     public void SetCollider(bool value)
     {
         col.enabled = value;
@@ -250,6 +255,7 @@ public class Player : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, Data.closeRangeDetectRadius);
             Gizmos.DrawWireSphere(transform.position, Data.midRangeDetectRadius);
             Gizmos.DrawWireSphere(transform.position, Data.longRangeDetectRadius);
+            Gizmos.DrawWireSphere(transform.position, Data.zeroRangeDetectRadius);
         }
     }
 

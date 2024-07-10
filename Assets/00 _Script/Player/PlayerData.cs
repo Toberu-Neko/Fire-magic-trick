@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "newPlayerData", menuName = "Data/Player Data/Base Data")]
@@ -9,6 +7,7 @@ public class PlayerData : ScriptableObject
     public LayerMask whatIsCombatDetectable;
     public float rotationSpeed = 15f;
     public float rotateSmoothTime = 0.1f;
+    public float zeroRangeDetectRadius = 1f;
     public float closeRangeDetectRadius = 2f;
     public float midRangeDetectRadius = 3f;
     public float longRangeDetectRadius = 4f;
@@ -37,6 +36,8 @@ public class PlayerData : ScriptableObject
     public float dashSpeed = 10f;
     public float dashTime = 0.2f;
     public float dashCooldown = 1f;
+    public float dashDamage = 10f;
+    public float dashKnockbackForce = 10f;
 
     [Header("Super Jump")]
     public float superJumpVelocity = 30f;
@@ -76,6 +77,7 @@ public class PlayerData : ScriptableObject
 
     public int altEnergyCost = 6;
     [Header("WindAlt")]
+    public float windBulletTimeDuration = 0.2f;
     public float windAltMaxTime = 5f;
     public float windAltDamage = 20f;
     public float windAltSpeedUpTime = 2.5f;
@@ -84,4 +86,7 @@ public class PlayerData : ScriptableObject
 
     [Header("FireAlt")]
     public float fireAltFireTime = 5f;
+
+    [Header("Death")]
+    public float deathAnimationTime = 2.5f;
 }

@@ -17,6 +17,7 @@ MonoBehaviour:
     m_Bits: 1064960
   rotationSpeed: 20
   rotateSmoothTime: 1.5
+  zeroRangeDetectRadius: 1
   closeRangeDetectRadius: 2
   midRangeDetectRadius: 3
   longRangeDetectRadius: 4
@@ -37,6 +38,8 @@ MonoBehaviour:
   dashSpeed: 12
   dashTime: 0.2
   dashCooldown: 0.35
+  dashDamage: 10
+  dashKnockbackForce: 12.5
   superJumpVelocity: 16
   superJumpEnergyCost: 3
   superJumpFallAddForce: 20

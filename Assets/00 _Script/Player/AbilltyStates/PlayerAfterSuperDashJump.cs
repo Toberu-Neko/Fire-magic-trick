@@ -12,6 +12,7 @@ public class PlayerAfterSuperDashJump : PlayerAbilityState
     {
         base.Enter();
 
+        movement.SetCanSetVelocity(true);
         movement.SetVelocityY(playerData.superDashJumpVelocity);
         player.InAirState.SetAirControlSpeed(playerData.walkSpeed);
         player.InAirState.SetIsJumping();
