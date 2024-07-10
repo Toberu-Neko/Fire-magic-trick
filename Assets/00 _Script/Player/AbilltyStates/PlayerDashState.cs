@@ -7,6 +7,8 @@ public class PlayerDashState : PlayerAbilityState
     private Vector2 v2Workspace;
     private bool canUseDash;
     private int currentFrame;
+    private List<GameObject> damagedObjs;
+
     public PlayerDashState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -16,6 +18,7 @@ public class PlayerDashState : PlayerAbilityState
         base.Enter();
         player.InputHandler.UseDashInput();
 
+        damagedObjs = new();
         v2Workspace = new();
 
         movement.SetGravityZero();
@@ -39,6 +42,19 @@ public class PlayerDashState : PlayerAbilityState
     {
         base.PhysicsUpdate();
 
+        foreach(var obj in SphereDetection(playerData.zeroRangeDetectRadius))
+        {
+            if (!damagedObjs.Contains(obj))
+            {
+                obj.TryGetComponent(out IDamageable damageable);
+                damageable?.Damage(playerData.dashDamage, player.transform.position);
+                obj.TryGetComponent(out IKnockbackable knockbackable);
+                knockbackable?.Knockback(player.transform.position, playerData.dashKnockbackForce);
+
+                damagedObjs.Add(obj);
+            }
+        }
+
         if(currentFrame <= 3)
         {
             Rotate(playerData.rotationSpeed * 20f, 0.01f);
@@ -56,7 +72,7 @@ public class PlayerDashState : PlayerAbilityState
             }
         }
 
-        currentFrame += 1;
+        currentFrame++;
     }
 
     public override void LogicUpdate()

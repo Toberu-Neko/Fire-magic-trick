@@ -90,7 +90,7 @@ public class PlayerWindAltState : PlayerAbilityState
             {
                 detectionInfos[0].knockbackable.Knockback(targetDir.normalized, 10f, player.transform.position);
                 detectionInfos[0].damageable.Damage(playerData.windAltDamage, player.transform.position);
-                BulletTimeManager.Instance.BulletTime_Slow(0.2f);
+                BulletTimeManager.Instance.BulletTime_Slow(playerData.windBulletTimeDuration);
 
                 hitTime = Time.time;
                 attackCount++;
