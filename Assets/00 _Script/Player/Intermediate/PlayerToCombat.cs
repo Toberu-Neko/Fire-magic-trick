@@ -16,9 +16,9 @@ public class PlayerToCombat : MonoBehaviour, IDamageable, IKnockbackable, IFlamm
         return combat.CheckIfOnFire();
     }
 
-    public void Damage(float damageAmount, Vector3 damagePosition)
+    public void Damage(float damageAmount, Vector3 damagePosition, bool trueDamage = false)
     {
-        combat.Damage(damageAmount, damagePosition);
+        combat.Damage(damageAmount, damagePosition, trueDamage);
     }
 
     public GameObject GetGameObject()

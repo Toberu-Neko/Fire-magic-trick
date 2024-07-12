@@ -60,9 +60,9 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable, IFlammable
         }
     }
 
-    public void Damage(float damageAmount, Vector3 damagePosition)
+    public void Damage(float damageAmount, Vector3 damagePosition, bool trueDamage = false)
     {
-        if (stats.Health.CurrentValue <= 0 || stats.IsInvincible)
+        if (stats.Health.CurrentValue <= 0 || (stats.IsInvincible && !trueDamage))
         {
             return;
         }

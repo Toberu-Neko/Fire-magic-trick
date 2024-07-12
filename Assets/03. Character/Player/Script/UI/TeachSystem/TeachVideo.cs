@@ -17,14 +17,21 @@ public class TeachVideo : MonoBehaviour
         videoPlayer.prepareCompleted += OnVideoPrepared;
         videoPlayer.Prepare();
     }
+
+    private void OnDestroy()
+    {
+        videoPlayer.prepareCompleted -= OnVideoPrepared;
+    }
+
+
     public void ChageVideoClip(VideoClip videoClip)
     {
         videoPlayer.clip = videoClip;
         videoPlayer.Prepare();
     }
+
     public void OnVideoPrepared(VideoPlayer source)
     {
-        // 准备完成后，开始播放
         videoPlayer.Play();
     }
 }

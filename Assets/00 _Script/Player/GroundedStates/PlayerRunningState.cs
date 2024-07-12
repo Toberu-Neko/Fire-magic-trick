@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class PlayerRunningState : PlayerGroundedState
 {
-    private Vector2 v2Workspace;
-    private Vector3 v3Workspace;
     public PlayerRunningState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
     public override void Enter()
     {
         base.Enter();
-        v3Workspace = new();
-        v2Workspace = new();
 
         player.ChangeActiveCam(Player.ActiveCamera.Run);
     }

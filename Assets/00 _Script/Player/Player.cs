@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [field: SerializeField] public PlayerInputHandler InputHandler { get; private set; }
     [field: SerializeField] public Animator Anim { get; private set; }
     [field: SerializeField] public Core Core { get; private set; }
+    [SerializeField] private PlayerVariableInterface playerVariableInterface;
     [field: SerializeField] public PlayerVFXController VFXController { get; private set; }
     [SerializeField] private CapsuleCollider col;
     [SerializeField] private GameObject playerModel;
@@ -65,6 +66,9 @@ public class Player : MonoBehaviour
     public PlayerWindAltState WindAltState { get; private set; }
     public PlayerFireAltState FireAltState { get; private set; }
 
+    public PlayerDeathState DeathState { get; private set; }
+    public PlayerRespawnState RespawnState { get; private set; }
+
     private void Awake()
     {
         CameraPosRelateToPlayer = new();
@@ -95,7 +99,20 @@ public class Player : MonoBehaviour
         WindAltState = new PlayerWindAltState(this, StateMachine, Data, "inAir");
         FireAltState = new PlayerFireAltState(this, StateMachine, Data, "inAir");
 
+        DeathState = new PlayerDeathState(this, StateMachine, Data, "death");
+        RespawnState = new PlayerRespawnState(this, StateMachine, Data, "respawn");
+
         ChangeActiveCam(ActiveCamera.Normal);
+    }
+
+    private void OnEnable()
+    {
+        Stats.Health.OnCurrentValueZero += Health_OnCurrentValueZero;
+    }
+
+    private void OnDisable()
+    {
+        Stats.Health.OnCurrentValueZero -= Health_OnCurrentValueZero;
     }
 
     private void Start()
@@ -147,7 +164,7 @@ public class Player : MonoBehaviour
 
     private void AnimationSFXTrigger() => StateMachine.CurrentState.AnimationSFXTrigger();
 
-
+    #region Camera
     private void CameraRotation()
     {
         // if there is an input and camera position is not fixed
@@ -231,10 +248,16 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+    #endregion
 
-    public void PlayerDeath()
+    private void Health_OnCurrentValueZero()
     {
-        // TODO: Reborn and reset everything
+        StateMachine.ChangeState(DeathState);
+    }
+
+    public void TeleportToSavepoint()
+    {
+        transform.position = playerVariableInterface.RespawnPosition;
     }
 
     public void SetCollider(bool value)

@@ -16,7 +16,9 @@ public class PlayerDashState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
+
         player.InputHandler.UseDashInput();
+        stats.SetInvincible(true);
 
         damagedObjs = new();
         v2Workspace = new();
@@ -36,6 +38,7 @@ public class PlayerDashState : PlayerAbilityState
         base.Exit();
 
         movement.SetGravityOrginal();
+        stats.SetInvincible(false);
     }
 
     public override void PhysicsUpdate()

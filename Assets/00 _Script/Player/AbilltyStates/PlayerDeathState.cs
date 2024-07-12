@@ -13,19 +13,37 @@ public class PlayerDeathState : PlayerFSMBaseState
         base.Enter();
 
         stats.SetInvincible(true);
+        movement.SetGravityZero();
         player.SetCollider(false);
         player.SetPlayerModel(false);
         player.ChangeActiveCam(Player.ActiveCamera.Death);
         player.VFXController.ActivateDeathVFX();
+
+        //TODO: BlackUI
+        UIManager.Instance.ActivateDeathUI();
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        if(Time.time > StartTime + playerData.deathAnimationTime)
+        movement.SetVelocityZero();
+
+        if(Time.time > StartTime + playerData.deathAnimationTime && UIManager.Instance.IsDeathUIOpenFinished())
         {
-            player.PlayerDeath();
+            stateMachine.ChangeState(player.RespawnState);
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        stats.SetInvincible(false);
+        player.SetCollider(true);
+        player.SetPlayerModel(true);
+        movement.SetGravityOrginal();
+
+        UIManager.Instance.DeactivateDeathUI();
     }
 }

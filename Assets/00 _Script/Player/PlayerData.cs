@@ -87,6 +87,7 @@ public class PlayerData : ScriptableObject
     [Header("FireAlt")]
     public float fireAltFireTime = 5f;
 
-    [Header("Death")]
+    [Header("Death and Respawn")]
     public float deathAnimationTime = 2.5f;
+    public float respawnTime = 2f;
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerWalkingState : PlayerGroundedState
 {
-    private Vector3 v3Workspace;
-    private Vector2 v2Workspace;
     public PlayerWalkingState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -13,8 +11,6 @@ public class PlayerWalkingState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        v3Workspace = new();
-        v2Workspace = new();
 
         player.ChangeActiveCam(Player.ActiveCamera.Normal);
     }

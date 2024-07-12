@@ -54,6 +54,18 @@ public class CardSystem : MonoBehaviour
     public event Action<int> OnWindCardEnergyChanged;
     public event Action<int> OnFireCardEnergyChanged;
 
+    public void Init()
+    {
+        currentCardType = CardType.Normal;
+        CurrentEquipedCard = CardType.Fire;
+        startCardStateTime = 0f;
+        endCardStateTime = 0f;
+        startShootTime = 0f;
+
+        DecreaseWindCardEnergy(WindCardEnergy);
+        DecreaseFireCardEnergy(FireCardEnergy);
+    }
+
     private void OnEnable()
     {
         targetPosition = Vector3.zero;
@@ -153,6 +165,7 @@ public class CardSystem : MonoBehaviour
         if (StrongShoot)
         {
             BulletTimeManager.Instance.BulletTime_Slow(strongShootBulletTimeDuration);
+
             Instantiate(normalCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
         }
         else

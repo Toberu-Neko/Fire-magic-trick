@@ -21,40 +21,21 @@ public class TriggerArea_DialogueTrigger : MonoBehaviour
     //Script
     public Dialogue dialogue;
     private DialogueManager dialogueManager;
-    private PlayerState playerState;
-    private ProgressSystem progressSystem;
 
 
     private void Start()
     {
         dialogueManager = GameManager.Instance.UISystem.GetComponent<DialogueManager>();
-        playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
-        progressSystem = GameManager.Instance.GetComponent<ProgressSystem>();
-
-        if(!triggerOnce)
-        {
-            progressSystem.OnPlayerDeath += ResetCanTrigger;
-        }
         canTrigger = true;
     }
-    private void Update()
-    {
-        if(isReadyDialogue && canTrigger)
-        {
-            if (playerState.isGround)
-            {
-                EventTrigger();
-                SetIsReadyDialogue(false);
-            }
-        }
-    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             if(!isReadyDialogue)
             {
-                SetIsReadyDialogue(true);
+                isReadyDialogue = true;
             }
         }
     }
@@ -81,10 +62,7 @@ public class TriggerArea_DialogueTrigger : MonoBehaviour
             }
         }
     }
-    private void ResetCanTrigger()
-    {
-        canTrigger = true;
-    }
+
     private void DialogueEnd()
     {
         if(NeedFeedbacks != null)
@@ -92,10 +70,7 @@ public class TriggerArea_DialogueTrigger : MonoBehaviour
             NeedFeedbacks.PlayFeedbacks();
         }
     }
-    private void SetIsReadyDialogue(bool isReady)
-    {
-        isReadyDialogue = isReady;
-    }
+
     private void OnValidate()
     {
         string debugText = "";

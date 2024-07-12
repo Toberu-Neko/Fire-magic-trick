@@ -64,7 +64,7 @@ public class EnergyCan : MonoBehaviour ,IDamageable
         
     }
 
-    public void Damage(float damageAmount, Vector3 damagePosition)
+    public void Damage(float damageAmount, Vector3 damagePosition, bool trueDamage = false)
     {
         health -= damageAmount;
 

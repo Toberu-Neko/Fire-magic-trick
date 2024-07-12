@@ -17,8 +17,6 @@ public class PlayerInAirState : PlayerFSMBaseState
     public bool IsJumping { get; private set; }
     private bool coyoteTime;
 
-    private Vector3 v3Workspace;
-    private Vector2 v2Workspace;
     private float inAirMovementSpeed;
 
     private bool setAirControlSpeed;
@@ -41,9 +39,6 @@ public class PlayerInAirState : PlayerFSMBaseState
         base.Enter();
         isFloating = false;
         startFloatingTime = 0f;
-
-        v3Workspace = new Vector3();
-        v2Workspace = new Vector2();
 
         if (!setAirControlSpeed)
         {

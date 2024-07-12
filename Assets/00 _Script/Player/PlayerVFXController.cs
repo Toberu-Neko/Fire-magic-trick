@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class PlayerVFXController : MonoBehaviour
 {
+    [Header("Objects")]
     [SerializeField] private GameObject floatVFX;
     [SerializeField] private GameObject windFeetCardVFX;
     [SerializeField] private GameObject superDashVFX;
     [SerializeField] private GameObject canComboVFX;
+
+    [Header("Prefabs")]
+    [SerializeField] private GameObject deathVFXPrefab;
+    [SerializeField] private GameObject respawnVFXPRefab;
 
     [Header("Super Jump")]
     [SerializeField] private Transform feetPosition;
@@ -15,7 +20,6 @@ public class PlayerVFXController : MonoBehaviour
     [SerializeField] private GameObject superJumpFireStartVFXPrefab;
     [SerializeField] private GameObject superJumpLandWindVFXPrefab;
     [SerializeField] private GameObject superJumpLandFireVFXPrefab;
-    [SerializeField] private GameObject deathVFXPrefab;
 
     private Core core;
     private ParticleManager particleManager;
@@ -35,11 +39,6 @@ public class PlayerVFXController : MonoBehaviour
         canComboVFX.SetActive(false);
     }
 
-
-    public void SetSuperDashVFX(bool value)
-    {
-        superDashVFX.SetActive(value);
-    }
 
     public void ActivateWindStartVFX()
     {
@@ -63,7 +62,12 @@ public class PlayerVFXController : MonoBehaviour
 
     public void ActivateDeathVFX()
     {
-       particleManager.StartParticles(deathVFXPrefab, feetPosition.position);
+        particleManager.StartParticles(deathVFXPrefab, transform.position);
+    }
+
+    public void ActivateRespawnVFX()
+    {
+        particleManager.StartParticles(respawnVFXPRefab, transform.position, transform);
     }
 
     public void SetCanComboVFX(bool value)
@@ -81,4 +85,8 @@ public class PlayerVFXController : MonoBehaviour
         windFeetCardVFX.SetActive(value);
     }
 
+    public void SetSuperDashVFX(bool value)
+    {
+        superDashVFX.SetActive(value);
+    }
 }
