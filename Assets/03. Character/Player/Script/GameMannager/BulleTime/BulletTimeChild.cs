@@ -39,7 +39,7 @@ public class BulletTimeChild : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            _bulletTimeSystem.BulletTime_Normal();
+            _bulletTimeSystem.TimeScaleOne();
 
             if(!isOneShot)
             {
@@ -61,7 +61,7 @@ public class BulletTimeChild : MonoBehaviour
                 _bulletTimeSystem.BulletTime_NearNormal();
                 break;
             case BulletTimeType.Normal:
-                _bulletTimeSystem.BulletTime_Normal();
+                _bulletTimeSystem.TimeScaleOne();
                 break;
         }
     }

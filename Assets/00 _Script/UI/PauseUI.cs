@@ -1,18 +1,34 @@
+using Eflatun.SceneReference;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseUI : MonoBehaviour
+public class PauseUI : UIBase
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private SceneReference mainMenuScene;
+    public override void Activate()
     {
-        
+        base.Activate();
+
+        GameManager.Instance.PauseGame();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Deactivate()
     {
-        
+        base.Deactivate();
+
+        GameManager.Instance.ResumeGame();
+    }
+
+    public void OnResumeButton()
+    {
+        Deactivate();
+    }
+
+    public void OnMainMenuButton()
+    {
+        Deactivate();
+
+        LoadSceneManager.Instance.LoadSceneSingle(mainMenuScene.Name);
     }
 }

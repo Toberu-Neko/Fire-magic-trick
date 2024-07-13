@@ -49,7 +49,7 @@ public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
     {
         base.OnFloatEnd();
         playerState.SetGravityToNormal();
-        BulletTimeManager.Instance.BulletTime_Normal();
+        BulletTimeManager.Instance.TimeScaleOne();
         S_floatShot.Stop();
     }
 
@@ -57,6 +57,6 @@ public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
     {
         base.OnFloatShotStop();
 
-        BulletTimeManager.Instance.BulletTime_Normal();
+        BulletTimeManager.Instance.TimeScaleOne();
     }
 }

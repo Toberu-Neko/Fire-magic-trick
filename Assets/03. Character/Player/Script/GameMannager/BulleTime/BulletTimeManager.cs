@@ -15,10 +15,16 @@ public class BulletTimeManager : MonoBehaviour
     }
 
     [Header("Bullet Time Scale")]
+    [SerializeField] private MMF_Player timeScaleZeroFB;
     [SerializeField] private MMF_Player Feedbacks_BulletTime_slow;
     [SerializeField] private MMF_Player Feedbacks_BulletTime_mid;
     [SerializeField] private MMF_Player Feedbacks_BulletTime_nearNormal;
     [SerializeField] private MMF_Player Feedbacks_BulletTime_Normal;
+
+    public void TimeScaleZero()
+    {
+        timeScaleZeroFB.PlayFeedbacks();
+    }
 
     public void BulletTime_Slow()
     {
@@ -32,26 +38,28 @@ public class BulletTimeManager : MonoBehaviour
     {
         Feedbacks_BulletTime_nearNormal.PlayFeedbacks();
     }
-    public void BulletTime_Normal()
+    public void TimeScaleOne()
     {
           Feedbacks_BulletTime_Normal.PlayFeedbacks();
     }
+
     public async void BulletTime_Slow(float time)
     {
         BulletTime_Slow();
         await Task.Delay((int)(time * 1000));
-        BulletTime_Normal();
+        TimeScaleOne();
     }
+
     public async void BulletTime_Mid(float time)
     {
         BulletTime_Mid();
         await Task.Delay((int)(time * 1000));
-        BulletTime_Normal();
+        TimeScaleOne();
     }
     public async void BulletTime_NearNormal(float time)
     {
         BulletTime_NearNormal();
         await Task.Delay((int)(time * 1000));
-        BulletTime_Normal();
+        TimeScaleOne();
     }
 }

@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class UIBase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public virtual void Activate()
     {
-        
+        gameObject.SetActive(true);
+        PlayerInputHandler.Instance.ResetAllInput();
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Deactivate()
     {
-        
+        gameObject.SetActive(false);
     }
 }
