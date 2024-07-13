@@ -8,7 +8,7 @@ public class Stats : CoreComponent
     // 0 = Die, < 100 = burn,  100 = Normal, 200 = NoSkill
     [field: SerializeField] public CoreStatSystem Health { get; private set; }
 
-    private float healthRegenPerSec = 0f;
+    [SerializeField] private float healthRegenPerSec = 0f;
 
     public bool IsInvincible { get; private set; }
     public bool InCombat { get; private set; }
@@ -24,6 +24,7 @@ public class Stats : CoreComponent
     private void OnEnable()
     {
         IsBurning = false;
+        InCombat = false;
         startBurnTime = 0f;
         burnDuration = 0f;
         startCombatTime = 0f;
@@ -78,7 +79,10 @@ public class Stats : CoreComponent
         }
         else
         {
-            burnDuration += time;
+            if(time > burnDuration)
+            {
+                burnDuration = time;
+            }
         }
 
         SetIsBurning(true);

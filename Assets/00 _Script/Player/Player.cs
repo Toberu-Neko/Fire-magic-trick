@@ -5,16 +5,17 @@ public class Player : MonoBehaviour
 {
     public PlayerStateMachine StateMachine { get; private set; }
     [field: SerializeField] public PlayerData Data { get; private set; }
-    [field: SerializeField] public CardSystem CardSystem { get; private set; }
-    [field: SerializeField] public PlayerInputHandler InputHandler { get; private set; }
     [field: SerializeField] public Animator Anim { get; private set; }
     [field: SerializeField] public Core Core { get; private set; }
-    [SerializeField] private PlayerVariableInterface playerVariableInterface;
+    [field: SerializeField] public CardSystem CardSystem { get; private set; }
+    [field: SerializeField] public PlayerInputHandler InputHandler { get; private set; }
     [field: SerializeField] public PlayerVFXController VFXController { get; private set; }
+    [SerializeField] private PlayerVariableInterface playerVariableInterface;
     [SerializeField] private CapsuleCollider col;
     [SerializeField] private GameObject playerModel;
     public Movement Movement { get; private set; }
     public Stats Stats { get; private set; }
+    [SerializeField] private float regenRate = 5f;
 
     [Header("Camera Objects")]
     [SerializeField] private Transform playerCamera;
@@ -134,6 +135,11 @@ public class Player : MonoBehaviour
         if(Stats.IsInvincible && !Movement.CanSetVelocity)
         {
             Movement.SetCanSetVelocity(true);
+        }
+
+        if (Stats.Health.CurrentValue < Stats.Health.InitValue && regenRate > 0f && !Stats.InCombat)
+        {
+            Stats.Health.IncreaseUntilInitValue(regenRate * Time.deltaTime);
         }
     }
 
