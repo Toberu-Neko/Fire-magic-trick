@@ -31,7 +31,7 @@ public class Soha : MonoBehaviour,IHealth
     [SerializeField] private CardMachineManager  topEnemyManager;
     [SerializeField] private Satun_Laser_Manager laser_Manager;
     [Header("Death")]
-    [SerializeField] private TriggerArea_Timeline End;
+    [SerializeField] private Timeline_Trigger End;
     [SerializeField] private GameObject FinishRoead;
     
     //Script
@@ -137,7 +137,6 @@ public class Soha : MonoBehaviour,IHealth
         changeState(State.Death);
         eventTrigger(State.Death);
         system.EndBossFight();
-        End.readyPlay();
         FinishRoead.SetActive(true);
     }
     private void changeState(State state)

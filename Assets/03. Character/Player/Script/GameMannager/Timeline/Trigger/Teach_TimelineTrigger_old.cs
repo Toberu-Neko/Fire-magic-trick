@@ -1,0 +1,36 @@
+using UnityEngine;
+using UnityEngine.Playables;
+
+public class Teach_TimelineTrigger_old : MonoBehaviour
+{
+    [SerializeField] private PlayableDirector playableDirector;
+    private ProgressSystem _progressSystem;
+    private bool Trigger;
+    private PlayableDirector _playableDirector;
+    private void Start()
+    {
+        _progressSystem = GameManager.Instance.GetComponent<ProgressSystem>();
+        //_playableDirector = GameManager.Instance.GetComponent<TimelineSystem>().PlayableDirector;
+        _progressSystem.OnPlayerDeath += ResetTrigger;
+    }
+    private void OnTriggerEnter(Collider other)
+    {   
+        if(other.CompareTag("Player"))
+        {
+            useThisTimeline();
+        }
+    }
+    private void useThisTimeline()
+    {
+        if(!Trigger)
+        {
+            playableDirector.Stop();
+            playableDirector.Play();
+            Trigger = true;
+        }
+    }
+    private void ResetTrigger()
+    {
+        Trigger = false;
+    }
+}
