@@ -49,7 +49,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public static PlayerInputHandler Instance { get; private set; }
     private GameManager gameManager;
-    private PlayerInput playerInput;
+    [SerializeField] private PlayerInput playerInput;
     public Camera MainCam { get; private set; }
 
     public Vector2 RawMouseInput { get; private set; }
@@ -100,11 +100,16 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Start()
     {
-        playerInput = GetComponent<PlayerInput>();
         MainCam = Camera.main;
         gameManager = GameManager.Instance;
     }
-    private void OnDisable()
+
+    public void SetPlayerInput(bool value)
+    {
+        playerInput.enabled = value;
+    }
+
+    private void OnDestroy()
     {
         InputSystem.onActionChange -= HandleActionChange;
     }

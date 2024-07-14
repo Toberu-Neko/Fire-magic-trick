@@ -24,21 +24,19 @@ public class GameManager : MonoBehaviour
         }
 
         Application.targetFrameRate = -1;
-        ResumeGame();
-
     }
 
     public void PauseGame()
     {
         IsPaused = true;
-        BulletTimeManager.Instance.TimeScaleZero();
         Cursor.lockState = CursorLockMode.None;
+        BulletTimeManager.Instance.TimeScaleZero();
     }
 
     public void ResumeGame()
     {
         IsPaused = false;
-        BulletTimeManager.Instance.TimeScaleOne();
         Cursor.lockState = CursorLockMode.Locked;
+        BulletTimeManager.Instance.TimeScaleOne();
     }
 }

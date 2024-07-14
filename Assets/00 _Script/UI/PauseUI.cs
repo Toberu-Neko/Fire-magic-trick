@@ -1,9 +1,7 @@
 using Eflatun.SceneReference;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseUI : UIBase
+public class PauseUI : MouseControlUIBase
 {
     [SerializeField] private SceneReference mainMenuScene;
     public override void Activate()

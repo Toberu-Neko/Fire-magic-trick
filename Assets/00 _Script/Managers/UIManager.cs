@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.UI;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    [SerializeField] private InputSystemUIInputModule inputSystemUIInputModule;
     [SerializeField] private PauseUI pauseUI;
     [SerializeField] private DeathUI deathUI;
+
+    private bool escInput = false;
 
     private void Awake()
     {
@@ -25,23 +29,28 @@ public class UIManager : MonoBehaviour
     {
         pauseUI.gameObject.SetActive(false);
         deathUI.gameObject.SetActive(false);
+
     }
+
+
 
     private void Update()
     {
         if (PlayerInputHandler.Instance.ESCInput)
         {
             PlayerInputHandler.Instance.UseESCInput();
-            if (pauseUI.gameObject.activeSelf)
-            {
-                pauseUI.Deactivate();
-            }
-            else
+
+            if (!pauseUI.gameObject.activeInHierarchy)
             {
                 pauseUI.Activate();
             }
+            else
+            {
+                pauseUI.Deactivate();
+            }
         }
     }
+
 
     public void ActivateDeathUI()
     {
