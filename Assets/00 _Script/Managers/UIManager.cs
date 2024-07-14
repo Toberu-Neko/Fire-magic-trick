@@ -21,6 +21,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        pauseUI.gameObject.SetActive(false);
+        deathUI.gameObject.SetActive(false);
+    }
+
     private void Update()
     {
         if (PlayerInputHandler.Instance.ESCInput)

@@ -33,6 +33,10 @@ public class LoadSceneManager : MonoBehaviour
 
     public void LoadSceneAdditive(string sceneName)
     {
+        if(SceneManager.GetSceneByName(sceneName).isLoaded)
+        {
+            return;
+        }
         StartCoroutine(LoadSceneAsyncAdditive(sceneName));
         CurrentSceneName = sceneName;
     }
