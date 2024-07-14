@@ -37,8 +37,7 @@ public class PlayerSuperDashState : PlayerAbilityState
         targetVector.Normalize();
         goToAirJumpState = false;
 
-        player.SetCollider(false);
-        player.SetPlayerModel(false);
+        player.SetColliderAndModel(false);
         player.VFXController.SetSuperDashVFX(true);
     }
 
@@ -47,8 +46,7 @@ public class PlayerSuperDashState : PlayerAbilityState
         base.Exit();
 
         target = null;
-        player.SetCollider(true);
-        player.SetPlayerModel(true);
+        player.SetColliderAndModel(true);
         player.VFXController.SetSuperDashVFX(false);
 
         List<GameObject> detectedobj = SphereDetection(playerData.closeRangeDetectRadius);

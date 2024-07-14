@@ -22,9 +22,7 @@ public class PlayerFireAltState : PlayerAbilityState
         player.InputHandler.UseSkillInput();
         player.CardSystem.DecreaseCardEnergy(playerData.altEnergyCost);
 
-        player.SetCollider(false);
-        stats.SetInvincible(true);
-        player.SetPlayerModel(false);
+        player.SetColliderAndModel(false);
         player.VFXController.SetSuperDashVFX(true);
         BulletTimeManager.Instance.BulletTime_Slow(0.2f);
 
@@ -99,9 +97,7 @@ public class PlayerFireAltState : PlayerAbilityState
     {
         base.Exit();
 
-        player.SetCollider(true);
-        stats.SetInvincible(false);
-        player.SetPlayerModel(true);
+        player.SetColliderAndModel(true);
         player.VFXController.SetSuperDashVFX(false);
     }
 }

@@ -69,6 +69,7 @@ public class Player : MonoBehaviour
 
     public PlayerDeathState DeathState { get; private set; }
     public PlayerRespawnState RespawnState { get; private set; }
+    public PlayerCantControlState CantControlState { get; private set; }
 
     private void Awake()
     {
@@ -102,6 +103,7 @@ public class Player : MonoBehaviour
 
         DeathState = new PlayerDeathState(this, StateMachine, Data, "death");
         RespawnState = new PlayerRespawnState(this, StateMachine, Data, "respawn");
+        CantControlState = new PlayerCantControlState(this, StateMachine, Data, "idle");
 
         ChangeActiveCam(ActiveCamera.Normal);
     }
@@ -154,7 +156,7 @@ public class Player : MonoBehaviour
     {
         Core.LateLogicUpdate();
 
-        if (useCameraRotate)
+        if (useCameraRotate && !GameManager.Instance.IsPaused)
         {
             CameraRotation();
         }
@@ -266,14 +268,26 @@ public class Player : MonoBehaviour
         transform.position = playerVariableInterface.RespawnPosition;
     }
 
+    public void SetColliderAndModel(bool value)
+    {
+        col.enabled = value;
+        playerModel.SetActive(value);
+        Stats.SetInvincible(!value);
+    }
+
     public void SetCollider(bool value)
     {
         col.enabled = value;
     }
 
-    public void SetPlayerModel(bool value)
+    public void GotoCantControlState()
     {
-        playerModel.SetActive(value);
+        StateMachine.ChangeState(CantControlState);
+    }
+
+    public void FinishCantControlState()
+    {
+        CantControlState.SetIsAbilityDone();
     }
 
     private void OnDrawGizmos()

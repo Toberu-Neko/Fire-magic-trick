@@ -35,9 +35,7 @@ public class PlayerWindAltState : PlayerAbilityState
         base.Enter();
 
         player.CardSystem.DecreaseCardEnergy(playerData.altEnergyCost);
-        player.SetCollider(false);
-        player.SetPlayerModel(false);
-        stats.SetInvincible(true);
+        player.SetColliderAndModel(false);
         movement.SetGravityZero();
         player.VFXController.SetWindFeetCardVFX(true);
         startPos = player.transform.position;
@@ -126,9 +124,7 @@ public class PlayerWindAltState : PlayerAbilityState
     {
         base.Exit();
 
-        player.SetCollider(true);
-        player.SetPlayerModel(true);
-        stats.SetInvincible(false);
+        player.SetColliderAndModel(true);
         movement.SetVelocityZero();
         movement.SetGravityOrginal();
         player.VFXController.SetWindFeetCardVFX(false);

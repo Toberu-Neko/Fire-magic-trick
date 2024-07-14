@@ -8,33 +8,47 @@ public class Timeline_Trigger : MonoBehaviour
     [SerializeField] private bool isOnce = true;
     //Script
     private PlayableDirector timeline;
-    private TimelineState state;
 
     //varable
     private bool isTrigger = false;
 
+    [HideInInspector] public bool isCompelete = true;
+
+    private Player player;
     private void Awake()
     {
-        timeline = this.transform.parent.GetComponent<PlayableDirector>();
-        state = GetComponent<TimelineState>();
+        timeline = transform.parent.GetComponent<PlayableDirector>();
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             if (!isTrigger)
             {
+                other.TryGetComponent(out player);
+                isTrigger = true;
                 timeline.Play();
             }
         }
     }
 
-    private void Update()
+    public void OnStart()
     {
-        if(isTrigger && state.isCompelete)
-        {
-            if (isOnce) return;
-            isTrigger = false;
-        }
     }
+
+    public void OnComplete()
+    {
+    }
+
+    public void EnablePlayerControl()
+    {
+        player?.FinishCantControlState();
+    }
+
+    public void DisablePlayerControl()
+    {
+        player?.GotoCantControlState();
+    }
+
 }

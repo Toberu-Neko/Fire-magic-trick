@@ -1310,7 +1310,6 @@ GameObject:
   - component: {fileID: 151629293}
   - component: {fileID: 151629292}
   - component: {fileID: 151629297}
-  - component: {fileID: 151629296}
   - component: {fileID: 151629295}
   m_Layer: 0
   m_Name: Trigger Area
@@ -1418,18 +1417,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOnce: 1
---- !u!114 &151629296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 151629290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6384d257b390dc84dab4adacc16df56a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   isCompelete: 1
 --- !u!320 &151629297
 PlayableDirector:
@@ -1447,7 +1434,7 @@ PlayableDirector:
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 7073010932504880050, guid: d203e5e0b58802a469e1a617b04a8b36, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 1140155943}
   m_ExposedReferences:
     m_References: []
 --- !u!1001 &156936041
@@ -10734,7 +10721,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1140155941}
   - component: {fileID: 1140155943}
-  - component: {fileID: 1140155942}
   m_Layer: 0
   m_Name: Time line
   m_TagString: Untagged
@@ -10758,19 +10744,6 @@ Transform:
   - {fileID: 702449131}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1140155942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1140155940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6384d257b390dc84dab4adacc16df56a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isCompelete: 1
 --- !u!114 &1140155943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10790,9 +10763,9 @@ MonoBehaviour:
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1140155942}
-          m_TargetAssemblyTypeName: TimelineState, Assembly-CSharp
-          m_MethodName: OnStart
+        - m_Target: {fileID: 151629295}
+          m_TargetAssemblyTypeName: Timeline_Trigger, Assembly-CSharp
+          m_MethodName: DisablePlayerControl
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -10804,9 +10777,9 @@ MonoBehaviour:
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1140155942}
-          m_TargetAssemblyTypeName: TimelineState, Assembly-CSharp
-          m_MethodName: OnComplete
+        - m_Target: {fileID: 151629295}
+          m_TargetAssemblyTypeName: Timeline_Trigger, Assembly-CSharp
+          m_MethodName: EnablePlayerControl
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

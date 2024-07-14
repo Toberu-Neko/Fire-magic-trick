@@ -17,8 +17,7 @@ public class PlayerFireballState : PlayerAbilityState
         maxSpeed = movement.CurrentVelocityXZMagnitude;
         useOverrideSpeed = false;
 
-        player.SetCollider(false);
-        player.SetPlayerModel(false);
+        player.SetColliderAndModel(false);
         player.VFXController.SetSuperDashVFX(true);
 
         if (collisionSenses.Ground)
@@ -31,8 +30,7 @@ public class PlayerFireballState : PlayerAbilityState
     {
         base.Exit();
 
-        player.SetCollider(true);
-        player.SetPlayerModel(true);
+        player.SetColliderAndModel(true);
         player.VFXController.SetSuperDashVFX(false);
 
         foreach (var col in SphereDetection(playerData.longRangeDetectRadius))

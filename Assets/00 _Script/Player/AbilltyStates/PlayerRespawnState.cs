@@ -12,11 +12,8 @@ public class PlayerRespawnState : PlayerAbilityState
     {
         base.Enter();
 
-        stats.SetInvincible(true);
-
         player.TeleportToSavepoint();
-        player.SetCollider(false);
-        player.SetPlayerModel(false);
+        player.SetColliderAndModel(false);
         player.ChangeActiveCam(Player.ActiveCamera.Normal);
         player.VFXController.ActivateRespawnVFX();
 
@@ -44,8 +41,6 @@ public class PlayerRespawnState : PlayerAbilityState
         base.Exit();
 
         movement.SetGravityOrginal();
-        stats.SetInvincible(false);
-        player.SetCollider(true);
-        player.SetPlayerModel(true);
+        player.SetColliderAndModel(true);
     }
 }
