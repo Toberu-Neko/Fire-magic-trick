@@ -203,7 +203,10 @@ public class PlayerInAirState : PlayerFSMBaseState
     {
         base.PhysicsUpdate();
 
-        Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime);
+        if (MovementInput != Vector2.zero)
+        {
+            Rotate(playerData.rotationSpeed, playerData.rotateSmoothTime);
+        }
     }
 
     private void CheckJumpMultiplier()

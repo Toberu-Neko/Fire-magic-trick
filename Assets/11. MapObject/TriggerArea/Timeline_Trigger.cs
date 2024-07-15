@@ -33,22 +33,4 @@ public class Timeline_Trigger : MonoBehaviour
         }
     }
 
-    public void OnStart()
-    {
-    }
-
-    public void OnComplete()
-    {
-    }
-
-    public void EnablePlayerControl()
-    {
-        player?.FinishCantControlState();
-    }
-
-    public void DisablePlayerControl()
-    {
-        player?.GotoCantControlState();
-    }
-
 }

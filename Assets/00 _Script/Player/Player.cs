@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     private ActiveCamera activeCamera;
     public enum ActiveCamera
     {
+        None,
         Normal,
         Run,
         Dash,
@@ -37,7 +38,7 @@ public class Player : MonoBehaviour
     [Header("Camera Settings")]
     [SerializeField] private GameObject cinemachineCameraTarget;
     [SerializeField] private bool lockCameraPosition = false;
-    [SerializeField] private bool useCameraRotate = true;
+    [field: SerializeField] public bool UseCameraRotate { get; set; }
     [SerializeField] private float sensitivity_x = 1f;
     [SerializeField] private float sensitivity_y = 0.5f;
     [SerializeField] private float topClamp = 70.0f;
@@ -104,8 +105,6 @@ public class Player : MonoBehaviour
         DeathState = new PlayerDeathState(this, StateMachine, Data, "death");
         RespawnState = new PlayerRespawnState(this, StateMachine, Data, "respawn");
         CantControlState = new PlayerCantControlState(this, StateMachine, Data, "idle");
-
-        ChangeActiveCam(ActiveCamera.Normal);
     }
 
     private void OnEnable()
@@ -121,7 +120,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _cinemachineTargetYaw = cinemachineCameraTarget.transform.rotation.eulerAngles.y;
-        StateMachine.Initialize(IdleState);
+        StateMachine.Initialize(InAirState);
     }
 
     private void Update()
@@ -156,7 +155,7 @@ public class Player : MonoBehaviour
     {
         Core.LateLogicUpdate();
 
-        if (useCameraRotate && !GameManager.Instance.IsPaused)
+        if (UseCameraRotate && !GameManager.Instance.IsPaused)
         {
             CameraRotation();
         }
@@ -254,6 +253,7 @@ public class Player : MonoBehaviour
                 AimCam.SetActive(false);
                 DeathCam.SetActive(true);
                 break;
+            
         }
     }
     #endregion
@@ -278,6 +278,11 @@ public class Player : MonoBehaviour
     public void SetCollider(bool value)
     {
         col.enabled = value;
+    }
+
+    public void SetModel(bool value)
+    {
+        playerModel.SetActive(value);
     }
 
     public void GotoCantControlState()

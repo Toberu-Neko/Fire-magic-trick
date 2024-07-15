@@ -17,6 +17,7 @@ public class PlayerCantControlState : PlayerAbilityState
             movement.SetVelocityZero();
         }
         stats.SetInvincible(true);
+        player.UseCameraRotate = false;
     }
 
     public override void LogicUpdate()
@@ -34,6 +35,7 @@ public class PlayerCantControlState : PlayerAbilityState
         base.Exit();
 
         stats.SetInvincible(false);
+        player.UseCameraRotate = true;
     }
 
     public void SetIsAbilityDone()

@@ -15,7 +15,7 @@ public class GameData
     public string currentTimeSkill;
     public string lastInteractedSavepointID;
 
-    public bool finishTutorial;
+    public bool finishStartTL;
 
 
     public SerializableDictionary<string, int> interactableMapItem;
@@ -38,7 +38,7 @@ public class GameData
         money = 0;
         currentTimeSkill = "PlayerTimeSkill_None";
         lastInteractedSavepointID = "Default";
-        finishTutorial = false;
+        finishStartTL = false;
         gotoSavePoint = true;
         playerPosition = new Vector2(0, 0);
 
