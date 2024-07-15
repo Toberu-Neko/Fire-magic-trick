@@ -310,7 +310,6 @@ public class SoundPack
     }
     public SoundPack Play(float delay)
     {
-
         SoundSystem.PlayAudioCall?.Invoke(this, delay);
         return this;
     }

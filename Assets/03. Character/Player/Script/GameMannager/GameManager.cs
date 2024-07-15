@@ -24,12 +24,15 @@ public class GameManager : MonoBehaviour
         }
 
         Application.targetFrameRate = -1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void PauseGame()
     {
         IsPaused = true;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         BulletTimeManager.Instance.TimeScaleZero();
     }
 
@@ -37,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         IsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         BulletTimeManager.Instance.TimeScaleOne();
     }
 }
