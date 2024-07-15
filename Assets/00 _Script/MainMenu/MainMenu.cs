@@ -16,6 +16,7 @@ public class MainMenu : MainMenuUIBase
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Time.timeScale = 1;
 
         saveSlotMenu.gameObject.SetActive(false);
         optionUI.gameObject.SetActive(false);
