@@ -129,17 +129,20 @@ public class CardSystem : MonoBehaviour
             {
                 HasSuperDashTarget = true;
                 SuperDashTarget = superDashHit.transform;
+                InGameUIManager.Instance.SetCrossRed();
             }
             else
             {
                 HasSuperDashTarget = false;
                 SuperDashTarget = null;
+                InGameUIManager.Instance.SetCrossWhite();
             }
         }
         else
         {
             HasSuperDashTarget = false;
             SuperDashTarget = null;
+            InGameUIManager.Instance.SetCrossWhite();
         }
     }
 

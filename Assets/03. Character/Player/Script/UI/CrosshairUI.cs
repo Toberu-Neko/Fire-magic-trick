@@ -4,40 +4,62 @@ using UnityEngine.UI;
 
 public class CrosshairUI : MonoBehaviour
 {
-    [SerializeField] private GameObject Crosshair;
+    [SerializeField] private Animator CrosshairAnimator;
     [SerializeField] private Color Normal;
     [SerializeField] private Color Check;
-    private Material CrosshairMaterial;
-    private Animator CrosshairAnimator;
+    [SerializeField] private Image[] CrosshairImages;
     [Header("Hit")]
-    [SerializeField] private float thresholdDistance;
     [SerializeField] private MMF_Player hitNear;
     [SerializeField] private MMF_Player hitFar;
 
+    private void Awake()
+    {
+        SetCrossWhite();
+    }
 
-    private void Start()
+    public void SetCrossRed()
     {
-        CrosshairAnimator = Crosshair.GetComponent<Animator>();
-        CrosshairMaterial = Crosshair.GetComponent<Image>().material;
+        foreach (var material in CrosshairImages)
+        {
+            if(material.color == Check)
+            {
+                return;
+            }
+            else
+            {
+                material.color = Check;
+            }
+        }
     }
-    public void SuperDashCheck()
+
+    public void SetCrossWhite()
     {
-        CrosshairMaterial.color = Check;
+        foreach (var material in CrosshairImages)
+        {
+            if(material.color == Normal)
+            {
+                return;
+            }
+            else
+            {
+                material.color = Normal;
+            }
+        }
     }
-    public void CrosshairInitialization()
-    {
-        CrosshairMaterial.color = Normal;
-    }
+
     public void CrosshairShooting()
     {
         CrosshairAnimator.Play("Crosshair");
     }
+
     public void CrosshairHit()
     {
         CrosshairAnimator.Play("CrossHairHit");
     }
+
     public void EnemyHitImpluse(Vector3 hitPosition)
     {
+        /*
         float distance = Vector3.Distance(hitPosition, transform.position);
         if(distance < thresholdDistance)
         {
@@ -46,5 +68,6 @@ public class CrosshairUI : MonoBehaviour
         {
               hitFar.PlayFeedbacks();
         }
+        */
     }
 }

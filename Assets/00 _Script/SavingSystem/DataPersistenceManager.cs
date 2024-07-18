@@ -58,7 +58,7 @@ public class DataPersistenceManager : MonoBehaviour
 
         if (DisableDataPersistance)
         {
-            Debug.LogError("Data persistance is disabled, this should only be used for debugging. And something will go wrong.");
+            Debug.LogError("Data persistance is disabled, this should only be used for debugging.");
             GameData = new GameData();
         }
 

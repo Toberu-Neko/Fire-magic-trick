@@ -5,11 +5,11 @@ using UnityEngine;
 public class TimeLineEvent : MonoBehaviour
 {
     [SerializeField] private Transform teleportTransform;
-    private Player player;
+    private IPlayerHandler player;
 
     private void Start()
     {
-        player = GameManager.Instance.Player.GetComponent<Player>();
+        player = GameManager.Instance.Player.GetComponent<IPlayerHandler>();
     }
 
     public void OnStart()
@@ -40,6 +40,11 @@ public class TimeLineEvent : MonoBehaviour
         player.SetModel(true);
     }
 
+    public void GotoAfterSuperDashJumpState()
+    {
+        player.GotoAfterSuperDashJumpState();
+    }
+
     public void TeleportPlayerToTLTransform()
     {
         if(teleportTransform == null)
@@ -47,6 +52,7 @@ public class TimeLineEvent : MonoBehaviour
             Debug.LogError("Teleport Transform is null in TLEvent");
             return;
         }
-        player.transform.position = teleportTransform.position;
+        Debug.Log("Teleporting player to " + teleportTransform.position);
+        player.Teleport(teleportTransform.position);
     }
 }

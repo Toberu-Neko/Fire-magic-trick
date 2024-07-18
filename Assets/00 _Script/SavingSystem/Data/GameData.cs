@@ -32,6 +32,9 @@ public class GameData
     public GameData()
     {
         firstTimePlaying = true;
+        activatedMapItem = new();
+        defeatedBosses = new();
+        pickedTreasures = new();
 
         maxHealth = 100f;
         timePlayed = 0f;

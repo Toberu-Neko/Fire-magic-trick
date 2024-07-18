@@ -73,10 +73,10 @@ public class SuperDashCameraCheck : MonoBehaviour
     {
         if(isHit)
         {
-            _crosshairUI.SuperDashCheck();
+            _crosshairUI.SetCrossRed();
         }else
         {
-            _crosshairUI.CrosshairInitialization();
+            _crosshairUI.SetCrossWhite();
         }
     }
     private void OnDrawGizmos()

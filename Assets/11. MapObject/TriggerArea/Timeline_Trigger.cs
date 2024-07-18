@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.Playables;
 
-[RequireComponent(typeof(PlayableDirector))]
-public class Timeline_Trigger : MonoBehaviour
+public class Timeline_Trigger : DataPersistMapObjBase
 {
     [Header("Setting")]
     [SerializeField] private bool isOnce = true;
@@ -13,11 +12,19 @@ public class Timeline_Trigger : MonoBehaviour
     private bool isTrigger = false;
 
     [HideInInspector] public bool isCompelete = true;
-
-    private Player player;
     private void Awake()
     {
         timeline = transform.parent.GetComponent<PlayableDirector>();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        if (isActivated)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,7 +33,6 @@ public class Timeline_Trigger : MonoBehaviour
         {
             if (!isTrigger)
             {
-                other.TryGetComponent(out player);
                 isTrigger = true;
                 timeline.Play();
             }

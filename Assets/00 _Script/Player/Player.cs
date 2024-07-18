@@ -1,7 +1,7 @@
 using MoreMountains.Tools;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IPlayerHandler
 {
     public PlayerStateMachine StateMachine { get; private set; }
     [field: SerializeField] public PlayerData Data { get; private set; }
@@ -77,6 +77,7 @@ public class Player : MonoBehaviour
         CameraPosRelateToPlayer = new();
         cameraWorkspaceV2 = new();
         cameraWorkspaceV2.Set(playerCamera.position.x - transform.position.x, playerCamera.position.z - transform.position.z);
+        UseCameraRotate = true;
 
         Movement = Core.GetCoreComponent<Movement>();
         Stats = Core.GetCoreComponent<Stats>();
@@ -293,6 +294,16 @@ public class Player : MonoBehaviour
     public void FinishCantControlState()
     {
         CantControlState.SetIsAbilityDone();
+    }
+
+    public void GotoAfterSuperDashJumpState()
+    {
+        StateMachine.ChangeState(AfterSuperDashJump);
+    }
+
+    public void Teleport(Vector3 position)
+    {
+        transform.position = position;
     }
 
     private void OnDrawGizmos()

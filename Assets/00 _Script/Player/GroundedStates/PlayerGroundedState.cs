@@ -19,7 +19,6 @@ public class PlayerGroundedState : PlayerFSMBaseState
     {
         base.Enter();
 
-        player.Anim.ResetTrigger("land");
         player.JumpState.ResetAmountOfJumpsLeft();
         player.DashState.ResetCanDash();
         player.InAirState.ResetFloatCount();
@@ -32,10 +31,16 @@ public class PlayerGroundedState : PlayerFSMBaseState
         isGrounded = collisionSenses.Ground;
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+
+        player.Anim.ResetTrigger("land");
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
 
         jumpInput = player.InputHandler.JumpInput;
         dashInput = player.InputHandler.DashInput;

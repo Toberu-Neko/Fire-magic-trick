@@ -15,10 +15,18 @@ public class LoadingUIController : MonoBehaviour
         LoadSceneManager.Instance.LoadingObj = loadingObj;
         LoadSceneManager.Instance.OnLoadingSingleProgress += HandleLoadingSingleProgress;
         LoadSceneManager.Instance.OnLoadingAdditiveProgress += HandleLoadingAdditiveProgress;
+        LoadSceneManager.Instance.OnAdditiveSceneAlreadyLoaded += Instance_OnAdditiveSceneAlreadyLoaded;
         loadingBar.Init(1f);
 
         DataPersistenceManager.Instance.LoadOptionData();
         blackScreen.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        LoadSceneManager.Instance.OnLoadingAdditiveProgress -= HandleLoadingAdditiveProgress;
+        LoadSceneManager.Instance.OnLoadingSingleProgress -= HandleLoadingSingleProgress;
+        LoadSceneManager.Instance.OnAdditiveSceneAlreadyLoaded -= Instance_OnAdditiveSceneAlreadyLoaded;
     }
 
     private void HandleLoadingAdditiveProgress(float obj)
@@ -28,12 +36,11 @@ public class LoadingUIController : MonoBehaviour
             blackScreenAnim?.SetTrigger("FadeOut");
         }
     }
-
-    private void OnDisable()
+    private void Instance_OnAdditiveSceneAlreadyLoaded()
     {
-        LoadSceneManager.Instance.OnLoadingAdditiveProgress -= HandleLoadingAdditiveProgress;
-        LoadSceneManager.Instance.OnLoadingSingleProgress -= HandleLoadingSingleProgress;
+        blackScreenAnim?.SetTrigger("FadeOut");
     }
+
 
     private void HandleLoadingSingleProgress(float progress)
     {

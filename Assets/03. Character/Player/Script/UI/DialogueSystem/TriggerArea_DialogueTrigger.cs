@@ -1,32 +1,37 @@
 using MoreMountains.Feedbacks;
-using System.Threading.Tasks;
 using UnityEngine;
 
-public class TriggerArea_DialogueTrigger : MonoBehaviour
+public class TriggerArea_DialogueTrigger : DataPersistMapObjBase
 {
     [Header("Additionals")]
-    public MMF_Player NeedFeedbacks;
+    [SerializeField] private MMF_Player NeedFeedbacks;
 
     [Header("Auto")]
-    public bool useAuto;
-    public float OnceAutoTime;
-    //Variables
-    public bool triggerOnce;
+    [SerializeField] private bool triggerOnce;
+    [SerializeField] private bool useAuto;
+    [SerializeField] private float OnceAutoTime;
     private bool canTrigger = true;
     private bool isReadyDialogue;
-    
-    [Header("Input To TMP")]
-    [SerializeField][TextArea(5, 10)] public string debugText;
 
     //Script
+    [SerializeField] private SO_Dialogue dialogueSO;
     public Dialogue dialogue;
-    private DialogueManager dialogueManager;
+    private IPlayerHandler playerHandler;
 
 
-    private void Start()
+    private void Awake()
     {
-        dialogueManager = GameManager.Instance.UISystem.GetComponent<DialogueManager>();
         canTrigger = true;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        if (isActivated) 
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,28 +41,34 @@ public class TriggerArea_DialogueTrigger : MonoBehaviour
             if(!isReadyDialogue)
             {
                 isReadyDialogue = true;
+                EventTrigger();
+
+                if (!useAuto)
+                {
+                    other.TryGetComponent(out playerHandler);
+                    playerHandler.GotoCantControlState();
+                }
             }
         }
     }
-    public async void EventTrigger()
+    public void EventTrigger()
     {
-        await Task.Delay(250);
         if (canTrigger)
         {
             if (useAuto)
             {
-                dialogueManager.StartDialogue(dialogue, OnceAutoTime);
-                dialogueManager.OnDialogueEnd += DialogueEnd;
+                InGameUIManager.Instance.StartDialogue(dialogueSO, OnceAutoTime);
             }
             else
             {
-                dialogueManager.StartDialogue(dialogue);
-                dialogueManager.OnDialogueEnd += DialogueEnd;
+                InGameUIManager.Instance.StartDialogue(dialogueSO);
             }
+
+            InGameUIManager.Instance.OnDialogueEnd += DialogueEnd;
 
             if (triggerOnce)
             {
-                triggerOnce = true;
+                isActivated = true;
                 canTrigger = false;
             }
         }
@@ -65,21 +76,13 @@ public class TriggerArea_DialogueTrigger : MonoBehaviour
 
     private void DialogueEnd()
     {
-        if(NeedFeedbacks != null)
+        InGameUIManager.Instance.OnDialogueEnd -= DialogueEnd;
+        DataPersistenceManager.Instance.SaveGame();
+        playerHandler.FinishCantControlState();
+
+        if (NeedFeedbacks != null)
         {
             NeedFeedbacks.PlayFeedbacks();
         }
-    }
-
-    private void OnValidate()
-    {
-        string debugText = "";
-
-        for (int i = 0; i < dialogue.contents.Length; i++)
-        {
-            debugText += dialogue.contents[i].name;
-            debugText += dialogue.contents[i].sentences;
-        }
-        this.debugText = debugText;
     }
 }

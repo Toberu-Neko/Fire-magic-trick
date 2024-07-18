@@ -125,7 +125,7 @@ public class Movement : CoreComponent
 
     public void Rotate(float value)
     {
-        Debug.Log("Rotate");
+        // Debug.Log("Rotate");
         RB.MoveRotation(Quaternion.Euler(0f, value, 0f));
     }
 

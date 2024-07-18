@@ -12,6 +12,7 @@ public class LoadSceneManager : MonoBehaviour
     public event Action<float> OnLoadingSingleProgress;
     public event Action<float> OnLoadingAdditiveProgress;
     public event Action<float> OnUnloadingAdditiveProgress;
+    public event Action OnAdditiveSceneAlreadyLoaded;
 
     private void Awake()
     {
@@ -35,6 +36,8 @@ public class LoadSceneManager : MonoBehaviour
     {
         if(SceneManager.GetSceneByName(sceneName).isLoaded)
         {
+            OnAdditiveSceneAlreadyLoaded?.Invoke();
+            Debug.LogWarning("Scene: " + sceneName + " is already loaded, this should only happened in Unity.");
             return;
         }
         StartCoroutine(LoadSceneAsyncAdditive(sceneName));

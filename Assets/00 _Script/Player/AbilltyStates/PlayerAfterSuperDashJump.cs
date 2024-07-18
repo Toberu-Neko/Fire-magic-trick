@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerAfterSuperDashJump : PlayerAbilityState
 {
+    private int currentFrame;
+
     public PlayerAfterSuperDashJump(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -16,6 +18,7 @@ public class PlayerAfterSuperDashJump : PlayerAbilityState
         movement.SetVelocityY(playerData.superDashJumpVelocity);
         player.InAirState.SetAirControlSpeed(playerData.walkSpeed);
         player.InAirState.SetIsJumping();
+        player.JumpState.DecreaseAmountOfJumpsLeft();
 
         foreach(var col in Physics.OverlapBox(player.transform.position, playerData.superDashFootDetectBox, player.transform.rotation))
         {
@@ -25,7 +28,20 @@ public class PlayerAfterSuperDashJump : PlayerAbilityState
                 knockbackable?.Knockback(Vector3.down,  playerData.superDashJumpKnockbackSpeed, player.transform.position);
             }
         }
+    }
 
-        isAbilityDone = true;
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+
+        // Wait for animition to start
+        if (currentFrame >= 2)
+        {
+            isAbilityDone = true;
+        }
+        else
+        {
+            currentFrame++;
+        }
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.UI;
 
@@ -10,8 +8,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private InputSystemUIInputModule inputSystemUIInputModule;
     [SerializeField] private PauseUI pauseUI;
     [SerializeField] private DeathUI deathUI;
-
-    private bool escInput = false;
 
     private void Awake()
     {
@@ -29,10 +25,7 @@ public class UIManager : MonoBehaviour
     {
         pauseUI.gameObject.SetActive(false);
         deathUI.gameObject.SetActive(false);
-
     }
-
-
 
     private void Update()
     {
