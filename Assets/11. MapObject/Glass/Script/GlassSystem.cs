@@ -26,8 +26,6 @@ public class GlassSystem : MonoBehaviour
     [SerializeField] public bool canSuperJump;
     [SerializeField] public bool jumpDelayMode;
 
-
-    private ProgressSystem progressSystem;
     private Collider glassCollider;
     private MeshRenderer glassRender;
     private bool isBroken;
@@ -40,8 +38,16 @@ public class GlassSystem : MonoBehaviour
     }
     private void Start()
     {
-        progressSystem = GameManager.Instance.GetComponent<ProgressSystem>();
-        progressSystem.OnPlayerDeath += OnPlayerDeathToRebirthGlass;
+    }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.OnPlayerReborn += OnPlayerDeathToRebirthGlass;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnPlayerReborn -= OnPlayerDeathToRebirthGlass;
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -55,7 +61,6 @@ public class GlassSystem : MonoBehaviour
     {
         BrokenSuperFast();
         isBrokenFoever = true;
-        progressSystem.OnPlayerDeath -= OnPlayerDeathToRebirthGlass;
     }
     public void BrokenCheck_SuperJump()
     {

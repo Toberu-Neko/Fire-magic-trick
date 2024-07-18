@@ -19,6 +19,10 @@ public class TimelineController : DataPersistMapObjBase
     {
         director.stopped += Director_stopped;
     }
+    private void OnDisable()
+    {
+        director.stopped -= Director_stopped;
+    }
 
     protected override void Start()
     {
@@ -49,18 +53,12 @@ public class TimelineController : DataPersistMapObjBase
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
         if (other.CompareTag("Player") && playType == PlayType.OnColliderEnter)
         {
-            Debug.Log("Player Enter");
             director.Play();
         }
     }
 
-    private void OnDisable()
-    {
-        director.stopped -= Director_stopped;
-    }
 
     private void Director_stopped(PlayableDirector obj)
     {

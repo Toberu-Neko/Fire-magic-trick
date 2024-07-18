@@ -21,7 +21,7 @@ public class PlayerRespawnState : PlayerAbilityState
 
         stats.Health.Init();
         player.CardSystem.Init();
-
+        GameManager.Instance.PlayerReborn();
     }
 
     public override void LogicUpdate()

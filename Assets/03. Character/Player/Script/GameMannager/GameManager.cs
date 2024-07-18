@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject NewGamePlay;
 
     public bool IsPaused { get; private set; }
+    public event Action OnPlayerReborn;
 
     private void Awake()
     {
@@ -42,5 +44,10 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         BulletTimeManager.Instance.TimeScaleOne();
+    }
+
+    public void PlayerReborn()
+    {
+        OnPlayerReborn?.Invoke();
     }
 }
