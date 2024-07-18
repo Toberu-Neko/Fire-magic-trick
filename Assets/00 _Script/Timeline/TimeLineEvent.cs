@@ -52,7 +52,6 @@ public class TimeLineEvent : MonoBehaviour
             Debug.LogError("Teleport Transform is null in TLEvent");
             return;
         }
-        Debug.Log("Teleporting player to " + teleportTransform.position);
         player.Teleport(teleportTransform.position);
     }
 }

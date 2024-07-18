@@ -78,7 +78,11 @@ public class TriggerArea_DialogueTrigger : DataPersistMapObjBase
     {
         InGameUIManager.Instance.OnDialogueEnd -= DialogueEnd;
         DataPersistenceManager.Instance.SaveGame();
-        playerHandler.FinishCantControlState();
+
+        if (!useAuto)
+        {
+            playerHandler.FinishCantControlState();
+        }
 
         if (NeedFeedbacks != null)
         {

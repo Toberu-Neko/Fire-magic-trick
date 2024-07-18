@@ -8,7 +8,7 @@ public class GameData
     public int money;
     public float maxHealth;
     public float timePlayed;
-    public Vector2 playerPosition;
+    public Vector3 playerRespawnPosition;
     public bool gotoSavePoint;
     public bool firstTimePlaying;
 
@@ -43,7 +43,7 @@ public class GameData
         lastInteractedSavepointID = "Default";
         finishStartTL = false;
         gotoSavePoint = true;
-        playerPosition = new Vector2(0, 0);
+        playerRespawnPosition = new();
 
         interactableMapItem = new();
 

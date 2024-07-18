@@ -1,7 +1,8 @@
 using MoreMountains.Tools;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IPlayerHandler
+[RequireComponent(typeof(CardSystem), typeof(PlayerVFXController), typeof(PlayerToCombat))]
+public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
 {
     public PlayerStateMachine StateMachine { get; private set; }
     [field: SerializeField] public PlayerData Data { get; private set; }
@@ -10,7 +11,6 @@ public class Player : MonoBehaviour, IPlayerHandler
     [field: SerializeField] public CardSystem CardSystem { get; private set; }
     [field: SerializeField] public PlayerInputHandler InputHandler { get; private set; }
     [field: SerializeField] public PlayerVFXController VFXController { get; private set; }
-    [SerializeField] private PlayerVariableInterface playerVariableInterface;
     [SerializeField] private CapsuleCollider col;
     [SerializeField] private GameObject playerModel;
     public Movement Movement { get; private set; }
@@ -49,6 +49,7 @@ public class Player : MonoBehaviour, IPlayerHandler
 
     private Vector2 cameraWorkspaceV2;
     public Vector2 CameraPosRelateToPlayer { get; private set; }
+    public Vector3 RespawnPosition { get; private set; }
 
     public PlayerIdleState IdleState { get; private set; }
     public PlayerWalkingState WalkingState { get; private set; }
@@ -71,6 +72,8 @@ public class Player : MonoBehaviour, IPlayerHandler
     public PlayerDeathState DeathState { get; private set; }
     public PlayerRespawnState RespawnState { get; private set; }
     public PlayerCantControlState CantControlState { get; private set; }
+    public PlayerLoadingState LoadingState { get; private set; }
+    private bool firstTimePlaying;
 
     private void Awake()
     {
@@ -106,6 +109,7 @@ public class Player : MonoBehaviour, IPlayerHandler
         DeathState = new PlayerDeathState(this, StateMachine, Data, "death");
         RespawnState = new PlayerRespawnState(this, StateMachine, Data, "respawn");
         CantControlState = new PlayerCantControlState(this, StateMachine, Data, "idle");
+        LoadingState = new PlayerLoadingState(this, StateMachine, Data, "idle");
     }
 
     private void OnEnable()
@@ -121,8 +125,39 @@ public class Player : MonoBehaviour, IPlayerHandler
     private void Start()
     {
         _cinemachineTargetYaw = cinemachineCameraTarget.transform.rotation.eulerAngles.y;
-        StateMachine.Initialize(InAirState);
+        StateMachine.Initialize(LoadingState);
+
+        LoadSceneManager.Instance.OnAdditiveSceneAlreadyLoaded += HandleFinishLoading;
+        LoadSceneManager.Instance.OnLoadingAdditiveProgress += HandleAdditiveLoading;
     }
+
+    private void OnDestroy()
+    {
+        LoadSceneManager.Instance.OnAdditiveSceneAlreadyLoaded -= HandleFinishLoading;
+        LoadSceneManager.Instance.OnLoadingAdditiveProgress -= HandleAdditiveLoading;
+    }
+
+    #region HandleLoading
+    private void HandleAdditiveLoading(float obj)
+    {
+        if (obj == 1f)
+        {
+            HandleFinishLoading();
+        }
+    }
+
+    private void HandleFinishLoading()
+    {
+        if (firstTimePlaying)
+        {
+            LoadingState.SetIsAbilityDone();
+        }
+        else
+        {
+            StateMachine.ChangeState(RespawnState);
+        }
+    }
+    #endregion
 
     private void Update()
     {
@@ -162,6 +197,7 @@ public class Player : MonoBehaviour, IPlayerHandler
         }
     }
 
+    #region Animation Triggers
     private void AnimationActionTrigger() => StateMachine.CurrentState.AnimationActionTrigger();
 
     private void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
@@ -171,6 +207,7 @@ public class Player : MonoBehaviour, IPlayerHandler
     private void AnimationStopMovementTrigger() => StateMachine.CurrentState.AnimationStopMovementTrigger();
 
     private void AnimationSFXTrigger() => StateMachine.CurrentState.AnimationSFXTrigger();
+    #endregion
 
     #region Camera
     private void CameraRotation()
@@ -266,7 +303,7 @@ public class Player : MonoBehaviour, IPlayerHandler
 
     public void TeleportToSavepoint()
     {
-        transform.position = playerVariableInterface.RespawnPosition;
+        transform.position = RespawnPosition;
     }
 
     public void SetColliderAndModel(bool value)
@@ -275,6 +312,12 @@ public class Player : MonoBehaviour, IPlayerHandler
         playerModel.SetActive(value);
         Stats.SetInvincible(!value);
     }
+    public void DecreaseHealthUntilInit(float value)
+    {
+        Stats.Health.DecreaseUntilInitValue(value);
+    }
+
+    #region IPlayerHandler
 
     public void SetCollider(bool value)
     {
@@ -303,8 +346,31 @@ public class Player : MonoBehaviour, IPlayerHandler
 
     public void Teleport(Vector3 position)
     {
+        firstTimePlaying = false;
         transform.position = position;
     }
+    public void SetRespawnPosition(Vector3 position)
+    {
+        RespawnPosition = position;
+    }
+    #endregion
+
+    #region IDataPersistance
+    public void LoadData(GameData data)
+    {
+        if (data.playerRespawnPosition == Vector3.zero)
+            return;
+        RespawnPosition = data.playerRespawnPosition;
+        firstTimePlaying = data.firstTimePlaying;
+        Teleport(RespawnPosition);
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.playerRespawnPosition = RespawnPosition;
+        data.firstTimePlaying = firstTimePlaying;
+    }
+    #endregion
 
     private void OnDrawGizmos()
     {
@@ -316,10 +382,5 @@ public class Player : MonoBehaviour, IPlayerHandler
             Gizmos.DrawWireSphere(transform.position, Data.longRangeDetectRadius);
             Gizmos.DrawWireSphere(transform.position, Data.zeroRangeDetectRadius);
         }
-    }
-
-    public void DecreaseHealthUntilInit(float value)
-    {
-        Stats.Health.DecreaseUntilInitValue(value);
     }
 }

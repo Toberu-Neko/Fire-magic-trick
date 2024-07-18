@@ -19,7 +19,8 @@ public class LoadingUIController : MonoBehaviour
         loadingBar.Init(1f);
 
         DataPersistenceManager.Instance.LoadOptionData();
-        blackScreen.SetActive(true);
+        if(blackScreen != null)
+            blackScreen.SetActive(true);
     }
 
     private void OnDisable()

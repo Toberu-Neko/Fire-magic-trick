@@ -1,6 +1,4 @@
 using Eflatun.SceneReference;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseUIMain : MouseControlUIBase
@@ -31,6 +29,9 @@ public class PauseUIMain : MouseControlUIBase
 
     public void OnMainMenuButton()
     {
+        GameManager.Instance.ResumeGame();
+        Time.timeScale = 1;
+        DataPersistenceManager.Instance.SaveGame();
         LoadSceneManager.Instance.LoadSceneSingle(mainMenuScene.Name);
     }
 

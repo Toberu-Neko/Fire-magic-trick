@@ -4,7 +4,6 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
-using System;
 using UnityEngine.Localization.Components;
 
 public class DialogueUI : MonoBehaviour
@@ -25,63 +24,54 @@ public class DialogueUI : MonoBehaviour
         contents = new Queue<Dialogue_Content>();
 
         canNext = true;
+        isDialogueActive = false;
     }
 
     private void Update()
     {
-        if (isDialogueActive)
+        if (!isDialogueActive)
         {
             if(PlayerInputHandler.Instance.AttackInput)
             {
                 PlayerInputHandler.Instance.UseAttackInput();
+
                 if (canNext)
                 {
                     DisplayNextSentence();
                 }
+                else
+                {
+                    //TODO: Skip Typing
+                }
             }
+
+            //TODO: Add Skip Story
+
         }
     }
 
     public void StartDialogue(SO_Dialogue dialogue)
     {
-        InitiaDialogue();
+        Initialization();
+        isDialogueAuto = false;
 
-        characterIcon.sprite = dialogue.contents[0].CharacterIcon;
-        nameText.StringReference = dialogue.contents[0].localizedName;
-
-
-        contents.Clear();
-
-        foreach (Dialogue_Content content in dialogue.contents)
-        {
-            contents.Enqueue(content);
-        }
-
-        DisplayNextSentence();
+        QueueDialogue(dialogue);
     }
 
     public async void StartDialogue(SO_Dialogue dialogue,float onceAutoTime)
     {
-        InitialDialogueAuto();
+        Initialization();
         isDialogueAuto = true;
-        nameText.StringReference = dialogue.contents[0].localizedName;
-        characterIcon.sprite = dialogue.contents[0].CharacterIcon;
 
-        contents.Clear();
+        QueueDialogue(dialogue);
 
-        foreach (Dialogue_Content content in dialogue.contents)
-        {
-            contents.Enqueue(content);
-        }
-
-        DisplayNextSentence();
-
-        for (int i = 0; i < contents.Count+2; i++)
+        for (int i = 0; i < contents.Count + 2; i++)
         {
             await Task.Delay((int)(onceAutoTime*1000));
             DisplayNextSentence();
         }
     }
+
 
     public void DisplayNextSentence()
     {
@@ -116,21 +106,27 @@ public class DialogueUI : MonoBehaviour
         Task.Delay(250).ContinueWith(t => canNext = true);
     }
 
-    private void InitiaDialogue()
+    private void Initialization()
     {
         gameObject.SetActive(true);
         isDialogueActive = true;
         contents = new();
+        dialogueText.text = "";
     }
 
-    private void InitialDialogueAuto()
+    private void QueueDialogue(SO_Dialogue dialogue)
     {
-        if (gameObject.activeSelf == false)
+        nameText.StringReference = dialogue.contents[0].localizedName;
+        characterIcon.sprite = dialogue.contents[0].CharacterIcon;
+
+        contents.Clear();
+
+        foreach (Dialogue_Content content in dialogue.contents)
         {
-            gameObject.SetActive(true);
+            contents.Enqueue(content);
         }
-        dialogueText.text = "";
-        isDialogueAuto = true;
+
+        DisplayNextSentence();
     }
 
     private void EndDialogue()

@@ -9,4 +9,5 @@ public interface IPlayerHandler
     void FinishCantControlState();
     void SetModel(bool value);
     void Teleport(Vector3 position);
+    void SetRespawnPosition(Vector3 position);
 }
