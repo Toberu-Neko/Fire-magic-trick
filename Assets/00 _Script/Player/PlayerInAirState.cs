@@ -174,7 +174,8 @@ public class PlayerInAirState : PlayerFSMBaseState
                 player.VFXController.SetCanComboVFX(false);
             }
 
-            if (!isFloating && floatCount < playerData.maxFloatCount && player.InputHandler.OrgJumpInput && minYVelocity < -1f && !collisionSenses.LongGround)
+            if (!isFloating && floatCount < playerData.maxFloatCount && stats.Health.GapBetweenCurrentAndMax > playerData.floatEnergyCostPerSceond * 0.5f 
+                && player.InputHandler.OrgJumpInput && minYVelocity < -1f && !collisionSenses.LongGround)
             {
                 floatCount++;
                 player.InputHandler.UseJumpInput();
@@ -183,7 +184,7 @@ public class PlayerInAirState : PlayerFSMBaseState
                 player.VFXController.SetFloatVFX(true);
                 player.CardSystem.SetStrongShoot(true);
             }
-            else if (isFloating && (!player.InputHandler.OrgJumpInput || Time.time - startFloatingTime > playerData.inAirMaxFloatTime || collisionSenses.LongGround))
+            else if (isFloating && (!player.InputHandler.OrgJumpInput || Time.time - startFloatingTime > playerData.inAirMaxFloatTime || collisionSenses.LongGround || stats.Health.CurrentValue == stats.Health.MaxValue))
             {
                 isFloating = false;
                 player.VFXController.SetFloatVFX(false);
@@ -193,6 +194,7 @@ public class PlayerInAirState : PlayerFSMBaseState
             if (isFloating)
             {
                 movement.SetVelocityY(playerData.floatSpeed);
+                stats.Health.Increase(playerData.floatEnergyCostPerSceond * Time.deltaTime);
             }
 
             inAirMovementSpeed = Mathf.Lerp(inAirMovementSpeed, playerData.airMoveSpeed, playerData.frameOfDecaySpeed * Time.deltaTime);

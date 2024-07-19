@@ -7,8 +7,7 @@ public class Bullet_Normal : MonoBehaviour
     [SerializeField] private float lifeTime;
     [SerializeField] private float speed;
     [Header("Force")]
-    [SerializeField] private Transform BackCoordinate;
-    [SerializeField] private float force;
+    [SerializeField] private float knockbackForce;
     [Header("Feedback")]
     [SerializeField] private ParticleSystem addspeedFeedback;
     [Header("VfxPrefab")]
@@ -17,20 +16,25 @@ public class Bullet_Normal : MonoBehaviour
 
     private Collider bulletCollider;
     private Rigidbody rb;
-    private CrosshairUI _crosshairUI;
     private PlayerDamage _playerDamage;
-    private void Start()
+
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         bulletCollider = GetComponent<Collider>();
-        _crosshairUI = GameManager.Instance.UISystem.GetComponent<CrosshairUI>();
         _playerDamage = GetComponent<PlayerDamage>();
+    }
+
+    private void OnEnable()
+    {
         Initialization();
     }
+
     private void Update()
     {
-        GiveSpeed();
+        rb.velocity = transform.forward * speed;
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         ContactPoint contact = collision.contacts[0];
@@ -40,50 +44,29 @@ public class Bullet_Normal : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnergyCan"))
         {
             _playerDamage.ToDamageEnemy(collision);
+            TryGetComponent(out IKnockbackable knockbackable);
+            knockbackable?.Knockback(transform.position, knockbackForce);
+
             GameObject enemyhit = Instantiate(hitEnemyPrefab, pos, rot);
-            KickBackEnemy(collision);
             Destroy(enemyhit, 1f);
+            InGameUIManager.Instance.HitEnemyEffect();
         }
 
-        newHit(pos, rot);
-        CroshairFeedback();
+        NewHit(pos, rot);
         DestroyBullet();
     }
-    private void KickBackEnemy(Collision collision)
-    {
-        if (collision.gameObject.GetComponent<EnemyHealthSystem>() != null)
-        {
-            if (collision.gameObject.GetComponent<EnemyHealthSystem>().kickBackGuard != true) // Could be knock back
-            {
-                Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
-                Vector3 Direction = (collision.transform.position - BackCoordinate.position).normalized;
-                Vector3 ForceDirection = new Vector3(Direction.x, 0, Direction.z);
-                rb.AddForce(ForceDirection * force * collision.gameObject.GetComponent<EnemyHealthSystem>().kickBackRatio, ForceMode.Impulse);
-            }
-        }
-    }
-    private void CroshairFeedback()
-    {
-        _crosshairUI.CrosshairHit();
-    }
-    private void newHit(Vector3 pos, Quaternion rot)
+
+    private void NewHit(Vector3 pos, Quaternion rot)
     {
         var hitVFX = Instantiate(cardSlashPrefab, pos, rot);
-        var psHit = hitVFX.GetComponent<VisualEffect>();
         Destroy(hitVFX, 1.5f);
     }
+
     private void Initialization()
     {
-        DestroyBullet(lifeTime);
+        Destroy(gameObject,lifeTime);
     }
-    private void GiveSpeed()
-    {
-        rb.velocity = transform.forward * speed;
-    }
-    private void DestroyBullet(float lifetime)
-    {
-        Destroy(gameObject, lifetime);
-    }
+
     private void DestroyBullet()
     {
         bulletCollider.enabled = false;

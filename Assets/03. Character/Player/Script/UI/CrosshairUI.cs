@@ -1,4 +1,5 @@
 using MoreMountains.Feedbacks;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class CrosshairUI : MonoBehaviour
     [SerializeField] private Color Normal;
     [SerializeField] private Color Check;
     [SerializeField] private Image[] CrosshairImages;
+    [SerializeField] private GameObject hitEffect;
     [Header("Hit")]
     [SerializeField] private MMF_Player hitNear;
     [SerializeField] private MMF_Player hitFar;
@@ -52,9 +54,11 @@ public class CrosshairUI : MonoBehaviour
         CrosshairAnimator.Play("Crosshair");
     }
 
-    public void CrosshairHit()
+    public async void HitEffextOn()
     {
-        CrosshairAnimator.Play("CrossHairHit");
+        hitEffect.SetActive(true);
+        await Task.Delay(100);
+        hitEffect.SetActive(false);
     }
 
     public void EnemyHitImpluse(Vector3 hitPosition)

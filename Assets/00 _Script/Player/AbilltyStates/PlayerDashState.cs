@@ -29,7 +29,7 @@ public class PlayerDashState : PlayerAbilityState
         canUseDash = false;
         currentFrame = 0;
 
-
+        stats.Health.Increase(playerData.normalDashEnergyCost);
         player.ChangeActiveCam(Player.ActiveCamera.Dash);
     }
 
@@ -98,7 +98,7 @@ public class PlayerDashState : PlayerAbilityState
         }
     }
 
-    public bool CanDash() => canUseDash && (Time.time >= ExitTime + playerData.dashCooldown || ExitTime == 0f);
+    public bool CanDash() => canUseDash && stats.Health.GapBetweenCurrentAndMax >= playerData.normalDashEnergyCost && (Time.time >= ExitTime + playerData.dashCooldown || ExitTime == 0f);
 
     public void ResetCanDash() => canUseDash = true;
 }

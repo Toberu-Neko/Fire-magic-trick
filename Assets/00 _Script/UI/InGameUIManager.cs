@@ -44,6 +44,16 @@ public class InGameUIManager : MonoBehaviour
         OnDialogueEnd?.Invoke();
     }
 
+    public void CrosshairShooting()
+    {
+        crosshairUI.CrosshairShooting();
+    }
+
+    public void HitEnemyEffect()
+    {
+        crosshairUI.HitEffextOn();
+    }
+
     public void StartDialogue(SO_Dialogue dialogue, float time)
     {
         dialogueUI.StartDialogue(dialogue, time);

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -9,9 +7,13 @@ public class CoreStatSystem
     public event Action OnCurrentValueZero;
     public event Action OnValueChanged;
     public event Action OnValueDecreased;
+    public event Action OnValueIncreased;
 
     [field: SerializeField] public float MaxValue { get; set; }
     [field: SerializeField] public float InitValue { get; set; }
+    /// <summary>
+    /// Max == 1f;
+    /// </summary>
     public float CurrentValuePercentage
     {
         get => CurrentValue / MaxValue;
@@ -20,6 +22,16 @@ public class CoreStatSystem
 
         }
     }
+
+    public float GapBetweenCurrentAndMax
+    {
+        get => MaxValue - CurrentValue;
+        private set
+        {
+
+        }
+    }
+
     // public float DeltaValue { get; private set; } = 0f;
 
     public float CurrentValue
@@ -49,6 +61,7 @@ public class CoreStatSystem
     {
         CurrentValue += amount;
         OnValueChanged?.Invoke();
+        OnValueIncreased?.Invoke();
     }
 
     public void Decrease(float amount)
@@ -89,13 +102,14 @@ public class CoreStatSystem
         {
             CurrentValue = InitValue;
             OnValueChanged?.Invoke();
+            OnValueIncreased?.Invoke();
             return;
         }
         else
         {
             CurrentValue += amount;
             OnValueChanged?.Invoke();
-            OnValueDecreased?.Invoke();
+            OnValueIncreased?.Invoke();
         }
     }
 }

@@ -37,6 +37,8 @@ public class PlayerSuperDashState : PlayerAbilityState
         targetVector.Normalize();
         goToAirJumpState = false;
 
+        stats.Health.Increase(playerData.superDashEnergyCost);
+
         player.SetColliderAndModel(false);
         player.VFXController.SetSuperDashVFX(true);
     }
@@ -113,7 +115,7 @@ public class PlayerSuperDashState : PlayerAbilityState
 
     public bool CanSuperDash()
     {
-        return Time.time >= ExitTime + playerData.superDashCooldown && player.CardSystem.HasSuperDashTarget;
+        return Time.time >= ExitTime + playerData.superDashCooldown && player.CardSystem.HasSuperDashTarget && stats.Health.GapBetweenCurrentAndMax >= playerData.superDashEnergyCost;
     }
 
     private void DetermineNextState()

@@ -111,7 +111,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
     {
         base.Exit();
 
-        if (collisionSenses.Ground || collisionSenses.Enemy)
+        if (!(player.InputHandler.JumpInput && player.InAirState.CheckCanFloat()))
         {
             foreach (var col in SphereDetection(playerData.longRangeDetectRadius))
             {

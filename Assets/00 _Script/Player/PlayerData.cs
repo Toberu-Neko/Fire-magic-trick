@@ -3,6 +3,33 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newPlayerData", menuName = "Data/Player Data/Base Data")]
 public class PlayerData : ScriptableObject
 {
+    [Header("---------能量---------")]
+    public float healthDecreaseRate = 5f;
+    public float healthDecreaseRateBurning = 7.5f;
+    public float normalDashEnergyCost = 10f;
+    public float superDashEnergyCost = 15f;
+    public float floatEnergyCostPerSceond = 10f;
+
+    [Header("---------攻擊數值---------")]
+    public float dashDamage = 10f;
+    public float dashKnockbackForce = 10f;
+
+    [Header("大跳")]
+    public float superJumpFireDamage = 30f;
+    public float superJumpFireJumpKnockbackForce = 8f;
+    public float superJumpLandKnockbackForce = 14f;
+    public float superJumpBurnTime = 2f;
+
+    [Header("穿梭")]
+    public float superDashDamage = 10f;
+    public float superDashKnockbackForce = 10f;
+    public float superDashBurnTime = 5f;
+
+    [Header("大招")]
+    public float windAltDamage = 20f;
+    public float fireAltFireTime = 5f;
+
+    [Header("---------冷卻與移動---------")]
     [Header("Basic")]
     public LayerMask whatIsCombatDetectable;
     public float rotationSpeed = 15f;
@@ -36,8 +63,6 @@ public class PlayerData : ScriptableObject
     public float dashSpeed = 10f;
     public float dashTime = 0.2f;
     public float dashCooldown = 1f;
-    public float dashDamage = 10f;
-    public float dashKnockbackForce = 10f;
 
     [Header("Super Jump")]
     public float superJumpVelocity = 30f;
@@ -45,11 +70,6 @@ public class PlayerData : ScriptableObject
     public float superJumpFallAddForce = 10f;
     public float superJumpFallStartVelocity = -6f;
 
-    [Header("Super Jump Attack")]
-    public float superJumpFireDamage = 30f;
-    public float superJumpFireJumpKnockbackForce = 8f;
-    public float superJumpLandKnockbackForce = 14f;
-    public float superJumpBurnTime = 2f;
 
     [Header("Super Dash")]
     public float maxSuperDashSpeed = 25f;
@@ -59,9 +79,6 @@ public class PlayerData : ScriptableObject
     public float superDashCooldown = 0.75f;
     public float afterSuperDashMultiplier = 0.65f;
     public float targetYOffset = 1f;
-    public float superDashDamage = 10f;
-    public float superDashKnockbackForce = 10f;
-    public float superDashBurnTime = 5f;
 
     [Header("Super Dash Jump")]
     public float superDashJumpVelocity = 10f;
@@ -79,13 +96,11 @@ public class PlayerData : ScriptableObject
     [Header("WindAlt")]
     public float windBulletTimeDuration = 0.2f;
     public float windAltMaxTime = 5f;
-    public float windAltDamage = 20f;
     public float windAltSpeedUpTime = 2.5f;
     public float windAltMaxSpeed = 24f;
     public AnimationCurve windAltSpeedCurve;
 
     [Header("FireAlt")]
-    public float fireAltFireTime = 5f;
 
     [Header("Death and Respawn")]
     public float deathAnimationTime = 2.5f;

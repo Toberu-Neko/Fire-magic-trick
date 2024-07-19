@@ -3,7 +3,7 @@ using UnityEngine;
 public class WindCard : Bullet
 {
     [Header("WindCard")]
-    [SerializeField] private Transform WindCardReturn;
+    [SerializeField] private GameObject windCardReturnPrefab;
 
     //Script
     private TrackSystem trackSystem;
@@ -36,7 +36,8 @@ public class WindCard : Bullet
     protected override void OnHitEnemy()
     {
         base.OnHitEnemy();
-        Instantiate(WindCardReturn, transform.position, Quaternion.identity);
+
+        ObjectPoolManager.SpawnObject(windCardReturnPrefab, transform.position, Quaternion.identity);
     }
     protected override bool NeedHitFeedback()
     {

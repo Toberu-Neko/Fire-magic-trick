@@ -2,17 +2,13 @@ using UnityEngine;
 
 public class SpreadArea : MonoBehaviour
 {
-    private PlayerDamage playerDamage;
-
-    private void Awake()
-    {
-        playerDamage = GetComponent<PlayerDamage>();
-    }
     private void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Enemy"))
         {
-            playerDamage.ToDamageEnemy(other);
+            Debug.LogError("Implment variable");
+            other.TryGetComponent(out IDamageable damageable);
+            damageable?.Damage(5, transform.position);
         }
     }
 }

@@ -154,6 +154,7 @@ public class CardSystem : MonoBehaviour
         }
 
         startShootTime = Time.unscaledTime;
+        InGameUIManager.Instance.CrosshairShooting();
 
         Vector3 aimDir = (targetPosition - frontSpawnPos.position).normalized;
 

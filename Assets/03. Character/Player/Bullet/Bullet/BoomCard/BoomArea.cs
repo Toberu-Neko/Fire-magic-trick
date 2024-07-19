@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Threading.Tasks;
 
+[RequireComponent(typeof(Collider))]
 public class BoomArea : MonoBehaviour
 {
     [Header("Boom Area")]
@@ -9,24 +10,36 @@ public class BoomArea : MonoBehaviour
     [SerializeField] private float forceToEnemy = 30;
     [SerializeField] private float forceToPlayer = 90;
 
-    private Collider coli;
+    private Collider col;
+    private float startTime;
 
-    private void Start()
+    private void Awake()
     {
-        coli = GetComponent<Collider>();
-
-        delayBoom();
-        Destroy(this.gameObject, delay+0.2f);
+        col = GetComponent<Collider>();
     }
-    private async void delayBoom()
-    {
-        await Task.Delay((int)(delay * 1000));
-        if(coli != null)
-        {
-            coli.enabled = true;
 
+    private void OnEnable()
+    {
+        col.enabled = false;
+        DelayExplode();
+        startTime = Time.time;
+    }
+
+    private void Update()
+    {
+        if(Time.time >= delay + 0.2f)
+        {
+            ObjectPoolManager.ReturnObjectToPool(gameObject);
         }
     }
+
+    private async void DelayExplode()
+    {
+        await Task.Delay((int)(delay * 1000));
+
+        col.enabled = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))

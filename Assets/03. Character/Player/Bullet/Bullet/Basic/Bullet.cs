@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
         OnHitSomething();
         SpawnVFX(cardSlashPrefab, transform.position, Quaternion.identity, 1.5f);
         DestroyBullet();
-        CroshairFeedback();
+        InGameUIManager.Instance.HitEnemyEffect();
     }
     protected virtual void OnTriggerEnter(Collider other)
     {
@@ -63,7 +63,7 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
                 OnHitSomething();
                 SpawnVFX(cardSlashPrefab, transform.position, Quaternion.identity, 1.5f);
             }
-            CroshairFeedback();
+            InGameUIManager.Instance.HitEnemyEffect();
         }
     }
     public void OnHitRightNow()
@@ -79,10 +79,6 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
     {
         var hitVFX = Instantiate(obj, pos, rot);
         Destroy(hitVFX, time);
-    }
-    private void CroshairFeedback()
-    {
-        // TODO: crosshairUI.CrosshairHit();
     }
     private void DestroyBullet()
     {

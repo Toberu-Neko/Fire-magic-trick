@@ -9,6 +9,7 @@ public class PlayerVFXController : MonoBehaviour
     [SerializeField] private GameObject windFeetCardVFX;
     [SerializeField] private GameObject superDashVFX;
     [SerializeField] private GameObject canComboVFX;
+    [SerializeField] private GameObject burningVFX;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject deathVFXPrefab;
@@ -37,6 +38,7 @@ public class PlayerVFXController : MonoBehaviour
         floatVFX.SetActive(false);
         windFeetCardVFX.SetActive(false);
         canComboVFX.SetActive(false);
+        burningVFX.SetActive(false);
     }
 
 
@@ -88,5 +90,10 @@ public class PlayerVFXController : MonoBehaviour
     public void SetSuperDashVFX(bool value)
     {
         superDashVFX.SetActive(value);
+    }
+
+    public void SetBurningVFX(bool value)
+    {
+        burningVFX.SetActive(value);
     }
 }

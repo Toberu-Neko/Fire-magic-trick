@@ -73,9 +73,9 @@ public class EnemyHealthSystem : MonoBehaviour
         Stats.OnBurnChanged += Stats_OnBurnChanged;
     }
 
-    private void Stats_OnBurnChanged()
+    private void Stats_OnBurnChanged(bool value)
     {
-        if(Stats.IsBurning)
+        if (value)
         {
             feedbacks_Fire.PlayFeedbacks();
         }

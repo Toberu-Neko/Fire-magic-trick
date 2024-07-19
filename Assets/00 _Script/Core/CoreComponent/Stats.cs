@@ -17,7 +17,7 @@ public class Stats : CoreComponent
 
     [SerializeField] private float burnWhenHealthBelowPercentage = 0.5f;
     public bool IsBurning { get; private set; }
-    public event Action OnBurnChanged;
+    public event Action<bool> OnBurnChanged;
     private float startBurnTime;
     private float burnDuration;
 
@@ -32,12 +32,12 @@ public class Stats : CoreComponent
         Health.Init();
         SetInvincible(false);
 
-        Health.OnValueDecreased += Health_OnValueDecreased;
+        Health.OnValueIncreased += SetInCombatTrue;
     }
 
     private void OnDisable()
     {
-        Health.OnValueDecreased -= Health_OnValueDecreased;
+        Health.OnValueIncreased -= SetInCombatTrue;
     }
 
     public override void LogicUpdate()
@@ -64,11 +64,7 @@ public class Stats : CoreComponent
         }
     }
 
-    private void Health_OnValueDecreased()
-    {
-        startCombatTime = Time.time;
-        InCombat = true;
-    }
+
 
     public void SetOnFire(float time)
     {
@@ -101,12 +97,18 @@ public class Stats : CoreComponent
     private void SetIsBurning(bool value)
     {
         IsBurning = value;
-        OnBurnChanged?.Invoke();
+        OnBurnChanged?.Invoke(value);
     }
 
 
     public void SetInvincible(bool value)
     {
         IsInvincible = value;
+    }
+
+    public void SetInCombatTrue()
+    {
+        startCombatTime = Time.time;
+        InCombat = true;
     }
 }

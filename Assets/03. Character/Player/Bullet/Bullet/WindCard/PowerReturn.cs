@@ -4,7 +4,6 @@ using UnityEngine;
 public class PowerReturn : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
-    [SerializeField] private float absorbDistance = 0.5f;
 
     //variable
     private Transform player;
@@ -42,7 +41,7 @@ public class PowerReturn : MonoBehaviour
                 sys.AddWindCardEnergy();
             }
 
-            Destroy(gameObject);
+            ObjectPoolManager.ReturnObjectToPool(gameObject);
         }
     }
 }

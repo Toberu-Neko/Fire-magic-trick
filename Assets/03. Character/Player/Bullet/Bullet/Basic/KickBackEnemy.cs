@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class KickBackEnemy : MonoBehaviour
 {
+    /*
     //interfate
     private IHitNotifier[] hitNotifier;
 
@@ -21,6 +22,7 @@ public class KickBackEnemy : MonoBehaviour
             }
         }
     }
+
     public void kickBackEnemy(Collision collision)
     {
         if (collision.gameObject.GetComponent<EnemyHealthSystem>() != null)
@@ -48,4 +50,5 @@ public class KickBackEnemy : MonoBehaviour
             }
         }
     }
+    */
 }

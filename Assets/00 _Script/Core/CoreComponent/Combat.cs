@@ -70,6 +70,7 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable, IFlammable
         stats.Health.Decrease(damageAmount);
         OnDamaged?.Invoke();
         OnDamageAmount?.Invoke(damageAmount);
+        stats.SetInCombatTrue();
 
         /*
         if (stats.Health.CurrentValue <= 0)

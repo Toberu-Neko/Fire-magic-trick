@@ -9,12 +9,12 @@ public class BoomCard : Bullet
     {
         base.OnHitEnemy();
 
-        Instantiate(fireRetrun, transform.position, Quaternion.identity);
+        ObjectPoolManager.SpawnObject(fireRetrun, transform.position, Quaternion.identity);
     }
     protected override void OnHitSomething()
     {
         base.OnHitSomething();
 
-        Instantiate(boomArea, transform.position, Quaternion.identity);
+        ObjectPoolManager.SpawnObject(boomArea, transform.position, Quaternion.identity);
     }
 }

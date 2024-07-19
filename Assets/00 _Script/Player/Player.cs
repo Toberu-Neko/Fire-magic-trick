@@ -15,7 +15,6 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     [SerializeField] private GameObject playerModel;
     public Movement Movement { get; private set; }
     public Stats Stats { get; private set; }
-    [SerializeField] private float regenRate = 5f;
 
     [Header("Camera Objects")]
     [SerializeField] private Transform playerCamera;
@@ -114,12 +113,15 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
 
     private void OnEnable()
     {
-        Stats.Health.OnCurrentValueZero += Health_OnCurrentValueZero;
+        Stats.Health.OnCurrentValueZero += HandleHealthZero;
+        Stats.OnBurnChanged += HandleBurnChanged;
     }
+
 
     private void OnDisable()
     {
-        Stats.Health.OnCurrentValueZero -= Health_OnCurrentValueZero;
+        Stats.Health.OnCurrentValueZero -= HandleHealthZero;
+        Stats.OnBurnChanged -= HandleBurnChanged;
     }
 
     private void Start()
@@ -174,9 +176,13 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
             Movement.SetCanSetVelocity(true);
         }
 
-        if (Stats.Health.CurrentValue < Stats.Health.InitValue && regenRate > 0f && !Stats.InCombat)
+        if (Stats.Health.CurrentValue > Stats.Health.InitValue && !Stats.InCombat)
         {
-            Stats.Health.IncreaseUntilInitValue(regenRate * Time.deltaTime);
+            DecreaseHealthUntilInit(Data.healthDecreaseRate * Time.deltaTime);
+        }
+        else if (Stats.IsBurning && !Stats.IsInvincible)
+        {
+            Stats.Health.Decrease(Data.healthDecreaseRateBurning * Time.deltaTime);
         }
     }
 
@@ -296,9 +302,14 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     }
     #endregion
 
-    private void Health_OnCurrentValueZero()
+    private void HandleHealthZero()
     {
         StateMachine.ChangeState(DeathState);
+    }
+
+    private void HandleBurnChanged(bool obj)
+    {
+        VFXController.SetBurningVFX(obj);
     }
 
     public void TeleportToSavepoint()
@@ -312,6 +323,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         playerModel.SetActive(value);
         Stats.SetInvincible(!value);
     }
+
     public void DecreaseHealthUntilInit(float value)
     {
         Stats.Health.DecreaseUntilInitValue(value);

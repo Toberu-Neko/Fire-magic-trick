@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SuperJump : MonoBehaviour
 {
+    /*
     [SerializeField] private ParticleSystem VFX_SuperJumpStart;
     [SerializeField] private float Force = 10f;
 
@@ -37,4 +38,5 @@ public class SuperJump : MonoBehaviour
             rb.AddForce(dir * Force, ForceMode.Impulse);
         }
     }
+    */
 }
