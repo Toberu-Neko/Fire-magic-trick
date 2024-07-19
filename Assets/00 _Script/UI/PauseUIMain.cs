@@ -4,8 +4,9 @@ using UnityEngine;
 public class PauseUIMain : MouseControlUIBase
 {
     [SerializeField] private PauseUI pauseUI;
-    [SerializeField] private SceneReference mainMenuScene;
     [SerializeField] private OptionUI optionUI;
+    [SerializeField] private TeleportUI teleportUI;
+    [SerializeField] private SceneReference mainMenuScene;
 
     private void Awake()
     {
@@ -33,6 +34,13 @@ public class PauseUIMain : MouseControlUIBase
         Time.timeScale = 1;
         DataPersistenceManager.Instance.SaveGame();
         LoadSceneManager.Instance.LoadSceneSingle(mainMenuScene.Name);
+    }
+
+    public void OnTeleportButton()
+    {
+        Deactivate();
+
+        teleportUI.Activate();
     }
 
     public void OnOptionButton()

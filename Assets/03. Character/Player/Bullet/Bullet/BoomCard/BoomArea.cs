@@ -27,7 +27,7 @@ public class BoomArea : MonoBehaviour
 
     private void Update()
     {
-        if(Time.time >= delay + 0.2f)
+        if(Time.time >= startTime + delay + 0.2f)
         {
             ObjectPoolManager.ReturnObjectToPool(gameObject);
         }

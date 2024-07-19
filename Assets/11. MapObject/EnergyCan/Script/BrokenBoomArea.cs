@@ -13,7 +13,7 @@ public class BrokenBoomArea : MonoBehaviour
             other.TryGetComponent(out IFlammable flammable);
             flammable?.SetOnFire(3f);
 
-            Debug.LogError("Haven't implement variable yet");
+            Debug.LogWarning("Haven't implement variable yet");
         }
 
         if(other.CompareTag("EnergyCan"))

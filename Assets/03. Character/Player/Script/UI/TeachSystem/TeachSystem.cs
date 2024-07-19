@@ -16,18 +16,16 @@ public class TeachSystem : MonoBehaviour
     [Header("Input To TMP")]
     [SerializeField][TextArea(5, 10)] private string debugText;
     [Header("Setting")]
-    [SerializeField] private GameObject teachBar;
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private TextMeshProUGUI content;
     [Header("Content")]
-    public TeachSystem_content[] teachSystem_Content;
+    [SerializeField] private TeachSystem_content[] teachSystem_Content;
 
     //Script
     [SerializeField] private GameObject[] Script;
-    private ControllerInput input;
     private PlayerState playerState;
     private HealthSystem healthSystem;
-    private TeachVideo teachVideo;
+    [SerializeField] private TeachVideo teachVideo;
 
     //variable
     private int index = 0;
@@ -41,41 +39,33 @@ public class TeachSystem : MonoBehaviour
     }
     private void Start()
     {
-        input = GameManager.Instance._input;
         playerState = GameManager.Instance.Player.GetComponent<PlayerState>();
         healthSystem = GameManager.Instance.Player.GetComponent<HealthSystem>();
-
-        //Initialization
-        setTeachBar(false);
     }
     private void Update()
     {
-        teachSystem();
-    }
-    private void teachSystem()
-    {
-        if(input !=null)
+        if (isTeach)
         {
-            if(isTeach)
+            if (PlayerInputHandler.Instance.AttackInput)
             {
-                if (input.leftClick)
+                PlayerInputHandler.Instance.UseAttackInput();
+
+                if (canNext)
                 {
-                    if(canNext)
-                    {
-                        DisplayNextSentence();
-                    }
+                    DisplayNextSentence();
                 }
-                if (input.cancel)
-                {
-                    //pauseSystem.StopPause();
-                    CloseTeach();
-                }
+            }
+            if (PlayerInputHandler.Instance.ESCInput)
+            {
+                PlayerInputHandler.Instance.UseESCInput();
+                CloseTeach();
             }
         }
     }
+
     public void OpenTeach(int index)
     {
-        SetIsTeach(true);
+        isTeach = true;
         this.index = index;
         contentIndex = 0;
         
@@ -84,8 +74,8 @@ public class TeachSystem : MonoBehaviour
         healthSystem.SetStoryInvincible(true);
 
         //UI
-        setTeachBar(true);
-        setScriptActiv(false);
+        gameObject.SetActive(true);
+        SetScriptActive(false);
         //pauseSystem.Pause();
 
         //title
@@ -103,9 +93,9 @@ public class TeachSystem : MonoBehaviour
     }
     public void CloseTeach()
     {
-        SetIsTeach(false);
-        setTeachBar(false);
-        setScriptActiv(true);
+        isTeach = false;
+        gameObject.SetActive(false);
+        SetScriptActive(true);
 
         healthSystem.SetStoryInvincible(false);
         playerState.SetUseCameraRotate(true);
@@ -141,11 +131,8 @@ public class TeachSystem : MonoBehaviour
             yield return null;
         }
     }
-    private void setTeachBar(bool active)
-    {
-        teachBar.SetActive(active);
-    }
-    private async void setScriptActiv(bool active)
+
+    private async void SetScriptActive(bool active)
     {
         await Task.Delay(250);
         for(int i=0;i<Script.Length;i++)
@@ -153,10 +140,7 @@ public class TeachSystem : MonoBehaviour
             Script[i].SetActive(active);
         }
     }
-    private void SetIsTeach(bool active)
-    {
-        isTeach = active;
-    }
+
     private void OnValidate()
     {
         string debugText = "";
@@ -173,7 +157,6 @@ public class TeachSystem : MonoBehaviour
     }
     private void OnVideoPrepared(VideoPlayer source)
     {
-        // Video prepared logic
         source.Play(); // 使用 source.Play() 而不是 teachVideo.videoPlayer.Play()
     }
 }

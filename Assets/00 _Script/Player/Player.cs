@@ -73,6 +73,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     public PlayerCantControlState CantControlState { get; private set; }
     public PlayerLoadingState LoadingState { get; private set; }
     private bool firstTimePlaying;
+    private bool loadFinished;
 
     private void Awake()
     {
@@ -80,6 +81,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         cameraWorkspaceV2 = new();
         cameraWorkspaceV2.Set(playerCamera.position.x - transform.position.x, playerCamera.position.z - transform.position.z);
         UseCameraRotate = true;
+        loadFinished = false;
 
         Movement = Core.GetCoreComponent<Movement>();
         Stats = Core.GetCoreComponent<Stats>();
@@ -150,12 +152,9 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
 
     private void HandleFinishLoading()
     {
-        if (firstTimePlaying)
+        if (!loadFinished)
         {
-            LoadingState.SetIsAbilityDone();
-        }
-        else
-        {
+            loadFinished = true;
             StateMachine.ChangeState(RespawnState);
         }
     }

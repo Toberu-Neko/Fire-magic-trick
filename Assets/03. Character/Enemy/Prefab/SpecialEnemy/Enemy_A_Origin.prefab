@@ -22103,7 +22103,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealthSystesm: {fileID: 8032919127870789860}
-  rb: {fileID: 0}
 --- !u!135 &4088897034274328083
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -37336,6 +37335,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3017461486205070196}
   - {fileID: 8032919127487653415}
   - {fileID: 897051314466243144}
   - {fileID: 4088897033122858646}
@@ -37428,18 +37428,7 @@ MonoBehaviour:
   isTeachEnemy: 0
   isOnceEnemy: 0
   isRebirthHide: 0
-  isIgnite: 0
-  isHurt: 0
-  isSteam: 0
-  isFire: 0
-  isShock: 0
   Boom: 0
-  StartHealth: 6
-  health: 6
-  maxHealth: 6
-  ignitionPoint: 5
-  coolingInterval: 2.5
-  coolingTime: 3.5
   _eye: {fileID: 4088897034717893022}
   feedbacks_Steam: {fileID: 4088897033814994014}
   feedbacks_Fire: {fileID: 4088897034492544992}
@@ -37587,7 +37576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  force: 30
+  knockbackForce: 8
   knockBackCoordinate: {fileID: 0}
   isVertical: 0
 --- !u!64 &8032919128011008215
@@ -37913,4 +37902,70 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7408227371839914533, guid: 546ab379c9b84884da8dec36338352b3, type: 3}
   m_PrefabInstance: {fileID: 2139370408}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8686080652333229024
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8032919127870789881}
+    m_Modifications:
+    - target: {fileID: 3511466808713938651, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
+      propertyPath: orgPoint
+      value: 
+      objectReference: {fileID: 8032919127870789881}
+    - target: {fileID: 4531320500229806446, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
+      propertyPath: m_Name
+      value: EnemyCore
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866788888447273108, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866788888447273108, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.091
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866788888447273108, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866788888447273108, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866788888447273108, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866788888447273108, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866788888447273108, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866788888447273108, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866788888447273108, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866788888447273108, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
+--- !u!4 &3017461486205070196 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5866788888447273108, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
+  m_PrefabInstance: {fileID: 8686080652333229024}
   m_PrefabAsset: {fileID: 0}
