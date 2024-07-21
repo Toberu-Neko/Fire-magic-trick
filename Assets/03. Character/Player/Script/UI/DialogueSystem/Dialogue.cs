@@ -16,6 +16,7 @@ public class Dialogue_Content
     [TextArea(3, 10)]
     public string sentences;
     public LocalizedString localizedContent;
+    public bool playFeedback;
     [Header("Feedbacak¡]if so¡^")]
     public MMF_Player feedback;
 }

@@ -7,7 +7,7 @@ public class TimelineController : DataPersistMapObjBase
 
     [Header("Awake會在讀取關卡的瞬間觸發")]
     [SerializeField] private PlayType playType;
-    private enum PlayType { OnColliderEnter, OnEnable }
+    private enum PlayType { OnColliderEnter, OnEnable, OnEvent }
     [SerializeField] private bool playOnce = true;
 
     private void Awake()
@@ -31,6 +31,7 @@ public class TimelineController : DataPersistMapObjBase
         if (isActivated)
         {
             gameObject.SetActive(false);
+            return;
         }
 
         isActivated = true;
@@ -39,7 +40,7 @@ public class TimelineController : DataPersistMapObjBase
         {
             director.Play();
         }
-        else
+        else if(playType == PlayType.OnColliderEnter)
         {
             if (gameObject.GetComponent<Collider>() == null)
             {
@@ -47,13 +48,20 @@ public class TimelineController : DataPersistMapObjBase
                 gameObject.SetActive(false);
                 return;
             }
-
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && playType == PlayType.OnColliderEnter)
+        {
+            director.Play();
+        }
+    }
+
+    public void EventTrigger()
+    {
+        if (playType == PlayType.OnEvent)
         {
             director.Play();
         }

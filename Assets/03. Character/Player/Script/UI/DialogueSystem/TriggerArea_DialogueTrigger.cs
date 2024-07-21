@@ -15,6 +15,8 @@ public class TriggerArea_DialogueTrigger : DataPersistMapObjBase
 
     //Script
     [SerializeField] private SO_Dialogue dialogueSO;
+    [SerializeField] private MMF_Player[] feedbacksDuringDialogue;
+    private int playedFeedbacksIndex = 0;
     public Dialogue dialogue;
     private IPlayerHandler playerHandler;
 
@@ -32,6 +34,17 @@ public class TriggerArea_DialogueTrigger : DataPersistMapObjBase
         {
             gameObject.SetActive(false);
         }
+    }
+
+    private void OnEnable()
+    {
+        InGameUIManager.Instance.OnDisplayNextSentence += HandleDisplayNextSentence;
+        playedFeedbacksIndex = 0;
+    }
+
+    private void OnDisable()
+    {
+        InGameUIManager.Instance.OnDisplayNextSentence -= HandleDisplayNextSentence;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -87,6 +100,15 @@ public class TriggerArea_DialogueTrigger : DataPersistMapObjBase
         if (NeedFeedbacks != null)
         {
             NeedFeedbacks.PlayFeedbacks();
+        }
+    }
+
+    private void HandleDisplayNextSentence()
+    {
+        if (feedbacksDuringDialogue.Length > playedFeedbacksIndex)
+        {
+            feedbacksDuringDialogue[playedFeedbacksIndex].PlayFeedbacks();
+            playedFeedbacksIndex++;
         }
     }
 }

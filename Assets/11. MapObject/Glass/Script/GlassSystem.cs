@@ -2,8 +2,9 @@ using UnityEngine;
 using System.Threading.Tasks;
 using MoreMountains.Feedbacks;
 
-public class GlassSystem : MonoBehaviour
+public class GlassSystem : MonoBehaviour, IDamageable
 {
+    [SerializeField] private bool canBreak = false;
     public enum Mode
     {
         Fast,
@@ -36,9 +37,6 @@ public class GlassSystem : MonoBehaviour
         glassCollider = GetComponent<Collider>();
         glassRender = GetComponent<MeshRenderer>();
     }
-    private void Start()
-    {
-    }
 
     private void OnEnable()
     {
@@ -49,6 +47,7 @@ public class GlassSystem : MonoBehaviour
     {
         GameManager.Instance.OnPlayerReborn -= OnPlayerDeathToRebirthGlass;
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         BrokenCheck_EnemyCrash(collision);
@@ -177,5 +176,16 @@ public class GlassSystem : MonoBehaviour
     private void SetCanSuperJump(bool active)
     {
         canSuperJump = active;
+    }
+
+    public void Damage(float damageAmount, Vector3 damagePosition, bool trueDamage = false)
+    {
+        Debug.Log("Damage");
+        BrokenSuperFast();
+    }
+
+    public GameObject GetGameObject()
+    {
+        return this.gameObject;
     }
 }

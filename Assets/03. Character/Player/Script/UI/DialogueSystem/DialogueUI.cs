@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Localization.Components;
+using System;
 
 public class DialogueUI : MonoBehaviour
 {
@@ -14,22 +15,16 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
 
     private Queue<Dialogue_Content> contents;
+    public Action OnDisplayNextSentence;
 
     //variables
     private bool isDialogueActive;
     private bool isDialogueAuto;
     private bool canNext = true;
-    private void Start()
-    {
-        contents = new Queue<Dialogue_Content>();
-
-        canNext = true;
-        isDialogueActive = false;
-    }
 
     private void Update()
     {
-        if (!isDialogueActive)
+        if (isDialogueActive && !isDialogueAuto)
         {
             if(PlayerInputHandler.Instance.AttackInput)
             {
@@ -77,7 +72,7 @@ public class DialogueUI : MonoBehaviour
     {
         ToNextTimerCooling();
 
-        if(contents.Count == 0)
+        if (contents.Count == 0)
         {
             EndDialogue();
             return;
@@ -86,7 +81,9 @@ public class DialogueUI : MonoBehaviour
         Dialogue_Content content = contents.Dequeue();
         nameText.StringReference = content.localizedName;
         characterIcon.sprite = content.CharacterIcon;
-        if(content.feedback != null) content.feedback.PlayFeedbacks();
+
+        InGameUIManager.Instance.DisplayNextSentence();
+
         StopAllCoroutines();
         StartCoroutine(TypeSentence(content.localizedContent.GetLocalizedString()));
     }
@@ -100,6 +97,7 @@ public class DialogueUI : MonoBehaviour
             yield return null;
         }
     }
+
     private void ToNextTimerCooling()
     {
         canNext = false;
@@ -119,30 +117,25 @@ public class DialogueUI : MonoBehaviour
         nameText.StringReference = dialogue.contents[0].localizedName;
         characterIcon.sprite = dialogue.contents[0].CharacterIcon;
 
-        contents.Clear();
-
         foreach (Dialogue_Content content in dialogue.contents)
         {
             contents.Enqueue(content);
         }
+
+        Debug.Log(contents.Count);
 
         DisplayNextSentence();
     }
 
     private void EndDialogue()
     {
-        InGameUIManager.Instance.DialogueEnd();
-
-        if (gameObject.activeSelf == true)
-        {
-            gameObject.SetActive(false);
-        }
-        if(isDialogueAuto)
-        {
-            isDialogueAuto = false;
-            return;
-        }
+        gameObject.SetActive(false);
+        isDialogueAuto = false;
         isDialogueActive = false;
+        canNext = true;
+
+
+        InGameUIManager.Instance.DialogueEnd();
     }
 
 }

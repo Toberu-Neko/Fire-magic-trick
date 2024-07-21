@@ -8,6 +8,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] private CrosshairUI crosshairUI;
     [SerializeField] private DialogueUI dialogueUI;
 
+    public event Action OnDisplayNextSentence;
     public event Action OnDialogueEnd;
 
     private void Awake()
@@ -42,6 +43,11 @@ public class InGameUIManager : MonoBehaviour
     public void DialogueEnd()
     {
         OnDialogueEnd?.Invoke();
+    }
+
+    public void DisplayNextSentence()
+    {
+        OnDisplayNextSentence?.Invoke();
     }
 
     public void CrosshairShooting()
