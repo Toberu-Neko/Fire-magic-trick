@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerDeathState : PlayerFSMBaseState
 {
+    public bool InState { get; private set; }
     public PlayerDeathState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -12,12 +13,13 @@ public class PlayerDeathState : PlayerFSMBaseState
     {
         base.Enter();
 
+        InState = true;
         movement.SetGravityZero();
-        player.SetColliderAndModel(false);
+        player.SetCollider(true);
+        player.SetModel(false);
         player.ChangeActiveCam(Player.ActiveCamera.Death);
         player.VFXController.ActivateDeathVFX();
 
-        //TODO: BlackUI
         UIManager.Instance.ActivateDeathUI();
     }
 
@@ -37,9 +39,12 @@ public class PlayerDeathState : PlayerFSMBaseState
     {
         base.Exit();
 
+        InState = false;
         player.SetColliderAndModel(true);
         movement.SetGravityOrginal();
 
         UIManager.Instance.DeactivateDeathUI();
     }
+
+    public bool CheckInState() => InState;
 }

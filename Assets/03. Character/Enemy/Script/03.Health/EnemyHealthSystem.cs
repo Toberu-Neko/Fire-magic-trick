@@ -94,7 +94,10 @@ public class EnemyHealthSystem : MonoBehaviour
 
     private void Health_OnValueDecreased()
     {
-        bt.SendEvent("HitByPlayer");
+        if (bt != null)
+        {
+            bt.SendEvent("HitByPlayer");
+        }
         OnEnemyHit?.Invoke();
 
         if (_fireSystem != null)

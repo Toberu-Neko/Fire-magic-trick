@@ -303,7 +303,10 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
 
     private void HandleHealthZero()
     {
-        StateMachine.ChangeState(DeathState);
+        if (!DeathState.CheckInState())
+        {
+            StateMachine.ChangeState(DeathState);
+        }
     }
 
     private void HandleBurnChanged(bool obj)
@@ -313,7 +316,8 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
 
     public void TeleportToSavepoint()
     {
-        transform.position = RespawnPosition;
+        Debug.Log("Teleporting to savepoint");
+        Teleport(RespawnPosition);
     }
 
     public void SetColliderAndModel(bool value)
@@ -373,6 +377,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
             return;
         RespawnPosition = data.playerRespawnPosition;
         firstTimePlaying = data.firstTimePlaying;
+        Debug.Log("LoadDataInPlayer");
         Teleport(RespawnPosition);
     }
 

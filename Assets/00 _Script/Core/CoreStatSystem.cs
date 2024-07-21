@@ -54,6 +54,8 @@ public class CoreStatSystem
     {
         CurrentValue = InitValue;
         OnValueChanged?.Invoke();
+        OnValueIncreased?.Invoke();
+        OnValueDecreased?.Invoke();
     }
 
 

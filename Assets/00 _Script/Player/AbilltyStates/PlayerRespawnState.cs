@@ -12,8 +12,9 @@ public class PlayerRespawnState : PlayerAbilityState
     {
         base.Enter();
 
+        player.SetCollider(true);
+        player.SetModel(false);
         player.TeleportToSavepoint();
-        player.SetColliderAndModel(false);
         player.ChangeActiveCam(Player.ActiveCamera.Normal);
         player.VFXController.ActivateRespawnVFX();
 

@@ -21,7 +21,7 @@ Shader "Slash/BlendDistortionCutout"
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
-#pragma multi_compile_particles
+			#pragma multi_compile_particles
 			#pragma multi_compile_fog
 			#pragma shader_feature USE_ALPHA_CUTOUT
 			

@@ -21,6 +21,7 @@ public class PlayerLoadScene : MonoBehaviour
         {
             if (!isLoaded)
             {
+                Debug.Log("Load Scene " + loadScene.Name);
                 LoadSceneManager.Instance.LoadSceneAdditive(loadScene.Name);
                 isLoaded = true;
             }
@@ -34,6 +35,7 @@ public class PlayerLoadScene : MonoBehaviour
         {
             if (isLoaded)
             {
+                Debug.Log("Unload Scene " + loadScene.Name);
                 LoadSceneManager.Instance.UnloadSceneAdditive(loadScene.Name);
                 isLoaded = false;
             }
