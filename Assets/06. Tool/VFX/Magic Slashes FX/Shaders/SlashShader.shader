@@ -56,6 +56,7 @@ Shader "Slash/BlendDistortionCutout"
 			float4 _DistStrength;
 			float _SoftFade;
 			sampler2D _CameraDepthTexture;
+			float _UnscaledTime;
 
 			
 			v2f vert (appdata v)
@@ -83,7 +84,7 @@ Shader "Slash/BlendDistortionCutout"
 				fade = saturate(_SoftFade * (sceneZ - partZ));
 				fade = _SoftFade > 0.01 ? fade : 1;
 #endif
-				half2 distort = tex2D(_DistTex, i.uvDistort + _Time.x * _DistStrength.zw) * _DistStrength.xy;
+				half2 distort = tex2D(_DistTex, i.uvDistort + _UnscaledTime * _DistStrength.zw) * _DistStrength.xy;
 
 				fixed4 col = tex2D(_MainTex, i.uv + i.rotation + distort);
 				col = 2 * col * _TintColor * i.color;
