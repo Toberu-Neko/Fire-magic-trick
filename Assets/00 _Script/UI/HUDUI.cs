@@ -4,6 +4,13 @@ using UnityEngine;
 public class HUDUI : MonoBehaviour
 {
     [SerializeField] private CrosshairUI crosshairUI;
+    [SerializeField] private TeachFloat teachFloatUI;
+
+    private void Awake()
+    {
+        crosshairUI.SetCrossWhite();
+        teachFloatUI.gameObject.SetActive(false);
+    }
 
     public void SetCrossRed()
     {
@@ -23,6 +30,16 @@ public class HUDUI : MonoBehaviour
     public void HitEnemyEffect()
     {
         crosshairUI.HitEffextOn();
+    }
+
+    public void OpenTeachFloat(TeachFloat.types type)
+    {
+        teachFloatUI.Open(type);
+    }
+
+    public void CloseTeachFloat(TeachFloat.types type)
+    {
+        teachFloatUI.Close(type);
     }
 
     public void Activate()

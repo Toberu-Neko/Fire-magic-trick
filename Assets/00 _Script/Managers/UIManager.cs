@@ -120,6 +120,16 @@ public class UIManager : MonoBehaviour
     {
         hudUI.Deactivate();
     }
+
+    public void OpenTeachFloat(TeachFloat.types type)
+    {
+        hudUI.OpenTeachFloat(type);
+    }
+
+    public void CloseTeachFloat(TeachFloat.types type)
+    {
+        hudUI.CloseTeachFloat(type);
+    }
     #endregion
 
     #region Dialogue

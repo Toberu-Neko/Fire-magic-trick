@@ -7,13 +7,6 @@ public class TeachFloat : MonoBehaviour
     [SerializeField] private GameObject JumpWeakest;
     [SerializeField] private GameObject ElementSkill;
 
-    private void Start()
-    {
-        UI_SuperJump.SetActive(false);
-        DashState.SetActive(false);
-        JumpWeakest.SetActive(false);
-        ElementSkill.SetActive(false);
-    }
     public enum types
     {
         SuperJump,
@@ -23,11 +16,13 @@ public class TeachFloat : MonoBehaviour
     }
     public void Open(types type)
     {
+        gameObject.SetActive(true);
         GameObject obj = ChooseObj(type);
         obj.SetActive(true);
     }
     public void Close(types type)
     {
+        gameObject.SetActive(false);
         GameObject obj = ChooseObj(type);
         obj.SetActive(false);
     }
