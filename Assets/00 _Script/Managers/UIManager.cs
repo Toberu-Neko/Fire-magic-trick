@@ -42,7 +42,9 @@ public class UIManager : MonoBehaviour
         {
             PlayerInputHandler.Instance.UseESCInput();
 
-            if (!pauseUI.gameObject.activeInHierarchy)
+            if (!pauseUI.gameObject.activeInHierarchy &&
+                !teachUI.gameObject.activeInHierarchy &&
+                !dialogueUI.gameObject.activeInHierarchy)
             {
                 pauseUI.Activate();
             }

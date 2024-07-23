@@ -25,7 +25,14 @@ public class Movement : CoreComponent
         RB = GetComponentInParent<Rigidbody>();
         collisionSenses = core.GetCoreComponent<CollisionSenses>();
 
-        useGravity = RB.useGravity;
+        if (RB != null)
+        {
+            useGravity = RB.useGravity;
+        }
+        else
+        {
+            useGravity = false;
+        }
     }
 
     private void OnEnable()

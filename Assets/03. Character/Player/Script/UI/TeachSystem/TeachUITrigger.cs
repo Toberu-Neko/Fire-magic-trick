@@ -37,24 +37,24 @@ public class TeachUITrigger : DataPersistMapObjBase
     {
         if(other.CompareTag("Player"))
         {
-            if (!isTrigger)
+            if (!isActivated)
             {
                 other.TryGetComponent(out playerHandler);
                 playerHandler?.GotoCantControlState();
 
                 UIManager.Instance.ActivateTeachUI(index);
 
-                if (!canTeachMutipleTimes) isTrigger = true;
+                if (!canTeachMutipleTimes) isActivated = true;
             }
         }
     }
 
     public void TriggerThisTeach()
     {
-        if (!isTrigger)
+        if (!isActivated)
         {
             UIManager.Instance.ActivateTeachUI(index);
-            isTrigger = true;
+            if (!canTeachMutipleTimes) isActivated = true;
         }
     }
 }

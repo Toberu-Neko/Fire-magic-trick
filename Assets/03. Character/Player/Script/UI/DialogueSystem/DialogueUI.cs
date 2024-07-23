@@ -122,8 +122,6 @@ public class DialogueUI : MonoBehaviour
             contents.Enqueue(content);
         }
 
-        Debug.Log(contents.Count);
-
         DisplayNextSentence();
     }
 
@@ -133,7 +131,6 @@ public class DialogueUI : MonoBehaviour
         isDialogueAuto = false;
         isDialogueActive = false;
         canNext = true;
-
 
         UIManager.Instance.DialogueEnd();
     }

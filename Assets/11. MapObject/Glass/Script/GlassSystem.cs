@@ -4,7 +4,6 @@ using MoreMountains.Feedbacks;
 
 public class GlassSystem : MonoBehaviour, IDamageable
 {
-    [SerializeField] private bool canBreak = false;
     public enum Mode
     {
         Fast,
@@ -34,6 +33,12 @@ public class GlassSystem : MonoBehaviour, IDamageable
 
     private void Awake()
     {
+        if (!canCrash)
+        {
+            enabled = false;
+            return;
+        }
+
         glassCollider = GetComponent<Collider>();
         glassRender = GetComponent<MeshRenderer>();
     }

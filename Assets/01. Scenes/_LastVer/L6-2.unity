@@ -1564,6 +1564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e814aa56885ce5489d4ef97b4629b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canBreak: 0
   mode: 0
   feedbacks_Broken: {fileID: 321312785}
   fastTime: 0.5
@@ -1585,6 +1586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e814aa56885ce5489d4ef97b4629b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canBreak: 0
   mode: 0
   feedbacks_Broken: {fileID: 292696037}
   fastTime: 0.5
@@ -3606,6 +3608,10 @@ PrefabInstance:
       propertyPath: isAddedID
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1651406178690184203, guid: 8cf03071989392943a10a1bc0676fc2b, type: 3}
+      propertyPath: dialogueSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 12a4540bdf3d474448d80dea2cd51494, type: 2}
     - target: {fileID: 1651406178690184203, guid: 8cf03071989392943a10a1bc0676fc2b, type: 3}
       propertyPath: OnceAutoTime
       value: 2.5

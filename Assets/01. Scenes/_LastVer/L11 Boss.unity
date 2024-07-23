@@ -63782,6 +63782,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1651406178690184203, guid: 8cf03071989392943a10a1bc0676fc2b, type: 3}
+      propertyPath: dialogueSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 74f2635d825a5044ab4ca740f55f1f95, type: 2}
+    - target: {fileID: 1651406178690184203, guid: 8cf03071989392943a10a1bc0676fc2b, type: 3}
       propertyPath: OnceAutoTime
       value: 1.5
       objectReference: {fileID: 0}
@@ -63817,6 +63821,38 @@ PrefabInstance:
       propertyPath: dialogue.contents.Array.data[1].CharacterIcon
       value: 
       objectReference: {fileID: 21300000, guid: 24edca89c6410be4385ac2b53b64f4f2, type: 3}
+    - target: {fileID: 1651406178690184203, guid: 8cf03071989392943a10a1bc0676fc2b, type: 3}
+      propertyPath: dialogue.contents.Array.data[0].localizedName.m_TableEntryReference.m_KeyId
+      value: 400762871808
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651406178690184203, guid: 8cf03071989392943a10a1bc0676fc2b, type: 3}
+      propertyPath: dialogue.contents.Array.data[1].localizedName.m_TableEntryReference.m_KeyId
+      value: 400762871808
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651406178690184203, guid: 8cf03071989392943a10a1bc0676fc2b, type: 3}
+      propertyPath: dialogue.contents.Array.data[0].localizedContent.m_TableEntryReference.m_KeyId
+      value: 60097306624
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651406178690184203, guid: 8cf03071989392943a10a1bc0676fc2b, type: 3}
+      propertyPath: dialogue.contents.Array.data[1].localizedContent.m_TableEntryReference.m_KeyId
+      value: 100496842752
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651406178690184203, guid: 8cf03071989392943a10a1bc0676fc2b, type: 3}
+      propertyPath: dialogue.contents.Array.data[0].localizedName.m_TableReference.m_TableCollectionName
+      value: GUID:1dfca45bb2868d64b9183d55d37c8704
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651406178690184203, guid: 8cf03071989392943a10a1bc0676fc2b, type: 3}
+      propertyPath: dialogue.contents.Array.data[1].localizedName.m_TableReference.m_TableCollectionName
+      value: GUID:1dfca45bb2868d64b9183d55d37c8704
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651406178690184203, guid: 8cf03071989392943a10a1bc0676fc2b, type: 3}
+      propertyPath: dialogue.contents.Array.data[0].localizedContent.m_TableReference.m_TableCollectionName
+      value: GUID:bc8f7d89131745e4ea679434068315f6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651406178690184203, guid: 8cf03071989392943a10a1bc0676fc2b, type: 3}
+      propertyPath: dialogue.contents.Array.data[1].localizedContent.m_TableReference.m_TableCollectionName
+      value: GUID:bc8f7d89131745e4ea679434068315f6
+      objectReference: {fileID: 0}
     - target: {fileID: 1651406178690184212, guid: 8cf03071989392943a10a1bc0676fc2b, type: 3}
       propertyPath: m_Name
       value: TriggerArea Auto OnBossFight

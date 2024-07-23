@@ -18,6 +18,7 @@ public class PlayerCantControlState : PlayerAbilityState
         }
         stats.SetInvincible(true);
         player.UseCameraRotate = false;
+        player.InAirState.SetIsJumpingFalse();
     }
 
     public override void LogicUpdate()
@@ -26,7 +27,15 @@ public class PlayerCantControlState : PlayerAbilityState
 
         if (collisionSenses.Ground)
         {
+            player.Anim.SetBool("idle", true);
+            player.Anim.SetBool("inAir", false);
             movement.SetVelocityZero();
+        }
+        else
+        {
+            player.Anim.SetBool("idle", false);
+            player.Anim.SetBool("inAir", true);
+            player.Anim.SetTrigger("land");
         }
     }
 

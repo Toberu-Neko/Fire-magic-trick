@@ -116,7 +116,7 @@ public class PlayerInAirState : PlayerFSMBaseState
             maxYVelocity = movement.CurrentVelocity.y;
         }
 
-        if (collisionSenses.Ground && !IsJumping && !collisionSenses.Slope.ExceedsMaxSlopeAngle)
+        if (collisionSenses.Ground && !IsJumping)
         {
             if(movement.CurrentVelocity.y < -1f)
             {
@@ -256,6 +256,12 @@ public class PlayerInAirState : PlayerFSMBaseState
 
         IsJumping = true;
     }
+
+    public void SetIsJumpingFalse()
+    {
+        IsJumping = false;
+    }
+
     public void StartCoyoteTime()
     {
         coyoteTime = true;

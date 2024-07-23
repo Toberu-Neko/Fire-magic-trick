@@ -5120,6 +5120,7 @@ GameObject:
   - component: {fileID: 3516421921178200367}
   - component: {fileID: 1028269271}
   - component: {fileID: 3579450611693673351}
+  - component: {fileID: 6416897411661924123}
   m_Layer: 14
   m_Name: Enemy_B
   m_TagString: Enemy
@@ -5468,6 +5469,18 @@ MonoBehaviour:
   looping: 0
   currentWaypointIndex: 0
   currentWaypoint: {fileID: 0}
+--- !u!114 &6416897411661924123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402972569165973743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3505bcff0cd4cd94a9ec7d97b3a01428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1402972569454198479
 GameObject:
   m_ObjectHideFlags: 0
@@ -30784,6 +30797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7739754362820939733, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
+    - {fileID: 1394898659689395196, guid: 5aac5ea5cf492fe4c92929e0ebb62804, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -34,11 +34,9 @@ public class TimelineController : DataPersistMapObjBase
             return;
         }
 
-        isActivated = true;
-
         if (playType == PlayType.OnEnable)
         {
-            director.Play();
+            PlayDirector();
         }
         else if(playType == PlayType.OnColliderEnter)
         {
@@ -55,7 +53,7 @@ public class TimelineController : DataPersistMapObjBase
     {
         if (other.CompareTag("Player") && playType == PlayType.OnColliderEnter)
         {
-            director.Play();
+            PlayDirector();
         }
     }
 
@@ -63,8 +61,14 @@ public class TimelineController : DataPersistMapObjBase
     {
         if (playType == PlayType.OnEvent)
         {
-            director.Play();
+            PlayDirector();
         }
+    }
+
+    private void PlayDirector()
+    {
+        director.Play();
+        isActivated = true;
     }
 
 
