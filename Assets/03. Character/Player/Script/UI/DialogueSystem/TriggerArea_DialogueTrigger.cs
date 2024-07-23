@@ -38,13 +38,13 @@ public class TriggerArea_DialogueTrigger : DataPersistMapObjBase
 
     private void OnEnable()
     {
-        InGameUIManager.Instance.OnDisplayNextSentence += HandleDisplayNextSentence;
+        UIManager.Instance.OnDisplayNextSentence += HandleDisplayNextSentence;
         playedFeedbacksIndex = 0;
     }
 
     private void OnDisable()
     {
-        InGameUIManager.Instance.OnDisplayNextSentence -= HandleDisplayNextSentence;
+        UIManager.Instance.OnDisplayNextSentence -= HandleDisplayNextSentence;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -70,14 +70,14 @@ public class TriggerArea_DialogueTrigger : DataPersistMapObjBase
         {
             if (useAuto)
             {
-                InGameUIManager.Instance.StartDialogue(dialogueSO, OnceAutoTime);
+                UIManager.Instance.StartDialogue(dialogueSO, OnceAutoTime);
             }
             else
             {
-                InGameUIManager.Instance.StartDialogue(dialogueSO);
+                UIManager.Instance.StartDialogue(dialogueSO);
             }
 
-            InGameUIManager.Instance.OnDialogueEnd += DialogueEnd;
+            UIManager.Instance.OnDialogueEnd += DialogueEnd;
 
             if (triggerOnce)
             {
@@ -89,7 +89,7 @@ public class TriggerArea_DialogueTrigger : DataPersistMapObjBase
 
     private void DialogueEnd()
     {
-        InGameUIManager.Instance.OnDialogueEnd -= DialogueEnd;
+        UIManager.Instance.OnDialogueEnd -= DialogueEnd;
         DataPersistenceManager.Instance.SaveGame();
 
         if (!useAuto)

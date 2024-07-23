@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
         OnHitSomething();
         SpawnVFX(cardSlashPrefab, transform.position, Quaternion.identity, 1.5f);
         DestroyBullet();
-        InGameUIManager.Instance.HitEnemyEffect();
+        UIManager.Instance.HitEnemyEffect();
     }
     protected virtual void OnTriggerEnter(Collider other)
     {
@@ -64,7 +64,7 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
                 OnHitSomething();
                 SpawnVFX(cardSlashPrefab, transform.position, Quaternion.identity, 1.5f);
             }
-            InGameUIManager.Instance.HitEnemyEffect();
+            UIManager.Instance.HitEnemyEffect();
         }
     }
     public void OnHitRightNow()

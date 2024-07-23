@@ -118,7 +118,10 @@ public class PlayerInAirState : PlayerFSMBaseState
 
         if (collisionSenses.Ground && !IsJumping && !collisionSenses.Slope.ExceedsMaxSlopeAngle)
         {
-            player.Anim.SetTrigger("land");
+            if(movement.CurrentVelocity.y < -1f)
+            {
+                player.Anim.SetTrigger("land");
+            }
 
             if (inAirMovementSpeed < playerData.slowRunSpeed && MovementInput != Vector2.zero)
             {

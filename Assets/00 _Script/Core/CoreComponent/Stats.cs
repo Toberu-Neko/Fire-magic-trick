@@ -8,7 +8,6 @@ public class Stats : CoreComponent
     // 0 = Die, < 100 = burn,  100 = Normal, 200 = NoSkill
     [field: SerializeField] public CoreStatSystem Health { get; private set; }
 
-    [SerializeField] private float healthRegenPerSec = 0f;
 
     public bool IsInvincible { get; private set; }
     public bool InCombat { get; private set; }
@@ -16,6 +15,8 @@ public class Stats : CoreComponent
     private float startCombatTime;
 
     [SerializeField] private float burnWhenHealthBelowPercentage = 0.5f;
+    [Header("This is not for Player")]
+    [SerializeField] private float healthRegenPerSec = 0f;
     public bool IsBurning { get; private set; }
     public event Action<bool> OnBurnChanged;
     private float startBurnTime;
@@ -63,8 +64,6 @@ public class Stats : CoreComponent
             BurnCheck();
         }
     }
-
-
 
     public void SetOnFire(float time)
     {

@@ -49,7 +49,7 @@ public class Bullet_Normal : MonoBehaviour
 
             GameObject enemyhit = Instantiate(hitEnemyPrefab, pos, rot);
             Destroy(enemyhit, 1f);
-            InGameUIManager.Instance.HitEnemyEffect();
+            UIManager.Instance.HitEnemyEffect();
         }
 
         NewHit(pos, rot);

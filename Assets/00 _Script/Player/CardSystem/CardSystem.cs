@@ -129,20 +129,20 @@ public class CardSystem : MonoBehaviour
             {
                 HasSuperDashTarget = true;
                 SuperDashTarget = superDashHit.transform;
-                InGameUIManager.Instance.SetCrossRed();
+                UIManager.Instance.SetCrossRed();
             }
             else
             {
                 HasSuperDashTarget = false;
                 SuperDashTarget = null;
-                InGameUIManager.Instance.SetCrossWhite();
+                UIManager.Instance.SetCrossWhite();
             }
         }
         else
         {
             HasSuperDashTarget = false;
             SuperDashTarget = null;
-            InGameUIManager.Instance.SetCrossWhite();
+            UIManager.Instance.SetCrossWhite();
         }
     }
 
@@ -154,7 +154,7 @@ public class CardSystem : MonoBehaviour
         }
 
         startShootTime = Time.unscaledTime;
-        InGameUIManager.Instance.CrosshairShooting();
+        UIManager.Instance.CrosshairShooting();
 
         Vector3 aimDir = (targetPosition - frontSpawnPos.position).normalized;
 

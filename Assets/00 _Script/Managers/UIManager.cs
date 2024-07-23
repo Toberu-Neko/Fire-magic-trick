@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem.UI;
 
@@ -6,8 +7,16 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     [SerializeField] private InputSystemUIInputModule inputSystemUIInputModule;
+    [SerializeField] private HUDUI hudUI;
     [SerializeField] private PauseUI pauseUI;
     [SerializeField] private DeathUI deathUI;
+
+    [SerializeField] private TeachUI teachUI;
+    public event Action OnTeachEnd;
+
+    [SerializeField] private DialogueUI dialogueUI;
+    public event Action OnDisplayNextSentence;
+    public event Action OnDialogueEnd;
 
     private void Awake()
     {
@@ -64,6 +73,69 @@ public class UIManager : MonoBehaviour
     {
         pauseUI.Deactivate();
     }
+
+    public void ActivateTeachUI(int index)
+    {
+       teachUI.OpenTeach(index);
+    }
+
+    public void OnDecativateTeachUI()
+    {
+        OnTeachEnd?.Invoke();
+    }
+
+    #region HUD
+    public void SetCrossRed()
+    {
+        hudUI.SetCrossRed();
+    }
+
+    public void SetCrossWhite()
+    {
+        hudUI.SetCrossWhite();
+    }
+
+    public void CrosshairShooting()
+    {
+        hudUI.CrosshairShooting();
+    }
+
+    public void HitEnemyEffect()
+    {
+        hudUI.HitEnemyEffect();
+    }
+
+    public void ActivateHUD()
+    {
+        hudUI.Activate();
+    }
+
+    public void DeactivateHUD()
+    {
+        hudUI.Deactivate();
+    }
+    #endregion
+
+    #region Dialogue
+    public void StartDialogue(SO_Dialogue dialogue)
+    {
+        dialogueUI.StartDialogue(dialogue);
+    }
+    public void StartDialogue(SO_Dialogue dialogue, float time)
+    {
+        dialogueUI.StartDialogue(dialogue, time);
+    }
+
+    public void DialogueEnd()
+    {
+        OnDialogueEnd?.Invoke();
+    }
+
+    public void DisplayNextSentence()
+    {
+        OnDisplayNextSentence?.Invoke();
+    }
+    #endregion
 
     public bool IsDeathUIOpenFinished()
     {

@@ -82,7 +82,7 @@ public class DialogueUI : MonoBehaviour
         nameText.StringReference = content.localizedName;
         characterIcon.sprite = content.CharacterIcon;
 
-        InGameUIManager.Instance.DisplayNextSentence();
+        UIManager.Instance.DisplayNextSentence();
 
         StopAllCoroutines();
         StartCoroutine(TypeSentence(content.localizedContent.GetLocalizedString()));
@@ -135,7 +135,7 @@ public class DialogueUI : MonoBehaviour
         canNext = true;
 
 
-        InGameUIManager.Instance.DialogueEnd();
+        UIManager.Instance.DialogueEnd();
     }
 
 }
