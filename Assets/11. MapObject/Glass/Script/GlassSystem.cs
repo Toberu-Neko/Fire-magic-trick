@@ -41,14 +41,10 @@ public class GlassSystem : MonoBehaviour, IDamageable
 
         glassCollider = GetComponent<Collider>();
         glassRender = GetComponent<MeshRenderer>();
-    }
-
-    private void OnEnable()
-    {
         GameManager.Instance.OnPlayerReborn += OnPlayerDeathToRebirthGlass;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         GameManager.Instance.OnPlayerReborn -= OnPlayerDeathToRebirthGlass;
     }
@@ -124,7 +120,7 @@ public class GlassSystem : MonoBehaviour, IDamageable
     }
     public void GlassRebirth()
     {
-        if(isBrokenFoever)
+        if(!isBrokenFoever)
         {
             SetIsBroken(false);
             SetGlass(true);

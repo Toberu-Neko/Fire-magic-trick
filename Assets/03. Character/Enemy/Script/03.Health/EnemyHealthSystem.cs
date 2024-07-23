@@ -71,6 +71,9 @@ public class EnemyHealthSystem : MonoBehaviour
         Stats.Health.OnValueDecreased += Health_OnValueDecreased;
         Stats.Health.OnValueChanged += Health_OnValueChanged;
         Stats.OnBurnChanged += Stats_OnBurnChanged;
+
+        StartPosition = this.transform.position;
+        StartRotation = this.transform.rotation;
     }
 
     private void Stats_OnBurnChanged(bool value)
@@ -90,6 +93,13 @@ public class EnemyHealthSystem : MonoBehaviour
         Stats.Health.OnValueDecreased -= Health_OnValueDecreased;
         Stats.Health.OnValueChanged -= Health_OnValueChanged;
         Stats.OnBurnChanged -= Stats_OnBurnChanged;
+
+    }
+
+    private void OnDestroy()
+    {
+
+        GameManager.Instance.OnPlayerReborn -= RebirthSelf;
     }
 
     private void Health_OnValueDecreased()
@@ -114,8 +124,7 @@ public class EnemyHealthSystem : MonoBehaviour
     private void Start()
     {
         bt = GetComponent<BehaviorTree>();
-        StartPosition = this.transform.position;
-        StartRotation = this.transform.rotation;
+        GameManager.Instance.OnPlayerReborn += RebirthSelf;
     }
 
     private void Update()
@@ -247,10 +256,9 @@ public class EnemyHealthSystem : MonoBehaviour
     public void Rebirth(Vector3 position, Quaternion rotation)
     {
         OnEnemyRebirth?.Invoke();
-        this.transform.position = position;
-        this.transform.rotation = rotation;
+        transform.position = position;
+        transform.rotation = rotation;
         Initialization();
-        return;
     }
     private void RebirthSelf()
     {
@@ -267,7 +275,12 @@ public class EnemyHealthSystem : MonoBehaviour
             this.gameObject.SetActive(false);
             return;
         }
+
         EnemyAggroSystem aggroSystem = GetComponent<EnemyAggroSystem>();
+
+        Stats.Health.Init();
+        gameObject.SetActive(true);
+
         if (aggroSystem != null)
         {
             aggroSystem.CleanAggroTarget();
