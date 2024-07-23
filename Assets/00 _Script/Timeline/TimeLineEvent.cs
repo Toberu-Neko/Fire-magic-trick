@@ -2,47 +2,69 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 常用Timeline事件
+/// </summary>
 public class TimeLineEvent : MonoBehaviour
 {
     [SerializeField] private Transform teleportTransform;
-    private IPlayerHandler player;
+    private IPlayerHandler playerInterface;
 
     private void Start()
     {
-        player = GameManager.Instance.Player.GetComponent<IPlayerHandler>();
+        playerInterface = GameManager.Instance.Player.GetComponent<IPlayerHandler>();
     }
 
     public void OnStart()
     {
+        // 開始播放時取消玩家控制，並取消抬頭顯示
+        UIManager.Instance.DeactivateHUD();
+        DisablePlayerControl();
     }
 
     public void OnComplete()
     {
+        UIManager.Instance.ActivateHUD();
+        EnablePlayerControl();
     }
 
     public void EnablePlayerControl()
     {
-        player.FinishCantControlState();
+        playerInterface.FinishCantControlState();
     }
 
     public void DisablePlayerControl()
     {
-        player.GotoCantControlState();
+        playerInterface.GotoCantControlState();
     }
 
     public void DisablePlayerModel()
     {
-        player.SetModel(false);
+        playerInterface.SetModel(false);
     }
 
     public void EnablePlayerModel()
     {
-        player.SetModel(true);
+        playerInterface.SetModel(true);
     }
 
     public void GotoAfterSuperDashJumpState()
     {
-        player.GotoAfterSuperDashJumpState();
+        playerInterface.GotoAfterSuperDashJumpState();
+    }
+
+    public void ActivateTeach(int index)
+    {
+        // 觸發教學並取消玩家控制
+        UIManager.Instance.ActivateTeachUI(index);
+        UIManager.Instance.OnTeachEnd += HandleTeachEnd;
+        playerInterface.GotoCantControlState();
+    }
+
+    private void HandleTeachEnd()
+    {
+        UIManager.Instance.OnTeachEnd -= HandleTeachEnd;
+        playerInterface.FinishCantControlState();
     }
 
     public void TeleportPlayerToTLTransform()
@@ -52,6 +74,6 @@ public class TimeLineEvent : MonoBehaviour
             Debug.LogError("Teleport Transform is null in TLEvent");
             return;
         }
-        player.Teleport(teleportTransform.position);
+        playerInterface.Teleport(teleportTransform.position);
     }
 }

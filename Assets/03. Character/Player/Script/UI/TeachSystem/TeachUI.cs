@@ -41,12 +41,6 @@ public class TeachUI : MonoBehaviour
                     DisplayNextSentence();
                 }
             }
-
-            else if (PlayerInputHandler.Instance.ESCInput)
-            {
-                PlayerInputHandler.Instance.UseESCInput();
-                CloseTeach();
-            }
         }
     }
 
@@ -73,9 +67,10 @@ public class TeachUI : MonoBehaviour
         StartCoroutine(TypeWord(teachSystem_Content[index].content[contentIndex]));
     }
 
-    private void CloseTeach()
+    public void CloseTeach()
     {
         isTeach = false;
+        UIManager.Instance.OnDecativateTeachUI();
         gameObject.SetActive(false);
     }
 

@@ -46,6 +46,10 @@ public class UIManager : MonoBehaviour
             {
                 pauseUI.Activate();
             }
+            else if (teachUI.gameObject.activeInHierarchy)
+            {
+                teachUI.CloseTeach();
+            }
             else
             {
                 pauseUI.Deactivate();
@@ -76,12 +80,14 @@ public class UIManager : MonoBehaviour
 
     public void ActivateTeachUI(int index)
     {
-       teachUI.OpenTeach(index);
+        teachUI.OpenTeach(index);
+        DeactivateHUD();
     }
 
     public void OnDecativateTeachUI()
     {
         OnTeachEnd?.Invoke();
+        ActivateHUD();
     }
 
     #region HUD
