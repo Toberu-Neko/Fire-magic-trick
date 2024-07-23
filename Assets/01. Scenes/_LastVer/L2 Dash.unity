@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18115212, g: 0.22674043, b: 0.30732065, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -784,9 +784,9 @@ MonoBehaviour:
         PlayEvents:
           m_PersistentCalls:
             m_Calls:
-            - m_Target: {fileID: 0}
-              m_TargetAssemblyTypeName: TeachSystem, Assembly-CSharp
-              m_MethodName: OpenTeach
+            - m_Target: {fileID: 961020879}
+              m_TargetAssemblyTypeName: TimeLineEvent, Assembly-CSharp
+              m_MethodName: ActivateTeach
               m_Mode: 3
               m_Arguments:
                 m_ObjectArgument: {fileID: 0}
@@ -1576,13 +1576,34 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4150671408604871042, guid: c85f0a13b69c7094ab4bc263b9530874, type: 3}
       insertIndex: -1
       addedObject: {fileID: 686964468}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4150671408604871043, guid: c85f0a13b69c7094ab4bc263b9530874, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 961020879}
   m_SourcePrefab: {fileID: 100100000, guid: c85f0a13b69c7094ab4bc263b9530874, type: 3}
 --- !u!4 &961020877 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4150671408604871042, guid: c85f0a13b69c7094ab4bc263b9530874, type: 3}
   m_PrefabInstance: {fileID: 961020876}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &961020878 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4150671408604871043, guid: c85f0a13b69c7094ab4bc263b9530874, type: 3}
+  m_PrefabInstance: {fileID: 961020876}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &961020879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961020878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7eced789efbb7418744392fcf820a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teleportTransform: {fileID: 0}
 --- !u!1001 &1068370590
 PrefabInstance:
   m_ObjectHideFlags: 0
