@@ -6,16 +6,19 @@ public class EnemySpawn_Pipe_Child : MonoBehaviour
     [SerializeField] private Barrier barrier;
     [SerializeField] private EnemySpawn_GlassBox glassBox;
 
-    private ProgressSystem progress;
     private bool isTrigger;
     private bool isFightOver;
 
     private void Start()
     {
-        progress = GameManager.Instance.GetComponent<ProgressSystem>();
-
-        progress.OnPlayerDeath += onPlayerDeath;
+        GameManager.Instance.OnPlayerReborn += onPlayerDeath;
         glassBox.OnFightOver += figthOver;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnPlayerReborn -= onPlayerDeath;
+        glassBox.OnFightOver -= figthOver;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,7 +40,7 @@ public class EnemySpawn_Pipe_Child : MonoBehaviour
     private void figthOver()
     {
         isFightOver = true;
-        progress.OnPlayerDeath -= onPlayerDeath;
+        GameManager.Instance.OnPlayerReborn -= onPlayerDeath;
     }
     private void onPlayerDeath()
     {

@@ -29,7 +29,6 @@ public class EnemySpawn_GlassBox : MonoBehaviour
     [SerializeField] private int EndTime;
     [Header("End")]
     [SerializeField] private GlassSystem glass;
-    private BulletTimeManager bulletTime;
 
     public delegate void OnFightOverHandler();
     public event OnFightOverHandler OnFightOver;
@@ -38,10 +37,7 @@ public class EnemySpawn_GlassBox : MonoBehaviour
     {
         pipes = GetComponentsInChildren<EnemySpawn_Pipe>();
     }
-    private void Start()
-    {
-        bulletTime = GameManager.Instance.GetComponent<BulletTimeManager>();
-    }
+
     public void StartFight()
     {
         if(state == Fightstate.Fight_Null)
@@ -99,7 +95,7 @@ public class EnemySpawn_GlassBox : MonoBehaviour
                     pipes[i].ClearNavigation();
                 }
                 glass.BrokenSuperFast();
-                bulletTime.BulletTime_Slow(2.5f);
+                BulletTimeManager.Instance.BulletTime_Slow(2.5f);
                 OnFightOver?.Invoke();
                 break;
         }

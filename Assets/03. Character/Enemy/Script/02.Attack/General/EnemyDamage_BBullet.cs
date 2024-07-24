@@ -21,24 +21,17 @@ public class EnemyDamage_BBullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == "Player")
+        if (collider.gameObject.CompareTag("Player"))
         {
             if(!trigger)
             {
-                DamagePlayer(collider.gameObject);
+                trigger = true;
+                collider.TryGetComponent(out IDamageable damageable);
+                damageable?.Damage(damage, knockBackCoordinate.position);
+                collider.TryGetComponent(out IKnockbackable knockbackable);
+                knockbackable?.Knockback(knockBackCoordinate.position, force);
             }
         }
-    }
-
-    private void DamagePlayer(GameObject player)
-    {
-        trigger = true;
-        HealthSystem healthSystem = player.GetComponent<HealthSystem>();
-
-        Vector3 Direction = (player.transform.position- knockBackCoordinate.position).normalized;
-        Vector3 ForceDirection = Direction;
-
-        healthSystem.ToDamagePlayer(damage, ForceDirection * force);
     }
     public void DestroyObject()
     {

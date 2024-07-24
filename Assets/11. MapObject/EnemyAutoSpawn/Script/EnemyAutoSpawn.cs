@@ -80,6 +80,7 @@ public class EnemyAutoSpawn : MonoBehaviour
         }
 
         Enemys[enemyCount] = Instantiate(Enemy, position, rotataion);
+        Enemys[enemyCount].GetComponent<AgentController>().DisableAgent();
 
         enemyCount++;
     }

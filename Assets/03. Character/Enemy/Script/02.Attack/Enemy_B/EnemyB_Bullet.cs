@@ -31,11 +31,6 @@ public class EnemyB_Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.tag == "Player")
-        {
-            //CallCoordinatedAttack();
-        }
-        // print("你媽炸啦: " + collision);
         Explosion();
     }
 

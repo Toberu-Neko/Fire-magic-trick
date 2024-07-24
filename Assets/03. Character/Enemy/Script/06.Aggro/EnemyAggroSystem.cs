@@ -92,6 +92,7 @@ public class EnemyAggroSystem : MonoBehaviour
         // 根據距離延遲觸發
         foreach (GameObject enemy in NearbyEnemy())
         {
+            if (enemy == null) continue;
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
 
             yield return new WaitForSeconds(distanceToEnemy * callingDelay);

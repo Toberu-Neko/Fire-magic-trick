@@ -81,6 +81,13 @@ public class PlayerSuperDashState : PlayerAbilityState
 
         jumpInput = player.InputHandler.JumpInput;
 
+        if(target == null)
+        {
+            DetermineNextState();
+            Debug.LogError("Target is null in Super Dash State");
+            return;
+        }
+
         targetPos.Set(target.position.x, target.transform.position.y + playerData.targetYOffset, target.position.z);
         if (jumpInput)
         {

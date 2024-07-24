@@ -45,10 +45,12 @@ public class CollisionSenses : CoreComponent
         {
             if (!Slope.IsOnSlope)
             {
+                Debug.Log("Ground");
                 return Physics.BoxCast(GroundCheck.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, slopeCheckDistance, whatIsGround);
             }
             else
             {
+                Debug.Log("Slope ground detection: " + Physics.BoxCast(GroundCheck.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, groundCheckDistance, whatIsGround));
                 return Physics.BoxCast(GroundCheck.position, groundCheckV3, Vector3.down, movement.ParentTransform.localRotation, groundCheckDistance, whatIsGround);
             }
             

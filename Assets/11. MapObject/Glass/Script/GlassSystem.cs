@@ -181,7 +181,10 @@ public class GlassSystem : MonoBehaviour, IDamageable
 
     public void Damage(float damageAmount, Vector3 damagePosition, bool trueDamage = false)
     {
-        Debug.Log("Damage");
+        if(!canCrash)
+        {
+            return;
+        }
         BrokenSuperFast();
     }
 
