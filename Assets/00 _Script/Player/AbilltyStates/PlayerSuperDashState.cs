@@ -41,6 +41,8 @@ public class PlayerSuperDashState : PlayerAbilityState
 
         player.SetColliderAndModel(false);
         player.VFXController.SetSuperDashVFX(true);
+
+        UIManager.Instance.HudUI.HudVFX.SuperDashSpeedLineEffect(true);
     }
 
     public override void Exit()
@@ -73,6 +75,8 @@ public class PlayerSuperDashState : PlayerAbilityState
                 }
             }
         }
+
+        UIManager.Instance.HudUI.HudVFX.SuperDashSpeedLineEffect(false);
     }
 
     public override void LogicUpdate()

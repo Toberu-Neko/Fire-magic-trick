@@ -15,6 +15,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     [SerializeField] private GameObject playerModel;
     public Movement Movement { get; private set; }
     public Stats Stats { get; private set; }
+    private Combat combat;
 
     [Header("Camera Objects")]
     [SerializeField] private Transform playerCamera;
@@ -85,6 +86,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
 
         Movement = Core.GetCoreComponent<Movement>();
         Stats = Core.GetCoreComponent<Stats>();
+        combat = Core.GetCoreComponent<Combat>();
 
         StateMachine = new PlayerStateMachine();
 
@@ -117,13 +119,16 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     {
         Stats.Health.OnCurrentValueZero += HandleHealthZero;
         Stats.OnBurnChanged += HandleBurnChanged;
-    }
 
+        combat.OnDamaged += HandleOnDamaged;
+    }
 
     private void OnDisable()
     {
         Stats.Health.OnCurrentValueZero -= HandleHealthZero;
         Stats.OnBurnChanged -= HandleBurnChanged;
+
+        combat.OnDamaged -= HandleOnDamaged;
     }
 
     private void Start()
@@ -141,6 +146,10 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         LoadSceneManager.Instance.OnLoadingAdditiveProgress -= HandleAdditiveLoading;
     }
 
+    private void HandleOnDamaged()
+    {
+        UIManager.Instance.HudUI.HudVFX.HitPlayerEffect();
+    }
     #region HandleLoading
     private void HandleAdditiveLoading(float obj)
     {
@@ -182,6 +191,15 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         else if (Stats.IsBurning && !Stats.IsInvincible)
         {
             Stats.Health.Decrease(Data.healthDecreaseRateBurning * Time.deltaTime);
+        }
+
+        if (Movement.CurrentVelocityXZMagnitude > Data.slowRunSpeed)
+        {
+            UIManager.Instance.HudUI.HudVFX.RunSpeedLineEffect(true);
+        }
+        else
+        {
+            UIManager.Instance.HudUI.HudVFX.RunSpeedLineEffect(false);
         }
     }
 
@@ -312,6 +330,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     private void HandleBurnChanged(bool obj)
     {
         VFXController.SetBurningVFX(obj);
+        UIManager.Instance.HudUI.HudVFX.OverburnEffect(obj);
     }
 
     public void TeleportToSavepoint()

@@ -58,6 +58,8 @@ public class PlayerWindAltState : PlayerAbilityState
 
         hitTime = Time.time;
         attackCount = 0;
+
+        UIManager.Instance.HudUI.HudVFX.WindAltEffect();
     }
 
     public override void LogicUpdate()

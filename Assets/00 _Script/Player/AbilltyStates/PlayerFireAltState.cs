@@ -33,6 +33,8 @@ public class PlayerFireAltState : PlayerAbilityState
             obj.TryGetComponent(out IFlammable flammable);
             flammable?.SetOnFire(6f);
         }
+
+        UIManager.Instance.HudUI.HudVFX.FireAltEffect();
     }
 
     public override void LogicUpdate()

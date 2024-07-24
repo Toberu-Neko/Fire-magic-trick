@@ -81,6 +81,42 @@ public class CardSystem : MonoBehaviour
         StrongShoot = false;
     }
 
+    private void Start()
+    {
+        OnWindCardEnergyChanged += HandleWindEnergyChange;
+        OnFireCardEnergyChanged += HandleFireEnergyChange;
+    }
+
+    private void OnDestroy()
+    {
+        OnWindCardEnergyChanged -= HandleWindEnergyChange;
+        OnFireCardEnergyChanged -= HandleFireEnergyChange;
+    }
+
+    private void HandleWindEnergyChange(int value)
+    {
+        if (value == windMaxEnergy)
+        {
+            UIManager.Instance.HudUI.HudVFX.WindEnergyFullEffect(true);
+        }
+        else
+        {
+            UIManager.Instance.HudUI.HudVFX.WindEnergyFullEffect(false);
+        }
+    }
+
+    private void HandleFireEnergyChange(int value)
+    {
+        if (value == fireMaxEnergy)
+        {
+            UIManager.Instance.HudUI.HudVFX.FireEnergyFullEffect(true);
+        }
+        else
+        {
+            UIManager.Instance.HudUI.HudVFX.FireEnergyFullEffect(false);
+        }
+    }
+
     private void Update()
     {
         ShootRay();
@@ -90,6 +126,7 @@ public class CardSystem : MonoBehaviour
             player.InputHandler.UseDebugInput();
             AddFireCardEnergy();
             AddWindCardEnergy();
+            player.Stats.Health.Init();
         }
 
         if(currentCardType != CardType.Normal)
@@ -209,6 +246,20 @@ public class CardSystem : MonoBehaviour
         if(cardType != CardType.Normal)
         {
             CurrentEquipedCard = cardType;
+        }
+
+        if(cardType == CardType.Wind)
+        {
+            UIManager.Instance.HudUI.HudVFX.WindStateIndicater(true);
+        }
+        else if(cardType == CardType.Fire)
+        {
+            UIManager.Instance.HudUI.HudVFX.FireStateIndicater(true);
+        }
+        else
+        {
+            UIManager.Instance.HudUI.HudVFX.WindStateIndicater(false);
+            UIManager.Instance.HudUI.HudVFX.FireStateIndicater(false);
         }
 
         startCardStateTime = Time.time;

@@ -5,6 +5,7 @@ public class HUDUI : MonoBehaviour
 {
     [SerializeField] private CrosshairUI crosshairUI;
     [SerializeField] private TeachFloat teachFloatUI;
+    [field: SerializeField] public HUDVFX HudVFX { get; private set; }
 
     private void Awake()
     {
@@ -41,6 +42,8 @@ public class HUDUI : MonoBehaviour
     {
         teachFloatUI.Close(type);
     }
+
+
 
     public void Activate()
     {

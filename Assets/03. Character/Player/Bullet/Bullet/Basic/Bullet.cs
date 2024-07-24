@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
     [SerializeField] protected float lifeTime;
     [SerializeField] protected float speed;
     [SerializeField] private LayerMask whatIsEnemy;
+    [SerializeField] private float colliderHitDamage = 3f;
 
     //Script
     private Rigidbody rb;
@@ -38,13 +39,21 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
 
     private void OnCollisionEnter(Collision collision)
     {
+        /*
         int hitLayerMask = 1 << collision.gameObject.layer;
         if((hitLayerMask & whatIsEnemy) != 0)
         {
             return;
         }
+        */
 
-        Debug.Log("Bullet hit something in collision. Col Name: " + collision.gameObject.name);
+        collision.gameObject.TryGetComponent<IDamageable>(out var damageable);
+        damageable?.Damage(colliderHitDamage, transform.position);
+        if(damageable != null)
+        {
+            Debug.Log("Hit!");
+        }
+
         OnHitSomething();
         SpawnVFX(cardSlashPrefab, transform.position, Quaternion.identity, 1.5f);
         DestroyBullet();

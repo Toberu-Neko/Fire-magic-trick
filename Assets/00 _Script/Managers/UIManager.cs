@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     [SerializeField] private InputSystemUIInputModule inputSystemUIInputModule;
-    [SerializeField] private HUDUI hudUI;
+    [field: SerializeField] public HUDUI HudUI { get;private set; }
     [SerializeField] private PauseUI pauseUI;
     [SerializeField] private DeathUI deathUI;
 
@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour
     {
         pauseUI.gameObject.SetActive(false);
         deathUI.gameObject.SetActive(false);
+        HudUI.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -95,42 +96,42 @@ public class UIManager : MonoBehaviour
     #region HUD
     public void SetCrossRed()
     {
-        hudUI.SetCrossRed();
+        HudUI.SetCrossRed();
     }
 
     public void SetCrossWhite()
     {
-        hudUI.SetCrossWhite();
+        HudUI.SetCrossWhite();
     }
 
     public void CrosshairShooting()
     {
-        hudUI.CrosshairShooting();
+        HudUI.CrosshairShooting();
     }
 
     public void HitEnemyEffect()
     {
-        hudUI.HitEnemyEffect();
+        HudUI.HitEnemyEffect();
     }
 
     public void ActivateHUD()
     {
-        hudUI.Activate();
+        HudUI.Activate();
     }
 
     public void DeactivateHUD()
     {
-        hudUI.Deactivate();
+        HudUI.Deactivate();
     }
 
     public void OpenTeachFloat(TeachFloat.types type)
     {
-        hudUI.OpenTeachFloat(type);
+        HudUI.OpenTeachFloat(type);
     }
 
     public void CloseTeachFloat(TeachFloat.types type)
     {
-        hudUI.CloseTeachFloat(type);
+        HudUI.CloseTeachFloat(type);
     }
     #endregion
 
