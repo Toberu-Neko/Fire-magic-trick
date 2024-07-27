@@ -63,7 +63,7 @@ public class PlayerDashState : PlayerAbilityState
             Rotate(playerData.rotationSpeed * 20f, 0.01f);
         }
 
-        if (currentFrame == 1)
+        if (currentFrame == 3)
         {
             if (MovementInput.y > 0f)
             {

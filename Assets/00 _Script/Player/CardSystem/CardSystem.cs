@@ -250,10 +250,12 @@ public class CardSystem : MonoBehaviour
 
         if(cardType == CardType.Wind)
         {
+            // Debug.Log("Wind");
             UIManager.Instance.HudUI.HudVFX.WindStateIndicater(true);
         }
         else if(cardType == CardType.Fire)
         {
+            // Debug.Log("Fire");
             UIManager.Instance.HudUI.HudVFX.FireStateIndicater(true);
         }
         else
