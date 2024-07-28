@@ -1,12 +1,17 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
+using static CardSystem;
 
 public class CardSystem : MonoBehaviour
 {
     [SerializeField] private Player player;
+    [SerializeField] private PlayerVFXController playerVFXController;
     [SerializeField] private GameObject normalCardPrefab;
     [SerializeField] private GameObject windCardPrefab;
     [SerializeField] private GameObject fireCardPrefab;
+    [SerializeField] private GameObject strongWindCardPrefab;
+    [SerializeField] private GameObject strongFireCardPrefab;
 
     [Header("Spawn Position")]
     [SerializeField] private Transform frontSpawnPos;
@@ -21,7 +26,8 @@ public class CardSystem : MonoBehaviour
     [SerializeField] private float minShootDistance;
     [SerializeField] private float shootCooldown;
     [SerializeField] private float cardStateDuration = 5f;
-    public bool StrongShoot { get; private set; }
+    private bool bulletTimeShoot;
+    private bool strongShoot;
 
     [Header("Super Dash")]
     [SerializeField] private LayerMask whatIsSuperDashTarget;
@@ -33,7 +39,13 @@ public class CardSystem : MonoBehaviour
     private Vector3 targetPosition;
     private Vector2 screenCenterPoint;
 
+    /// <summary>
+    /// 負責能否射出屬性牌的狀態
+    /// </summary>
     private CardType currentCardType;
+    /// <summary>
+    /// 負責當前裝備的屬性牌
+    /// </summary>
     public CardType CurrentEquipedCard { get; private set; }
     public enum CardType
     {
@@ -78,7 +90,7 @@ public class CardSystem : MonoBehaviour
         startShootTime = 0f;
 
         HasSuperDashTarget = false;
-        StrongShoot = false;
+        bulletTimeShoot = false;
     }
 
     private void Start()
@@ -95,9 +107,12 @@ public class CardSystem : MonoBehaviour
 
     private void HandleWindEnergyChange(int value)
     {
+        playerVFXController.SetWindCountVFX(value);
+
         if (value == windMaxEnergy)
         {
             UIManager.Instance.HudUI.HudVFX.WindEnergyFullEffect(true);
+            playerVFXController.PlayWindMax();
         }
         else
         {
@@ -107,9 +122,12 @@ public class CardSystem : MonoBehaviour
 
     private void HandleFireEnergyChange(int value)
     {
+        playerVFXController.SetFireCountVFX(value);
+
         if (value == fireMaxEnergy)
         {
             UIManager.Instance.HudUI.HudVFX.FireEnergyFullEffect(true);
+            playerVFXController.PlayFireMax();
         }
         else
         {
@@ -203,7 +221,7 @@ public class CardSystem : MonoBehaviour
         player.Anim.SetTrigger("shoot");
         // Debug.Log(transform.forward - player.InputHandler.MainCam.transform.forward);
 
-        if (StrongShoot)
+        if (bulletTimeShoot)
         {
             BulletTimeManager.Instance.BulletTime_Slow(strongShootBulletTimeDuration);
 
@@ -211,18 +229,48 @@ public class CardSystem : MonoBehaviour
         }
         else
         {
-            switch (currentCardType)
+            if (strongShoot)
             {
-                case CardType.Normal:
-                    Instantiate(normalCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
-                    break;
-                case CardType.Wind:
-                    Instantiate(windCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
-                    break;
-                case CardType.Fire:
-                    Instantiate(fireCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
-                    break;
+                strongShoot = false;
+                switch (currentCardType)
+                {
+                    case CardType.Normal:
+                        Debug.LogError("Strong shoot can't be normal card");
+                        break;
+                    case CardType.Wind:
+                        ShootThreeWind(aimDir);
+                        break;
+                    case CardType.Fire:
+                        Instantiate(fireCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
+                        Instantiate(fireCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up) * Quaternion.Euler(0f, 45f / 2f, 0f));
+                        Instantiate(fireCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up) * Quaternion.Euler(0f, -45f / 2f, 0f));
+                        break;
+                }
             }
+            else
+            {
+                switch (currentCardType)
+                {
+                    case CardType.Normal:
+                        Instantiate(normalCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
+                        break;
+                    case CardType.Wind:
+                        Instantiate(windCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
+                        break;
+                    case CardType.Fire:
+                        Instantiate(fireCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
+                        break;
+                }
+            }
+        }
+    }
+
+    private async void ShootThreeWind(Vector3 dir)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            Instantiate(windCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(dir, Vector3.up));
+            await Task.Delay(200);
         }
     }
 
@@ -236,26 +284,20 @@ public class CardSystem : MonoBehaviour
 
     public void SetStrongShoot(bool value)
     {
-        StrongShoot = value;
+        bulletTimeShoot = value;
     }
     #endregion
 
-
     public void ChangeCard(CardType cardType)
     {
-        if(cardType != CardType.Normal)
-        {
-            CurrentEquipedCard = cardType;
-        }
-
         if(cardType == CardType.Wind)
         {
-            // Debug.Log("Wind");
+            strongShoot = true;
             UIManager.Instance.HudUI.HudVFX.WindStateIndicater(true);
         }
         else if(cardType == CardType.Fire)
         {
-            // Debug.Log("Fire");
+            strongShoot = true;
             UIManager.Instance.HudUI.HudVFX.FireStateIndicater(true);
         }
         else
@@ -264,9 +306,30 @@ public class CardSystem : MonoBehaviour
             UIManager.Instance.HudUI.HudVFX.FireStateIndicater(false);
         }
 
+        ChangeCurrentEquipCard(cardType);
+
         startCardStateTime = Time.time;
         endCardStateTime = startCardStateTime + cardStateDuration;
         currentCardType = cardType;
+    }
+
+    private void ChangeCurrentEquipCard(CardType cardType)
+    {
+        if(CurrentEquipedCard == cardType)
+        {
+            return;
+        }
+
+        if (cardType == CardType.Wind)
+        {
+            UIManager.Instance.HudUI.HudVFX.FlipToWindCard();
+            CurrentEquipedCard = CardType.Wind;
+        }
+        else if (cardType == CardType.Fire)
+        {
+            UIManager.Instance.HudUI.HudVFX.FlipToFireCard();
+            CurrentEquipedCard = CardType.Fire;
+        }
     }
 
     #region Card Energy
@@ -280,9 +343,9 @@ public class CardSystem : MonoBehaviour
 
         if(CurrentEquipedCard == CardType.Wind)
         {
-            if(WindCardEnergy == 0)
+            if (WindCardEnergy == 0)
             {
-                CurrentEquipedCard = CardType.Fire;
+                ChangeCurrentEquipCard(CardType.Fire);
                 return FireCardEnergy;
             }
             else
@@ -294,7 +357,7 @@ public class CardSystem : MonoBehaviour
         {
             if (FireCardEnergy == 0)
             {
-                CurrentEquipedCard = CardType.Wind;
+                ChangeCurrentEquipCard(CardType.Wind);
                 return WindCardEnergy;
             }
             else
@@ -321,7 +384,7 @@ public class CardSystem : MonoBehaviour
             {
                 if (FireCardEnergy >= amount)
                 {
-                    CurrentEquipedCard = CardType.Fire;
+                    ChangeCurrentEquipCard(CardType.Fire);
                     return true;
                 }
             }
@@ -336,7 +399,7 @@ public class CardSystem : MonoBehaviour
             {
                 if (WindCardEnergy >= amount)
                 {
-                    CurrentEquipedCard = CardType.Wind;
+                    ChangeCurrentEquipCard(CardType.Wind);
                     return true;
                 }
             }
@@ -359,9 +422,13 @@ public class CardSystem : MonoBehaviour
 
     public void AddWindCardEnergy()
     {
+        if (WindCardEnergy == windMaxEnergy)
+        {
+            return;
+        }
         WindCardEnergy++;
-        WindCardEnergy = Mathf.Clamp(WindCardEnergy, 0, windMaxEnergy);
         OnWindCardEnergyChanged?.Invoke(WindCardEnergy);
+        WindCardEnergy = Mathf.Clamp(WindCardEnergy, 0, windMaxEnergy);
     }
 
     public void DecreaseWindCardEnergy(int value)
