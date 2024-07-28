@@ -10045,11 +10045,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Health>k__BackingField:
-    <MaxValue>k__BackingField: 100
-    <InitValue>k__BackingField: 100
+    <MaxValue>k__BackingField: 50
+    <InitValue>k__BackingField: 50
     decreaseable: 1
   combatTimer: 5
   burnWhenHealthBelowPercentage: 0.5
+  healthRegenPerSec: 0
 --- !u!1 &4004274603461280864
 GameObject:
   m_ObjectHideFlags: 0
@@ -22274,6 +22275,8 @@ MonoBehaviour:
   longGroundCheckDistance: 1.25
   slopeCheckDistance: 0.75
   longSlopeCheckDistance: 1.5
+  orgPoint: {fileID: 0}
+  orgPointDistance: 1.25
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8705

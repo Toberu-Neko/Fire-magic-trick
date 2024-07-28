@@ -56,6 +56,12 @@ public class PlayerVFXController : MonoBehaviour
         windMaxVFX.Stop();
     }
 
+    public void SetModelVFX(bool value)
+    {
+        fireCountVFX.gameObject.SetActive(value);
+        windCountVFX.gameObject.SetActive(value);
+    }
+
 
     public void ActivateWindStartVFX()
     {
