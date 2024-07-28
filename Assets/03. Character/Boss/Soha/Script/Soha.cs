@@ -1,7 +1,7 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 
-public class Soha : MonoBehaviour,IHealth
+public class Soha : MonoBehaviour, IDamageable
 {
     public enum State
     {
@@ -36,9 +36,6 @@ public class Soha : MonoBehaviour,IHealth
     
     //Script
     private Boss_System system;
-
-    //Value
-    public int iHealth { get; set; }
     
     private void Awake()
     {
@@ -49,16 +46,24 @@ public class Soha : MonoBehaviour,IHealth
         Initialization();
 
         system.onResetFight += Initialization;
+        system.onStartFight += stateEventCheck;
     }
+
+    private void OnDestroy()
+    {
+        system.onStartFight -= stateEventCheck;
+        system.onResetFight -= Initialization;
+    }
+
     private void Update()
     {
         CheckActive();
     }
+
     private void Initialization()
     {
         health = Health_Full;
         system.SetHealth(healthPersentage(health));
-        system.onStartFight += stateEventCheck;
         topEnemyManager.ToClose();
         if (state != State.Death) state = State.inactive;
     }
@@ -74,16 +79,6 @@ public class Soha : MonoBehaviour,IHealth
                 }
             }
         }
-    }
-    public void TakeDamage(int damage, PlayerDamage.DamageType damageType)
-    {
-        health -= damage;
-        stateEventCheck();
-        if (state == State.Death) return; 
-
-        CheckActive();
-
-        system.SetHealth(healthPersentage(health));
     }
     private void stateEventCheck()
     {
@@ -169,5 +164,21 @@ public class Soha : MonoBehaviour,IHealth
 
         float persenHealth = newHealth / Health_Full;
         return persenHealth;
+    }
+
+    public void Damage(float damageAmount, Vector3 damagePosition, bool trueDamage = false)
+    {
+        health -= damageAmount;
+        stateEventCheck();
+        if (state == State.Death) return;
+
+        CheckActive();
+
+        system.SetHealth(healthPersentage(health));
+    }
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
     }
 }
