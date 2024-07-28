@@ -341,8 +341,8 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
 
     public void SetColliderAndModel(bool value)
     {
-        col.enabled = value;
-        playerModel.SetActive(value);
+        SetCollider(value);
+        SetModel(value);
         Stats.SetInvincible(!value);
     }
 
@@ -361,6 +361,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     public void SetModel(bool value)
     {
         playerModel.SetActive(value);
+        VFXController.SetModelVFX(value);
     }
 
     public void GotoCantControlState()

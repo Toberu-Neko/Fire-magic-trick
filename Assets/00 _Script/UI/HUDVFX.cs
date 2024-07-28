@@ -5,9 +5,10 @@ using UnityEngine;
 public class HUDVFX : MonoBehaviour
 {
     [SerializeField] private ParticleSystem hitPlayerEffect;
-    [SerializeField] private ParticleSystem hitPlayerSpeedLine;
+    [SerializeField] private ParticleSystem superDashHitSpeedLine;
     [SerializeField] private ParticleSystem fireAlt;
     [SerializeField] private ParticleSystem windAlt;
+    [SerializeField] private Animator flipCardAnim;
 
     [SerializeField] private GameObject inFireState;
     [SerializeField] private GameObject inWindState;
@@ -19,6 +20,11 @@ public class HUDVFX : MonoBehaviour
 
     private void Awake()
     {
+        hitPlayerEffect.gameObject.SetActive(true);
+        superDashHitSpeedLine.gameObject.SetActive(true);
+        fireAlt.gameObject.SetActive(true);
+        windAlt.gameObject.SetActive(true);
+
         overburn.SetActive(false);
         windEnergyFull.SetActive(false);
         fireEnergyFull.SetActive(false);
@@ -41,6 +47,11 @@ public class HUDVFX : MonoBehaviour
     public void WindAltEffect()
     {
         windAlt.Play();
+    }
+
+    public void SuperDashHitSpeedLineEffect()
+    {
+        superDashHitSpeedLine.Play();
     }
 
     public void FireStateIndicater(bool value)
@@ -80,5 +91,17 @@ public class HUDVFX : MonoBehaviour
     public void SuperDashSpeedLineEffect(bool value)
     {
         superDashSpeedLine.SetActive(value);
+    }
+
+    public void FlipToFireCard()
+    {
+        flipCardAnim.SetBool("isFire", true);
+        flipCardAnim.SetBool("isWind", false);
+    }
+
+    public void FlipToWindCard()
+    {
+        flipCardAnim.SetBool("isFire", false);
+        flipCardAnim.SetBool("isWind", true);
     }
 }

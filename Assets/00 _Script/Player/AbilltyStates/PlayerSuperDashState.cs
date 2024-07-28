@@ -107,6 +107,7 @@ public class PlayerSuperDashState : PlayerAbilityState
 
         if (Vector3.Distance(player.transform.position, targetPos) <= 0.5f)
         {
+            UIManager.Instance.HudUI.HudVFX.SuperDashHitSpeedLineEffect();
             DetermineNextState();
             return;
         }

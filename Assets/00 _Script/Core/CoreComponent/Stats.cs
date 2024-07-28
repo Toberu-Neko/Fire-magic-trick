@@ -8,7 +8,6 @@ public class Stats : CoreComponent
     // 0 = Die, < 100 = burn,  100 = Normal, 200 = NoSkill
     [field: SerializeField] public CoreStatSystem Health { get; private set; }
 
-
     public bool IsInvincible { get; private set; }
     public bool InCombat { get; private set; }
     [SerializeField] private float combatTimer = 5f;
