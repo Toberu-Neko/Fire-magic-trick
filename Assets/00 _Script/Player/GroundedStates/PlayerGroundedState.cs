@@ -76,6 +76,7 @@ public class PlayerGroundedState : PlayerFSMBaseState
             {
                 if(player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
                 {
+                    // TODO: 現在範圍沒有目標也能開
                     stateMachine.ChangeState(player.WindAltState);
                 }
                 else if(player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Fire)

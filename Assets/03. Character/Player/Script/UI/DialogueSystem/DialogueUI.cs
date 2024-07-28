@@ -114,6 +114,11 @@ public class DialogueUI : MonoBehaviour
 
     private void QueueDialogue(SO_Dialogue dialogue)
     {
+        if(dialogue == null)
+        {
+            Debug.LogError("Dialogue is null");
+            return;
+        }
         nameText.StringReference = dialogue.contents[0].localizedName;
         characterIcon.sprite = dialogue.contents[0].CharacterIcon;
 

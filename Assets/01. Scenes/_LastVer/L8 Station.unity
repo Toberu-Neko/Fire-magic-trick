@@ -1453,6 +1453,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Glass_Circle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9186644988659419998, guid: 460f7216acc5b7141a1677cb268a0f1a, type: 3}
+      propertyPath: canSuperJump
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1833,38 +1837,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 24.2
       objectReference: {fileID: 0}
-    - target: {fileID: 9086776864363229551, guid: a216ed44072e05340b76e745d736b186, type: 3}
-      propertyPath: ID
-      value: d2b5049f-c73d-4512-ac20-296b094ba189
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086776864363229551, guid: a216ed44072e05340b76e745d736b186, type: 3}
-      propertyPath: isAddedID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086776864363229551, guid: a216ed44072e05340b76e745d736b186, type: 3}
-      propertyPath: dialogueSO
-      value: 
-      objectReference: {fileID: 11400000, guid: dbf00696c0b08844080ff92982b9cd59, type: 2}
-    - target: {fileID: 9086776864363229551, guid: a216ed44072e05340b76e745d736b186, type: 3}
-      propertyPath: triggerOnce
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086776864394932768, guid: a216ed44072e05340b76e745d736b186, type: 3}
-      propertyPath: ID
-      value: 3d5b44f7-f571-4834-9cc3-03e60f1da62d
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086776864394932768, guid: a216ed44072e05340b76e745d736b186, type: 3}
-      propertyPath: isAddedID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086776864394932768, guid: a216ed44072e05340b76e745d736b186, type: 3}
-      propertyPath: dialogueSO
-      value: 
-      objectReference: {fileID: 11400000, guid: 59eefa33f62da084b81cb2f37e61bf6f, type: 2}
-    - target: {fileID: 9086776864394932768, guid: a216ed44072e05340b76e745d736b186, type: 3}
-      propertyPath: triggerOnce
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9086776864394932771, guid: a216ed44072e05340b76e745d736b186, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.1
@@ -1889,18 +1861,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 24.2
       objectReference: {fileID: 0}
-    - target: {fileID: 9086776865172444139, guid: a216ed44072e05340b76e745d736b186, type: 3}
-      propertyPath: ID
-      value: 042d11d5-5347-467b-9e70-44f1b0f45eab
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086776865172444139, guid: a216ed44072e05340b76e745d736b186, type: 3}
-      propertyPath: isAddedID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086776865172444139, guid: a216ed44072e05340b76e745d736b186, type: 3}
-      propertyPath: triggerOnce
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9086776865544957853, guid: a216ed44072e05340b76e745d736b186, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.1
@@ -1912,22 +1872,6 @@ PrefabInstance:
     - target: {fileID: 9086776865544957853, guid: a216ed44072e05340b76e745d736b186, type: 3}
       propertyPath: m_LocalPosition.z
       value: 24.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086776865544957854, guid: a216ed44072e05340b76e745d736b186, type: 3}
-      propertyPath: ID
-      value: e8cec5ef-1126-46b5-bfcf-22a57742a23e
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086776865544957854, guid: a216ed44072e05340b76e745d736b186, type: 3}
-      propertyPath: isAddedID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9086776865544957854, guid: a216ed44072e05340b76e745d736b186, type: 3}
-      propertyPath: dialogueSO
-      value: 
-      objectReference: {fileID: 11400000, guid: 458dbf9ff7077f5438948cd03a32ca1a, type: 2}
-    - target: {fileID: 9086776865544957854, guid: a216ed44072e05340b76e745d736b186, type: 3}
-      propertyPath: triggerOnce
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9345,6 +9289,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9186644988659419999, guid: 460f7216acc5b7141a1677cb268a0f1a, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14803,7 +14751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1372625422
   m_CollectObjects: 0
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}

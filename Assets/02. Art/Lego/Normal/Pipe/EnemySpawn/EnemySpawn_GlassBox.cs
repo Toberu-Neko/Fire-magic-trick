@@ -63,7 +63,7 @@ public class EnemySpawn_GlassBox : MonoBehaviour
     }
     public void Fight(Fightstate state)
     {
-        triggerDialogue();
+        TriggerDialogue();
 
         switch (state)
         {
@@ -100,7 +100,7 @@ public class EnemySpawn_GlassBox : MonoBehaviour
                 break;
         }
     }
-    private void triggerDialogue()
+    private void TriggerDialogue()
     {
         Dialogues[dialogueNumber].EventTrigger();
         dialogueNumber++;

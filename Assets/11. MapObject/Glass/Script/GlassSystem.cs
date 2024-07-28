@@ -33,49 +33,16 @@ public class GlassSystem : MonoBehaviour, IDamageable
 
     private void Awake()
     {
-        if (!canCrash)
-        {
-            enabled = false;
-            return;
-        }
-
         glassCollider = GetComponent<Collider>();
         glassRender = GetComponent<MeshRenderer>();
-        GameManager.Instance.OnPlayerReborn += OnPlayerDeathToRebirthGlass;
+        GameManager.Instance.OnPlayerReborn += GlassRebirth;
     }
 
     private void OnDestroy()
     {
-        GameManager.Instance.OnPlayerReborn -= OnPlayerDeathToRebirthGlass;
+        GameManager.Instance.OnPlayerReborn -= GlassRebirth;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        BrokenCheck_EnemyCrash(collision);
-    }
-    private void OnPlayerDeathToRebirthGlass()
-    {
-          GlassRebirth();
-    }
-    public void BrokenFoever()
-    {
-        BrokenSuperFast();
-        isBrokenFoever = true;
-    }
-    public void BrokenCheck_SuperJump()
-    {
-        if(canSuperJump)
-        {
-            if(jumpDelayMode)
-            {
-                delayMode();
-            }
-            else
-            {
-                BrokenSuperFast();
-            }
-        }
-    }
     public void BrokenCheck_Crash()
     {
         if (canCrash)
@@ -83,6 +50,7 @@ public class GlassSystem : MonoBehaviour, IDamageable
             BrokenSuperFast();
         }
     }
+
     private void BrokenCheck_EnemyCrash(Collision collision)
     {
         if(canEnemyCrash)
@@ -137,15 +105,11 @@ public class GlassSystem : MonoBehaviour, IDamageable
         feedbacks_Delay.PlayFeedbacks();
         await Task.Delay((int)(delayTime * 1000));
         SetGlass(false);
+    }
 
-        Debug.Log("delayMode");
-    }
-    private void chargeMode()
-    {
-        Debug.Log("chargeMode");
-    }
     private void SetGlass(bool active)
     {
+        // Debug.Log("SetGlass + " + active);
         SetCollider(active);
         SetColliderRender(active);
 
@@ -169,10 +133,21 @@ public class GlassSystem : MonoBehaviour, IDamageable
         {
             glassCollider.enabled = active;
         }
+        else
+        {
+            Debug.LogError("Glass Collider == null in " + gameObject.name);
+        }
     }
     private void SetColliderRender(bool active)
     {
-        glassRender.enabled = active;
+        if(glassRender != null)
+        {
+            glassRender.enabled = active;
+        }
+        else
+        {
+            Debug.LogError("Glass Render == null in " + gameObject.name);
+        }
     }
     private void SetCanSuperJump(bool active)
     {

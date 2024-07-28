@@ -110,32 +110,18 @@ public class PlayerVFXController : MonoBehaviour
 
     public void SetWindCountVFX(int value)
     {
-        if (value == 0)
-        {
-            windCountVFX.Stop();
-        }
-        else
-        {
-            var emission = windCountVFX.emission;
-            emission.rateOverTimeMultiplier = value * 5;
-            if (windCountVFX.isStopped)
-                windCountVFX.Play();
-        }
+        var emission = windCountVFX.emission;
+        emission.rateOverTimeMultiplier = value * 5;
+        if (windCountVFX.isStopped)
+            windCountVFX.Play();
     }
 
     public void SetFireCountVFX(int value)
     {
-        if (value == 0)
-        {
-            fireCountVFX.Stop();
-        }
-        else
-        {
-            var emission = fireCountVFX.emission;
-            emission.rateOverTimeMultiplier = value * 5;
-            if(fireCountVFX.isStopped)
-                fireCountVFX.Play();
-        }
+        var emission = fireCountVFX.emission;
+        emission.rateOverTimeMultiplier = value * 5;
+        if (fireCountVFX.isStopped)
+            fireCountVFX.Play();
     }
 
     public void PlayWindMax()

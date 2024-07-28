@@ -302,6 +302,7 @@ public class CardSystem : MonoBehaviour
         }
         else
         {
+            strongShoot = false;
             UIManager.Instance.HudUI.HudVFX.WindStateIndicater(false);
             UIManager.Instance.HudUI.HudVFX.FireStateIndicater(false);
         }
@@ -333,39 +334,6 @@ public class CardSystem : MonoBehaviour
     }
 
     #region Card Energy
-
-    public int CheckCurrentCardEnergy()
-    {
-        if(WindCardEnergy == 0 && FireCardEnergy == 0)
-        {
-            return 0;
-        }
-
-        if(CurrentEquipedCard == CardType.Wind)
-        {
-            if (WindCardEnergy == 0)
-            {
-                ChangeCurrentEquipCard(CardType.Fire);
-                return FireCardEnergy;
-            }
-            else
-            {
-                return WindCardEnergy;
-            }
-        }
-        else
-        {
-            if (FireCardEnergy == 0)
-            {
-                ChangeCurrentEquipCard(CardType.Wind);
-                return WindCardEnergy;
-            }
-            else
-            { 
-                return FireCardEnergy;
-            }
-        }
-    }
 
     public bool CheckCardEnergy(int amount)
     {
@@ -427,8 +395,8 @@ public class CardSystem : MonoBehaviour
             return;
         }
         WindCardEnergy++;
-        OnWindCardEnergyChanged?.Invoke(WindCardEnergy);
         WindCardEnergy = Mathf.Clamp(WindCardEnergy, 0, windMaxEnergy);
+        OnWindCardEnergyChanged?.Invoke(WindCardEnergy);
     }
 
     public void DecreaseWindCardEnergy(int value)

@@ -67,7 +67,7 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable, IFlammable
             return;
         }
 
-        Debug.Log("Damage in Core: " + damageAmount);
+        // Debug.Log("Damage in Core: " + damageAmount);
 
         stats.Health.Decrease(damageAmount);
         OnDamaged?.Invoke();

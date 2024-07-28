@@ -7,8 +7,6 @@ public class EnemyPushPlayer_IgnoreInvicible : MonoBehaviour
     [SerializeField] private Transform knockBackCoordinate;
     [SerializeField] private bool isVertical;
 
-    private IKnockbackable knockbackable;
-
     private void Start()
     {
         if (knockBackCoordinate == null)
@@ -20,18 +18,15 @@ public class EnemyPushPlayer_IgnoreInvicible : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Player"))
         {
-            if(knockbackable != null)
-            {
-                collider?.TryGetComponent(out knockbackable);
-            }
+            collider.TryGetComponent(out IKnockbackable _knockbackable);
 
             if (isVertical)
             {
-                knockbackable.Knockback(collider.transform.position + Vector3.down, force);
+                _knockbackable?.Knockback(collider.transform.position + Vector3.down, force);
             }
             else
             {
-                knockbackable.Knockback(transform.position, force);
+                _knockbackable?.Knockback(transform.position, force);
             }
         }
     }

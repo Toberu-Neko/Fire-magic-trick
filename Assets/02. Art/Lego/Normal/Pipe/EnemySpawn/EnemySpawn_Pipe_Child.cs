@@ -11,14 +11,14 @@ public class EnemySpawn_Pipe_Child : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.OnPlayerReborn += onPlayerDeath;
-        glassBox.OnFightOver += figthOver;
+        GameManager.Instance.OnPlayerReborn += OnPlayerDeath;
+        glassBox.OnFightOver += FigthOver;
     }
 
     private void OnDestroy()
     {
-        GameManager.Instance.OnPlayerReborn -= onPlayerDeath;
-        glassBox.OnFightOver -= figthOver;
+        GameManager.Instance.OnPlayerReborn -= OnPlayerDeath;
+        glassBox.OnFightOver -= FigthOver;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,12 +37,12 @@ public class EnemySpawn_Pipe_Child : MonoBehaviour
         barrier.Open();
         glassBox.StartFight();
     }
-    private void figthOver()
+    private void FigthOver()
     {
         isFightOver = true;
-        GameManager.Instance.OnPlayerReborn -= onPlayerDeath;
+        GameManager.Instance.OnPlayerReborn -= OnPlayerDeath;
     }
-    private void onPlayerDeath()
+    private void OnPlayerDeath()
     {
         barrier.Close();
         glassBox.onPlearDeath();
