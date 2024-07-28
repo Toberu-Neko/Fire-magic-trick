@@ -7,7 +7,7 @@ public class EnemyPushPlayer_IgnoreInvicible : MonoBehaviour
     [SerializeField] private Transform knockBackCoordinate;
     [SerializeField] private bool isVertical;
 
-    Rigidbody rb;
+    private IKnockbackable knockbackable;
 
     private void Start()
     {
@@ -18,28 +18,21 @@ public class EnemyPushPlayer_IgnoreInvicible : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == "Player")
+        if (collider.gameObject.CompareTag("Player"))
         {
-            PushPlayer(collider.gameObject);
+            if(knockbackable != null)
+            {
+                collider?.TryGetComponent(out knockbackable);
+            }
+
+            if (isVertical)
+            {
+                knockbackable.Knockback(collider.transform.position + Vector3.down, force);
+            }
+            else
+            {
+                knockbackable.Knockback(transform.position, force);
+            }
         }
-    }
-
-    private void PushPlayer(GameObject player)
-    {
-        HealthSystem healthSystem = player.GetComponent<HealthSystem>();
-
-        Vector3 Direction = (player.transform.position - knockBackCoordinate.position).normalized;
-        Vector3 ForceDirection = Direction;
-
-        if (!isVertical)
-        {
-            ForceDirection = new Vector3(Direction.x, 0, Direction.z);
-        }
-        else
-        {
-            ForceDirection = new Vector3(0, Direction.y, 0);
-        }
-
-        healthSystem.ToPushPlayer(ForceDirection * force);
     }
 }

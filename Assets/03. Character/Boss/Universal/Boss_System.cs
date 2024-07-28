@@ -2,18 +2,14 @@ using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Boss_System : MonoBehaviour
+public class Boss_System : DataPersistMapObjBase
 {
     [Header("Setting")]
-    public Boss_UI UI;
     public Barrier barrier;
     [SerializeField] private MMF_Player reserFeedback;
     [Header("Boss")]
     [SerializeField] private string boss_name;
     [SerializeField] private string boss_littleTitle;
-    [Space(10)]
-
-    private ProgressSystem progress;
 
     public delegate void OnStartFightHandler();
     public event OnStartFightHandler onStartFight;
@@ -23,19 +19,22 @@ public class Boss_System : MonoBehaviour
     public event OnEndFightHandler onEndFight;
 
     private bool isBoss;
-    private bool isWin;
 
-    private void Start()
+    protected override void Start()
     {
-        progress = GameManager.Instance.GetComponent<ProgressSystem>();
+        base.Start();
+        GameManager.Instance.OnPlayerReborn += ResetBoss;
+    }
 
-        progress.OnPlayerDeath += ResetBoss;
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnPlayerReborn -= ResetBoss;
     }
     private void Update()
     {
-        if(isBoss && !isWin)
+        if(isBoss && !isActivated)
         {
-            if(this.gameObject.activeSelf==false)
+            if (this.gameObject.activeSelf == false) 
             {
                 this.gameObject.SetActive(true);
             }
@@ -43,12 +42,12 @@ public class Boss_System : MonoBehaviour
     }
     public void ResetBoss()
     {
-        if (isWin) return;
+        if (isActivated) return;
         if (isBoss)
         {
             isBoss = false;
 
-            UI.Boss_Exit();
+            UIManager.Instance.HudUI.CloseBossUI();
             barrier.Close();
             reserFeedback.PlayFeedbacks();
             onResetFight?.Invoke();
@@ -57,12 +56,12 @@ public class Boss_System : MonoBehaviour
     }
     public void StartBossFight()
     {
-        if (isWin) return;
+        if (isActivated) return;
         if (!isBoss)
         {
             isBoss = true;
 
-            UI.Boss_Enter(boss_name, boss_littleTitle);
+            UIManager.Instance.HudUI.OpenBossUI(boss_name, boss_littleTitle);
             barrier.Open();
             reserFeedback.PlayFeedbacks();
             onStartFight?.Invoke();
@@ -75,17 +74,17 @@ public class Boss_System : MonoBehaviour
             isBoss = false;
 
             onEndFight?.Invoke();
-            UI.Boss_Exit();
+            UIManager.Instance.HudUI.CloseBossUI();
             barrier.Close();
         }
     }
     public void SetHealth(float newHealthpersen)
     {
-        UI.SetValue(newHealthpersen);
+        UIManager.Instance.HudUI.SetBossHealth(newHealthpersen);
     }
     public void SetIsWind(bool active)
     {
-        isWin = active;
+        isActivated = active;
     }
     public void DebugTest(string word)
     {

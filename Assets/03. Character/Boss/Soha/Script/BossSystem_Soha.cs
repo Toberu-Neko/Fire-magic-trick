@@ -3,7 +3,6 @@ using UnityEngine;
 public class BossSystem_Soha : MonoBehaviour
 {
     //Script
-    private Soha soha;
     private Boss_System system;
 
     [Header("Start Boss Fight")]
@@ -12,7 +11,6 @@ public class BossSystem_Soha : MonoBehaviour
     [SerializeField] private EnemySpawn_Manager spawnManager_pipe;
     private void Awake()
     {
-        soha = GetComponent<Soha>();
         system = GetComponent<Boss_System>();
     }
     private void Start()

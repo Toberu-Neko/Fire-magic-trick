@@ -5,17 +5,10 @@ public class EnemyDebuffPlayer : MonoBehaviour
     [SerializeField] private float debuffTime;
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == "Player")
+        if (collider.gameObject.CompareTag("Player"))
         {
-            DebuffPlay(collider);
+            //TODO: Stun
         }
-    }
-    private void DebuffPlay(Collider collider)
-    {
-        GameObject player = collider.gameObject;
-        PlayerState playerState = player.GetComponent<PlayerState>();
-
-        playerState.DebuffPlay(debuffTime);
     }
 
 }

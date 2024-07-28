@@ -8,15 +8,16 @@ public class SteamBoom : MonoBehaviour
     [SerializeField] private Transform edge;
     [SerializeField] private float height;
     [SerializeField] private MMF_Player feedback;
-    private ImpactReceiver impact;
     private float preferLenght;
 
+    private IKnockbackable playerKnockable;
     private GameObject player;
     private float timer;
+
     private void Start()
     {
-        player = GameManager.Instance._input.gameObject;
-        impact = GameManager.Instance.Player.GetComponent<ImpactReceiver>();
+        player = GameManager.Instance.Player.gameObject;
+        playerKnockable = player.GetComponent<IKnockbackable>();
         preferLenght = (edge.position - this.transform.position).magnitude;
     }
     private void OnTriggerEnter(Collider other)
@@ -66,7 +67,7 @@ public class SteamBoom : MonoBehaviour
         Vector3 force = direction2D * forceLenght*5 + height;
 
         feedback.PlayFeedbacks();
-        impact.AddImpact(force);
+        playerKnockable.Knockback(transform.position, forceLenght * 5);
         initialization();
     }
 }
