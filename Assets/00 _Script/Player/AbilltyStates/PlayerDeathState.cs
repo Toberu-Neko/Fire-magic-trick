@@ -44,6 +44,7 @@ public class PlayerDeathState : PlayerFSMBaseState
         movement.SetGravityOrginal();
 
         UIManager.Instance.DeactivateDeathUI();
+        player.ChangeActiveCam(Player.ActiveCamera.DeterminBySpeed);
     }
 
     public bool CheckInState() => InState;

@@ -18,6 +18,8 @@ public class PlayerAimIdleState : PlayerGroundedState
     public override void Exit()
     {
         base.Exit();
+
+        player.ChangeActiveCam(Player.ActiveCamera.DeterminBySpeed);
     }
 
     public override void LogicUpdate()

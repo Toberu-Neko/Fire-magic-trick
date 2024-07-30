@@ -12,10 +12,10 @@ public class PlayerRespawnState : PlayerAbilityState
     {
         base.Enter();
 
+        player.ChangeActiveCam(Player.ActiveCamera.DeterminBySpeed);
         player.SetCollider(true);
         player.SetModel(false);
         player.TeleportToSavepoint();
-        player.ChangeActiveCam(Player.ActiveCamera.Normal);
         player.VFXController.ActivateRespawnVFX();
 
         movement.SetGravityZero();
@@ -40,7 +40,6 @@ public class PlayerRespawnState : PlayerAbilityState
     public override void Exit()
     {
         base.Exit();
-
         movement.SetGravityOrginal();
         player.SetColliderAndModel(true);
     }

@@ -10,8 +10,6 @@ public class PlayerRunningState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-
-        player.ChangeActiveCam(Player.ActiveCamera.Run);
     }
 
     public override void LogicUpdate()

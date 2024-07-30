@@ -30,7 +30,6 @@ public class PlayerDashState : PlayerAbilityState
         currentFrame = 0;
 
         stats.Health.Increase(playerData.normalDashEnergyCost);
-        player.ChangeActiveCam(Player.ActiveCamera.Dash);
     }
 
     public override void Exit()

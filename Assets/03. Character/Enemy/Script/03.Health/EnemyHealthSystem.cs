@@ -1,6 +1,7 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using BehaviorDesigner.Runtime;
+using UnityEngine.PlayerLoop;
 
 public class EnemyHealthSystem : MonoBehaviour
 {
@@ -75,19 +76,15 @@ public class EnemyHealthSystem : MonoBehaviour
         StartPosition = this.transform.position;
         StartRotation = this.transform.rotation;
     }
-
-    private void Stats_OnBurnChanged(bool value)
+    private void Start()
     {
-        if (value)
-        {
-            feedbacks_Fire.PlayFeedbacks();
-        }
-        else
-        {
-            feedbacks_Fire.StopFeedbacks();
-        }
-    }
+        bt = GetComponent<BehaviorTree>();
 
+        Stats.Health.Init();
+        Stats.SetOnFire(false);
+
+        GameManager.Instance.OnPlayerReborn += RebirthSelf;
+    }
     private void OnDisable()
     {
         Stats.Health.OnValueDecreased -= Health_OnValueDecreased;
@@ -98,7 +95,6 @@ public class EnemyHealthSystem : MonoBehaviour
 
     private void OnDestroy()
     {
-
         GameManager.Instance.OnPlayerReborn -= RebirthSelf;
     }
 
@@ -116,16 +112,8 @@ public class EnemyHealthSystem : MonoBehaviour
         }
     }
 
-    private void Health_OnValueChanged()
-    {
-        GealthFeedbackByHP(Stats.Health.CurrentValuePercentage);
-    }
 
-    private void Start()
-    {
-        bt = GetComponent<BehaviorTree>();
-        GameManager.Instance.OnPlayerReborn += RebirthSelf;
-    }
+
 
     private void Update()
     {
@@ -142,6 +130,22 @@ public class EnemyHealthSystem : MonoBehaviour
     private void FixedUpdate()
     {
         Core.PhysicsUpdate();
+    }
+    private void Health_OnValueChanged()
+    {
+        GealthFeedbackByHP(Stats.Health.CurrentValuePercentage);
+    }
+
+    private void Stats_OnBurnChanged(bool value)
+    {
+        if (value)
+        {
+            feedbacks_Fire.PlayFeedbacks();
+        }
+        else
+        {
+            feedbacks_Fire.StopFeedbacks();
+        }
     }
 
     public void SetIsRebirthHide(bool value)
@@ -241,6 +245,7 @@ public class EnemyHealthSystem : MonoBehaviour
             if (isHurt)
             {
                 isHurt = false;
+                feedbacks_Steam.StopFeedbacks();
             }
         }
     }
@@ -279,6 +284,7 @@ public class EnemyHealthSystem : MonoBehaviour
         EnemyAggroSystem aggroSystem = GetComponent<EnemyAggroSystem>();
 
         Stats.Health.Init();
+        Stats.SetOnFire(false);
         gameObject.SetActive(true);
 
         if (aggroSystem != null)

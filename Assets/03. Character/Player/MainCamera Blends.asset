@@ -17,15 +17,26 @@ MonoBehaviour:
     m_To: CM Player Aim
     m_Blend:
       m_Style: 1
-      m_Time: 0.3
+      m_Time: 0.4
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: CM Player Normal
+  - m_From: '**ANY CAMERA**'
     m_To: CM Player Run
+    m_Blend:
+      m_Style: 1
+      m_Time: 0.8
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: CM Player Run
+    m_To: '**ANY CAMERA**'
     m_Blend:
       m_Style: 1
       m_Time: 0.4
@@ -35,22 +46,11 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: CM Player Run
-    m_To: CM Player Aim
-    m_Blend:
-      m_Style: 1
-      m_Time: 0.3
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
   - m_From: CM Player Aim
-    m_To: CM Player Run
+    m_To: '**ANY CAMERA**'
     m_Blend:
       m_Style: 1
-      m_Time: 0.3
+      m_Time: 0.25
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
@@ -80,17 +80,6 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: '**ANY CAMERA**'
-    m_To: CM StartGame
-    m_Blend:
-      m_Style: 1
-      m_Time: 1
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-  - m_From: '**ANY CAMERA**'
     m_To: CM Credit
     m_Blend:
       m_Style: 1
@@ -106,39 +95,6 @@ MonoBehaviour:
     m_Blend:
       m_Style: 1
       m_Time: 1
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-  - m_From: '**ANY CAMERA**'
-    m_To: CM Player Normal
-    m_Blend:
-      m_Style: 1
-      m_Time: 1
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-  - m_From: '**ANY CAMERA**'
-    m_To: CM Player Dash
-    m_Blend:
-      m_Style: 1
-      m_Time: 0.25
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-  - m_From: CM Player Dash
-    m_To: '**ANY CAMERA**'
-    m_Blend:
-      m_Style: 1
-      m_Time: 0.35
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []

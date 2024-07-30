@@ -31,6 +31,7 @@ public class Stats : CoreComponent
 
         Health.Init();
         SetInvincible(false);
+        SetOnFire(false);
 
         Health.OnValueIncreased += SetInCombatTrue;
     }
@@ -56,12 +57,20 @@ public class Stats : CoreComponent
 
         if(Health.CurrentValuePercentage < burnWhenHealthBelowPercentage)
         {
+            Debug.Log("Burn cause of 50% health");
             SetIsBurning(true);
         }
         else if (IsBurning)
         {
             BurnCheck();
         }
+    }
+
+    public void SetOnFire(bool value)
+    {
+        startBurnTime = 0f;
+        burnDuration = 0f;
+        SetIsBurning(value);
     }
 
     public void SetOnFire(float time)

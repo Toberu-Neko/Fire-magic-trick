@@ -15,6 +15,13 @@ public class PlayerAimWalkingState : PlayerGroundedState
         player.ChangeActiveCam(Player.ActiveCamera.Aim);
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+
+        player.ChangeActiveCam(Player.ActiveCamera.DeterminBySpeed);
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
