@@ -17,14 +17,13 @@ public class FireCard : Bullet
     {
         base.Start();
 
-        superDash = GameManager.Instance.EnergySystem.GetComponent<SuperDash>();
+        // superDash = GameManager.Instance.EnergySystem.GetComponent<SuperDash>();
     }
     protected override void Update()
     {
         base.Update();
 
         timerSystem();
-        DistanceCheck();
     }
     private void DistanceCheck()
     {

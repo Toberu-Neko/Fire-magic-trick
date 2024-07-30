@@ -19,6 +19,7 @@ public class PlayerAfterSuperDashJump : PlayerAbilityState
         player.InAirState.SetAirControlSpeed(playerData.walkSpeed);
         player.InAirState.SetIsJumping();
         player.JumpState.DecreaseAmountOfJumpsLeft();
+        player.CardSystem.SetKickStrongShoot(true);
 
         foreach(var col in Physics.OverlapBox(player.transform.position, playerData.superDashFootDetectBox, player.transform.rotation))
         {

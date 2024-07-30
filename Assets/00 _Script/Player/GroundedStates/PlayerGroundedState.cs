@@ -22,6 +22,7 @@ public class PlayerGroundedState : PlayerFSMBaseState
         player.JumpState.ResetAmountOfJumpsLeft();
         player.DashState.ResetCanDash();
         player.InAirState.ResetFloatCount();
+        player.CardSystem.SetKickStrongShoot(false);
     }
 
     public override void DoChecks()

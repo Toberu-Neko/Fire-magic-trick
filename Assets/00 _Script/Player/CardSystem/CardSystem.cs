@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
-using static CardSystem;
 
 public class CardSystem : MonoBehaviour
 {
@@ -28,6 +27,7 @@ public class CardSystem : MonoBehaviour
     [SerializeField] private float cardStateDuration = 5f;
     private bool bulletTimeShoot;
     private bool strongShoot;
+    private bool kickStrongShoot;
 
     [Header("Super Dash")]
     [SerializeField] private LayerMask whatIsSuperDashTarget;
@@ -91,6 +91,8 @@ public class CardSystem : MonoBehaviour
 
         HasSuperDashTarget = false;
         bulletTimeShoot = false;
+        strongShoot = false;
+        kickStrongShoot = false;
     }
 
     private void Start()
@@ -229,7 +231,24 @@ public class CardSystem : MonoBehaviour
         }
         else
         {
-            if (strongShoot)
+            if(kickStrongShoot && strongShoot)
+            {
+                strongShoot = false;
+                kickStrongShoot = false;
+                switch (currentCardType)
+                {
+                    case CardType.Normal:
+                        Debug.LogError("Kick strong shoot can't be normal card");
+                        break;
+                    case CardType.Wind:
+                        Instantiate(strongWindCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
+                        break;
+                    case CardType.Fire:
+                        Instantiate(strongFireCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
+                        break;
+                }
+            }
+            else if (strongShoot)
             {
                 strongShoot = false;
                 switch (currentCardType)
@@ -282,9 +301,14 @@ public class CardSystem : MonoBehaviour
         Instantiate(normalCardPrefab, target.position, Quaternion.LookRotation(aimDir, Vector3.up));
     }
 
-    public void SetStrongShoot(bool value)
+    public void SetBulletTimeShoot(bool value)
     {
         bulletTimeShoot = value;
+    }
+
+    public void SetKickStrongShoot(bool value)
+    {
+        kickStrongShoot = value;
     }
     #endregion
 

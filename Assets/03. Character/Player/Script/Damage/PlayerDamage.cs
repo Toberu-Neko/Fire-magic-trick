@@ -5,6 +5,7 @@ public class PlayerDamage : MonoBehaviour
     [SerializeField] private DamageType damageType;
     private Bullet bullet;
     [SerializeField] private float damage;
+    [SerializeField] private float knockbackSpeed;
 
     private void Awake()
     {
@@ -42,5 +43,7 @@ public class PlayerDamage : MonoBehaviour
     {
         Collision.gameObject.TryGetComponent(out IDamageable damageable);
         damageable?.Damage(damage, transform.position);
+        Collision.gameObject.TryGetComponent(out IKnockbackable knockbackable);
+        knockbackable?.Knockback(transform.position, knockbackSpeed);
     }
 }

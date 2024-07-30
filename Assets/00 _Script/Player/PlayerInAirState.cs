@@ -76,7 +76,7 @@ public class PlayerInAirState : PlayerFSMBaseState
 
         player.VFXController.SetCanComboVFX(false);
         player.VFXController.SetFloatVFX(false);
-        player.CardSystem.SetStrongShoot(false);
+        player.CardSystem.SetBulletTimeShoot(false);
     }
 
     public override void DoChecks()
@@ -180,13 +180,13 @@ public class PlayerInAirState : PlayerFSMBaseState
                 isFloating = true;
                 startFloatingTime = Time.time;
                 player.VFXController.SetFloatVFX(true);
-                player.CardSystem.SetStrongShoot(true);
+                player.CardSystem.SetBulletTimeShoot(true);
             }
             else if (isFloating && (!player.InputHandler.OrgJumpInput || Time.time - startFloatingTime > playerData.inAirMaxFloatTime || collisionSenses.LongGround || stats.Health.CurrentValue == stats.Health.MaxValue))
             {
                 isFloating = false;
                 player.VFXController.SetFloatVFX(false);
-                player.CardSystem.SetStrongShoot(false);
+                player.CardSystem.SetBulletTimeShoot(false);
             }
 
             if (isFloating)
