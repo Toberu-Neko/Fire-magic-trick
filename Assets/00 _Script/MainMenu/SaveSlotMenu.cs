@@ -21,9 +21,14 @@ public class SaveSlotMenu : MonoBehaviour
         saveSlots = GetComponentsInChildren<SaveSlot>();
     }
 
+    public void SetIsLoadingGame(bool value)
+    {
+        isLoadingGame = value;
+    }
+
     public void OnSaveSlotClicked(SaveSlot saveSlot)
     {
-        DisableMenuButtons();
+        // DisableMenuButtons();
 
         DataPersistenceManager.Instance.ChangeSelectedProfileId(saveSlot.GetProfileId());
 

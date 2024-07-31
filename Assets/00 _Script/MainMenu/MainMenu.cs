@@ -6,6 +6,7 @@ public class MainMenu : MainMenuUIBase
 {
     [SerializeField] private SaveSlotMenu saveSlotMenu;
     [SerializeField] private OptionUI optionUI;
+    [SerializeField] private GameObject confirmStartUI;
 
     [SerializeField] private Button continueGameButton;
     [SerializeField] private Button loadButton;
@@ -20,6 +21,7 @@ public class MainMenu : MainMenuUIBase
 
         saveSlotMenu.gameObject.SetActive(false);
         optionUI.gameObject.SetActive(false);
+        confirmStartUI.SetActive(false);
 
         optionUI.OnDeactivate += OptionUI_OnDeactivate;
     }
@@ -50,9 +52,7 @@ public class MainMenu : MainMenuUIBase
 
     public void OnStartClick()
     {
-        Deactivate();
-
-        saveSlotMenu.Activate(false);
+        confirmStartUI.SetActive(true);
     }
 
     public void OnQuitClick()
