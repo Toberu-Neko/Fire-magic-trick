@@ -12,6 +12,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     [field: SerializeField] public PlayerInputHandler InputHandler { get; private set; }
     [field: SerializeField] public PlayerVFXController VFXController { get; private set; }
     [SerializeField] private CapsuleCollider col;
+    [SerializeField] private Transform defaultRespawnPos;
     [SerializeField] private GameObject playerModel;
     [SerializeField] private AudioSource superDashAudio;
 
@@ -425,11 +426,16 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     public void LoadData(GameData data)
     {
         if (data.playerRespawnPosition == Vector3.zero)
-            return;
-        RespawnPosition = data.playerRespawnPosition;
-        firstTimePlaying = data.firstTimePlaying;
-        Debug.Log("LoadDataInPlayer");
-        Teleport(RespawnPosition);
+        {
+            RespawnPosition = defaultRespawnPos.position;
+            Teleport(RespawnPosition);
+        }
+        else
+        {
+            RespawnPosition = data.playerRespawnPosition;
+            firstTimePlaying = data.firstTimePlaying;
+            Teleport(RespawnPosition);
+        }
     }
 
     public void SaveData(GameData data)

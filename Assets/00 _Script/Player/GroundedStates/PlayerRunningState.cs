@@ -18,7 +18,7 @@ public class PlayerRunningState : PlayerGroundedState
 
         MoveRelateWithCam(playerData.slowRunSpeed, playerData.fastRunSpeed);
 
-        CheckPlayStepSound(movement.CurrentVelocityXZMagnitude / 8f);
+        CheckPlayStepSound(2.5f / movement.CurrentVelocityXZMagnitude);
 
         if (!isExitingState)
         {

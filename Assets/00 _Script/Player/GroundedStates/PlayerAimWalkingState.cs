@@ -28,7 +28,7 @@ public class PlayerAimWalkingState : PlayerGroundedState
 
 
         MoveWithFacingDir(playerData.walkSpeed);
-        CheckPlayStepSound(movement.CurrentVelocityXZMagnitude / 8f);
+        CheckPlayStepSound(2.5f / movement.CurrentVelocityXZMagnitude);
 
         if (!isExitingState)
         {
