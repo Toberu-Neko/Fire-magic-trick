@@ -64,7 +64,7 @@ public class PlayerFireballState : PlayerAbilityState
             }
         }
 
-        movement.SetVelocityY(Mathf.Lerp(playerData.fireballMaxYVelocity, playerData.fireballMinYVelocity, Time.time - StartTime / playerData.fireballMaxTime));
+        movement.SetVelocityY(Mathf.Lerp(playerData.fireballMaxYVelocity, playerData.fireballMinYVelocity, (Time.time - StartTime) / playerData.fireballMaxTime));
 
         if (collisionSenses.Ground)
         {

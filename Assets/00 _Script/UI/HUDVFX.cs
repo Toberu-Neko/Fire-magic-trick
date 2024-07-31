@@ -13,8 +13,6 @@ public class HUDVFX : MonoBehaviour
     [SerializeField] private GameObject inFireState;
     [SerializeField] private GameObject inWindState;
     [SerializeField] private GameObject overburn;
-    [SerializeField] private GameObject windEnergyFull;
-    [SerializeField] private GameObject fireEnergyFull;
     [SerializeField] private GameObject runSpeedLine;
     [SerializeField] private GameObject superDashSpeedLine;
 
@@ -26,8 +24,6 @@ public class HUDVFX : MonoBehaviour
         windAlt.gameObject.SetActive(true);
 
         overburn.SetActive(false);
-        windEnergyFull.SetActive(false);
-        fireEnergyFull.SetActive(false);
         runSpeedLine.SetActive(false);
         superDashSpeedLine.SetActive(false);
         inFireState.SetActive(false);
@@ -71,16 +67,6 @@ public class HUDVFX : MonoBehaviour
     public void OverburnEffect(bool value)
     {
         overburn.SetActive(value);
-    }
-
-    public void WindEnergyFullEffect(bool value)
-    {
-        windEnergyFull.SetActive(value);
-    }
-
-    public void FireEnergyFullEffect(bool value)
-    {
-        fireEnergyFull.SetActive(value);
     }
 
     public void RunSpeedLineEffect(bool value)

@@ -113,12 +113,12 @@ public class CardSystem : MonoBehaviour
 
         if (value == windMaxEnergy)
         {
-            UIManager.Instance.HudUI.HudVFX.WindEnergyFullEffect(true);
+            playerVFXController.SetWindMaxStar(true);
             playerVFXController.PlayWindMax();
         }
         else
         {
-            UIManager.Instance.HudUI.HudVFX.WindEnergyFullEffect(false);
+            playerVFXController.SetWindMaxStar(false);
         }
     }
 
@@ -128,12 +128,12 @@ public class CardSystem : MonoBehaviour
 
         if (value == fireMaxEnergy)
         {
-            UIManager.Instance.HudUI.HudVFX.FireEnergyFullEffect(true);
+            playerVFXController.SetFireMaxStar(true);
             playerVFXController.PlayFireMax();
         }
         else
         {
-            UIManager.Instance.HudUI.HudVFX.FireEnergyFullEffect(false);
+            playerVFXController.SetFireMaxStar(false);
         }
     }
 

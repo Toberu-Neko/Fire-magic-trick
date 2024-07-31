@@ -49,10 +49,6 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
 
         collision.gameObject.TryGetComponent<IDamageable>(out var damageable);
         damageable?.Damage(colliderHitDamage, transform.position);
-        if(damageable != null)
-        {
-            Debug.Log("Hit!");
-        }
 
         OnHitSomething();
         SpawnVFX(cardSlashPrefab, transform.position, Quaternion.identity, 1.5f);
@@ -63,7 +59,7 @@ public class Bullet : MonoBehaviour, IHitNotifier, ITriggerNotifier
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Bullet hit enemy in trigger, + hit: " + gameObject.name);
+            // Debug.Log("Bullet hit enemy in trigger, + hit: " + gameObject.name);
             OnTrigger?.Invoke(other);
             OnHitEnemy();
             // crosshairUI.EnemyHitImpluse(this.transform.position);

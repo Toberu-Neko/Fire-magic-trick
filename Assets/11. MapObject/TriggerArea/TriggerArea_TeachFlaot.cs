@@ -15,7 +15,7 @@ public class TriggerArea_TeachFlaot : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            UIManager.Instance.OpenTeachFloat(types);
+            UIManager.Instance.CloseTeachFloat(types);
         }
     }
 }

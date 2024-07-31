@@ -373,7 +373,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
 
     public void SetCollider(bool value)
     {
-        col.enabled = value;
+        col.isTrigger = !value;
     }
 
     public void SetModel(bool value)

@@ -82,6 +82,7 @@ public class EnemyHealthSystem : MonoBehaviour
 
         Stats.Health.Init();
         Stats.SetOnFire(false);
+        Stats_OnBurnChanged(false);
 
         GameManager.Instance.OnPlayerReborn += RebirthSelf;
     }
@@ -90,7 +91,6 @@ public class EnemyHealthSystem : MonoBehaviour
         Stats.Health.OnValueDecreased -= Health_OnValueDecreased;
         Stats.Health.OnValueChanged -= Health_OnValueChanged;
         Stats.OnBurnChanged -= Stats_OnBurnChanged;
-
     }
 
     private void OnDestroy()
@@ -100,6 +100,11 @@ public class EnemyHealthSystem : MonoBehaviour
 
     private void Health_OnValueDecreased()
     {
+        if(Stats.Health.CurrentValuePercentage > 0.95f)
+        {
+            return;
+        }
+
         if (bt != null)
         {
             bt.SendEvent("HitByPlayer");
