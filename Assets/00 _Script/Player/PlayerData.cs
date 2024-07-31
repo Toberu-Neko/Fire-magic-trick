@@ -60,6 +60,7 @@ public class PlayerData : ScriptableObject
     public float inAirMaxFloatTime = 3f;
 
     [Header("Dash")]
+    public Sound dashSound;
     public float dashSpeed = 10f;
     public float dashTime = 0.2f;
     public float dashCooldown = 1f;

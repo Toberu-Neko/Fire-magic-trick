@@ -30,6 +30,7 @@ public class PlayerDashState : PlayerAbilityState
         currentFrame = 0;
 
         stats.Health.Increase(playerData.normalDashEnergyCost);
+        AudioManager.Instance.PlaySoundFX(playerData.dashSound, player.transform, AudioManager.SoundType.twoD);
     }
 
     public override void Exit()
