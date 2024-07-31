@@ -30,6 +30,7 @@ public class PlayerFireballState : PlayerAbilityState
     {
         base.Exit();
 
+        AudioManager.Instance.PlaySoundFX(playerData.superJumpLandSound, player.transform, AudioManager.SoundType.twoD);
         player.SetColliderAndModel(true);
         player.VFXController.SetSuperDashVFX(false);
 

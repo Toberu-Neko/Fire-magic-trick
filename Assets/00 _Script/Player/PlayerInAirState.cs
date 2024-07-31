@@ -116,6 +116,7 @@ public class PlayerInAirState : PlayerFSMBaseState
             if(movement.CurrentVelocity.y < -1f)
             {
                 player.Anim.SetTrigger("land");
+                AudioManager.Instance.PlaySoundFX(playerData.landSFX, player.transform, AudioManager.SoundType.twoD);
             }
 
             if (inAirMovementSpeed < playerData.slowRunSpeed && MovementInput != Vector2.zero)

@@ -43,6 +43,7 @@ public class PlayerSuperDashState : PlayerAbilityState
         player.VFXController.SetSuperDashVFX(true);
 
         UIManager.Instance.HudUI.HudVFX.SuperDashSpeedLineEffect(true);
+        player.SetSuperDashAudio(true);
     }
 
     public override void Exit()
@@ -77,6 +78,8 @@ public class PlayerSuperDashState : PlayerAbilityState
         }
 
         UIManager.Instance.HudUI.HudVFX.SuperDashSpeedLineEffect(false);
+        AudioManager.Instance.PlaySoundFX(playerData.superDashHitSFX, player.transform, AudioManager.SoundType.twoD);
+        player.SetSuperDashAudio(false);
     }
 
     public override void LogicUpdate()

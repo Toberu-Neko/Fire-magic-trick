@@ -19,6 +19,8 @@ public class PlayerWalkingState : PlayerGroundedState
 
         MoveRelateWithCam(playerData.walkSpeed);
 
+        CheckPlayStepSound(movement.CurrentVelocityXZMagnitude / 8f);
+
         if (!isExitingState)
         {
             if(MovementInput == Vector2.zero)

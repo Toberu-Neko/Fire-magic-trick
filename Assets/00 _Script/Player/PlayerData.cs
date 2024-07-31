@@ -40,6 +40,7 @@ public class PlayerData : ScriptableObject
     public float longRangeDetectRadius = 4f;
 
     [Header("Move")]
+    public Sound[] footStepSFX;
     public float walkSpeed = 3f;
     public float slowRunSpeed = 5f;
     public float fastRunSpeed = 8f;
@@ -54,6 +55,7 @@ public class PlayerData : ScriptableObject
     public float frameOfDecaySpeed = 0.75f;
 
     [Header("InAir")]
+    public Sound landSFX;
     public int maxFloatCount = 1;
     public float floatSpeed = -1f;
     public float floatHoldJumpTime = 0.2f;
@@ -66,13 +68,15 @@ public class PlayerData : ScriptableObject
     public float dashCooldown = 1f;
 
     [Header("Super Jump")]
+    public Sound superJumpStartSound;
+    public Sound superJumpLandSound;
     public float superJumpVelocity = 30f;
     public int superJumpEnergyCost = 3;
     public float superJumpFallAddForce = 10f;
     public float superJumpFallStartVelocity = -6f;
 
-
     [Header("Super Dash")]
+    public Sound superDashHitSFX;
     public float maxSuperDashSpeed = 25f;
     public AnimationCurve superDashSpeedGraph;
     public float speedUpTime = 0.5f;

@@ -102,10 +102,10 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(ReturnSFXObj(audioSource.gameObject, time));
     }
 
-    public void PlayRandomSoundFX(Sound[] sounds, Transform spawnTransform)
+    public void PlayRandomSoundFX(Sound[] sounds, Transform spawnTransform, SoundType type)
     {
         int randomIndex = UnityEngine.Random.Range(0, sounds.Length);
-        AudioSource audioSource = ObjectPoolManager.SpawnObject(soundFXObj3D, spawnTransform.position, Quaternion.identity).GetComponent<AudioSource>();
+        AudioSource audioSource = ObjectPoolManager.SpawnObject(type == SoundType.twoD ? soundFXObj2D : soundFXObj3D, spawnTransform.position, Quaternion.identity).GetComponent<AudioSource>();
 
         Sound s = sounds[randomIndex];
         audioSource.clip = s.clip;

@@ -11,6 +11,7 @@ public class PlayerGroundedState : PlayerFSMBaseState
     protected bool isGrounded;
     protected bool isOnSlope;
 
+    private float lastTimePlayStepSound;
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -85,6 +86,16 @@ public class PlayerGroundedState : PlayerFSMBaseState
                     stateMachine.ChangeState(player.FireAltState);
                 }
             }
+        }
+    }
+
+    protected void CheckPlayStepSound(float waitTime)
+    {
+        if(Time.time >= waitTime + lastTimePlayStepSound)
+        {
+            lastTimePlayStepSound = Time.time;
+
+            AudioManager.Instance.PlayRandomSoundFX(playerData.footStepSFX, player.transform, AudioManager.SoundType.twoD);
         }
     }
 

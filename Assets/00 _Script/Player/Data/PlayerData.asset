@@ -37,6 +37,39 @@ MonoBehaviour:
   closeRangeDetectRadius: 2
   midRangeDetectRadius: 3
   longRangeDetectRadius: 4
+  footStepSFX:
+  - name: 
+    clip: {fileID: 8300000, guid: 72f526a6a9890f643a88e85a61c86c8a, type: 3}
+    volume: 1
+    pitch: 1
+    pitchRandomRangeMin: -0.1
+    pitchRandomRangeMax: 0.1
+    loop: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 85016e0f2b01da248b9663dd49a161b0, type: 3}
+    volume: 1
+    pitch: 1
+    pitchRandomRangeMin: -0.1
+    pitchRandomRangeMax: 0.1
+    loop: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 186de84b3207156479abe98f4958fed0, type: 3}
+    volume: 1
+    pitch: 1
+    pitchRandomRangeMin: -0.1
+    pitchRandomRangeMax: 0.1
+    loop: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 1a91fcd19acf1e54bba0945d9f390849, type: 3}
+    volume: 1
+    pitch: 1
+    pitchRandomRangeMin: -0.1
+    pitchRandomRangeMax: 0.1
+    loop: 0
+    source: {fileID: 0}
   walkSpeed: 3.25
   slowRunSpeed: 5
   fastRunSpeed: 8
@@ -47,6 +80,15 @@ MonoBehaviour:
   jumpInpusStopYSpeedMultiplier: 1
   coyoteTime: 0.2
   frameOfDecaySpeed: 0.75
+  landSFX:
+    name: 
+    clip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
+    volume: 1
+    pitch: 1
+    pitchRandomRangeMin: 0
+    pitchRandomRangeMax: 0
+    loop: 0
+    source: {fileID: 0}
   maxFloatCount: 1
   floatSpeed: -0.2
   floatHoldJumpTime: 0.5
@@ -63,10 +105,37 @@ MonoBehaviour:
   dashSpeed: 12
   dashTime: 0.2
   dashCooldown: 0.35
+  superJumpStartSound:
+    name: 
+    clip: {fileID: 8300000, guid: 090f472c241a2284c95084cfccc0b7b3, type: 3}
+    volume: 1
+    pitch: 1
+    pitchRandomRangeMin: 0
+    pitchRandomRangeMax: 0
+    loop: 0
+    source: {fileID: 0}
+  superJumpLandSound:
+    name: 
+    clip: {fileID: 8300000, guid: 68d9e4315b9796e4a81221b429ad1269, type: 3}
+    volume: 1
+    pitch: 1
+    pitchRandomRangeMin: 0
+    pitchRandomRangeMax: 0
+    loop: 0
+    source: {fileID: 0}
   superJumpVelocity: 16
   superJumpEnergyCost: 3
   superJumpFallAddForce: 20
   superJumpFallStartVelocity: -6
+  superDashHitSFX:
+    name: 
+    clip: {fileID: 8300000, guid: fc44d5cb3fcf36f47a542f1612a0c77f, type: 3}
+    volume: 1
+    pitch: 1
+    pitchRandomRangeMin: 0
+    pitchRandomRangeMax: 0
+    loop: 0
+    source: {fileID: 0}
   maxSuperDashSpeed: 25
   superDashSpeedGraph:
     serializedVersion: 2

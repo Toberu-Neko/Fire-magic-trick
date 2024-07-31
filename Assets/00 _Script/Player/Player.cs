@@ -13,6 +13,8 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     [field: SerializeField] public PlayerVFXController VFXController { get; private set; }
     [SerializeField] private CapsuleCollider col;
     [SerializeField] private GameObject playerModel;
+    [SerializeField] private AudioSource superDashAudio;
+
     public Movement Movement { get; private set; }
     public Stats Stats { get; private set; }
     private Combat combat;
@@ -353,7 +355,6 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
 
     public void TeleportToSavepoint()
     {
-        Debug.Log("Teleporting to savepoint");
         Teleport(RespawnPosition);
     }
 
@@ -367,6 +368,18 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     public void DecreaseHealthUntilInit(float value)
     {
         Stats.Health.DecreaseUntilInitValue(value);
+    }
+
+    public void SetSuperDashAudio(bool value)
+    {
+        if (value)
+        {
+           superDashAudio.Play();
+        }
+        else
+        {
+            superDashAudio.Stop();
+        }
     }
 
     #region IPlayerHandler

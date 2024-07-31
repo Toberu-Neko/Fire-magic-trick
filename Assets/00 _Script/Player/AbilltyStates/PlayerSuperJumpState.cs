@@ -24,6 +24,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
         minYVelocity = Mathf.Infinity;
 
         player.VFXController.SetCanComboVFX(player.InAirState.CheckCanFloat());
+        AudioManager.Instance.PlaySoundFX(playerData.superJumpStartSound, player.transform, AudioManager.SoundType.twoD);
 
         if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
         {
@@ -113,6 +114,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
 
         if (!(player.InputHandler.JumpInput && player.InAirState.CheckCanFloat()))
         {
+            AudioManager.Instance.PlaySoundFX(playerData.superJumpLandSound, player.transform, AudioManager.SoundType.twoD);
             foreach (var col in SphereDetection(playerData.longRangeDetectRadius))
             {
                 if (col != null)
