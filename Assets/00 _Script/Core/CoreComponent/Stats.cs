@@ -57,7 +57,7 @@ public class Stats : CoreComponent
 
         if(Health.CurrentValuePercentage < burnWhenHealthBelowPercentage)
         {
-            Debug.Log("Burn cause of 50% health");
+            // Debug.Log("Burn cause of 50% health");
             SetIsBurning(true);
         }
         else if (IsBurning)

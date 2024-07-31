@@ -44,7 +44,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce4c71967ded174a93d9fbbc285bbae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: L1BGM
+    clip: {fileID: 8300000, guid: 561f2d4f6c2f24544a8862439cbec0fe, type: 3}
+    volume: 1
+    pitch: 1
+    pitchRandomRangeMin: 0
+    pitchRandomRangeMax: 0
+    loop: 1
+    source: {fileID: 0}
+  - name: MainMenuBGM
+    clip: {fileID: 8300000, guid: 561f2d4f6c2f24544a8862439cbec0fe, type: 3}
+    volume: 1
+    pitch: 1
+    pitchRandomRangeMin: 0
+    pitchRandomRangeMax: 0
+    loop: 1
+    source: {fileID: 0}
   soundFXObj2D: {fileID: 2214217653284669646, guid: 198a71389cbb3984c9a769c0d7dbe792, type: 3}
   soundFXObj3D: {fileID: 2214217653284669646, guid: c92fe9f70e61b5740bee96b0cc69a393, type: 3}
   audioMixer: {fileID: 24100000, guid: 8bc3f869f0f4d8241b19450046ccc2e9, type: 2}
