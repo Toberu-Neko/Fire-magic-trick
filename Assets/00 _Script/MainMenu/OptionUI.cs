@@ -25,6 +25,7 @@ public class OptionUI : MonoBehaviour, IOptionData
         gameObject.SetActive(false);
         OnDeactivate?.Invoke();
         DataPersistenceManager.Instance.SaveOptionData();
+        DataPersistenceManager.Instance.LoadOptionData();
     }
 
     public void SetMasterVolume(float volume)

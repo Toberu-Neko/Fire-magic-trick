@@ -23,6 +23,7 @@ public class PauseUI : MouseControlUIBase
         base.Deactivate();
 
         GameManager.Instance.ResumeGame();
+        optionUI.Deactivate();
     }
 
 }
