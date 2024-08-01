@@ -34,7 +34,7 @@ public class InstanceCombiner : MonoBehaviour
 
     private void Awake()
     {
-        Debug.LogError("This script is for Editor Only in " + transform.root.name);
+        Debug.LogError("This script is for Editor Only in " + transform.parent.name);
         enabled = false;
         return;
     }
@@ -58,6 +58,7 @@ public class InstanceCombiner : MonoBehaviour
         var mesh = new Mesh();
 
         //Call targetMesh.CombineMeshes and pass in the array of CombineInstances.
+
         mesh.CombineMeshes(combine);
         transform.localPosition = mesh.bounds.center * -1;
 
@@ -71,6 +72,7 @@ public class InstanceCombiner : MonoBehaviour
 
         // Print Results
         print($"<color=#20E7B0>Combine Meshes was Successful!</color>");
+        DestroyImmediate(this);
     }
 
     private void AddMeshComps()
