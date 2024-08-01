@@ -56,6 +56,9 @@ public class EnemyHealthSystem : MonoBehaviour
     public Stats Stats { get; private set; }
     public Combat Combat { get; private set; }
     public Movement Movement { get; private set; }
+    public CollisionSenses CollisionSenses { get; private set; }
+
+    private float notGroundedTimer;
 
     private void Awake()
     {
@@ -63,8 +66,11 @@ public class EnemyHealthSystem : MonoBehaviour
         Stats = Core.GetCoreComponent<Stats>();
         Combat = Core.GetCoreComponent<Combat>();
         Movement = Core.GetCoreComponent<Movement>();
+        CollisionSenses = Core.GetCoreComponent<CollisionSenses>();
 
         _fireSystem = GetComponent<EnemyFireSystem>();
+
+        notGroundedTimer = 0f;
     }
 
     private void OnEnable()
@@ -125,6 +131,22 @@ public class EnemyHealthSystem : MonoBehaviour
         Core.LogicUpdate();
 
         AtCrashTimerSystem();
+
+        if (gameObject.name.Contains("A"))
+        {
+            if (CollisionSenses.Ground)
+            {
+                notGroundedTimer = 0f;
+            }
+            else
+            {
+                notGroundedTimer += Time.deltaTime;
+                if (notGroundedTimer > 10f)
+                {
+                    EnemyDeathRightNow();
+                }
+            }
+        }
     }
 
     private void LateUpdate()

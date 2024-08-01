@@ -7,14 +7,14 @@ public class TriggerFunction : MonoBehaviour
     [SerializeField] private bool OnStartTrigger = false;
     [SerializeField] UnityEvent OnStartTriggerEvent;
     [Header("OnTriggerEnter")]
-    [SerializeField] UnityEvent OnTriggerEvent;
+    [SerializeField] UnityEvent<Collider> OnTriggerEvent;
     [SerializeField] private bool OnlyOnce = true;
     [Header("OnTriggerStay")]
     [SerializeField] private bool useTriggerStay = false;
-    [SerializeField] UnityEvent OnTriggerStayEvent;
+    [SerializeField] UnityEvent<Collider> OnTriggerStayEvent;
     [Header("OnTriggerExit")]
     [SerializeField] private bool useTriggerExit = false;
-    [SerializeField] UnityEvent OnTriggerExitEvent;
+    [SerializeField] UnityEvent<Collider> OnTriggerExitEvent;
 
 
     private void Start()
@@ -28,7 +28,7 @@ public class TriggerFunction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            OnTriggerEvent.Invoke();
+            OnTriggerEvent.Invoke(other);
             if (OnlyOnce)
             {
                 Destroy(gameObject);
@@ -43,7 +43,7 @@ public class TriggerFunction : MonoBehaviour
             {
                 if (OnTriggerStayEvent != null)
                 {
-                    OnTriggerStayEvent.Invoke();
+                    OnTriggerStayEvent.Invoke(other);
                 }
             }
         }
@@ -57,7 +57,7 @@ public class TriggerFunction : MonoBehaviour
                 if (OnTriggerExitEvent != null)
                 {
                     //Debug.Log("trigger Function");
-                    OnTriggerExitEvent.Invoke();
+                    OnTriggerExitEvent.Invoke(other);
                 }
             }
         }

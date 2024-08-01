@@ -17,7 +17,9 @@ public class PlayerFireballState : PlayerAbilityState
         maxSpeed = movement.CurrentVelocityXZMagnitude;
         useOverrideSpeed = false;
 
-        player.SetColliderAndModel(false);
+        player.SetCollider(true);
+        player.SetModel(false);
+        stats.SetInvincible(true);
         player.VFXController.SetSuperDashVFX(true);
 
         if (collisionSenses.Ground)
@@ -31,7 +33,10 @@ public class PlayerFireballState : PlayerAbilityState
         base.Exit();
 
         AudioManager.Instance.PlaySoundFX(playerData.superJumpLandSound, player.transform, AudioManager.SoundType.twoD);
-        player.SetColliderAndModel(true);
+
+        player.SetModel(true);
+        stats.SetInvincible(false);
+
         player.VFXController.SetSuperDashVFX(false);
 
         foreach (var col in SphereDetection(playerData.longRangeDetectRadius))
