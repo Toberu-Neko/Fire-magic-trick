@@ -6,6 +6,8 @@ public class PlayerFireAltState : PlayerAbilityState
     private int currentFrame;
     private float startShootingTime;
     private bool firstTimeDrop;
+
+    private float lastShootTime;
     public PlayerFireAltState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -14,6 +16,7 @@ public class PlayerFireAltState : PlayerAbilityState
     {
         base.Enter();
 
+        lastShootTime = 0f;
         minYVelocity = Mathf.Infinity;
         currentFrame = 0;
         firstTimeDrop = true;
@@ -24,6 +27,7 @@ public class PlayerFireAltState : PlayerAbilityState
 
         player.SetColliderAndModel(false);
         player.VFXController.SetSuperDashVFX(true);
+        player.VFXController.PlayFireExplode();
         BulletTimeManager.Instance.BulletTime_Slow(0.2f);
 
         movement.SetVelocityY(playerData.superJumpVelocity);
@@ -31,7 +35,7 @@ public class PlayerFireAltState : PlayerAbilityState
         foreach(var obj in SphereDetection(playerData.longRangeDetectRadius))
         {
             obj.TryGetComponent(out IFlammable flammable);
-            flammable?.SetOnFire(6f);
+            flammable?.SetOnFire(5f);
         }
 
         UIManager.Instance.HudUI.HudVFX.FireAltEffect();
@@ -56,6 +60,13 @@ public class PlayerFireAltState : PlayerAbilityState
                 {
                     firstTimeDrop = false;
                     startShootingTime = Time.time;
+                    player.VFXController.PlayFireExplode();
+
+                    foreach (var obj in SphereDetection(playerData.longRangeDetectRadius))
+                    {
+                        obj.TryGetComponent(out IFlammable flammable);
+                        flammable?.SetOnFire(5f);
+                    }
 
                     BulletTimeManager.Instance.BulletTime_Slow(0.2f);
                 }
@@ -64,8 +75,17 @@ public class PlayerFireAltState : PlayerAbilityState
                 MoveWithInput(playerData.aimMoveSpeed, 0f, true);
 
                 //shoot
-                player.CardSystem.FireAltShoot();
+                if(Time.time > lastShootTime + playerData.fireAltFireRate)
+                {
+                    lastShootTime = Time.time;
 
+                    for (int i = 0; i < playerData.fireAltFireBullet; i++)
+                    {
+                        player.CardSystem.FireAltShoot();
+                    }
+
+                    AudioManager.Instance.PlayRandomSoundFX(player.CardSystem.ShootSFXs, player.transform, AudioManager.SoundType.twoD);
+                }
 
                 if (Time.time > startShootingTime + playerData.fireAltFireTime)
                 {

@@ -17,6 +17,7 @@ public class PlayerVFXController : MonoBehaviour
     [SerializeField] private ParticleSystem windMaxVFX;
     [SerializeField] private ParticleSystem windMaxStar;
     [SerializeField] private ParticleSystem fireMaxStar;
+    [SerializeField] private ParticleSystem fireExplode;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject deathVFXPrefab;
@@ -53,7 +54,9 @@ public class PlayerVFXController : MonoBehaviour
         windCountVFX.gameObject.SetActive(true);
         fireMaxVFX.gameObject.SetActive(true);
         windMaxVFX.gameObject.SetActive(true);
+        fireExplode.gameObject.SetActive(true);
 
+        fireExplode.Stop();
         fireCountVFX.Stop();
         windCountVFX.Stop();
         fireMaxVFX.Stop();
@@ -68,6 +71,11 @@ public class PlayerVFXController : MonoBehaviour
         fireMaxStar.gameObject.SetActive(value);
     }
 
+    public void PlayFireExplode()
+    {
+        fireExplode.Stop();
+        fireExplode.Play();
+    }
 
     public void ActivateWindStartVFX()
     {
