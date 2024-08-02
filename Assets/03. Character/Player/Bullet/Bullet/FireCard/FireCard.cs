@@ -3,12 +3,9 @@ using UnityEngine;
 public class FireCard : Bullet
 {
     [Header("FireCard")]
-    [SerializeField] private Transform fireBall;
+    [SerializeField] private GameObject fireBallPrefab;
     [SerializeField] private float moveTime;
     [SerializeField] private float ThroughDistance;
-
-    //Script
-    private SuperDash superDash;
 
     //variable
     private float timer;
@@ -16,31 +13,15 @@ public class FireCard : Bullet
     protected override void Start()
     {
         base.Start();
-
-        // superDash = GameManager.Instance.EnergySystem.GetComponent<SuperDash>();
     }
     protected override void Update()
     {
         base.Update();
 
-        timerSystem();
-    }
-    private void DistanceCheck()
-    {
-        Vector3 Player = GameManager.Instance.Player.transform.position;
-        Vector3 FireCard = transform.position;
-        float distance = (Player - FireCard).magnitude;
-
-        if(distance < ThroughDistance)
-        {
-            if(superDash.isSuperDash)
-            {
-                superDash.ToThroughEnemy();
-            }
-        }
+        TimerSystem();
     }
 
-    private void timerSystem()
+    private void TimerSystem()
     {
         timer += Time.deltaTime;
 
@@ -49,6 +30,7 @@ public class FireCard : Bullet
             ToStop();
         }
     }
+
     protected override void OnHitEnemy()
     {
         base.OnHitEnemy();
@@ -57,7 +39,8 @@ public class FireCard : Bullet
     protected override void OnHitSomething()
     {
         base.OnHitSomething();
-        Instantiate(fireBall, transform.position, Quaternion.identity);
+
+        ObjectPoolManager.SpawnObject(fireBallPrefab, transform.position, Quaternion.identity);
     }
     private void ToStop()
     {
