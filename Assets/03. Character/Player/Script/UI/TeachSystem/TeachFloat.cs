@@ -17,35 +17,41 @@ public class TeachFloat : MonoBehaviour
     public void Open(types type)
     {
         gameObject.SetActive(true);
-        GameObject obj = ChooseObj(type);
-        obj.SetActive(true);
+        ChooseObj(type, true);
     }
     public void Close(types type)
     {
         gameObject.SetActive(false);
-        GameObject obj = ChooseObj(type);
-        obj.SetActive(false);
+        ChooseObj(type, false);
     }
-    private GameObject ChooseObj(types type)
+    private void ChooseObj(types type, bool activate)
     {
-        GameObject obj = null;
-
         switch (type)
         {
             case types.SuperJump:
-                obj = UI_SuperJump;
+                UI_SuperJump.SetActive(activate);
+                DashState.SetActive(false);
+                JumpWeakest.SetActive(false);
+                ElementSkill.SetActive(false);
                 break;
             case types.DashState:
-                obj = DashState;
+                UI_SuperJump.SetActive(false);
+                DashState.SetActive(activate);
+                JumpWeakest.SetActive(false);
+                ElementSkill.SetActive(false);
                 break;
             case types.JumpWeakest:
-                obj = JumpWeakest;
+                UI_SuperJump.SetActive(false);
+                DashState.SetActive(false);
+                JumpWeakest.SetActive(activate);
+                ElementSkill.SetActive(false);
                 break;
             case types.ElementSkill:
-                obj = ElementSkill;
+                UI_SuperJump.SetActive(false);
+                DashState.SetActive(false);
+                JumpWeakest.SetActive(false);
+                ElementSkill.SetActive(activate);
                 break;
         }
-
-        return obj;
     }
 }
