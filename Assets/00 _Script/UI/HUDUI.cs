@@ -1,3 +1,4 @@
+using MoreMountains.Tools;
 using System;
 using UnityEngine;
 
@@ -8,11 +9,49 @@ public class HUDUI : MonoBehaviour
     [SerializeField] private TeachFloat teachFloatUI;
     [field: SerializeField] public HUDVFX HudVFX { get; private set; }
 
+    [SerializeField] private MMProgressBar normalBar;
+    [SerializeField] private MMProgressBar overburnBar;
+
+    private float lastUpdateBarTime = 0f;
+
     private void Awake()
     {
         crosshairUI.SetCrossWhite();
         teachFloatUI.gameObject.SetActive(false);
         bossUI.gameObject.SetActive(false);
+        lastUpdateBarTime = 0f;
+        SetBar(0.5f);
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.OnPlayerReborn += () => lastUpdateBarTime = 0f;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnPlayerReborn -= () => lastUpdateBarTime = 0f;
+    }
+
+    public void SetBar(float percentage)
+    {
+        if(Time.time - lastUpdateBarTime < 0.2f && lastUpdateBarTime!=0)
+        {
+            return;
+        }
+
+        lastUpdateBarTime = Time.time;
+
+        if(percentage >= 0.5f)
+        {
+            normalBar.UpdateBar01(1f - (percentage - 0.5f) * 2f);
+            overburnBar.UpdateBar01(0f);
+        }
+        else
+        {
+            normalBar.UpdateBar01(1f);
+            overburnBar.UpdateBar01(1f - percentage * 2f);
+        }
     }
 
     public void SetCrossRed()

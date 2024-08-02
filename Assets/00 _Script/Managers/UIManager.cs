@@ -94,6 +94,7 @@ public class UIManager : MonoBehaviour
     }
 
     #region HUD
+
     public void SetCrossRed()
     {
         HudUI.SetCrossRed();

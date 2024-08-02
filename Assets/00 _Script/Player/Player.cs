@@ -120,13 +120,23 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     private void OnEnable()
     {
         Stats.Health.OnCurrentValueZero += HandleHealthZero;
+        Stats.Health.OnValueChanged += Health_OnValueChanged;
         Stats.OnBurnChanged += HandleBurnChanged;
 
         combat.OnDamaged += HandleOnDamaged;
     }
 
+    private void Health_OnValueChanged()
+    {
+        if(UIManager.Instance != null)
+        {
+            UIManager.Instance.HudUI.SetBar(Stats.Health.CurrentValuePercentage);
+        }
+    }
+
     private void OnDisable()
     {
+        Stats.Health.OnValueChanged -= Health_OnValueChanged;
         Stats.Health.OnCurrentValueZero -= HandleHealthZero;
         Stats.OnBurnChanged -= HandleBurnChanged;
 
@@ -137,6 +147,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     {
         _cinemachineTargetYaw = cinemachineCameraTarget.transform.rotation.eulerAngles.y;
         StateMachine.Initialize(LoadingState);
+        Stats.Health.Init();
 
         LoadSceneManager.Instance.OnAdditiveSceneAlreadyLoaded += HandleFinishLoading;
         LoadSceneManager.Instance.OnLoadingAdditiveProgress += HandleAdditiveLoading;

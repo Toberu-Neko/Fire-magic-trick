@@ -22,6 +22,7 @@ public class PlayerRespawnState : PlayerAbilityState
 
         stats.Health.Init();
         player.CardSystem.Init();
+        UIManager.Instance.HudUI.SetBar(0.5f);
         GameManager.Instance.PlayerReborn();
     }
 
