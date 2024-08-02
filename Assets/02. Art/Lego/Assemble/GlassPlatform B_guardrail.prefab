@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4678375460295673677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4467537614516130764}
+  m_Layer: 13
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4467537614516130764
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4678375460295673677}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.03, y: -0.51, z: 0.023}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5454432171278342093}
+  m_Father: {fileID: 6177357743855961258}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4678679119795121636
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,12 +59,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4678679119795121636}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.105250664, y: 0.7038468, z: 0.10752038, w: 0.69423443}
-  m_LocalPosition: {x: 110.12256, y: -29.569038, z: 64.252335}
-  m_LocalScale: {x: 0.65763575, y: 0.89040715, z: 0.86510193}
+  m_LocalRotation: {x: 0.105250664, y: 0.7038468, z: 0.10752038, w: 0.6942344}
+  m_LocalPosition: {x: 110.12255, y: -29.569038, z: 64.252335}
+  m_LocalScale: {x: 0.65763587, y: 0.890407, z: 0.8651019}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6177357743855961258}
+  m_Father: {fileID: 4467537614516130764}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5606725403093231
 MeshFilter:
@@ -242,7 +274,7 @@ Transform:
   m_LocalScale: {x: 1.2434, y: 1, z: 1.5937603}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5454432171278342093}
+  - {fileID: 4467537614516130764}
   - {fileID: 2387430143386270539}
   - {fileID: 19667441340620351}
   m_Father: {fileID: 2161432915690348090}

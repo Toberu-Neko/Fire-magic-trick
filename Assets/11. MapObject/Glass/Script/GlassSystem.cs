@@ -75,7 +75,7 @@ public class GlassSystem : MonoBehaviour, IDamageable
                     fastMode();
                     break;
                 case Mode.Delay:
-                    delayMode();
+                    DelayMode();
                     break;
             }
 
@@ -100,7 +100,7 @@ public class GlassSystem : MonoBehaviour, IDamageable
         SetGlass(false);
 
     }
-    private async void delayMode()
+    private async void DelayMode()
     {
         feedbacks_Delay.PlayFeedbacks();
         await Task.Delay((int)(delayTime * 1000));
@@ -166,5 +166,13 @@ public class GlassSystem : MonoBehaviour, IDamageable
     public GameObject GetGameObject()
     {
         return this.gameObject;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.CompareTag("Player") && mode == Mode.Delay)
+        {
+            DelayMode();
+        }
     }
 }

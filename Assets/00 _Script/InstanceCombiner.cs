@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 #if UNITY_EDITOR
+using UnityEditor;
 [CustomEditor(typeof(InstanceCombiner))]
 public class InstanceCombinerEditor : Editor
 {
@@ -21,7 +21,7 @@ public class InstanceCombinerEditor : Editor
         }
     }
 }
-#endif
+
 public class InstanceCombiner : MonoBehaviour
 {
     // Source Meshes you want to combine
@@ -98,7 +98,6 @@ public class InstanceCombiner : MonoBehaviour
         }
     }
 
-
     public static void SaveMesh(Mesh mesh, string name, bool makeNewInstance, bool optimizeMesh)
     {
         string path = EditorUtility.SaveFilePanel("Save Separate Mesh Asset", "Assets/", name, "asset");
@@ -115,3 +114,4 @@ public class InstanceCombiner : MonoBehaviour
         AssetDatabase.SaveAssets();
     }
 }
+#endif
