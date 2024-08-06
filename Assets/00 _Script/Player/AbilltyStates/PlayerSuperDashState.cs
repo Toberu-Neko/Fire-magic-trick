@@ -1,5 +1,3 @@
-using MagicaCloth2;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -71,7 +69,7 @@ public class PlayerSuperDashState : PlayerAbilityState
 
                 if (col.TryGetComponent(out IKnockbackable knockbackable))
                 {
-                    knockbackable.Knockback(player.transform.position, playerData.superDashKnockbackForce, false);
+                    knockbackable.Knockback(player.transform.position, playerData.superDashKnockbackForce);
                 }
 
                 if (col.TryGetComponent(out IFlammable flammable))

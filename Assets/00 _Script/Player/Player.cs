@@ -26,7 +26,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     [SerializeField] private Transform playerCamera;
     [SerializeField] private GameObject NormalCam;
     [SerializeField] private GameObject RunCam;
-    [SerializeField] private GameObject DashCam;
+    [SerializeField] private GameObject SkillCam;
     [SerializeField] private GameObject AimCam;
     [SerializeField] private GameObject DeathCam;
     private ActiveCamera activeCamera;
@@ -36,6 +36,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         None,
         Aim,
         Death,
+        Skill,
         DeterminBySpeed
     }
 
@@ -132,7 +133,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     {
         if(UIManager.Instance != null)
         {
-            UIManager.Instance.HudUI.SetBar(Stats.Health.CurrentValuePercentage);
+            
         }
     }
 
@@ -186,7 +187,8 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
 
     private void Update()
     {
-        Core.LogicUpdate();
+        Core.LogicUpdate(); 
+        UIManager.Instance.HudUI.SetBar(Stats.Health.CurrentValuePercentage);
 
         StateMachine.CurrentState.LogicUpdate();
         Anim.SetFloat("speed", Movement.CurrentVelocityXZMagnitude);
@@ -307,15 +309,23 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
                 controlCamBySpeed = false;
                 NormalCam.SetActive(false);
                 RunCam.SetActive(false);
-                DashCam.SetActive(false);
+                SkillCam.SetActive(false);
                 AimCam.SetActive(true);
+                DeathCam.SetActive(false);
+                break;
+            case ActiveCamera.Skill:
+                controlCamBySpeed = false;
+                NormalCam.SetActive(false);
+                RunCam.SetActive(false);
+                SkillCam.SetActive(true);
+                AimCam.SetActive(false);
                 DeathCam.SetActive(false);
                 break;
             case ActiveCamera.Death:
                 controlCamBySpeed = false;
                 NormalCam.SetActive(false);
                 RunCam.SetActive(false);
-                DashCam.SetActive(false);
+                SkillCam.SetActive(false);
                 AimCam.SetActive(false);
                 DeathCam.SetActive(true);
                 break;
@@ -334,7 +344,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         }
         NormalCam.SetActive(false);
         RunCam.SetActive(true);
-        DashCam.SetActive(false);
+        SkillCam.SetActive(false);
         AimCam.SetActive(false);
         DeathCam.SetActive(false);
     }
@@ -347,7 +357,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         }
         NormalCam.SetActive(true);
         RunCam.SetActive(false);
-        DashCam.SetActive(false);
+        SkillCam.SetActive(false);
         AimCam.SetActive(false);
         DeathCam.SetActive(false);
     }

@@ -22,6 +22,7 @@ public class PlayerFireAltState : PlayerAbilityState
         firstTimeDrop = true;
         startShootingTime = 0f;
 
+        player.ChangeActiveCam(Player.ActiveCamera.Skill);
         player.InputHandler.UseSkillInput();
         player.CardSystem.DecreaseCardEnergy(playerData.altEnergyCost);
 
@@ -119,6 +120,7 @@ public class PlayerFireAltState : PlayerAbilityState
     {
         base.Exit();
 
+        player.ChangeActiveCam(Player.ActiveCamera.DeterminBySpeed);
         player.SetColliderAndModel(true);
         player.VFXController.SetSuperDashVFX(false);
     }

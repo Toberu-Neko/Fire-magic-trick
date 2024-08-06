@@ -16,6 +16,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
         currentFrame = 0;
         firstTimeDrop = false;
 
+        player.ChangeActiveCam(Player.ActiveCamera.Skill);
         player.InputHandler.UseSuperJumpInput();
         player.JumpState.DecreaseAmountOfJumpsLeft();
         player.CardSystem.DecreaseCardEnergy(playerData.superJumpEnergyCost);
@@ -112,6 +113,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
     {
         base.Exit();
 
+        player.ChangeActiveCam(Player.ActiveCamera.DeterminBySpeed);
         if (!(player.InputHandler.JumpInput && player.InAirState.CheckCanFloat()))
         {
             AudioManager.Instance.PlaySoundFX(playerData.superJumpLandSound, player.transform, AudioManager.SoundType.twoD);
