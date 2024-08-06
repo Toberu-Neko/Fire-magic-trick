@@ -19,6 +19,8 @@ public class PlayerVFXController : MonoBehaviour
     [SerializeField] private ParticleSystem fireMaxStar;
     [SerializeField] private ParticleSystem fireExplode;
     [SerializeField] private ParticleSystem superDashHit;
+    [SerializeField] private ParticleSystem windSuperJump;
+    [SerializeField] private ParticleSystem fireSuperJump;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject deathVFXPrefab;
@@ -26,8 +28,6 @@ public class PlayerVFXController : MonoBehaviour
 
     [Header("Super Jump")]
     [SerializeField] private Transform feetPosition;
-    [SerializeField] private GameObject superJumpWindStartVFXPrefab;
-    [SerializeField] private GameObject superJumpFireStartVFXPrefab;
     [SerializeField] private GameObject superJumpLandWindVFXPrefab;
     [SerializeField] private GameObject superJumpLandFireVFXPrefab;
 
@@ -57,6 +57,8 @@ public class PlayerVFXController : MonoBehaviour
         windMaxVFX.gameObject.SetActive(true);
         fireExplode.gameObject.SetActive(true);
         superDashHit.gameObject.SetActive(true);
+        windSuperJump.gameObject.SetActive(true);
+        fireSuperJump.gameObject.SetActive(true);
 
         burningVFX.Stop();
         superDashHit.Stop();
@@ -65,6 +67,10 @@ public class PlayerVFXController : MonoBehaviour
         windCountVFX.Stop();
         fireMaxVFX.Stop();
         windMaxVFX.Stop();
+        windMaxStar.Stop();
+        fireMaxStar.Stop();
+        windSuperJump.Stop();
+        fireSuperJump.Stop();
     }
 
     public void SetModelVFX(bool value)
@@ -75,21 +81,24 @@ public class PlayerVFXController : MonoBehaviour
         fireMaxStar.gameObject.SetActive(value);
     }
 
+    public void PlayWindSuperJump()
+    {
+        windSuperJump.Stop();
+        windSuperJump.Play();
+    }
+
+    public void PlayFireSuperJump()
+    {
+        fireSuperJump.Stop();
+        fireSuperJump.Play();
+    }
+
     public void PlayFireExplode()
     {
         fireExplode.Stop();
         fireExplode.Play();
     }
 
-    public void ActivateWindStartVFX()
-    {
-        particleManager.StartParticles(superJumpWindStartVFXPrefab, feetPosition.position);
-    }
-
-    public void ActivateFireStartVFX()
-    {
-        particleManager.StartParticles(superJumpFireStartVFXPrefab, feetPosition.position);
-    }
 
     public void ActivateWindLandVFX()
     {

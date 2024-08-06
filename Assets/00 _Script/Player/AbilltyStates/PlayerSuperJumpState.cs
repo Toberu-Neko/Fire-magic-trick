@@ -29,7 +29,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
 
         if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
         {
-            player.VFXController.ActivateWindStartVFX();
+            player.VFXController.PlayWindSuperJump();
 
             // 起跳會聚攏敵人
             foreach (var col in SphereDetection(playerData.longRangeDetectRadius))
@@ -44,7 +44,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
         }
         else
         {
-            player.VFXController.ActivateFireStartVFX();
+            player.VFXController.PlayFireSuperJump();
 
             // 震退並燃燒敵人
             foreach (var col in SphereDetection(playerData.midRangeDetectRadius))
