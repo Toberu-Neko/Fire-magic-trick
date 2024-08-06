@@ -9,8 +9,8 @@ public class PlayerVFXController : MonoBehaviour
     [SerializeField] private GameObject windFeetCardVFX;
     [SerializeField] private GameObject superDashVFX;
     [SerializeField] private GameObject canComboVFX;
-    [SerializeField] private GameObject burningVFX;
 
+    [SerializeField] private ParticleSystem burningVFX;
     [SerializeField] private ParticleSystem fireCountVFX;
     [SerializeField] private ParticleSystem windCountVFX;
     [SerializeField] private ParticleSystem fireMaxVFX;
@@ -47,8 +47,8 @@ public class PlayerVFXController : MonoBehaviour
         floatVFX.SetActive(false);
         windFeetCardVFX.SetActive(false);
         canComboVFX.SetActive(false);
-        burningVFX.SetActive(false);
 
+        burningVFX.gameObject.SetActive(true);
         windMaxStar.gameObject.SetActive(true);
         fireMaxStar.gameObject.SetActive(true);
         fireCountVFX.gameObject.SetActive(true);
@@ -58,6 +58,7 @@ public class PlayerVFXController : MonoBehaviour
         fireExplode.gameObject.SetActive(true);
         superDashHit.gameObject.SetActive(true);
 
+        burningVFX.Stop();
         superDashHit.Stop();
         fireExplode.Stop();
         fireCountVFX.Stop();
@@ -186,8 +187,17 @@ public class PlayerVFXController : MonoBehaviour
         superDashHit.Play();
     }
 
-    public void SetBurningVFX(bool value)
+    public void SetBurningVFX(float value)
     {
-        burningVFX.SetActive(value);
+        var emission = windCountVFX.emission;
+        emission.rateOverTimeMultiplier = value * 5;
+        if(value > 0)
+        {
+            burningVFX.Play();
+        }
+        else
+        {
+            burningVFX.Stop();
+        }
     }
 }

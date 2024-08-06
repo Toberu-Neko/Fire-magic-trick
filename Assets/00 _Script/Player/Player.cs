@@ -373,7 +373,14 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
 
     private void HandleBurnChanged(bool obj)
     {
-        VFXController.SetBurningVFX(obj);
+        if(obj)
+        {
+            VFXController.SetBurningVFX(1f);
+        }
+        else
+        {
+            VFXController.SetBurningVFX(0f);
+        }
         UIManager.Instance.HudUI.HudVFX.OverburnEffect(obj);
     }
 

@@ -60,6 +60,7 @@ public class PlayerSuperDashState : PlayerAbilityState
 
         if (detectedobj.Count > 0)
         {
+            player.VFXController.ActivateFireLandVFX();
             foreach (GameObject col in detectedobj)
             {
                 if (col.TryGetComponent(out IDamageable damageable))
