@@ -14,9 +14,7 @@ public class Satun_Laser_New : MonoBehaviour
     private VisualEffect vfx;
 
     private float timer;
-    private float PauseTime;
     private bool isTimer;
-    private bool isReady;
     private void Awake()
     {
         vfx = GetComponentInChildren<VisualEffect>();
@@ -34,7 +32,6 @@ public class Satun_Laser_New : MonoBehaviour
     {
         isTimer = true;
         timer = 0;
-        isReady = false;
 
         VFX_Aiming.Play();
     }

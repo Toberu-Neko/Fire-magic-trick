@@ -15,9 +15,6 @@ public class Gear : MonoBehaviour
     [SerializeField] private Transform origin;
     [SerializeField] private Transform end;
 
-    private float t = 5;
-    
-
     private void Awake()
     {
         target = end;

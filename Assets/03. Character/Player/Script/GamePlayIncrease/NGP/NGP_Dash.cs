@@ -39,7 +39,6 @@ public class NGP_Dash : NGP_Basic_Dash
         Fire,
         Wind,
     }
-    private DashState dashState;
 
     protected override void Start()
     {
@@ -91,7 +90,6 @@ public class NGP_Dash : NGP_Basic_Dash
 
         //event
         OnDashForward?.Invoke();
-        dashState = DashState.Fire;
 
         //variable
         coolingTimer = dashCooling;
@@ -107,7 +105,6 @@ public class NGP_Dash : NGP_Basic_Dash
 
         //event
         OnDashBackward?.Invoke();
-        dashState = DashState.Wind;
 
         //feedbacks
         Feedback_DashBack.PlayFeedbacks();

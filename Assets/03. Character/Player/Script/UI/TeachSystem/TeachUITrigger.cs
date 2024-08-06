@@ -5,7 +5,6 @@ public class TeachUITrigger : DataPersistMapObjBase
     [Header("Settings")]
     [SerializeField] private bool canTeachMutipleTimes = false;
     [SerializeField] private int index = 0;
-    private bool isTrigger = false;
     private IPlayerHandler playerHandler;
 
     private void OnEnable()
