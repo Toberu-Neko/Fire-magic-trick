@@ -125,23 +125,13 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     private void OnEnable()
     {
         Stats.Health.OnCurrentValueZero += HandleHealthZero;
-        Stats.Health.OnValueChanged += Health_OnValueChanged;
         Stats.OnBurnChanged += HandleBurnChanged;
 
         combat.OnDamaged += HandleOnDamaged;
     }
 
-    private void Health_OnValueChanged()
-    {
-        if(UIManager.Instance != null)
-        {
-            
-        }
-    }
-
     private void OnDisable()
     {
-        Stats.Health.OnValueChanged -= Health_OnValueChanged;
         Stats.Health.OnCurrentValueZero -= HandleHealthZero;
         Stats.OnBurnChanged -= HandleBurnChanged;
 
