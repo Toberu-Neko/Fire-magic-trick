@@ -28,6 +28,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     [SerializeField] private GameObject RunCam;
     [SerializeField] private GameObject SkillCam;
     [SerializeField] private GameObject AimCam;
+    [SerializeField] private GameObject superDashCam;
     [SerializeField] private GameObject DeathCam;
     private ActiveCamera activeCamera;
     private bool controlCamBySpeed;
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         Aim,
         Death,
         Skill,
+        SuperDash,
         DeterminBySpeed
     }
 
@@ -313,6 +315,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
                 SkillCam.SetActive(false);
                 AimCam.SetActive(true);
                 DeathCam.SetActive(false);
+                superDashCam.SetActive(false);
                 break;
             case ActiveCamera.Skill:
                 controlCamBySpeed = false;
@@ -321,6 +324,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
                 SkillCam.SetActive(true);
                 AimCam.SetActive(false);
                 DeathCam.SetActive(false);
+                superDashCam.SetActive(false);
                 break;
             case ActiveCamera.Death:
                 controlCamBySpeed = false;
@@ -329,6 +333,16 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
                 SkillCam.SetActive(false);
                 AimCam.SetActive(false);
                 DeathCam.SetActive(true);
+                superDashCam.SetActive(false);
+                break;
+            case ActiveCamera.SuperDash:
+                controlCamBySpeed = false;
+                NormalCam.SetActive(false);
+                RunCam.SetActive(false);
+                SkillCam.SetActive(false);
+                AimCam.SetActive(false);
+                DeathCam.SetActive(false);
+                superDashCam.SetActive(true);
                 break;
             case ActiveCamera.DeterminBySpeed:
                 controlCamBySpeed = true;

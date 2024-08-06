@@ -42,7 +42,7 @@ public class PlayerSuperDashState : PlayerAbilityState
 
         UIManager.Instance.HudUI.HudVFX.SuperDashSpeedLineEffect(true);
         player.SetSuperDashAudio(true);
-        player.ChangeActiveCam(Player.ActiveCamera.Skill);
+        player.ChangeActiveCam(Player.ActiveCamera.SuperDash);
     }
 
     public override void Exit()
