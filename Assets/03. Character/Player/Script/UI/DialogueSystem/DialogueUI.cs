@@ -26,9 +26,10 @@ public class DialogueUI : MonoBehaviour
     {
         if (isDialogueActive && !isDialogueAuto)
         {
-            if(PlayerInputHandler.Instance.AttackInput)
+            if (PlayerInputHandler.Instance.AttackInput || PlayerInputHandler.Instance.JumpInput)
             {
                 PlayerInputHandler.Instance.UseAttackInput();
+                PlayerInputHandler.Instance.UseJumpInput();
 
                 if (canNext)
                 {

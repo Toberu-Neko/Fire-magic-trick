@@ -36,10 +36,10 @@ public class VibrationController : MonoBehaviour
         if (gamepad != null)
         {
             // 使用Gamepad类的震动函数
-            gamepad.SetMotorSpeeds(intensity, intensity);
+            // gamepad.SetMotorSpeeds(intensity, intensity);
 
             // 在指定的持续时间后停止震动
-            Invoke("StopVibration", duration);
+            // Invoke("StopVibration", duration);
         }
     }
 
