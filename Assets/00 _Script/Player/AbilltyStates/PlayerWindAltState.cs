@@ -39,6 +39,7 @@ public class PlayerWindAltState : PlayerAbilityState
         movement.SetGravityZero();
         player.VFXController.SetWindFeetCardVFX(true);
         startPos = player.transform.position;
+        player.ChangeActiveCam(Player.ActiveCamera.Skill);
 
         //Detect Enemy
         detectionInfos = new();
@@ -126,6 +127,7 @@ public class PlayerWindAltState : PlayerAbilityState
     {
         base.Exit();
 
+        player.ChangeActiveCam(Player.ActiveCamera.DeterminBySpeed);
         player.SetColliderAndModel(true);
         movement.SetVelocityZero();
         movement.SetGravityOrginal();

@@ -3,16 +3,10 @@ using UnityEngine;
 public class Trap : MonoBehaviour
 {
     [SerializeField] private float force;
-    //Script
-    private ImpactReceiver impactReceiver;
 
-    private void Start()
+    public void Play(Collider other)
     {
-        impactReceiver = GameManager.Instance.Player.GetComponent<ImpactReceiver>();
-    }
-    public void Play()
-    {
-        Vector3 force = -transform.forward * this.force;
-        impactReceiver.AddImpact(force);
+        other.TryGetComponent(out IKnockbackable knockbackable);
+        knockbackable.Knockback(transform.position, force/2f);
     }
 }

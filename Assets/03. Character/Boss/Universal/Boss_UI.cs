@@ -7,7 +7,7 @@ public class Boss_UI : MonoBehaviour
     public Image health;
     public TextMeshProUGUI boss_name;
     public TextMeshProUGUI boss_littleTitle;
-    private Animator animator;
+    [SerializeField] private Animator animator;
 
     private void Awake()
     {

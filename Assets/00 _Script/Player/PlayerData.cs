@@ -27,6 +27,8 @@ public class PlayerData : ScriptableObject
 
     [Header("大招")]
     public float windAltDamage = 20f;
+    public float fireAltFireRate = 0.75f;
+    public float fireAltFireBullet = 15f;
     public float fireAltFireTime = 5f;
 
     [Header("---------冷卻與移動---------")]

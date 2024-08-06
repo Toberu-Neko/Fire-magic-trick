@@ -1,3 +1,4 @@
+using Cinemachine;
 using MoreMountains.Tools;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     [field: SerializeField] public PlayerInputHandler InputHandler { get; private set; }
     [field: SerializeField] public PlayerVFXController VFXController { get; private set; }
     [SerializeField] private CapsuleCollider col;
+    [SerializeField] private CinemachineImpulseSource dashHitImpluseSource;
     [SerializeField] private Transform defaultRespawnPos;
     [SerializeField] private GameObject playerModel;
     [SerializeField] private AudioSource superDashAudio;
@@ -24,8 +26,9 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     [SerializeField] private Transform playerCamera;
     [SerializeField] private GameObject NormalCam;
     [SerializeField] private GameObject RunCam;
-    [SerializeField] private GameObject DashCam;
+    [SerializeField] private GameObject SkillCam;
     [SerializeField] private GameObject AimCam;
+    [SerializeField] private GameObject superDashCam;
     [SerializeField] private GameObject DeathCam;
     private ActiveCamera activeCamera;
     private bool controlCamBySpeed;
@@ -34,6 +37,8 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         None,
         Aim,
         Death,
+        Skill,
+        SuperDash,
         DeterminBySpeed
     }
 
@@ -137,6 +142,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     {
         _cinemachineTargetYaw = cinemachineCameraTarget.transform.rotation.eulerAngles.y;
         StateMachine.Initialize(LoadingState);
+        Stats.Health.Init();
 
         LoadSceneManager.Instance.OnAdditiveSceneAlreadyLoaded += HandleFinishLoading;
         LoadSceneManager.Instance.OnLoadingAdditiveProgress += HandleAdditiveLoading;
@@ -153,6 +159,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         UIManager.Instance.HudUI.HudVFX.HitPlayerEffect();
     }
     #region HandleLoading
+
     private void HandleAdditiveLoading(float obj)
     {
         if (obj == 1f)
@@ -173,7 +180,8 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
 
     private void Update()
     {
-        Core.LogicUpdate();
+        Core.LogicUpdate(); 
+        UIManager.Instance.HudUI.SetBar(Stats.Health.CurrentValuePercentage);
 
         StateMachine.CurrentState.LogicUpdate();
         Anim.SetFloat("speed", Movement.CurrentVelocityXZMagnitude);
@@ -294,17 +302,37 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
                 controlCamBySpeed = false;
                 NormalCam.SetActive(false);
                 RunCam.SetActive(false);
-                DashCam.SetActive(false);
+                SkillCam.SetActive(false);
                 AimCam.SetActive(true);
                 DeathCam.SetActive(false);
+                superDashCam.SetActive(false);
+                break;
+            case ActiveCamera.Skill:
+                controlCamBySpeed = false;
+                NormalCam.SetActive(false);
+                RunCam.SetActive(false);
+                SkillCam.SetActive(true);
+                AimCam.SetActive(false);
+                DeathCam.SetActive(false);
+                superDashCam.SetActive(false);
                 break;
             case ActiveCamera.Death:
                 controlCamBySpeed = false;
                 NormalCam.SetActive(false);
                 RunCam.SetActive(false);
-                DashCam.SetActive(false);
+                SkillCam.SetActive(false);
                 AimCam.SetActive(false);
                 DeathCam.SetActive(true);
+                superDashCam.SetActive(false);
+                break;
+            case ActiveCamera.SuperDash:
+                controlCamBySpeed = false;
+                NormalCam.SetActive(false);
+                RunCam.SetActive(false);
+                SkillCam.SetActive(false);
+                AimCam.SetActive(false);
+                DeathCam.SetActive(false);
+                superDashCam.SetActive(true);
                 break;
             case ActiveCamera.DeterminBySpeed:
                 controlCamBySpeed = true;
@@ -321,7 +349,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         }
         NormalCam.SetActive(false);
         RunCam.SetActive(true);
-        DashCam.SetActive(false);
+        SkillCam.SetActive(false);
         AimCam.SetActive(false);
         DeathCam.SetActive(false);
     }
@@ -334,7 +362,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         }
         NormalCam.SetActive(true);
         RunCam.SetActive(false);
-        DashCam.SetActive(false);
+        SkillCam.SetActive(false);
         AimCam.SetActive(false);
         DeathCam.SetActive(false);
     }
@@ -350,7 +378,14 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
 
     private void HandleBurnChanged(bool obj)
     {
-        VFXController.SetBurningVFX(obj);
+        if(obj)
+        {
+            VFXController.SetBurningVFX((1f - Stats.Health.CurrentValuePercentage) / 0.5f);
+        }
+        else
+        {
+            VFXController.SetBurningVFX(0f);
+        }
         UIManager.Instance.HudUI.HudVFX.OverburnEffect(obj);
     }
 
@@ -416,11 +451,17 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         firstTimePlaying = false;
         transform.position = position;
     }
+
     public void SetRespawnPosition(Vector3 position)
     {
         RespawnPosition = position;
     }
     #endregion
+
+    public void DoDashHitImpluse(float value)
+    {
+        dashHitImpluseSource.GenerateImpulse(value);
+    }
 
     #region IDataPersistance
     public void LoadData(GameData data)

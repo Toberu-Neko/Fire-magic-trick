@@ -32,9 +32,10 @@ public class TeachUI : MonoBehaviour
     {
         if (isTeach)
         {
-            if (PlayerInputHandler.Instance.AttackInput)
+            if (PlayerInputHandler.Instance.AttackInput || PlayerInputHandler.Instance.JumpInput)
             {
                 PlayerInputHandler.Instance.UseAttackInput();
+                PlayerInputHandler.Instance.UseJumpInput();
 
                 if (canNext)
                 {

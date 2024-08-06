@@ -1,5 +1,3 @@
-using MagicaCloth2;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,6 +42,7 @@ public class PlayerSuperDashState : PlayerAbilityState
 
         UIManager.Instance.HudUI.HudVFX.SuperDashSpeedLineEffect(true);
         player.SetSuperDashAudio(true);
+        player.ChangeActiveCam(Player.ActiveCamera.SuperDash);
     }
 
     public override void Exit()
@@ -53,11 +52,17 @@ public class PlayerSuperDashState : PlayerAbilityState
         target = null;
         player.SetColliderAndModel(true);
         player.VFXController.SetSuperDashVFX(false);
+        player.VFXController.SuperDashHit();
+
+        player.ChangeActiveCam(Player.ActiveCamera.DeterminBySpeed);
+        player.DoDashHitImpluse(1.25f);
+        BulletTimeManager.Instance.BulletTime_Slow(0.25f);
 
         List<GameObject> detectedobj = SphereDetection(playerData.closeRangeDetectRadius);
 
-        if (detectedobj.Count > 0) 
+        if (detectedobj.Count > 0)
         {
+            player.VFXController.ActivateFireLandVFX();
             foreach (GameObject col in detectedobj)
             {
                 if (col.TryGetComponent(out IDamageable damageable))
@@ -67,7 +72,7 @@ public class PlayerSuperDashState : PlayerAbilityState
 
                 if (col.TryGetComponent(out IKnockbackable knockbackable))
                 {
-                    knockbackable.Knockback(player.transform.position, playerData.superDashKnockbackForce, false);
+                    knockbackable.Knockback(player.transform.position, playerData.superDashKnockbackForce);
                 }
 
                 if (col.TryGetComponent(out IFlammable flammable))

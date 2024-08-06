@@ -16,6 +16,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
         currentFrame = 0;
         firstTimeDrop = false;
 
+        player.ChangeActiveCam(Player.ActiveCamera.Skill);
         player.InputHandler.UseSuperJumpInput();
         player.JumpState.DecreaseAmountOfJumpsLeft();
         player.CardSystem.DecreaseCardEnergy(playerData.superJumpEnergyCost);
@@ -28,7 +29,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
 
         if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
         {
-            player.VFXController.ActivateWindStartVFX();
+            player.VFXController.PlayWindSuperJump();
 
             // 起跳會聚攏敵人
             foreach (var col in SphereDetection(playerData.longRangeDetectRadius))
@@ -43,7 +44,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
         }
         else
         {
-            player.VFXController.ActivateFireStartVFX();
+            player.VFXController.PlayFireSuperJump();
 
             // 震退並燃燒敵人
             foreach (var col in SphereDetection(playerData.midRangeDetectRadius))
@@ -112,6 +113,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
     {
         base.Exit();
 
+        player.ChangeActiveCam(Player.ActiveCamera.DeterminBySpeed);
         if (!(player.InputHandler.JumpInput && player.InAirState.CheckCanFloat()))
         {
             AudioManager.Instance.PlaySoundFX(playerData.superJumpLandSound, player.transform, AudioManager.SoundType.twoD);

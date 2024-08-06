@@ -17,8 +17,10 @@ public class EnergyBall : MonoBehaviour
     [SerializeField] private float absorbDistance;
 
     private float timer;
+
     private bool isTimer;
     private bool isTimerFinish;
+    private float startTime;
 
     private GameObject player;
     private Rigidbody rb;
@@ -30,11 +32,18 @@ public class EnergyBall : MonoBehaviour
 
         startMove(speed_Start);
         SetIsTimer(true);
+        timer = 0;
+        startTime = Time.time;
     }
     private void Update()
     {
         CheckBallMoveToPlayerDistance();
         timerSystem();
+
+        if(Time.time > startTime + 15f)
+        {
+            Destroy(gameObject);
+        }
     }
     private void timerSystem()
     {

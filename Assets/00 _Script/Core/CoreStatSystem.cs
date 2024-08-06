@@ -77,7 +77,10 @@ public class CoreStatSystem
     {
         if(CurrentValue < InitValue)
         {
-            return;
+            CurrentValue += amount;
+            Mathf.Clamp(CurrentValue, 0f, InitValue);
+            OnValueChanged?.Invoke();
+            OnValueIncreased?.Invoke();
         }
         else if (CurrentValue - amount <= InitValue)
         {
