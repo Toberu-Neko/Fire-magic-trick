@@ -189,8 +189,9 @@ public class PlayerVFXController : MonoBehaviour
 
     public void SetBurningVFX(float value)
     {
-        var emission = windCountVFX.emission;
-        emission.rateOverTimeMultiplier = value * 5;
+        var comp = burningVFX.main;
+        comp.startSize = value * 2f;
+
         if(value > 0)
         {
             burningVFX.Play();
