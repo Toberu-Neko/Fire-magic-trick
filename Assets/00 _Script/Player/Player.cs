@@ -167,6 +167,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         UIManager.Instance.HudUI.HudVFX.HitPlayerEffect();
     }
     #region HandleLoading
+
     private void HandleAdditiveLoading(float obj)
     {
         if (obj == 1f)
@@ -375,7 +376,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     {
         if(obj)
         {
-            VFXController.SetBurningVFX(1f);
+            VFXController.SetBurningVFX((1f - Stats.Health.CurrentValuePercentage) / 0.5f);
         }
         else
         {

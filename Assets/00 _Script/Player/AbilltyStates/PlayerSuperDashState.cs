@@ -42,6 +42,7 @@ public class PlayerSuperDashState : PlayerAbilityState
 
         UIManager.Instance.HudUI.HudVFX.SuperDashSpeedLineEffect(true);
         player.SetSuperDashAudio(true);
+        player.ChangeActiveCam(Player.ActiveCamera.Skill);
     }
 
     public override void Exit()
@@ -53,6 +54,7 @@ public class PlayerSuperDashState : PlayerAbilityState
         player.VFXController.SetSuperDashVFX(false);
         player.VFXController.SuperDashHit();
 
+        player.ChangeActiveCam(Player.ActiveCamera.DeterminBySpeed);
         player.DoDashHitImpluse(1.25f);
         BulletTimeManager.Instance.BulletTime_Slow(0.25f);
 
