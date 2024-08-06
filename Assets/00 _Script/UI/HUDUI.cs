@@ -12,7 +12,6 @@ public class HUDUI : MonoBehaviour
     [SerializeField] private MMProgressBar normalBar;
     [SerializeField] private MMProgressBar overburnBar;
 
-    private float lastUpdateBarTime = 0f;
     private bool canChangeBar = true;
 
     private void Awake()
@@ -21,18 +20,14 @@ public class HUDUI : MonoBehaviour
         canChangeBar = true;
         teachFloatUI.gameObject.SetActive(false);
         bossUI.gameObject.SetActive(false);
-        lastUpdateBarTime = 0f;
-        SetBar(0.5f);
     }
 
     private void Start()
     {
-        GameManager.Instance.OnPlayerReborn += () => lastUpdateBarTime = 0f;
     }
 
     private void OnDestroy()
     {
-        GameManager.Instance.OnPlayerReborn -= () => lastUpdateBarTime = 0f;
     }
 
     public void SetCanChangeBar(bool value)
