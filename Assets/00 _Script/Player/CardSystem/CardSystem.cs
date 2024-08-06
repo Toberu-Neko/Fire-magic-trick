@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class CardSystem : MonoBehaviour
     [SerializeField] private GameObject strongWindCardPrefab;
     [SerializeField] private GameObject strongFireCardPrefab;
     [field: SerializeField] public Sound[] ShootSFXs { get; private set; }
+    [SerializeField] private CinemachineImpulseSource impulseSource;
 
     [Header("Spawn Position")]
     [SerializeField] private Transform frontSpawnPos;
@@ -237,6 +239,8 @@ public class CardSystem : MonoBehaviour
                 strongShoot = false;
                 kickStrongShoot = false;
                 AudioManager.Instance.PlayRandomSoundFX(ShootSFXs, transform, AudioManager.SoundType.twoD);
+
+                impulseSource.GenerateImpulse(2f);
                 switch (currentCardType)
                 {
                     case CardType.Normal:
@@ -262,6 +266,7 @@ public class CardSystem : MonoBehaviour
                         ShootThreeWind(aimDir);
                         break;
                     case CardType.Fire:
+                        impulseSource.GenerateImpulse(1.5f);
                         AudioManager.Instance.PlayRandomSoundFX(ShootSFXs, transform, AudioManager.SoundType.twoD);
                         Instantiate(fireCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
                         Instantiate(fireCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(aimDir, Vector3.up) * Quaternion.Euler(0f, 45f / 2f, 0f));
@@ -272,6 +277,7 @@ public class CardSystem : MonoBehaviour
             else
             {
                 AudioManager.Instance.PlayRandomSoundFX(ShootSFXs, transform, AudioManager.SoundType.twoD);
+                impulseSource.GenerateImpulse(1f);
                 switch (currentCardType)
                 {
                     case CardType.Normal:
@@ -292,6 +298,7 @@ public class CardSystem : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
+            impulseSource.GenerateImpulse(1f);
             AudioManager.Instance.PlayRandomSoundFX(ShootSFXs, transform, AudioManager.SoundType.twoD);
             Instantiate(windCardPrefab, frontSpawnPos.position, Quaternion.LookRotation(dir, Vector3.up));
             await Task.Delay(200);
@@ -300,6 +307,7 @@ public class CardSystem : MonoBehaviour
 
     public void FireAltShoot()
     {
+        impulseSource.GenerateImpulse(2f);
         Transform target = fireAltSpawnPos[UnityEngine.Random.Range(0, fireAltSpawnPos.Length)];
         Vector3 aimDir = ((target.position + new Vector3(UnityEngine.Random.Range(-0.25f, 0.25f), 0f, UnityEngine.Random.Range(-0.25f, 0.25f))) - transform.position).normalized;
 
