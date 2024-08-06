@@ -43,7 +43,7 @@ public class GameData
         lastInteractedSavepointID = "Default";
         finishStartTL = false;
         gotoSavePoint = true;
-        playerRespawnPosition = new();
+        playerRespawnPosition = Vector3.zero;
 
         interactableMapItem = new();
 
