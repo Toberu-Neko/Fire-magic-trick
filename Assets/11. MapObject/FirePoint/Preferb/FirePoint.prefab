@@ -4841,7 +4841,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3418616191019630300}
   - component: {fileID: 7487677988590139549}
-  - component: {fileID: 3418616191019630301}
   m_Layer: 14
   m_Name: FirePoint
   m_TagString: FirePoint
@@ -4886,24 +4885,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.5
+  m_Radius: 1.7355549
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3418616191019630301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3418616191019630296}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c81145c1e05f7794c84094f0951ae1bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CheckArea: {fileID: 0}
-  FirePointParticle: {fileID: 3418616190969688838}
-  FirePointCoreParticle: {fileID: 0}
-  recoverTime_ms: 5000
 --- !u!1 &3729126198979643240
 GameObject:
   m_ObjectHideFlags: 0

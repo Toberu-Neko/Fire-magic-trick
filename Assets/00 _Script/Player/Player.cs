@@ -336,6 +336,10 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
                 break;
             case ActiveCamera.DeterminBySpeed:
                 controlCamBySpeed = true;
+                SkillCam.SetActive(false);
+                AimCam.SetActive(false);
+                DeathCam.SetActive(false);
+                superDashCam.SetActive(false);
                 break;
             
         }
@@ -448,6 +452,10 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
 
     public void Teleport(Vector3 position)
     {
+        if(position == Vector3.zero)
+        {
+            position = defaultRespawnPos.position;
+        }
         firstTimePlaying = false;
         transform.position = position;
     }
