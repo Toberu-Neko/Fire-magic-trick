@@ -18,6 +18,7 @@ public class PlayerVFXController : MonoBehaviour
     [SerializeField] private ParticleSystem windMaxStar;
     [SerializeField] private ParticleSystem fireMaxStar;
     [SerializeField] private ParticleSystem fireExplode;
+    [SerializeField] private ParticleSystem superDashHit;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject deathVFXPrefab;
@@ -55,7 +56,9 @@ public class PlayerVFXController : MonoBehaviour
         fireMaxVFX.gameObject.SetActive(true);
         windMaxVFX.gameObject.SetActive(true);
         fireExplode.gameObject.SetActive(true);
+        superDashHit.gameObject.SetActive(true);
 
+        superDashHit.Stop();
         fireExplode.Stop();
         fireCountVFX.Stop();
         windCountVFX.Stop();
@@ -175,6 +178,12 @@ public class PlayerVFXController : MonoBehaviour
     public void SetSuperDashVFX(bool value)
     {
         superDashVFX.SetActive(value);
+    }
+
+    public void SuperDashHit()
+    {
+        superDashHit.Stop();
+        superDashHit.Play();
     }
 
     public void SetBurningVFX(bool value)

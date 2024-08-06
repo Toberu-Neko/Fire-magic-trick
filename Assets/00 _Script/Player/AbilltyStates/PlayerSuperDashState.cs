@@ -53,10 +53,14 @@ public class PlayerSuperDashState : PlayerAbilityState
         target = null;
         player.SetColliderAndModel(true);
         player.VFXController.SetSuperDashVFX(false);
+        player.VFXController.SuperDashHit();
+
+        player.DoDashHitImpluse(1.25f);
+        BulletTimeManager.Instance.BulletTime_Slow(0.25f);
 
         List<GameObject> detectedobj = SphereDetection(playerData.closeRangeDetectRadius);
 
-        if (detectedobj.Count > 0) 
+        if (detectedobj.Count > 0)
         {
             foreach (GameObject col in detectedobj)
             {

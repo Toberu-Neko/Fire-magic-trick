@@ -1,3 +1,4 @@
+using Cinemachine;
 using MoreMountains.Tools;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     [field: SerializeField] public PlayerInputHandler InputHandler { get; private set; }
     [field: SerializeField] public PlayerVFXController VFXController { get; private set; }
     [SerializeField] private CapsuleCollider col;
+    [SerializeField] private CinemachineImpulseSource dashHitImpluseSource;
     [SerializeField] private Transform defaultRespawnPos;
     [SerializeField] private GameObject playerModel;
     [SerializeField] private AudioSource superDashAudio;
@@ -427,11 +429,17 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         firstTimePlaying = false;
         transform.position = position;
     }
+
     public void SetRespawnPosition(Vector3 position)
     {
         RespawnPosition = position;
     }
     #endregion
+
+    public void DoDashHitImpluse(float value)
+    {
+        dashHitImpluseSource.GenerateImpulse(value);
+    }
 
     #region IDataPersistance
     public void LoadData(GameData data)
