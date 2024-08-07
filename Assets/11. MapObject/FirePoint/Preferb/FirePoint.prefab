@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3418616190969688836}
   - component: {fileID: 3418616190969688838}
   - component: {fileID: 3418616190969688839}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4841,7 +4841,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3418616191019630300}
   - component: {fileID: 7487677988590139549}
-  m_Layer: 14
+  m_Layer: 10
   m_Name: FirePoint
   m_TagString: FirePoint
   m_Icon: {fileID: 0}
@@ -4898,7 +4898,7 @@ GameObject:
   - component: {fileID: 6943541097580755332}
   - component: {fileID: 5472768795093914536}
   - component: {fileID: 2520780534530489608}
-  m_Layer: 14
+  m_Layer: 10
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5072,6 +5072,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: cf0725acb50101447ac2823b8c3eef44, type: 3}
       propertyPath: m_Name
       value: star_point
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cf0725acb50101447ac2823b8c3eef44, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

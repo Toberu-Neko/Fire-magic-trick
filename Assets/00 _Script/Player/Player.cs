@@ -494,6 +494,11 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     }
     #endregion
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        //Debug.Log(collision.gameObject.name);
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.gray;

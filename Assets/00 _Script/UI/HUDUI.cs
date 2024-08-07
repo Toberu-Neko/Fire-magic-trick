@@ -1,6 +1,7 @@
 using MoreMountains.Tools;
 using System;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class HUDUI : MonoBehaviour
 {
@@ -20,6 +21,11 @@ public class HUDUI : MonoBehaviour
         canChangeBar = true;
         teachFloatUI.gameObject.SetActive(false);
         bossUI.gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        canChangeBar = true;
     }
 
     private void Start()
