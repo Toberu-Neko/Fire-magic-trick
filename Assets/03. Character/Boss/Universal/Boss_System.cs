@@ -61,6 +61,7 @@ public class Boss_System : DataPersistMapObjBase
         {
             isBoss = true;
 
+            Debug.Log("Boss Fight Start");
             UIManager.Instance.HudUI.OpenBossUI(boss_name, boss_littleTitle);
             barrier.Open();
             reserFeedback.PlayFeedbacks();

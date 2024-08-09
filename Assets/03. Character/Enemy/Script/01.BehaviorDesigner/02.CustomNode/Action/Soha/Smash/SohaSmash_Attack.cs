@@ -14,7 +14,6 @@ public class SohaSmash_Attack : Action
 
     private GameObject smashColliderL;
     private GameObject smashColliderR;
-    private Rigidbody rb;
     private float timer;
 
     public override void OnStart()

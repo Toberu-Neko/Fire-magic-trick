@@ -69,7 +69,7 @@ public class SohaWaterBullet_Shoot : Action
     void ShootingWaterBullet() // 發射水砲
     {
         // 目標點
-        Vector3 targetPosition = new Vector3(targetObject.Value.transform.position.x, targetObject.Value.transform.position.y + playerHeight, targetObject.Value.transform.position.z);
+        Vector3 targetPosition = new Vector3(GameManager.Instance.Player.position.x, GameManager.Instance.Player.position.y + playerHeight, GameManager.Instance.Player.position.z);
         
         // 目標點偏移
         Vector3 randomTargetPosition = new Vector3(

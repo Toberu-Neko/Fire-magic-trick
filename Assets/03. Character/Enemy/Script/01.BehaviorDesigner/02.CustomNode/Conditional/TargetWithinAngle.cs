@@ -27,7 +27,7 @@ public class TargetWithinAngle : Conditional
     private bool isWithinAngle()
     {
         // 獲取目標位置，並將其投影到水平平面上
-        Vector3 targetPosition = targetObject.Value.transform.position;
+        Vector3 targetPosition = GameManager.Instance.Player.position;
         Vector3 targetPositionWithoutY = new Vector3(targetPosition.x, transform.position.y, targetPosition.z);
 
         // 計算到目標的方向向量

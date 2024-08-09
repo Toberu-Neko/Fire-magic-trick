@@ -29,7 +29,6 @@ public class Soha : MonoBehaviour, IDamageable
     [Header("Mid")]
     [SerializeField] private GlassRoadManager glassRoadManager;
     [SerializeField] private CardMachineManager  topEnemyManager;
-    [SerializeField] private Satun_Laser_Manager laser_Manager;
     [Header("Death")]
     [SerializeField] private Timeline_Trigger End;
     [SerializeField] private GameObject FinishRoead;
@@ -125,7 +124,6 @@ public class Soha : MonoBehaviour, IDamageable
         changeState(State.Low);
         eventTrigger(State.Low);
         boom.SteamBoomRightNow();
-        laser_Manager.playLaser();
     }
     private void Event_Death()
     {

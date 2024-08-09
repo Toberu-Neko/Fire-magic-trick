@@ -12,7 +12,6 @@ public class SohaSwept_Attack : Action
     [SerializeField] private float duration;
 
     private GameObject smashCollider;
-    private Rigidbody rb;
     private float timer;
 
     public override void OnStart()
@@ -20,7 +19,7 @@ public class SohaSwept_Attack : Action
         if(behaviorObject.Value != null)
         {
             // 抓取碰撞體
-            smashCollider = behaviorObject.Value.Find("HandCollider").gameObject;
+            smashCollider = behaviorObject.Value.Find("HandColliderR").gameObject;
 
             // 啟動碰撞體
             ColliderController(true);

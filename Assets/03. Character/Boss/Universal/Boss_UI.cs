@@ -9,20 +9,19 @@ public class Boss_UI : MonoBehaviour
     public TextMeshProUGUI boss_littleTitle;
     [SerializeField] private Animator animator;
 
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
     public void Boss_Enter(string boss_name,string littleTitle)
     {
+        gameObject.SetActive(true);
         this.boss_name.text = boss_name;
         this.boss_littleTitle.text = littleTitle;
         animator.SetTrigger("Enter");
     }
+
     public void Boss_Exit()
     {
         animator.SetTrigger("Exit");
     }
+
     public void SetValue(float value)
     {
         health.fillAmount = value;

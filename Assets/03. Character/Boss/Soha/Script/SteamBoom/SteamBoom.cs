@@ -60,14 +60,11 @@ public class SteamBoom : MonoBehaviour
     private void steamBoom()
     {
         Vector3 direction = (player.transform.position - this.transform.position).normalized;
-        Vector3 direction2D = new Vector3(direction.x, 0, direction.z);
         float overlappingLenght = (player.transform.position - this.transform.position).magnitude;
         float forceLenght = preferLenght - overlappingLenght;
-        Vector3 height = new Vector3(0, this.height, 0);
-        Vector3 force = direction2D * forceLenght*5 + height;
 
         feedback.PlayFeedbacks();
-        playerKnockable.Knockback(transform.position, forceLenght * 5);
+        playerKnockable.Knockback(transform.position, forceLenght);
         initialization();
     }
 }

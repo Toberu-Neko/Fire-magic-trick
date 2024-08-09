@@ -50,7 +50,7 @@ public class SohaLazer_Shoot : Action
 
     private void RotateToTarget()
     {
-        Vector3 targetPosition = new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z);
+        Vector3 targetPosition = new Vector3(GameManager.Instance.Player.position.x, transform.position.y, GameManager.Instance.Player.position.z);
         Quaternion rotation = Quaternion.LookRotation(targetPosition - transform.position);
 
         float angle = Quaternion.Angle(transform.rotation, rotation);

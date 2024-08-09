@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class WaterPool : MonoBehaviour
 {
-    [SerializeField] private float debufTime = 1.5f;
+    [SerializeField] private float damageAmount = 15f;
+    [SerializeField] private float knockbackForce = 8f;
     private void Start()
     {
         Destroy(gameObject,2f);
@@ -11,7 +12,10 @@ public class WaterPool : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerState>().SlowPlayer(debufTime);
+            other.TryGetComponent(out IDamageable damageable);
+            damageable.Damage(damageAmount, transform.position);
+            other.TryGetComponent(out IKnockbackable knockbackable);
+            knockbackable.Knockback(transform.position, knockbackForce);
         }    
     }
 }
