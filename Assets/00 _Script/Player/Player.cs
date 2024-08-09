@@ -393,11 +393,6 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         UIManager.Instance.HudUI.HudVFX.OverburnEffect(obj);
     }
 
-    public void TeleportToSavepoint()
-    {
-        Teleport(RespawnPosition);
-    }
-
     public void SetColliderAndModel(bool value)
     {
         SetCollider(value);
@@ -477,13 +472,19 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         if (data.playerRespawnPosition == Vector3.zero)
         {
             RespawnPosition = defaultRespawnPos.position;
-            Teleport(RespawnPosition);
+            if (!DataPersistenceManager.Instance.DisableDataPersistance)
+            {
+                Teleport(RespawnPosition);
+            }
         }
         else
         {
             RespawnPosition = data.playerRespawnPosition;
             firstTimePlaying = data.firstTimePlaying;
-            Teleport(RespawnPosition);
+            if (!DataPersistenceManager.Instance.DisableDataPersistance)
+            {
+                Teleport(RespawnPosition);
+            }
         }
     }
 

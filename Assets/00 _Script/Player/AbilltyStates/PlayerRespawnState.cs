@@ -15,7 +15,12 @@ public class PlayerRespawnState : PlayerAbilityState
         player.ChangeActiveCam(Player.ActiveCamera.DeterminBySpeed);
         player.SetCollider(true);
         player.SetModel(false);
-        player.TeleportToSavepoint();
+
+        if(player.RespawnPosition != Vector3.zero)
+        {
+            player.Teleport(player.RespawnPosition);
+        }
+
         player.VFXController.ActivateRespawnVFX();
 
         movement.SetGravityZero();

@@ -9,8 +9,7 @@ public class DataPersistenceManager : MonoBehaviour
 {
     [Header("Debugging")]
     [SerializeField] private bool initializeDataIfNull = false;
-    [Header("下面這個勾起來會強制取消存檔系統，可用於測試時重新擺放玩家位置")]
-    [SerializeField] public bool disableDataPersistance = false;
+    [field: SerializeField] public bool DisableDataPersistance { get; private set; }
     [SerializeField] private bool overwriteSelectedProfile = false;
     [SerializeField] private string selectedProfileIdDebug = "";
 
@@ -57,7 +56,7 @@ public class DataPersistenceManager : MonoBehaviour
         selectedProfileId = dataHandler.GetMostRecentlyUpdatedProfileId();
         firstTimeLoad = false;
 
-        if (disableDataPersistance)
+        if (DisableDataPersistance)
         {
             Debug.LogError("Data persistance is disabled, this should only be used for debugging.");
             GameData = new GameData();
@@ -185,7 +184,7 @@ public class DataPersistenceManager : MonoBehaviour
         DataPersistanceObjects = FindAllDataPersistenceObjects();
         Debug.Log("Load " + DataPersistanceObjects.Count + " objects.");
         loadObjCount = DataPersistanceObjects.Count;
-        if (disableDataPersistance)
+        if (DisableDataPersistance)
         {
             return;
         }
@@ -223,7 +222,7 @@ public class DataPersistenceManager : MonoBehaviour
     {
         DataPersistanceObjects = FindAllDataPersistenceObjects();
         Debug.Log("Saved, " + DataPersistanceObjects.Count + " Objects.");
-        if (disableDataPersistance)
+        if (DisableDataPersistance)
         {
             return;
         }
