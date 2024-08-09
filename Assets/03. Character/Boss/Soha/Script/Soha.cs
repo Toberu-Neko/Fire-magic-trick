@@ -1,5 +1,6 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class Soha : MonoBehaviour, IDamageable
 {
@@ -32,7 +33,8 @@ public class Soha : MonoBehaviour, IDamageable
     [Header("Death")]
     [SerializeField] private Timeline_Trigger End;
     [SerializeField] private GameObject FinishRoead;
-    
+
+    [SerializeField] private PlayableDirector endDir;
     //Script
     private Boss_System system;
     
@@ -153,6 +155,7 @@ public class Soha : MonoBehaviour, IDamageable
 
             case State.Death:
                 dialogue_Death.EventTrigger();
+                endDir.Play();
                 break;
         }
     }
