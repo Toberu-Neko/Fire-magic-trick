@@ -5,6 +5,8 @@ public class PlayerSuperJumpState : PlayerAbilityState
     private float minYVelocity;
     private int currentFrame;
     private bool firstTimeDrop;
+
+    private bool doDropDamage;
     public PlayerSuperJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -15,6 +17,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
 
         currentFrame = 0;
         firstTimeDrop = false;
+        doDropDamage = true;
 
         player.ChangeActiveCam(Player.ActiveCamera.Skill);
         player.InputHandler.UseSuperJumpInput();
@@ -98,7 +101,19 @@ public class PlayerSuperJumpState : PlayerAbilityState
 
         if (player.InputHandler.JumpInput && player.InAirState.CheckCanFloat())
         {
+            doDropDamage = false;
             isAbilityDone = true;
+        }
+        else if (player.InputHandler.FireTransferInput && player.SuperDashState.CanSuperDash())
+        {
+            doDropDamage = false;
+            player.SuperDashState.SetTarget(player.CardSystem.SuperDashTarget);
+            stateMachine.ChangeState(player.SuperDashState);
+        }
+        else if(player.InputHandler.DashInput && player.DashState.CanDash())
+        {
+            doDropDamage = false;
+            stateMachine.ChangeState(player.DashState);
         }
     }
 
@@ -114,7 +129,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
         base.Exit();
 
         player.ChangeActiveCam(Player.ActiveCamera.DeterminBySpeed);
-        if (!(player.InputHandler.JumpInput && player.InAirState.CheckCanFloat()))
+        if (doDropDamage)
         {
             AudioManager.Instance.PlaySoundFX(playerData.superJumpLandSound, player.transform, AudioManager.SoundType.twoD);
             foreach (var col in SphereDetection(playerData.longRangeDetectRadius))
