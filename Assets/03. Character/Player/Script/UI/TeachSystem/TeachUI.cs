@@ -3,13 +3,14 @@ using TMPro;
 using System.Threading.Tasks;
 using System.Collections;
 using UnityEngine.Video;
+using UnityEngine.Localization;
 
 [System.Serializable]
 public class TeachSystem_content
 {
     public string title;
     public VideoClip video;
-    [TextArea(3,10)]public string[] content;
+    public LocalizedString[] localizedContents;
 }
 public class TeachUI : MonoBehaviour
 {
@@ -65,7 +66,7 @@ public class TeachUI : MonoBehaviour
 
         //content
         StopAllCoroutines();
-        StartCoroutine(TypeWord(teachSystem_Content[index].content[contentIndex]));
+        StartCoroutine(TypeWord(teachSystem_Content[index].localizedContents[contentIndex].GetLocalizedString()));
     }
 
     public void CloseTeach()
@@ -77,7 +78,7 @@ public class TeachUI : MonoBehaviour
 
     private void DisplayNextSentence()
     {
-        if (teachSystem_Content[index].content.Length == contentIndex+1)
+        if (teachSystem_Content[index].localizedContents.Length == contentIndex+1)
         {
             CloseTeach();
             return;
@@ -88,7 +89,7 @@ public class TeachUI : MonoBehaviour
         contentIndex++;
 
         StopAllCoroutines();
-        StartCoroutine(TypeWord(teachSystem_Content[index].content[contentIndex]));
+        StartCoroutine(TypeWord(teachSystem_Content[index].localizedContents[contentIndex].GetLocalizedString()));
     }
     
     private void ToNextTimerCooling()
@@ -114,9 +115,9 @@ public class TeachUI : MonoBehaviour
         {
             debugText += teachSystem_Content[i].title;
 
-            for(int i2 = 0; i2 < teachSystem_Content[i].content.Length;i2++)
+            for(int i2 = 0; i2 < teachSystem_Content[i].localizedContents.Length;i2++)
             {
-                debugText += teachSystem_Content[i].content[i2];
+                debugText += teachSystem_Content[i].localizedContents[i2].GetLocalizedString();
             }
         }
         this.debugText = debugText;

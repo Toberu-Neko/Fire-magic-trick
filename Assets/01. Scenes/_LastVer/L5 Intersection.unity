@@ -21583,6 +21583,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pipe_D_Gray (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6215932091067852694, guid: 1720e2195345a8b42b5460b0c6a52843, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0ec529564703f694c966358f7a085b93, type: 2}
+    - target: {fileID: 6448986983049668327, guid: 1720e2195345a8b42b5460b0c6a52843, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3fc8d75fe2ceedf4bb5db6e4d7b5be97, type: 2}
     - target: {fileID: 8238587365220559711, guid: 1720e2195345a8b42b5460b0c6a52843, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -36559,7 +36567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 772549742022523459, guid: 1720e2195345a8b42b5460b0c6a52843, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.256832
+      value: 37.21
       objectReference: {fileID: 0}
     - target: {fileID: 772549742022523459, guid: 1720e2195345a8b42b5460b0c6a52843, type: 3}
       propertyPath: m_LocalPosition.y
@@ -36567,7 +36575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 772549742022523459, guid: 1720e2195345a8b42b5460b0c6a52843, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.439013
+      value: 9.45
       objectReference: {fileID: 0}
     - target: {fileID: 772549742022523459, guid: 1720e2195345a8b42b5460b0c6a52843, type: 3}
       propertyPath: m_LocalRotation.w
@@ -36601,6 +36609,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pipe_D_Gray (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6215932091067852694, guid: 1720e2195345a8b42b5460b0c6a52843, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0ec529564703f694c966358f7a085b93, type: 2}
+    - target: {fileID: 6448986983049668327, guid: 1720e2195345a8b42b5460b0c6a52843, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3fc8d75fe2ceedf4bb5db6e4d7b5be97, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -69327,7 +69343,7 @@ MonoBehaviour:
     FieldOfView: 50
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 250
+    FarClipPlane: 3000
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
