@@ -113,7 +113,7 @@ public class CardSystem : MonoBehaviour
     private void HandleWindEnergyChange(int value)
     {
         playerVFXController.SetWindCountVFX(value);
-        UIManager.Instance.HudUI.CardCount.SetWindCard(value);
+        UIManager.Instance.HudUI.CardCount.SetWindCount(value);
 
         if (value == windMaxEnergy)
         {
@@ -129,7 +129,7 @@ public class CardSystem : MonoBehaviour
     private void HandleFireEnergyChange(int value)
     {
         playerVFXController.SetFireCountVFX(value);
-        UIManager.Instance.HudUI.CardCount.SetFireCard(value);
+        UIManager.Instance.HudUI.CardCount.SetFireCount(value);
 
         if (value == fireMaxEnergy)
         {

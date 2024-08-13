@@ -30,6 +30,11 @@ public class HUDVFX : MonoBehaviour
         inWindState.SetActive(false);
     }
 
+    private void Start()
+    {
+        FlipToFireCard();
+    }
+
     public void HitPlayerEffect()
     {
         hitPlayerEffect.Play();

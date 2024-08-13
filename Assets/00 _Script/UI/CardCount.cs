@@ -1,163 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardCount : MonoBehaviour
 {
-    [SerializeField] private GameObject windCard1;
-    [SerializeField] private GameObject windCard2;
-    [SerializeField] private GameObject windCard3;
-    [SerializeField] private GameObject windCard4;
-    [SerializeField] private GameObject windCard5;
-    [SerializeField] private GameObject windCard6;
+    [SerializeField] private Slider fireSlider;
+    [SerializeField] private Slider windSlider;
 
-    [SerializeField] private GameObject fireCard1;
-    [SerializeField] private GameObject fireCard2;
-    [SerializeField] private GameObject fireCard3;
-    [SerializeField] private GameObject fireCard4;
-    [SerializeField] private GameObject fireCard5;
-    [SerializeField] private GameObject fireCard6;
+    private int targetFireCount;
+    private int targetWindCount;
 
     private void Awake()
     {
-        windCard1.SetActive(false);
-        windCard2.SetActive(false);
-        windCard3.SetActive(false);
-        windCard4.SetActive(false);
-        windCard5.SetActive(false);
-        windCard6.SetActive(false);
-
-        fireCard1.SetActive(false);
-        fireCard2.SetActive(false);
-        fireCard3.SetActive(false);
-        fireCard4.SetActive(false);
-        fireCard5.SetActive(false);
-        fireCard6.SetActive(false);
+        fireSlider.value = 0;
+        windSlider.value = 0;
     }
 
-    public void SetWindCard(int count)
+    private void Update()
     {
-        switch (count)
+        if (fireSlider.value != targetFireCount)
         {
-            case 0:
-                windCard1.SetActive(false);
-                windCard2.SetActive(false);
-                windCard3.SetActive(false);
-                windCard4.SetActive(false);
-                windCard5.SetActive(false);
-                windCard6.SetActive(false);
-                break;
-            case 1:
-                windCard1.SetActive(true);
-                windCard2.SetActive(false);
-                windCard3.SetActive(false);
-                windCard4.SetActive(false);
-                windCard5.SetActive(false);
-                windCard6.SetActive(false);
-                break;
-            case 2:
-                windCard1.SetActive(true);
-                windCard2.SetActive(true);
-                windCard3.SetActive(false);
-                windCard4.SetActive(false);
-                windCard5.SetActive(false);
-                windCard6.SetActive(false);
-                break;
-            case 3:
-                windCard1.SetActive(true);
-                windCard2.SetActive(true);
-                windCard3.SetActive(true);
-                windCard4.SetActive(false);
-                windCard5.SetActive(false);
-                windCard6.SetActive(false);
-                break;
-            case 4:
-                windCard1.SetActive(true);
-                windCard2.SetActive(true);
-                windCard3.SetActive(true);
-                windCard4.SetActive(true);
-                windCard5.SetActive(false);
-                windCard6.SetActive(false);
-                break;
-            case 5:
-                windCard1.SetActive(true);
-                windCard2.SetActive(true);
-                windCard3.SetActive(true);
-                windCard4.SetActive(true);
-                windCard5.SetActive(true);
-                windCard6.SetActive(false);
-                break;
-            case 6:
-                windCard1.SetActive(true);
-                windCard2.SetActive(true);
-                windCard3.SetActive(true);
-                windCard4.SetActive(true);
-                windCard5.SetActive(true);
-                windCard6.SetActive(true);
-                break;
+            fireSlider.value = Mathf.Lerp(fireSlider.value, targetFireCount, 0.1f);
+        }
+
+        if (windSlider.value != targetWindCount)
+        {
+            windSlider.value = Mathf.Lerp(windSlider.value, targetWindCount, 0.1f);
         }
     }
 
-    public void SetFireCard(int count)
+    public void SetFireCount(int value)
     {
-        switch (count)
-        {
-            case 0:
-                fireCard1.SetActive(false);
-                fireCard2.SetActive(false);
-                fireCard3.SetActive(false);
-                fireCard4.SetActive(false);
-                fireCard5.SetActive(false);
-                fireCard6.SetActive(false);
-                break;
-            case 1:
-                fireCard1.SetActive(true);
-                fireCard2.SetActive(false);
-                fireCard3.SetActive(false);
-                fireCard4.SetActive(false);
-                fireCard5.SetActive(false);
-                fireCard6.SetActive(false);
-                break;
-            case 2:
-                fireCard1.SetActive(true);
-                fireCard2.SetActive(true);
-                fireCard3.SetActive(false);
-                fireCard4.SetActive(false);
-                fireCard5.SetActive(false);
-                fireCard6.SetActive(false);
-                break;
-            case 3:
-                fireCard1.SetActive(true);
-                fireCard2.SetActive(true);
-                fireCard3.SetActive(true);
-                fireCard4.SetActive(false);
-                fireCard5.SetActive(false);
-                fireCard6.SetActive(false);
-                break;
-            case 4:
-                fireCard1.SetActive(true);
-                fireCard2.SetActive(true);
-                fireCard3.SetActive(true);
-                fireCard4.SetActive(true);
-                fireCard5.SetActive(false);
-                fireCard6.SetActive(false);
-                break;
-            case 5:
-                fireCard1.SetActive(true);
-                fireCard2.SetActive(true);
-                fireCard3.SetActive(true);
-                fireCard4.SetActive(true);
-                fireCard5.SetActive(true);
-                fireCard6.SetActive(false);
-                break;
-            case 6:
-                fireCard1.SetActive(true);
-                fireCard2.SetActive(true);
-                fireCard3.SetActive(true);
-                fireCard4.SetActive(true);
-                fireCard5.SetActive(true);
-                fireCard6.SetActive(true);
-                break;
-        }
+        targetFireCount = value;
+    }
+
+
+
+
+    public void SetWindCount(int value)
+    {
+        targetWindCount = value;
     }
 }
