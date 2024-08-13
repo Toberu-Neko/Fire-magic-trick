@@ -11,10 +11,7 @@ public class Dialogue
 public class Dialogue_Content
 {
     public Sprite CharacterIcon;
-    public string name;
     public LocalizedString localizedName;
-    [TextArea(3, 10)]
-    public string sentences;
     public LocalizedString localizedContent;
     public bool playFeedback;
     [Header("Feedbacak¡]if so¡^")]

@@ -1,13 +1,12 @@
 using MoreMountains.Tools;
-using System;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class HUDUI : MonoBehaviour
 {
     [SerializeField] private Boss_UI bossUI;
     [SerializeField] private CrosshairUI crosshairUI;
     [SerializeField] private TeachFloat teachFloatUI;
+    [field: SerializeField] public CardCount CardCount { get; private set; }
     [field: SerializeField] public HUDVFX HudVFX { get; private set; }
 
     [SerializeField] private MMProgressBar normalBar;

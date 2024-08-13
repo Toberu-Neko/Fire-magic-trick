@@ -17,7 +17,6 @@ public class TriggerArea_DialogueTrigger : DataPersistMapObjBase
     [SerializeField] private SO_Dialogue dialogueSO;
     [SerializeField] private MMF_Player[] feedbacksDuringDialogue;
     private int playedFeedbacksIndex = 0;
-    public Dialogue dialogue;
     private IPlayerHandler playerHandler;
 
 

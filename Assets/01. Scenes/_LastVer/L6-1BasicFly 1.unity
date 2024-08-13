@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 42473410}
   - component: {fileID: 42473409}
   - component: {fileID: 42473408}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -931,7 +931,7 @@ GameObject:
   - component: {fileID: 203478385}
   - component: {fileID: 203478384}
   - component: {fileID: 203478383}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1164,7 +1164,7 @@ GameObject:
   - component: {fileID: 274249082}
   - component: {fileID: 274249081}
   - component: {fileID: 274249080}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: CM vcam4 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1595,7 +1595,7 @@ GameObject:
   - component: {fileID: 468837358}
   - component: {fileID: 468837357}
   - component: {fileID: 468837356}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1779,7 +1779,7 @@ GameObject:
   - component: {fileID: 820076049}
   - component: {fileID: 820076048}
   - component: {fileID: 820076047}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: CM vcam4 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2220,6 +2220,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 893441128}
     m_Modifications:
+    - target: {fileID: 6512202882558961753, guid: 88bb390a1c78ff84cab48372f6818fb6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512202882558961753, guid: 88bb390a1c78ff84cab48372f6818fb6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512202882558961753, guid: 88bb390a1c78ff84cab48372f6818fb6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 13.26
+      objectReference: {fileID: 0}
     - target: {fileID: 6632564660812486760, guid: 88bb390a1c78ff84cab48372f6818fb6, type: 3}
       propertyPath: m_Name
       value: gear container
@@ -3101,7 +3113,7 @@ GameObject:
   - component: {fileID: 1304215804}
   - component: {fileID: 1304215803}
   - component: {fileID: 1304215802}
-  m_Layer: 24
+  m_Layer: 0
   m_Name: TriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3167,7 +3179,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1304215800}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3221,7 +3233,7 @@ GameObject:
   - component: {fileID: 1322716913}
   - component: {fileID: 1322716912}
   - component: {fileID: 1322716911}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: CM vcam4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4160,7 +4172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1651406178690184214, guid: 8cf03071989392943a10a1bc0676fc2b, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1651406178690184214, guid: 8cf03071989392943a10a1bc0676fc2b, type: 3}
       propertyPath: m_Materials.Array.data[0]
