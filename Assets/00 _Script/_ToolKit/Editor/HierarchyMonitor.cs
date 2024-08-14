@@ -14,6 +14,18 @@ public static class HierarchyMonitor
 
     static void OnHierarchyChanged()
     {
+        var allLine = GameObject.FindObjectsOfType<CableProceduralSimple>();
+
+        foreach (var item in allLine)
+        {
+            if (!Application.isPlaying)
+            {
+                CableProceduralSimple script = item.GetComponent<CableProceduralSimple>();
+
+                script.Init();
+            }
+        }
+
         var allMapObj = GameObject.FindObjectsOfType<DataPersistMapObjBase>();
 
         foreach (var item in allMapObj)

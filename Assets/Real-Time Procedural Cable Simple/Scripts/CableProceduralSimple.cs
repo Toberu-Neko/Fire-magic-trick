@@ -44,12 +44,7 @@ public class CableProceduralSimple : MonoBehaviour
 		Init();
     }
 
-    private void OnValidate()
-    {
-		Init();
-    }
-
-	private void Init()
+	public void Init()
 	{
 
         // Get direction Vector.
