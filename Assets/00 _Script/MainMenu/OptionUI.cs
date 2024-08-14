@@ -16,6 +16,7 @@ public class OptionUI : MonoBehaviour, IOptionData
     public void Activate()
     {
         DataPersistenceManager.Instance.LoadOptionData();
+        EventSystem.current.SetSelectedGameObject(masterVolumeSlider.gameObject);
         gameObject.SetActive(true);
     }
 

@@ -18,20 +18,36 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private Sound buttonHover;
     [SerializeField] private Sound buttonClick;
 
-    public enum SoundType 
-    { 
+    public enum SoundType
+    {
         twoD,
         threeD
     }
 
-    public void PlayButtonHover(Transform spawnTransform)
+    private void Awake()
     {
-        PlaySoundFX(buttonHover, spawnTransform, SoundType.twoD);
-    }
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-    public void PlayButtonClick(Transform spawnTransform)
-    {
-        PlaySoundFX(buttonClick, spawnTransform, SoundType.twoD);
+        DontDestroyOnLoad(gameObject);
+
+        foreach (Sound s in sounds)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
+            s.source.outputAudioMixerGroup = bgmMixerGroup;
+        }
     }
 
     #region Set Volume
@@ -52,35 +68,16 @@ public class AudioManager : MonoBehaviour
     }
     #endregion
 
-    private void Awake()
-    {
-        if(Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
-
-        foreach(Sound s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-            s.source.outputAudioMixerGroup = bgmMixerGroup;
-        }
-    }
-
+    #region Sound Effect
+    /// <summary>
+    /// This function is used to play sound effect
+    /// </summary>
+    /// <param name="sound">The sound effect that you want to play</param>
+    /// <param name="spawnTransform">The position where the sound effect is played</param>
+    /// <param name="type">2D or 3D sound effect</param>
     public void PlaySoundFX(Sound sound, Transform spawnTransform, SoundType type)
     {
-        if(sound == null)
+        if (sound == null)
         {
             Debug.LogError("Sound == null in audio manager.");
             return;
@@ -123,18 +120,24 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(ReturnSFXObj(audioSource.gameObject, time));
     }
 
+    // Return the sound effect object to the object pool after the sound effect is finished playing
     private IEnumerator ReturnSFXObj(GameObject sfxObj, float time)
     {
         yield return new WaitForSecondsRealtime(time);
         ObjectPoolManager.ReturnObjectToPool(sfxObj);
-
     }
+    #endregion
 
+    #region BGM
+    /// <summary>
+    /// Play BGM
+    /// </summary>
+    /// <param name="name"> BGM name, need to be added in the AudioManager</param>
     public void PlayBGM(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
-        if(s == null)
+        if (s == null)
         {
             Debug.LogError("音效名稱" + name + "錯誤");
             return;
@@ -160,19 +163,9 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
-    public void StopBGM(string name, float time = 1f)
-    {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-
-        if (s == null)
-        {
-            Debug.LogWarning("音效名稱" + name + "錯誤");
-            return;
-        }
-
-        StartCoroutine(IE_StopBGM(s, time));
-    }
-
+    /// <summary>
+    /// Stop all BGM using fade out effect
+    /// </summary>
     public void StopAllBGM()
     {
         foreach (var sound in sounds)
@@ -184,9 +177,28 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    IEnumerator IE_StopBGM(Sound s, float time)
+    /// <summary>
+    /// Stop BGM with fade out effect
+    /// </summary>
+    /// <param name="name">BGM name, need to be addded in the AudioManager</param>
+    /// <param name="time">Fade out time</param>
+    public void StopBGM(string name, float time = 1f)
     {
-        while(s.source.volume > 0)
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+
+        if (s == null)
+        {
+            Debug.LogWarning("BGM Name " + name + "Error");
+            return;
+        }
+
+        StartCoroutine(IE_StopBGM(s, time));
+    }
+
+
+    private IEnumerator IE_StopBGM(Sound s, float time)
+    {
+        while (s.source.volume > 0)
         {
             s.source.volume -= Time.unscaledDeltaTime / time;
             yield return new WaitForSecondsRealtime(Time.unscaledDeltaTime);
@@ -194,5 +206,18 @@ public class AudioManager : MonoBehaviour
 
         s.source.Stop();
     }
+    #endregion
+
+    #region Play Button Sound
+    public void PlayButtonHover(Transform spawnTransform)
+    {
+        PlaySoundFX(buttonHover, spawnTransform, SoundType.twoD);
+    }
+
+    public void PlayButtonClick(Transform spawnTransform)
+    {
+        PlaySoundFX(buttonClick, spawnTransform, SoundType.twoD);
+    }
+    #endregion
 
 }

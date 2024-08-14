@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TeachUI teachUI;
     public event Action OnTeachEnd;
 
+    private bool canPause = true;
     [SerializeField] private DialogueUI dialogueUI;
     public event Action OnDisplayNextSentence;
     public event Action OnDialogueEnd;
@@ -28,6 +29,9 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        //TODO: Lock pause menu when in dialogue and in timeline
+        canPause = true;
     }
 
     private void OnEnable()
@@ -58,6 +62,11 @@ public class UIManager : MonoBehaviour
                 pauseUI.Deactivate();
             }
         }
+    }
+
+    public void SetCanPause(bool value)
+    {
+        canPause = value;
     }
 
 

@@ -26,12 +26,21 @@ public class LoadSceneManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    /// <summary>
+    /// This method is used to load a scene with a single scene.
+    /// In this project, we use this method to load the main menu scene and ingame base scene.
+    /// </summary>
+    /// <param name="sceneName"></param>
     public void LoadSceneSingle(string sceneName)
     {
         StartCoroutine(LoadSceneAsyncSingle(sceneName));
         CurrentSceneName = sceneName;
     }
 
+    /// <summary>
+    /// This method is used to load level scene ingame.
+    /// </summary>
+    /// <param name="sceneName"></param>
     public void LoadSceneAdditive(string sceneName)
     {
         if(SceneManager.GetSceneByName(sceneName).isLoaded)
@@ -44,11 +53,16 @@ public class LoadSceneManager : MonoBehaviour
         CurrentSceneName = sceneName;
     }
 
+    /// <summary>
+    /// This method is used to unload the level scene.
+    /// </summary>
+    /// <param name="sceneName"></param>
     public void UnloadSceneAdditive(string sceneName)
     {
         StartCoroutine(UnloadSceneAsuncAdditive(sceneName));
     }
 
+    // For loading screen
     private IEnumerator LoadSceneAsyncSingle(string sceneName)
     {
         if(LoadingObj != null)
@@ -66,6 +80,7 @@ public class LoadSceneManager : MonoBehaviour
         }
     }
 
+    // For confirming the level scene is loaded
     private IEnumerator LoadSceneAsyncAdditive(string sceneName)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
@@ -79,6 +94,8 @@ public class LoadSceneManager : MonoBehaviour
         }
     }
 
+
+    // For unloading the level scene
     private IEnumerator UnloadSceneAsuncAdditive(string sceneName)
     {
         if(SceneManager.GetSceneByName(sceneName).isLoaded == false)
