@@ -35,7 +35,7 @@ public class RepeatFunction : MonoBehaviour
 
         if(timer < countDowntiem)
         {
-            timer+=Time.deltaTime;
+            timer += Time.deltaTime;
         }
 
         if(timer > countDowntiem)
