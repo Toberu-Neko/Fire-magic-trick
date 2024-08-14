@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
 [ExecuteAlways]
@@ -43,23 +41,33 @@ public class CableProceduralSimple : MonoBehaviour
 			Debug.LogError("No Endpoint Transform assigned to Cable_Procedural component attached to " + gameObject.name);
 			return;
 		}
+		Init();
+    }
 
-		// Get direction Vector.
-		vectorFromStartToEnd = endPointTransform.position - transform.position;
-		// Setting the Start object to look at the end will be used for making the wind be perpendicular to the cable later.
-		transform.forward = vectorFromStartToEnd.normalized;
-		// Get number of points in the cable using the distance from the start to end, and the point density
-		pointsInLineRenderer = Mathf.FloorToInt(pointDensity * vectorFromStartToEnd.magnitude);
-		// Set number of points in line renderer
-		line.positionCount = pointsInLineRenderer;
+    private void OnValidate()
+    {
+		Init();
+    }
 
-		// The Direction of SAG is the direction of gravity
-		sagDirection = Physics.gravity.normalized;
-	}
-	
+	private void Init()
+	{
+
+        // Get direction Vector.
+        vectorFromStartToEnd = endPointTransform.position - transform.position;
+        // Setting the Start object to look at the end will be used for making the wind be perpendicular to the cable later.
+        transform.forward = vectorFromStartToEnd.normalized;
+        // Get number of points in the cable using the distance from the start to end, and the point density
+        pointsInLineRenderer = Mathf.FloorToInt(pointDensity * vectorFromStartToEnd.magnitude);
+        // Set number of points in line renderer
+        line.positionCount = pointsInLineRenderer;
+
+        // The Direction of SAG is the direction of gravity
+        sagDirection = Physics.gravity.normalized;
+    }
 
 
-	void Update () 
+
+    void Update () 
 	{
 		Draw();
 	}

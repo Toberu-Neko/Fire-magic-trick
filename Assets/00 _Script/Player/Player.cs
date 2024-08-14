@@ -21,6 +21,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
     public Movement Movement { get; private set; }
     public Stats Stats { get; private set; }
     private Combat combat;
+    private CollisionSenses collisionSenses;
 
     [Header("Camera Objects")]
     [SerializeField] private Transform playerCamera;
@@ -94,6 +95,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
         Movement = Core.GetCoreComponent<Movement>();
         Stats = Core.GetCoreComponent<Stats>();
         combat = Core.GetCoreComponent<Combat>();
+        collisionSenses = Core.GetCoreComponent<CollisionSenses>();
 
         StateMachine = new PlayerStateMachine();
 
@@ -308,13 +310,20 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
                 superDashCam.SetActive(false);
                 break;
             case ActiveCamera.Skill:
-                controlCamBySpeed = false;
-                NormalCam.SetActive(false);
-                RunCam.SetActive(false);
-                SkillCam.SetActive(true);
-                AimCam.SetActive(false);
-                DeathCam.SetActive(false);
-                superDashCam.SetActive(false);
+                if (Stats.InCombat || collisionSenses.SphereEnemy)
+                {
+                    controlCamBySpeed = false;
+                    NormalCam.SetActive(false);
+                    RunCam.SetActive(false);
+                    SkillCam.SetActive(true);
+                    AimCam.SetActive(false);
+                    DeathCam.SetActive(false);
+                    superDashCam.SetActive(false);
+                }
+                else
+                {
+                    ChangeActiveCam(ActiveCamera.DeterminBySpeed);
+                }
                 break;
             case ActiveCamera.Death:
                 controlCamBySpeed = false;

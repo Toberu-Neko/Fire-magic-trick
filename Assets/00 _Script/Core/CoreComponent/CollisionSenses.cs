@@ -81,6 +81,14 @@ public class CollisionSenses : CoreComponent
         }
     }
 
+    public bool SphereEnemy
+    {
+        get
+        {
+            return Physics.CheckSphere(GroundCheck.position, slopeCheckDistance * 2.5f, whatIsEnemy);
+        }
+    }
+
     public Slope Slope
     {
         get
