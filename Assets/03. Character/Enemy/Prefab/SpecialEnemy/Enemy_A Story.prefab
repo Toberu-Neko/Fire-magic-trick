@@ -32156,7 +32156,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 8
+  MinDistance: 3
   MaxDistance: 30
   Pan2D: 0
   rolloffMode: 0
@@ -32284,7 +32284,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 8
+  MinDistance: 3
   MaxDistance: 30
   Pan2D: 0
   rolloffMode: 0
@@ -32412,7 +32412,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 8
+  MinDistance: 3
   MaxDistance: 30
   Pan2D: 0
   rolloffMode: 0
@@ -33442,8 +33442,8 @@ MonoBehaviour:
         RandomSfx: []
         MinVolume: 1
         MaxVolume: 1
-        MinPitch: 1
-        MaxPitch: 1
+        MinPitch: 0.8
+        MaxPitch: 1.2
         SfxAudioMixerGroup: {fileID: -1742314431726622351, guid: 8bc3f869f0f4d8241b19450046ccc2e9, type: 2}
 --- !u!1 &7002353523113855012
 GameObject:
@@ -33489,7 +33489,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 68d9e4315b9796e4a81221b429ad1269, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -33497,7 +33497,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 8
+  MinDistance: 3
   MaxDistance: 30
   Pan2D: 0
   rolloffMode: 0
@@ -33947,7 +33947,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 8
+  MinDistance: 3
   MaxDistance: 30
   Pan2D: 0
   rolloffMode: 0

@@ -77,4 +77,9 @@ public class TimeLineEvent : MonoBehaviour
         Debug.Log("Teleporting player to " + teleportTransform.position);
         playerInterface.Teleport(teleportTransform.position);
     }
+
+    public void PlayBGN(string bgmName)
+    {
+        AudioManager.Instance.PlayBGM(bgmName);
+    }
 }

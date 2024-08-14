@@ -46,7 +46,6 @@ public class CableProceduralSimple : MonoBehaviour
 
 	public void Init()
 	{
-
         // Get direction Vector.
         vectorFromStartToEnd = endPointTransform.position - transform.position;
         // Setting the Start object to look at the end will be used for making the wind be perpendicular to the cable later.

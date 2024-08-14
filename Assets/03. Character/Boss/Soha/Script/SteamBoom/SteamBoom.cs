@@ -11,19 +11,18 @@ public class SteamBoom : MonoBehaviour
     private float preferLenght;
 
     private IKnockbackable playerKnockable;
-    private GameObject player;
     private float timer;
 
     private void Start()
     {
-        player = GameManager.Instance.Player.gameObject;
-        playerKnockable = player.GetComponent<IKnockbackable>();
+        playerKnockable = GameManager.Instance.Player.GetComponent<IKnockbackable>();
         preferLenght = (edge.position - this.transform.position).magnitude;
     }
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
+            other.TryGetComponent(out playerKnockable);
             playerInside = true;
         }
     }
@@ -36,35 +35,29 @@ public class SteamBoom : MonoBehaviour
     }
     private void Update()
     {
-        timerSystem();
+        if (playerInside)
+        {
+            timer += Time.deltaTime;
+        }
+        if (timer > MaxInsideTime)
+        {
+            steamBoom();
+        }
     }
     public void SteamBoomRightNow()
     {
         steamBoom();
     }
-    private void initialization()
-    {
-        timer = 0;
-    }
-    private void timerSystem()
-    {
-        if(playerInside)
-        {
-            timer += Time.deltaTime;
-        }
-        if(timer > MaxInsideTime)
-        {
-            steamBoom();
-        }
-    }
     private void steamBoom()
     {
-        Vector3 direction = (player.transform.position - this.transform.position).normalized;
-        float overlappingLenght = (player.transform.position - this.transform.position).magnitude;
-        float forceLenght = preferLenght - overlappingLenght;
+        if (playerInside)
+        {
+            Vector3 direction = (GameManager.Instance.Player.position - transform.position - Vector3.down * 10f).normalized;
+
+            playerKnockable.Knockback(direction, 60f, transform.position);
+        }
 
         feedback.PlayFeedbacks();
-        playerKnockable.Knockback(transform.position, forceLenght);
-        initialization();
+        timer = 0;
     }
 }

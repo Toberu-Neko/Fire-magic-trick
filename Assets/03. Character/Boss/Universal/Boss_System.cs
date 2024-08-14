@@ -50,10 +50,10 @@ public class Boss_System : DataPersistMapObjBase
             isBoss = false;
 
             UIManager.Instance.HudUI.CloseBossUI();
+            AudioManager.Instance.PlayBGM(normalBgmName);
             barrier.Close();
             reserFeedback.PlayFeedbacks();
             onResetFight?.Invoke();
-            Debug.Log("Boss Fight Reset");
         }
     }
     public void StartBossFight()
@@ -63,7 +63,6 @@ public class Boss_System : DataPersistMapObjBase
         {
             isBoss = true;
 
-            Debug.Log("Boss Fight Start");
             UIManager.Instance.HudUI.OpenBossUI(boss_name, boss_littleTitle);
             barrier.Open();
             reserFeedback.PlayFeedbacks();
@@ -79,8 +78,9 @@ public class Boss_System : DataPersistMapObjBase
             isBoss = false;
 
             onEndFight?.Invoke();
-            AudioManager.Instance.PlayBGM(normalBgmName);
+            isActivated = true;
             UIManager.Instance.HudUI.CloseBossUI();
+            DataPersistenceManager.Instance.SaveGame();
             barrier.Close();
         }
     }

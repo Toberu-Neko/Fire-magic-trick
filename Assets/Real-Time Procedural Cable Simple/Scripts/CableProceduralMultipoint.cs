@@ -8,7 +8,6 @@ using UnityEngine;
 [ExecuteAlways]
 public class CableProceduralMultipoint : MonoBehaviour
 {
-
 	LineRenderer line;
 
 	// The Start of the cable will be the transform of the GameObject that has this component.
@@ -26,8 +25,6 @@ public class CableProceduralMultipoint : MonoBehaviour
 		public Transform start, end;
 		public float sag;
 	}
-
-
 
 	void Start () 
 	{
@@ -50,9 +47,6 @@ public class CableProceduralMultipoint : MonoBehaviour
 			Draw(section);
 		}
 	}
-
-
-
 
 	void Draw(CableSection section)
 	{

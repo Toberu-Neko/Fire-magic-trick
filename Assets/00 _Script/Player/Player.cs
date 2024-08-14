@@ -310,7 +310,7 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
                 superDashCam.SetActive(false);
                 break;
             case ActiveCamera.Skill:
-                if (Stats.InCombat || collisionSenses.SphereEnemy)
+                if (collisionSenses.SphereEnemy)
                 {
                     controlCamBySpeed = false;
                     NormalCam.SetActive(false);
@@ -322,7 +322,11 @@ public class Player : MonoBehaviour, IPlayerHandler, IDataPersistance
                 }
                 else
                 {
-                    ChangeActiveCam(ActiveCamera.DeterminBySpeed);
+                    controlCamBySpeed = true;
+                    SkillCam.SetActive(false);
+                    AimCam.SetActive(false);
+                    DeathCam.SetActive(false);
+                    superDashCam.SetActive(false);
                 }
                 break;
             case ActiveCamera.Death:
