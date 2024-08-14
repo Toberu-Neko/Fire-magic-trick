@@ -72,10 +72,11 @@ public class PlayerFireballState : PlayerAbilityState
 
         movement.SetVelocityY(Mathf.Lerp(playerData.fireballMaxYVelocity, playerData.fireballMinYVelocity, (Time.time - StartTime) / playerData.fireballMaxTime));
 
-        if (collisionSenses.Ground)
+        if (collisionSenses.Ground || Time.time >= StartTime + 6f)
         {
             isAbilityDone = true;
         }
+
     }
 
     public override void PhysicsUpdate()

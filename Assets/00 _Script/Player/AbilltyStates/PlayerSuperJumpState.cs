@@ -73,7 +73,7 @@ public class PlayerSuperJumpState : PlayerAbilityState
 
         MoveRelateWithCam(playerData.airMoveSpeed);
 
-        if(currentFrame > 5)
+        if(currentFrame > 4)
         {
             minYVelocity = Mathf.Min(minYVelocity, movement.CurrentVelocity.y);
 
@@ -114,6 +114,11 @@ public class PlayerSuperJumpState : PlayerAbilityState
         {
             doDropDamage = false;
             stateMachine.ChangeState(player.DashState);
+        }
+
+        if(Time.time >= StartTime + 2.5f)
+        {
+            player.ChangeActiveCam(Player.ActiveCamera.DeterminBySpeed);
         }
     }
 

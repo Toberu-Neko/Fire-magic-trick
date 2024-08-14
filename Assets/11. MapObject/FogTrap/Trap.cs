@@ -7,6 +7,6 @@ public class Trap : MonoBehaviour
     public void Play(Collider other)
     {
         other.TryGetComponent(out IKnockbackable knockbackable);
-        knockbackable.Knockback(transform.position, force/2f);
+        knockbackable.Knockback(transform.position, force);
     }
 }

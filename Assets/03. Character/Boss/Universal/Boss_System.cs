@@ -10,6 +10,8 @@ public class Boss_System : DataPersistMapObjBase
     [Header("Boss")]
     [SerializeField] private string boss_name;
     [SerializeField] private string boss_littleTitle;
+    [SerializeField] private string bossBgmName;
+    [SerializeField] private string normalBgmName;
 
     public delegate void OnStartFightHandler();
     public event OnStartFightHandler onStartFight;
@@ -66,6 +68,8 @@ public class Boss_System : DataPersistMapObjBase
             barrier.Open();
             reserFeedback.PlayFeedbacks();
             onStartFight?.Invoke();
+
+            AudioManager.Instance.PlayBGM(bossBgmName);
         }
     }
     public void EndBossFight()
@@ -75,6 +79,7 @@ public class Boss_System : DataPersistMapObjBase
             isBoss = false;
 
             onEndFight?.Invoke();
+            AudioManager.Instance.PlayBGM(normalBgmName);
             UIManager.Instance.HudUI.CloseBossUI();
             barrier.Close();
         }

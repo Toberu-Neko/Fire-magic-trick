@@ -9875,10 +9875,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1.5
-  MaxDistance: 15
+  MinDistance: 8
+  MaxDistance: 30
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -10461,10 +10461,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1.5
-  MaxDistance: 15
+  MinDistance: 8
+  MaxDistance: 30
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -10589,10 +10589,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1.5
-  MaxDistance: 15
+  MinDistance: 8
+  MaxDistance: 30
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -10717,10 +10717,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1.5
-  MaxDistance: 15
+  MinDistance: 8
+  MaxDistance: 30
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -10949,10 +10949,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1.5
-  MaxDistance: 15
+  MinDistance: 8
+  MaxDistance: 30
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -11077,10 +11077,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1.5
-  MaxDistance: 15
+  MinDistance: 8
+  MaxDistance: 30
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -27913,8 +27913,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.7
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!114 &8032919127870789860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29095,10 +29095,6 @@ PrefabInstance:
       propertyPath: managedReferences[7717559668277772295].TargetAudioSource
       value: 
       objectReference: {fileID: 4088897034484578843}
-    - target: {fileID: 2490766111345095967, guid: c833a582fdfb80e4f9de25d3be226b5e, type: 3}
-      propertyPath: managedReferences[7717559668277772291].SfxAudioMixerGroup
-      value: 
-      objectReference: {fileID: -1742314431726622351, guid: 8bc3f869f0f4d8241b19450046ccc2e9, type: 2}
     - target: {fileID: 2490766111345095967, guid: c833a582fdfb80e4f9de25d3be226b5e, type: 3}
       propertyPath: managedReferences[7717559645067542528].BoundParticleSystem
       value: 
