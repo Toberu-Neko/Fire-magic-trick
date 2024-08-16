@@ -5,6 +5,7 @@ using UnityEngine;
 public class SohaScaleController : MonoBehaviour
 {
     private bool close;
+    [SerializeField] private GameObject fogGO;
 
     private void Awake()
     {
@@ -18,6 +19,7 @@ public class SohaScaleController : MonoBehaviour
             transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, Time.deltaTime * 5);
             if (transform.localScale.x < 0.05f)
             {
+                fogGO.SetActive(false);
                 gameObject.SetActive(false);
             }
         }
