@@ -10675,11 +10675,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4150671408604871288, guid: c85f0a13b69c7094ab4bc263b9530874, type: 3}
       propertyPath: m_Events.m_Events.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DisablePlayerControl
+      value: OnStart
       objectReference: {fileID: 0}
     - target: {fileID: 4150671408604871288, guid: c85f0a13b69c7094ab4bc263b9530874, type: 3}
       propertyPath: m_Events.m_Events.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: EnablePlayerControl
+      value: OnComplete
       objectReference: {fileID: 0}
     - target: {fileID: 4150671408604871288, guid: c85f0a13b69c7094ab4bc263b9530874, type: 3}
       propertyPath: m_Events.m_Events.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -37751,6 +37751,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 957600bc4020f7b48b7b5f3550dbcc76, type: 3}
     - target: {fileID: 3815556338376573228, guid: 1479c17580b94364ea578249899b9ec5, type: 3}
+      propertyPath: onDialogueEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815556338376573228, guid: 1479c17580b94364ea578249899b9ec5, type: 3}
+      propertyPath: onDialogueEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815556338376573228, guid: 1479c17580b94364ea578249899b9ec5, type: 3}
+      propertyPath: onDialogueEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1658056771}
+    - target: {fileID: 3815556338376573228, guid: 1479c17580b94364ea578249899b9ec5, type: 3}
+      propertyPath: onDialogueEnd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815556338376573228, guid: 1479c17580b94364ea578249899b9ec5, type: 3}
+      propertyPath: onDialogueEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815556338376573228, guid: 1479c17580b94364ea578249899b9ec5, type: 3}
       propertyPath: dialogue.contents.Array.data[0].localizedName.m_TableEntryReference.m_KeyId
       value: 400762871808
       objectReference: {fileID: 0}
@@ -37831,6 +37851,10 @@ PrefabInstance:
       value: 5640153210880
       objectReference: {fileID: 0}
     - target: {fileID: 3815556338376573228, guid: 1479c17580b94364ea578249899b9ec5, type: 3}
+      propertyPath: onDialogueEnd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SohaScaleController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815556338376573228, guid: 1479c17580b94364ea578249899b9ec5, type: 3}
       propertyPath: dialogue.contents.Array.data[0].localizedName.m_TableReference.m_TableCollectionName
       value: GUID:1dfca45bb2868d64b9183d55d37c8704
       objectReference: {fileID: 0}
@@ -37909,6 +37933,10 @@ PrefabInstance:
     - target: {fileID: 3815556338376573228, guid: 1479c17580b94364ea578249899b9ec5, type: 3}
       propertyPath: dialogue.contents.Array.data[9].localizedContent.m_TableReference.m_TableCollectionName
       value: GUID:5fc866f92b9fffc41a940ab07078ed53
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815556338376573228, guid: 1479c17580b94364ea578249899b9ec5, type: 3}
+      propertyPath: onDialogueEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3815556338376573231, guid: 1479c17580b94364ea578249899b9ec5, type: 3}
       propertyPath: m_RootOrder
@@ -58380,15 +58408,15 @@ MonoBehaviour:
         Owner: {fileID: 1215270366}
         DebugActive: 0
         TargetShaker: {fileID: 0}
-        Duration: 2.5
+        Duration: 1.5
         ResetShakerValuesAfterShake: 1
         ResetTargetValuesAfterShake: 1
         ShakeSpeed: 35
-        ShakeRange: 1.5
+        ShakeRange: 0.25
         ShakeMainDirection: {x: 1, y: 1, z: 1}
         RandomizeDirection: 1
         ShakeAltDirection: {x: -1, y: -1, z: -1}
-        RandomizeDirectionOnPlay: 0
+        RandomizeDirectionOnPlay: 1
         AddDirectionalNoise: 1
         DirectionalNoiseStrengthMin: {x: 0.5, y: 0.5, z: 0.5}
         DirectionalNoiseStrengthMax: {x: 0.5, y: 0.5, z: 0.5}
@@ -69571,7 +69599,7 @@ AudioSource:
   m_GameObject: {fileID: 1650836393}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1742314431726622351, guid: 8bc3f869f0f4d8241b19450046ccc2e9, type: 2}
   m_audioClip: {fileID: 8300000, guid: 8d570c2e1aa38d64f9a9b681cd6fa9fa, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -69670,6 +69698,7 @@ GameObject:
   - component: {fileID: 1658056770}
   - component: {fileID: 1658056769}
   - component: {fileID: 1658056768}
+  - component: {fileID: 1658056771}
   m_Layer: 15
   m_Name: Quad (1)
   m_TagString: Untagged
@@ -69817,6 +69846,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1658056766}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1658056771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658056766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8467d8c1a4542394dbeb414a1760cf2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1672689801
 GameObject:
   m_ObjectHideFlags: 0

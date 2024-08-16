@@ -1,5 +1,6 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TriggerArea_DialogueTrigger : DataPersistMapObjBase
 {
@@ -18,6 +19,7 @@ public class TriggerArea_DialogueTrigger : DataPersistMapObjBase
     [SerializeField] private MMF_Player[] feedbacksDuringDialogue;
     private int playedFeedbacksIndex = 0;
     private IPlayerHandler playerHandler;
+    [SerializeField] private UnityEvent onDialogueEnd;
 
 
     private void Awake()
@@ -90,6 +92,7 @@ public class TriggerArea_DialogueTrigger : DataPersistMapObjBase
     {
         UIManager.Instance.OnDialogueEnd -= DialogueEnd;
         DataPersistenceManager.Instance.SaveGame();
+        onDialogueEnd?.Invoke();
 
         if (!useAuto)
         {
