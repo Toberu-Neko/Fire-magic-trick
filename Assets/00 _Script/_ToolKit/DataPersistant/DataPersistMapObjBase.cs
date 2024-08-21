@@ -22,7 +22,7 @@ public class DataPersistMapObjBase : MonoBehaviour, IDataPersistance
     {
         if (ID == "")
         {
-            Debug.LogError("ID is empty, data not saved. Object: " + gameObject.name);
+            Debug.LogWarning("ID is empty, data not saved. Object: " + gameObject.name);
             return;
         }
 

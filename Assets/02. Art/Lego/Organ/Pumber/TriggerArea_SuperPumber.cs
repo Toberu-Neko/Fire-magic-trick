@@ -16,10 +16,18 @@ public class TriggerArea_SuperPumber : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            Vector3 damagePos = other.transform.position + Vector3.down;
+            if(pumber.isDeathPumber)
+            {
+                other.TryGetComponent(out IDamageable damageable);
+                damageable?.Damage(9999, transform.position, true);
+            }
+            else
+            {
+                Vector3 damagePos = other.transform.position + Vector3.down;
 
-            other.TryGetComponent(out IKnockbackable knockbackable);
-            knockbackable?.Knockback(damagePos, SuperPumberForce);
+                other.TryGetComponent(out IKnockbackable knockbackable);
+                knockbackable?.Knockback(damagePos, SuperPumberForce);
+            }
         }
     }
 }

@@ -34,7 +34,7 @@ public class InstanceCombiner : MonoBehaviour
 
     private void Awake()
     {
-        Debug.LogError("This script is for Editor Only in " + transform.parent.name);
+        Debug.LogWarning("This script is for Editor Only in " + transform.parent.name);
         enabled = false;
         return;
     }

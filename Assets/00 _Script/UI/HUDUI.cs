@@ -1,5 +1,6 @@
 using MoreMountains.Tools;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HUDUI : MonoBehaviour
 {
@@ -10,7 +11,11 @@ public class HUDUI : MonoBehaviour
     [field: SerializeField] public HUDVFX HudVFX { get; private set; }
 
     [SerializeField] private MMProgressBar normalBar;
+    [SerializeField] private Image normalBarColor;
+    [SerializeField] private Color normalColor;
     [SerializeField] private MMProgressBar overburnBar;
+    [SerializeField] private Image overburnBarColor;
+    [SerializeField] private Color overburnColor;
 
     private bool canChangeBar = true;
 
@@ -109,6 +114,9 @@ public class HUDUI : MonoBehaviour
     public void Activate()
     {
         gameObject.SetActive(true);
+
+        normalBarColor.color = normalColor;
+        overburnBarColor.color = overburnColor;
     }
 
     public void Deactivate()

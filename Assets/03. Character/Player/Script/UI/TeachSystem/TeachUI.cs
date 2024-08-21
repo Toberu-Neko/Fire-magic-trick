@@ -9,6 +9,7 @@ using UnityEngine.Localization;
 public class TeachSystem_content
 {
     public string title;
+    public LocalizedString localizedTitle;
     public VideoClip video;
     public LocalizedString[] localizedContents;
 }
@@ -56,7 +57,7 @@ public class TeachUI : MonoBehaviour
         gameObject.SetActive(true);
 
         //title
-        title.text = teachSystem_Content[index].title;
+        title.text = teachSystem_Content[index].localizedTitle.GetLocalizedString();
 
         // video
         teachVideo.ChageVideoClip(teachSystem_Content[index].video);

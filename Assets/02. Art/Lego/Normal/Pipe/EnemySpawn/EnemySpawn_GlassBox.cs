@@ -1,4 +1,5 @@
 using MoreMountains.Feedbacks;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -121,11 +122,18 @@ public class EnemySpawn_GlassBox : MonoBehaviour
             pipes[i].ToSpawn();
             workPipes.Add(pipes[i]);
         }
-        ToEnd();
+        StartCoroutine(ToEnd());
     }
-    private async void ToEnd()
+
+    private IEnumerator ToEnd()
     {
-        await Task.Delay(EndTime*1000);
+        float startTime = Time.time;
+
+        while (Time.time - startTime < EndTime)
+        {
+            yield return null;
+        }
+
         state++;
         Fight(state);
 
@@ -134,6 +142,7 @@ public class EnemySpawn_GlassBox : MonoBehaviour
             pipes[i].StopSpawn();
         }
     }
+
     private void onFightOverCheck()
     {
         //if fight not over,return
